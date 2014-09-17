@@ -1,0 +1,937 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: HqF-pt_BR\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-15 15:09-0000\n"
+"PO-Revision-Date: 2014-09-15 15:16-0000\n"
+"Last-Translator: Felipe <felipecoelhokussik@gmail.com>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../archive-historias_filmes.php:14
+#, php-format
+msgid "More about &ldquo;%s&rdquo;"
+msgstr "Mais sobre &ldquo;%s&rdquo;"
+
+#: ../archive-historias_filmes.php:14 ../content.php:6 ../functions.php:289
+#: ../functions.php:309 ../inc/post_type-consultant.php:74
+#: ../single-historias_filmes.php:17
+#, php-format
+msgid "%s Edit"
+msgstr "%s Editar"
+
+#: ../comments.php:12
+#, php-format
+msgid "One reaction"
+msgid_plural "%1$s reactions"
+msgstr[0] "Uma reação"
+msgstr[1] "%1$s reações"
+
+#: ../comments.php:14
+#, php-format
+msgid "%s Leave a reply"
+msgstr "%s Deixe uma resposta"
+
+#: ../comments.php:24
+msgid "Comment navigation"
+msgstr "Navegação dos comentários"
+
+#: ../comments.php:25
+#, php-format
+msgid "%s Older comments"
+msgstr "%s Comentários antigos"
+
+#: ../comments.php:26
+#, php-format
+msgid "Newer comments %s"
+msgstr "Comentários recentes %s"
+
+#: ../comments.php:36
+msgid "Comments are closed."
+msgstr "Os comentários estão fechados."
+
+#: ../content.php:7 ../single-historias_filmes.php:17
+#, php-format
+msgid "Read, comment and share &ldquo;%s&rdquo;"
+msgstr "Ler, comentar e compartilhar &ldquo;%s&rdquo;"
+
+#: ../content.php:19 ../single-historias_filmes.php:56
+msgid "To be continued&hellip;"
+msgstr "Continua&hellip;"
+
+#: ../content.php:20 ../page-templates/form.php:16
+#: ../page-templates/list-users.php:15 ../page-templates/map.php:22
+#: ../page.php:10 ../single-historias_filmes.php:57
+msgid "Pages:"
+msgstr "Páginas:"
+
+#. translators: used between list items, there is a space after the comma
+#: ../content.php:29
+msgid ", "
+msgstr ", "
+
+#: ../content.php:33
+#, php-format
+msgid "Posted in %1$s"
+msgstr "Postado em %1$s"
+
+#: ../footer.php:5
+msgid "Twitter"
+msgstr "Twitter"
+
+#: ../footer.php:6
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../footer.php:7
+msgid "Vimeo"
+msgstr "Vimeo"
+
+#: ../footer.php:8
+msgid "Facebook"
+msgstr "Facebook"
+
+#: ../functions.php:64
+msgid "Primary Menu"
+msgstr "Menu primário"
+
+#: ../functions.php:65
+msgid "Secondary Menu"
+msgstr "Menu secundário"
+
+#: ../functions.php:66
+msgid "Mobile Menu"
+msgstr "Menu Mobile"
+
+#: ../functions.php:167
+#, php-format
+msgid "Page %s"
+msgstr "Página %s"
+
+#: ../functions.php:180
+msgid "Leave a reply"
+msgstr "Deixe uma resposta"
+
+#: ../functions.php:180
+msgid "One comment"
+msgstr "Um comentário"
+
+#: ../functions.php:180
+#, php-format
+msgid "% comments"
+msgstr "% comentários"
+
+#: ../functions.php:210
+#, php-format
+msgid "%s ago"
+msgstr "Há %s"
+
+#: ../functions.php:227
+msgid "Post navigation"
+msgstr "Navegação de posts"
+
+#: ../functions.php:237
+#, php-format
+msgid "%s Older posts"
+msgstr "%s Mais antigos"
+
+#: ../functions.php:241
+#, php-format
+msgid "%s Newer posts"
+msgstr "%s Mais recentes"
+
+#: ../functions.php:255
+msgid "Primary Widget Area"
+msgstr "Área primária de widgets"
+
+#: ../functions.php:256
+msgid "Its the coloured one."
+msgstr "É a colorida."
+
+#: ../functions.php:308
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s resultados para %2$s"
+
+#: ../functions.php:308
+msgid "Permalink"
+msgstr "Permalink"
+
+#: ../functions.php:313
+msgid "Your comment is awaiting moderation."
+msgstr "Seu comentário está aguardando moderação."
+
+#: ../functions.php:468
+msgid "Hey admin, don't forget to set up a menu!"
+msgstr "Admin, não esqueça de definir um menu!"
+
+#: ../header.php:32
+msgid "Skip to content"
+msgstr "Pular pro conteúdo"
+
+#: ../header.php:59 ../page-templates/home-inscricoes.php:35
+#, php-format
+msgid "Hello, %s!"
+msgstr "Olá, %s!"
+
+#: ../header.php:73
+msgid "Hello, friend!"
+msgstr "Olá, amigo!"
+
+#: ../historias_filmes.php:16
+msgid "Director"
+msgstr "Diretor"
+
+#: ../historias_filmes.php:22
+msgid "Region"
+msgstr "Estado"
+
+#: ../historias_filmes.php:28
+msgid "Producer"
+msgstr "Produtora"
+
+#: ../historias_filmes.php:34
+msgid "Producer URL"
+msgstr "Site da produtora"
+
+#: ../historias_filmes.php:55 ../historias_filmes.php:66
+msgid "Movies"
+msgstr "Filmes"
+
+#: ../historias_filmes.php:56
+msgid "Movie"
+msgstr "Filme"
+
+#: ../historias_filmes.php:57
+msgctxt "historias_filmes"
+msgid "Add New"
+msgstr "Adicionar novo"
+
+#: ../historias_filmes.php:58
+msgid "Add New Movie"
+msgstr "Adicionar filme"
+
+#: ../historias_filmes.php:59
+msgid "Edit Movie"
+msgstr "Editar filme"
+
+#: ../historias_filmes.php:60
+msgid "New Movie"
+msgstr "Novo filme"
+
+#: ../historias_filmes.php:61
+msgid "All Movies"
+msgstr "Todos os filmes"
+
+#: ../historias_filmes.php:62
+msgid "View Movie"
+msgstr "Visualizar filme"
+
+#: ../historias_filmes.php:63
+msgid "Search Movies"
+msgstr "Buscar filmes"
+
+#: ../historias_filmes.php:64
+msgid "No Movie Found"
+msgstr "Nenhum filme encontrado"
+
+#: ../historias_filmes.php:65
+msgid "No Movie Found in the trash"
+msgstr "Nenhum filme na lixeira"
+
+#: ../historias_filmes.php:91
+msgid "About the Movie"
+msgstr "Sobre o filme"
+
+#: ../inc/contextual-help.php:15
+msgid "Front Page Templates"
+msgstr "Modelos de Capa"
+
+#: ../inc/customizr.php:39
+msgid "Default"
+msgstr "Padrão"
+
+#: ../inc/customizr.php:89
+msgid "Highlight Color"
+msgstr "Cor destacada"
+
+#: ../inc/customizr.php:105
+msgid "Site Logo"
+msgstr "Logo"
+
+#: ../inc/customizr.php:121
+msgid "Tagline"
+msgstr "Descrição"
+
+#: ../inc/customizr.php:130
+msgid "Program Status"
+msgstr "Status do Programa"
+
+#: ../inc/customizr.php:143
+msgid "Open Subscriptions"
+msgstr "Inscrições abertas"
+
+#: ../inc/customizr.php:157
+msgid "Open Evaluation"
+msgstr "Avaliações abertas"
+
+#: ../inc/post2home/post2home.php:43
+msgid "Feature"
+msgstr "Destaque"
+
+#: ../inc/post2home/post2home.php:58
+msgid "Set / unset post feature"
+msgstr ""
+
+#: ../inc/post_type-consultant.php:10 ../inc/post_type-consultant.php:21
+msgid "Consultants"
+msgstr "Consultores"
+
+#: ../inc/post_type-consultant.php:11
+msgid "Consultant"
+msgstr "Consultor"
+
+#: ../inc/post_type-consultant.php:12
+#, fuzzy
+msgctxt "Consultant"
+msgid "Add New"
+msgstr "Adicionar novo"
+
+#: ../inc/post_type-consultant.php:13
+msgid "Add New Consultant"
+msgstr "Adicionar novo consultor"
+
+#: ../inc/post_type-consultant.php:14
+msgid "Edit Consultant"
+msgstr "Editar consultor"
+
+#: ../inc/post_type-consultant.php:15
+msgid "New Consultant"
+msgstr "Novo consultor"
+
+#: ../inc/post_type-consultant.php:16
+msgid "All Consultants"
+msgstr "Todos os consultores"
+
+#: ../inc/post_type-consultant.php:17
+msgid "View Consultant"
+msgstr "Ver consultores"
+
+#: ../inc/post_type-consultant.php:18
+msgid "Search Consultants"
+msgstr "Pesquisar consultores"
+
+#: ../inc/post_type-consultant.php:19
+msgid "No Consultant Found"
+msgstr "Nenhum consultor encontrado"
+
+#: ../inc/post_type-consultant.php:20
+msgid "No Consultant Found in the trash"
+msgstr "Nenhum consultor na lixeira"
+
+#: ../inc/post_type_projetos.php:29
+msgctxt "post type singular name"
+msgid "Projetos"
+msgstr ""
+
+#: ../inc/post_type_projetos.php:30
+msgctxt "image"
+msgid "Adicionar Novo"
+msgstr ""
+
+#: ../inc/post_type_projetos.php:31
+msgid "Adicionar novo Projetos"
+msgstr ""
+
+#: ../inc/post_type_projetos.php:32
+msgid "Editar Projetos"
+msgstr ""
+
+#: ../inc/post_type_projetos.php:33
+msgid "Novo Projetos"
+msgstr ""
+
+#: ../inc/post_type_projetos.php:34
+msgid "Ver Projetos"
+msgstr ""
+
+#: ../inc/post_type_projetos.php:35
+#, fuzzy
+msgid "Search Projetoss"
+msgstr "Buscar filmes"
+
+#: ../inc/post_type_projetos.php:36
+msgid "Nenhum Projetos Encontrado"
+msgstr ""
+
+#: ../inc/post_type_projetos.php:37
+msgid "Nenhum Projetos na Lixeira"
+msgstr ""
+
+#: ../inc/theme-options.php:121
+msgid "Save Changes"
+msgstr ""
+
+#: ../inscricoes-avaliacao.php:12
+msgid "Evaluation Panel"
+msgstr "Painel de avaliação"
+
+#: ../inscricoes-avaliacao.php:18
+msgid "Budget"
+msgstr "Orçamento"
+
+#: ../inscricoes-avaliacao.php:19
+msgid "Merit"
+msgstr "Mérito"
+
+#: ../inscricoes-avaliacao.php:20
+msgid "Viability"
+msgstr "Viabilidade"
+
+#: ../inscricoes-avaliacao.php:21
+msgid "Qualification"
+msgstr "Qualificação"
+
+#: ../inscricoes-avaliacao.php:22
+msgid "Remarks"
+msgstr "Observações"
+
+#: ../inscricoes-avaliacao.php:26
+msgid "Finish Evaluation"
+msgstr "Concluir avaliação"
+
+#: ../inscricoes-avaliacao.php:31
+msgid "Comments on the Budget"
+msgstr "Comentários sobre o orçamento"
+
+#: ../inscricoes-avaliacao.php:38
+msgid "Merit Score"
+msgstr "Nota para o mérito"
+
+#: ../inscricoes-avaliacao.php:61
+msgid "Comments on Merit"
+msgstr "Comentários sobre o mérito"
+
+#: ../inscricoes-avaliacao.php:68
+msgid "Viability Score"
+msgstr "Nota para a viabilidade"
+
+#: ../inscricoes-avaliacao.php:91
+msgid "Comments on the Viability"
+msgstr "Comentários sobre a viabilidade"
+
+#: ../inscricoes-avaliacao.php:98
+msgid "Qualification Score"
+msgstr "Nota para a qualificação"
+
+#: ../inscricoes-avaliacao.php:121
+msgid "Comments on the Qualification"
+msgstr "Comentários sobre a qualificação"
+
+#: ../inscricoes-avaliacao.php:128
+msgid "General Remarks"
+msgstr "Observações gerais"
+
+#: ../inscricoes-functions.php:152
+msgid ""
+"<span class=\"error\">Os campos da etapa anterior nao estao preenchidos "
+"corretamente.</span>"
+msgstr ""
+
+#: ../inscricoes-functions.php:165
+msgid "Este projeto já teve os dados submetidos e não pode mais ser alterado."
+msgstr ""
+
+#: ../inscricoes-functions.php:198
+msgid "Inscrições encerradas"
+msgstr ""
+
+#: ../inscricoes-functions.php:230
+msgid "Você já fez uma inscrição. Este é o seu número de inscrição"
+msgstr ""
+
+#: ../inscricoes-functions.php:233
+msgid "Inscrições encerradas."
+msgstr ""
+
+#: ../inscricoes-functions.php:247
+msgid ""
+"O formul&aacute;rio n&atilde;o foi preenchido corretamente. Confira as "
+"etapas novamente."
+msgstr ""
+
+#: ../inscricoes-functions.php:407
+msgid "Select File"
+msgstr "Selecionar arquivo"
+
+#: ../inscricoes-functions.php:795
+msgid "Este campo não pode ser vazio"
+msgstr ""
+
+#: ../inscricoes-functions.php:805
+msgid "O email não tem um formato válido"
+msgstr ""
+
+#: ../inscricoes-functions.php:811
+msgid "O CPF fornecido é inválido."
+msgstr ""
+
+#: ../inscricoes-functions.php:843
+msgid "Já existe um projeto cadastrado com este CPF."
+msgstr ""
+
+#: ../inscricoes-functions.php:851
+msgid "O CNPJ fornecido é inválido."
+msgstr ""
+
+#: ../inscricoes-functions.php:896
+msgid "Já existe um projeto cadastrado com este CNPJ."
+msgstr ""
+
+#: ../inscricoes-functions.php:905
+msgid "Já existem dois projetos cadastrados com este CNPJ."
+msgstr ""
+
+#: ../inscricoes-functions.php:914
+msgid "O CEP fornecido é invalido"
+msgstr ""
+
+#: ../inscricoes-functions.php:921
+msgid "O número do telefone é invalido"
+msgstr ""
+
+#: ../inscricoes-functions.php:928
+msgid "Formato inválido para o valor. Por favor apague e começe novamente."
+msgstr ""
+
+#: ../inscricoes-functions.php:933
+msgid "O valor não pode ser zero."
+msgstr ""
+
+#: ../inscricoes-functions.php:957
+msgid ""
+"O valor total não condiz com os valores da pré-produção, produção e pós-"
+"produção."
+msgstr ""
+
+#: ../inscricoes-functions.php:960
+msgid ""
+"Não é possível calcular o orçamento total através de um usuário inválido."
+msgstr ""
+
+#: ../inscricoes-functions.php:966
+msgid "O texto não deve exceder 500 caracteres."
+msgstr ""
+
+#: ../inscricoes-functions.php:973 ../inscricoes-functions.php:980
+msgid "O texto não deve exceder 4000 caracteres."
+msgstr ""
+
+#: ../inscricoes-functions.php:987
+msgid "O texto não deve exceder 8000 caracteres."
+msgstr ""
+
+#: ../inscricoes-register.php:21
+msgid ""
+"Este e-mail já está registrado em nosso sistema. Por favor, cadastre-se com "
+"outro e-mail. <br/>(Já sou cadastrado e <a href=\""
+msgstr ""
+
+#: ../inscricoes-register.php:24
+msgid "O e-mail informado é inválido.<br/>"
+msgstr ""
+
+#: ../inscricoes-register.php:32
+msgid "O e-mail é obrigatório para o cadastro no site.<br/>"
+msgstr ""
+
+#: ../inscricoes.php:41
+msgid "Inscrição não encontrada."
+msgstr ""
+
+#: ../inscricoes.php:45
+msgid "Esta inscrição foi marcada como inválida."
+msgstr ""
+
+#: ../inscricoes.php:172 ../inscricoes.php:174
+msgid "Print"
+msgstr "Imprimir"
+
+#: ../inscricoes.php:179
+msgid "Switch Project"
+msgstr "Alternar Projeto"
+
+#: ../inscricoes.php:191 ../inscricoes.php:490 ../inscricoes.php:509
+msgid "Complete!"
+msgstr ""
+
+#: ../lista-de-inscritos.php:105
+msgid "Valid!"
+msgstr "Válida!"
+
+#: ../lista-de-inscritos.php:107
+msgid "Invalid!"
+msgstr "Inválida!"
+
+#: ../page-templates/form.php:38
+msgid "Email successfully sent!"
+msgstr "Email enviado com sucesso!"
+
+#: ../page-templates/form.php:41
+msgid "Error sending email, please try again"
+msgstr "Erro ao enviar o email, por favor, tente outra vez"
+
+#: ../page-templates/form.php:52
+msgid "Message"
+msgstr "Mensagem"
+
+#: ../page-templates/form.php:56
+msgid "Your Name"
+msgstr "Seu nome"
+
+#: ../page-templates/form.php:60
+msgid "Your Email"
+msgstr "Seu email"
+
+#: ../page-templates/form.php:63
+msgid "Send"
+msgstr "Enviar"
+
+#: ../page-templates/form.php:63
+msgid "to"
+msgstr "para"
+
+#: ../page-templates/home-divulgacao.php:20
+#, php-format
+msgid "By %s"
+msgstr "Por %s"
+
+#: ../page-templates/home-divulgacao.php:33
+msgid "There are no films to show! Please add some."
+msgstr "Nenhum filme a ser exibido! Por favor, cadastre alguns."
+
+#: ../page-templates/home-divulgacao.php:55
+msgid "Please create a page called \"Mostra Itinerante\"."
+msgstr "Por favor, crie uma página chamada \"Mostra Itinerante\"."
+
+#: ../page-templates/home-divulgacao.php:61
+msgid "Latest News"
+msgstr "Últimas notícias"
+
+#: ../page-templates/home-inscricoes.php:22
+msgid "Please set a Thumbnail Image for this page."
+msgstr "Por favor, defina uma Imagem Destacada para esta página."
+
+#: ../page-templates/home-inscricoes.php:48
+msgid "Login / Email"
+msgstr "Login / Email"
+
+#: ../page-templates/home-inscricoes.php:49
+msgid "Lost Password"
+msgstr "Esqueci a senha"
+
+#: ../single-historias_filmes.php:34
+msgid "Visit the producer website"
+msgstr "Visitar o site da produtora"
+
+#: ../single-historias_filmes.php:76
+msgid "Other Selected Movies"
+msgstr "Outros filmes selecionados"
+
+#~ msgid ""
+#~ "<span aria-hidden=\"true\" data-icon=\"&#xe067;\"></span><span class="
+#~ "\"assistive-text\">Edit</span>"
+#~ msgstr ""
+#~ "<span aria-hidden=\"true\" data-icon=\"&#xe067;\"></span><span class="
+#~ "\"assistive-text\">Editar</span>"
+
+#~ msgid "Leave a Comment"
+#~ msgstr "Deixe um comentário"
+
+#~ msgid "1 Reply"
+#~ msgstr "1 resposta"
+
+#~ msgid "% Replies"
+#~ msgstr "% respostas"
+
+#~ msgid "Switch between my two projects"
+#~ msgstr "Alternar entre meus dois projetos"
+
+#~ msgid "You can customize this text in the \"Blue Box\" Custom Field."
+#~ msgstr ""
+#~ "Você pode editar este texto no Campo Personalizado chamado \"Blue Box\"."
+
+#~ msgid "New message received"
+#~ msgstr "Nova mensagem"
+
+#~ msgid "1 Comment"
+#~ msgstr "1 comentário"
+
+#~ msgid "Home"
+#~ msgstr "Capa"
+
+#~ msgid "Newer posts %s"
+#~ msgstr "Mais recentes %s"
+
+#~ msgid "Daily Archives: %s"
+#~ msgstr "Arquivos do dia %s"
+
+#~ msgid "Monthly Archives: %s"
+#~ msgstr "Arquivos do mês %s"
+
+#~ msgid "Yearly Archives: %s"
+#~ msgstr "Arquivos do ano %s"
+
+#~ msgid "Archives"
+#~ msgstr "Arquivos"
+
+#~ msgid "Attachment navigation"
+#~ msgstr "Navegação dos anexos"
+
+#~ msgid "Return to %s"
+#~ msgstr "Voltar para %s"
+
+#~ msgid "Subscribe to this category"
+#~ msgstr "Assinar esta categoria"
+
+#~ msgid "Its white, and its right below the coloured one."
+#~ msgstr "Fica abaixo da colorida."
+
+#~ msgid "1st Subsidiary Aside"
+#~ msgstr "Primeira área auxiliar"
+
+#~ msgid "Its down there, in the footer."
+#~ msgstr "Fica no rodapé."
+
+#~ msgid "2nd Subsidiary Aside"
+#~ msgstr "Segunda área auxiliar"
+
+#~ msgid "3rd Subsidiary Aside"
+#~ msgstr "Terceira área auxiliar"
+
+#~ msgid "Subscribe to the RSS feed"
+#~ msgstr "Assinar o feed RSS"
+
+#~ msgid "Subscribe"
+#~ msgstr "Assinar"
+
+#~ msgid "%1$s Results for %2$s"
+#~ msgstr "%1$s resultados para %2$s"
+
+#~ msgid "Subscribe to this search"
+#~ msgstr "Assinar essa busca"
+
+#~ msgid ""
+#~ "Sorry, but nothing matched your search criteria. Please try again with "
+#~ "some different keywords."
+#~ msgstr ""
+#~ "Perdão, mas nada corresponde a estes critérios. Por favor, tente outra "
+#~ "vez com palavras diferentes."
+
+#~ msgid "Base Color"
+#~ msgstr "Cor base"
+
+#~ msgid "Layout"
+#~ msgstr "Modelo"
+
+#~ msgid "Text in Footer"
+#~ msgstr "Texto do rodapé"
+
+#~ msgid "Theme Options"
+#~ msgstr "Opções do tema"
+
+#~ msgid "Overview"
+#~ msgstr "Visão geral"
+
+#~ msgid ""
+#~ "Some themes provide customization options that are grouped together on a "
+#~ "Theme Options screen. If you change themes, options may change or "
+#~ "disappear, as they are theme-specific. Your current theme, Twenty Eleven, "
+#~ "provides the following Theme Options:"
+#~ msgstr ""
+#~ "Alguns temas oferecem opções de customização que ficam agrupadas em uma "
+#~ "página de opções. Se você trocar de tema, estas opções podem mudar ou "
+#~ "desaparecer, já que elas estão ligadas ao tema. Seu tema atual, Jecebel, "
+#~ "oferece as seguintes opções:"
+
+#~ msgid ""
+#~ "<strong>Link Color</strong>: You can choose the color used for text links "
+#~ "on your site. You can enter the HTML color or hex code, or you can choose "
+#~ "visually by clicking the \"Select a Color\" button to pick from a color "
+#~ "wheel."
+#~ msgstr ""
+#~ "<strong>Cor do link</strong>: Você pode escolher a cor usada nos links do "
+#~ "seu site. Você pode digitar o valor HTML ou hex da cor, ou você pode "
+#~ "escolher direto na roda de cores clicando no botão \"Selecionar cor\"."
+
+#~ msgid ""
+#~ "<strong>Default Layout</strong>: You can choose if you want your "
+#~ "site&#8217;s default layout to have a sidebar on the left, the right, or "
+#~ "not at all."
+#~ msgstr ""
+#~ "<strong>Layout padrão</strong>: Você pode escolher se a barra lateral do "
+#~ "seu tema vai ficar na direita ou na esquerda."
+
+#~ msgid ""
+#~ "Remember to click \"Save Changes\" to save any changes you have made to "
+#~ "the theme options."
+#~ msgstr ""
+#~ "Lembre-se de clicar em \"Salvar mudanças\" para salvar as opções que você "
+#~ "alterou."
+
+#~ msgid "For more information:"
+#~ msgstr "Para mais informações:"
+
+#~ msgid ""
+#~ "<a href=\"http://codex.wordpress.org/Appearance_Theme_Options_Screen\" "
+#~ "target=\"_blank\">Documentation on Theme Options</a>"
+#~ msgstr ""
+#~ "<a href=\"http://codex.wordpress.org/Appearance_Theme_Options_Screen\" "
+#~ "target=\"_blank\">Documentação sobre Opções dos temas</a>"
+
+#~ msgid ""
+#~ "<a href=\"http://wordpress.org/support/\" target=\"_blank\">Support "
+#~ "Forums</a>"
+#~ msgstr ""
+#~ "<a href=\"http://wordpress.org/support/\" target=\"_blank\">Fóruns de "
+#~ "suporte</a>"
+
+#~ msgid "Content on left"
+#~ msgstr "Conteúdo na esquerda"
+
+#~ msgid "Jecebel is proudly powered by WordPress"
+#~ msgstr "Jecebel é orgulhosamente feito com WordPress"
+
+#~ msgid "Default color: %s"
+#~ msgstr "Cor padrão: %s"
+
+#~ msgid ""
+#~ "You may want to use these shortcodes in your footer text: [site-title] "
+#~ "[site-tagline] [site-link] [wp-link] [theme-name] [theme-author] [theme-"
+#~ "link] [the-year]"
+#~ msgstr ""
+#~ "Você pode usar esses shortcodes no texto de rodapé: [site-title] [site-"
+#~ "tagline] [site-link] [wp-link] [theme-name] [theme-author] [theme-link] "
+#~ "[the-year]"
+
+#~ msgid "%s Theme Options"
+#~ msgstr "%s Opções do tema"
+
+#~ msgid "By "
+#~ msgstr "Por"
+
+#~ msgid "View all posts by %s"
+#~ msgstr "Ver todos os posts de %s"
+
+#~ msgid "Published "
+#~ msgstr "Publicado"
+
+#~ msgid "Continue reading <span class=\"meta-nav\">&raquo;</span>"
+#~ msgstr "Continue lendo <span class=\"meta-nav\">&raquo;</span>"
+
+#~ msgid ""
+#~ "This entry was posted in %1$s%2$s. Bookmark the <a href=\"%3$s\" title="
+#~ "\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>. Follow any comments "
+#~ "here with the <a href=\"%5$s\" title=\"Comments RSS to %4$s\" rel="
+#~ "\"alternate\" type=\"application/rss+xml\">RSS feed for this post</a>."
+#~ msgstr ""
+#~ "This entry was posted in %1$s%2$s. Bookmark the <a href=\"%3$s\" title="
+#~ "\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>. Follow any comments "
+#~ "here with the <a href=\"%5$s\" title=\"Comments RSS to %4$s\" rel="
+#~ "\"alternate\" type=\"application/rss+xml\">RSS feed for this post</a>."
+
+#~ msgid " and tagged "
+#~ msgstr " e com as tags "
+
+#~ msgid ""
+#~ "<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Post "
+#~ "a comment</a> or leave a trackback: <a class=\"trackback-link\" href=\"%s"
+#~ "\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</"
+#~ "a>."
+#~ msgstr ""
+#~ "<a class=\"comment-link\" href=\"#respond\" title=\"Deixar um comentário"
+#~ "\">Deixar um comentário</a> ou mandar um trackback: <a class=\"trackback-"
+#~ "link\" href=\"%s\" title=\"Trackback URL\" rel=\"trackback\">Trackback "
+#~ "URL</a>."
+
+#~ msgid ""
+#~ "Comments are closed, but you can leave a trackback: <a class=\"trackback-"
+#~ "link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback"
+#~ "\">Trackback URL</a>."
+#~ msgstr ""
+#~ "Comentários estão fechados, mas você pode deixar um trackback: <a class="
+#~ "\"trackback-link\" href=\"%s\" title=\"Trackback URL\" rel=\"trackback"
+#~ "\">Trackback URL</a>."
+
+#~ msgid ""
+#~ "Trackbacks are closed, but you can <a class=\"comment-link\" href="
+#~ "\"#respond\" title=\"Post a comment\">post a comment</a>."
+#~ msgstr ""
+#~ "Trackbacks estão fechados, mas você pode <a class=\"comment-link\" href="
+#~ "\"#respond\" title=\"Deixar um comentário\">deixar um comentário</a>."
+
+#~ msgid "Both comments and trackbacks are currently closed."
+#~ msgstr "Comentários e trackbacks estão fechados."
+
+#~ msgid "Daily Archives <span>%s</span>"
+#~ msgstr "Arquivos do dia <span>%s</span>"
+
+#~ msgid "Monthly Archives <span>%s</span>"
+#~ msgstr "Arquivos do mês <span>%s</span>"
+
+#~ msgid "Yearly Archives <span>%s</span>"
+#~ msgstr "Arquivos do ano <span>%s</span>"
+
+#~ msgid "About %s"
+#~ msgstr "Sobre %s"
+
+#~ msgid ""
+#~ "Apologies, but we were unable to find what you were looking for. Perhaps "
+#~ "searching will help."
+#~ msgstr ""
+#~ "Perdão, mas não conseguimos encontrar o que você estava procurando. "
+#~ "Talvez a busca ajude."
+
+#~ msgid ""
+#~ "This post is password protected. Enter the password to view any comments."
+#~ msgstr ""
+#~ "Este post é protegido por senha. Digite a senha para ver os comentários."
+
+#~ msgid "Leave a message!"
+#~ msgstr "Deixe uma mensagem!"
+
+#~ msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
+#~ msgstr "<span class=\"meta-nav\">&larr;</span> Comentários antigos"
+
+#~ msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
+#~ msgstr "Comentários recentes <span class=\"meta-nav\">&rarr;</span>"
+
+#~ msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+#~ msgstr "<span class=\"meta-nav\">&larr;</span> Posts antigos"
+
+#~ msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+#~ msgstr "Posts recentes <span class=\"meta-nav\">&rarr;</span>"
+
+#~ msgid "Direct link for this comment."
+#~ msgstr "Link direto para este comentário"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "Color Scheme"
+#~ msgstr "Esquema de cores"
+
+#~ msgid "Skip navigation to the content"
+#~ msgstr "Pular a navegação pro conteúdo"

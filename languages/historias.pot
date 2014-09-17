@@ -1,0 +1,411 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Historias que ficam\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-31 15:19-0300\n"
+"PO-Revision-Date: 2013-05-31 15:27-0300\n"
+"Last-Translator: Felipe <felipecoelhokussik@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../archive-historias_filmes.php:14
+#, php-format
+msgid "More about &ldquo;%s&rdquo;"
+msgstr ""
+
+#: ../archive-historias_filmes.php:14
+#: ../content.php:46
+#: ../functions.php:297
+#: ../functions.php:317
+msgid "<span aria-hidden=\"true\" data-icon=\"&#xe067;\"></span><span class=\"assistive-text\">Edit</span>"
+msgstr ""
+
+#: ../comments.php:12
+#, php-format
+msgid "One reaction"
+msgid_plural "%1$s reactions"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../comments.php:14
+#, php-format
+msgid "%s Leave a reply"
+msgstr ""
+
+#: ../comments.php:24
+msgid "Comment navigation"
+msgstr ""
+
+#: ../comments.php:25
+#, php-format
+msgid "%s Older comments"
+msgstr ""
+
+#: ../comments.php:26
+#, php-format
+msgid "Newer comments %s"
+msgstr ""
+
+#: ../comments.php:36
+msgid "Comments are closed."
+msgstr ""
+
+#: ../content.php:6
+#, php-format
+msgid "Read, comment and share &ldquo;%s&rdquo;"
+msgstr ""
+
+#: ../content.php:18
+msgid "To be continued&hellip;"
+msgstr ""
+
+#: ../content.php:19
+msgid "Pages:"
+msgstr ""
+
+#: ../content.php:29
+msgid ", "
+msgstr ""
+
+#: ../content.php:33
+#, php-format
+msgid "Posted in %1$s"
+msgstr ""
+
+#: ../content.php:43
+msgid "Leave a Comment"
+msgstr ""
+
+#: ../content.php:43
+msgid "One comment"
+msgstr ""
+
+#: ../content.php:43
+#, php-format
+msgid "% comments"
+msgstr ""
+
+#: ../footer.php:5
+msgid "Twitter"
+msgstr ""
+
+#: ../footer.php:6
+msgid "Flickr"
+msgstr ""
+
+#: ../footer.php:7
+msgid "Vimeo"
+msgstr ""
+
+#: ../footer.php:8
+msgid "Facebook"
+msgstr ""
+
+#: ../functions.php:57
+msgid "Primary Menu"
+msgstr ""
+
+#: ../functions.php:58
+msgid "Secondary Menu"
+msgstr ""
+
+#: ../functions.php:156
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: ../functions.php:188
+msgid "Leave a reply"
+msgstr ""
+
+#: ../functions.php:188
+msgid "1 Reply"
+msgstr ""
+
+#: ../functions.php:188
+msgid "% Replies"
+msgstr ""
+
+#: ../functions.php:218
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: ../functions.php:235
+msgid "Post navigation"
+msgstr ""
+
+#: ../functions.php:245
+#, php-format
+msgid "%s Older posts"
+msgstr ""
+
+#: ../functions.php:249
+#, php-format
+msgid "%s Newer posts"
+msgstr ""
+
+#: ../functions.php:263
+msgid "Primary Widget Area"
+msgstr ""
+
+#: ../functions.php:264
+msgid "Its the coloured one."
+msgstr ""
+
+#: ../functions.php:316
+#, php-format
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: ../functions.php:316
+msgid "Permalink"
+msgstr ""
+
+#: ../functions.php:321
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: ../header.php:35
+msgid "Skip to content"
+msgstr ""
+
+#: ../header.php:51
+#, php-format
+msgid "Hello, %s!"
+msgstr ""
+
+#: ../historias_filmes.php:16
+msgid "Director"
+msgstr ""
+
+#: ../historias_filmes.php:22
+msgid "Region"
+msgstr ""
+
+#: ../historias_filmes.php:28
+msgid "Producer"
+msgstr ""
+
+#: ../historias_filmes.php:34
+msgid "Producer URL"
+msgstr ""
+
+#: ../historias_filmes.php:55
+#: ../historias_filmes.php:66
+msgid "Movies"
+msgstr ""
+
+#: ../historias_filmes.php:56
+msgid "Movie"
+msgstr ""
+
+#: ../historias_filmes.php:57
+msgctxt "historias_filmes"
+msgid "Add New"
+msgstr ""
+
+#: ../historias_filmes.php:58
+msgid "Add New Movie"
+msgstr ""
+
+#: ../historias_filmes.php:59
+msgid "Edit Movie"
+msgstr ""
+
+#: ../historias_filmes.php:60
+msgid "New Movie"
+msgstr ""
+
+#: ../historias_filmes.php:61
+msgid "All Movies"
+msgstr ""
+
+#: ../historias_filmes.php:62
+msgid "View Movie"
+msgstr ""
+
+#: ../historias_filmes.php:63
+msgid "Search Movies"
+msgstr ""
+
+#: ../historias_filmes.php:64
+msgid "No Movie Found"
+msgstr ""
+
+#: ../historias_filmes.php:65
+msgid "No Movie Found in the trash"
+msgstr ""
+
+#: ../historias_filmes.php:91
+msgid "About the Movie"
+msgstr ""
+
+#: ../inscricoes-functions.php:59
+msgid "<span class=\"error\">Os campos da etapa anterior nao estao preenchidos corretamente.</span>"
+msgstr ""
+
+#: ../inscricoes-functions.php:72
+msgid "Este projeto já teve os dados submetidos e não pode mais ser alterado."
+msgstr ""
+
+#: ../inscricoes-functions.php:105
+msgid "Inscrições encerradas"
+msgstr ""
+
+#: ../inscricoes-functions.php:137
+msgid "Você já fez uma inscrição. Este é o seu número de inscrição"
+msgstr ""
+
+#: ../inscricoes-functions.php:140
+msgid "Inscrições encerradas."
+msgstr ""
+
+#: ../inscricoes-functions.php:154
+msgid "O formul&aacute;rio n&atilde;o foi preenchido corretamente. Confira as etapas novamente."
+msgstr ""
+
+#: ../inscricoes-functions.php:633
+msgid "Este campo não pode ser vazio"
+msgstr ""
+
+#: ../inscricoes-functions.php:643
+msgid "O email não tem um formato válido"
+msgstr ""
+
+#: ../inscricoes-functions.php:649
+msgid "O CPF fornecido é inválido."
+msgstr ""
+
+#: ../inscricoes-functions.php:680
+msgid "O CNPJ fornecido é inválido."
+msgstr ""
+
+#: ../inscricoes-functions.php:725
+msgid "Já existe um projeto cadastrado com este CNPJ."
+msgstr ""
+
+#: ../inscricoes-functions.php:734
+msgid "O CEP fornecido é invalido"
+msgstr ""
+
+#: ../inscricoes-functions.php:741
+msgid "O número do telefone é invalido"
+msgstr ""
+
+#: ../inscricoes-functions.php:748
+msgid "Formato inválido para o valor. Por favor apague e começe novamente."
+msgstr ""
+
+#: ../inscricoes-functions.php:753
+msgid "O valor não pode ser zero."
+msgstr ""
+
+#: ../inscricoes-functions.php:777
+msgid "O valor total não condiz com os valores da pré-produção, produção e pós-produção."
+msgstr ""
+
+#: ../inscricoes-functions.php:780
+msgid "Não é possível calcular o orçamento total através de um usuário inválido."
+msgstr ""
+
+#: ../inscricoes-functions.php:786
+msgid "O texto não deve exceder 500 caracteres."
+msgstr ""
+
+#: ../inscricoes-functions.php:793
+msgid "O texto não deve exceder 4000 caracteres."
+msgstr ""
+
+#: ../inscricoes-register.php:21
+msgid "Este e-mail já está registrado em nosso sistema. Por favor, cadastre-se com outro e-mail. <br/>(Já sou cadastrado e <a href=\""
+msgstr ""
+
+#: ../inscricoes-register.php:24
+msgid "O e-mail informado é inválido.<br/>"
+msgstr ""
+
+#: ../inscricoes-register.php:32
+msgid "O e-mail é obrigatório para o cadastro no site.<br/>"
+msgstr ""
+
+#: ../inscricoes.php:35
+msgid "Inscrição não encontrada."
+msgstr ""
+
+#: ../inscricoes.php:39
+msgid "Esta inscrição foi marcada como inválida."
+msgstr ""
+
+#: ../lista-de-inscritos.php:104
+msgid "Valid!"
+msgstr ""
+
+#: ../lista-de-inscritos.php:106
+msgid "Invalid!"
+msgstr ""
+
+#: ../single-historias_filmes.php:34
+msgid "Visit the producer website"
+msgstr ""
+
+#: ../single-historias_filmes.php:76
+msgid "Other Selected Movies"
+msgstr ""
+
+#: ../inc/theme-options.php:121
+msgid "Save Changes"
+msgstr ""
+
+#: ../page-templates/divulgacao.php:36
+msgid "You can customize this text in the \"Blue Box\" Custom Field."
+msgstr ""
+
+#: ../page-templates/divulgacao.php:48
+msgid "Please create a page called \"Mostra Itinerante\"."
+msgstr ""
+
+#: ../page-templates/divulgacao.php:54
+msgid "Latest News"
+msgstr ""
+
+#: ../page-templates/form.php:38
+msgid "Email successfully sent!"
+msgstr ""
+
+#: ../page-templates/form.php:41
+msgid "Error sending email, please try again"
+msgstr ""
+
+#: ../page-templates/form.php:52
+msgid "Message"
+msgstr ""
+
+#: ../page-templates/form.php:56
+msgid "Your Name"
+msgstr ""
+
+#: ../page-templates/form.php:60
+msgid "Your Email"
+msgstr ""
+
+#: ../page-templates/form.php:63
+msgid "Send"
+msgstr ""
+
+#: ../page-templates/form.php:63
+msgid "to"
+msgstr ""
+
+#: ../page-templates/home-inscricoes.php:48
+msgid "Lost Password"
+msgstr ""
+
