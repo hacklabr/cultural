@@ -22,7 +22,7 @@ get_header(); ?>
 
 		<?php endwhile; // end of the loop. ?>
 
-		<?php cultural_content_nav( 'nav-below' ); ?>
+		<?php cultural_post_nav( ); ?>
 
 		</div><!-- #content .site-content --><!-- #primary .content-area -->
 

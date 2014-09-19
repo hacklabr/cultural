@@ -11,7 +11,7 @@
 
 	    <?php endif; ?>
 
-		<?php cultural_content_nav( 'nav-below' ); ?>
+		<?php cultural_paging_nav(); ?>
 	</div><!-- /content -->
 
 <?php get_footer(); ?>

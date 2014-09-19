@@ -93,7 +93,7 @@ class Cultural_Customize {
    public static function live_preview() {
       wp_enqueue_script(
            'cultural-customizer', // Give the script a unique ID
-           get_template_directory_uri() . '/js/customizr.js', // Define the path to the JS file
+           get_template_directory_uri() . '/js/customizer.js', // Define the path to the JS file
            array(  'jquery', 'customize-preview' ), // Define dependencies
            '', // Define a version (optional)
            true // Specify whether to put in footer (leave this true)

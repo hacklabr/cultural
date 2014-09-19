@@ -15,8 +15,6 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>">
-
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 	<?php wp_head(); ?>
@@ -29,7 +27,7 @@
 	<header class="site-header wrap cf">
 		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'cultural' ); ?>" class="assistive-text"><?php _e( 'Skip to content', 'cultural' ); ?></a>
 
-		<div id="branding">
+		<div class="branding">
 			<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
             <?php
             $logo = get_theme_mod('site_logo');
