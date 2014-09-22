@@ -1,0 +1,27 @@
+{
+  "name": "cultural",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hacklabr/cultural",
+  "authors": [
+    "Felipe <hola@seufelipe.com.br>"
+  ],
+  "main": "style.css",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "masonry": "~3.1.5",
+    "respond": "~1.4.2",
+    "responsive-nav": "~1.0.32",
+    "imagesloaded": "~3.1.8"
+  }
+}

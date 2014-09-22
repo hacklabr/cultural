@@ -104,3 +104,12 @@ function cultural_setup_author() {
     }
 }
 add_action( 'wp', 'cultural_setup_author' );
+
+/**
+ * Add a lock icon before the protected posts title
+ */
+function cultural_private_titles( $format ) {
+    return '%s <i class="fa  fa-lock"></i>';
+}
+add_filter( 'private_title_format', 'cultural_private_titles' );
+add_filter( 'protected_title_format', 'cultural_private_titles' );
