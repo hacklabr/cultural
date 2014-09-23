@@ -16,10 +16,42 @@ function cultural_the_format() {
     global $post;
 
     $format = get_post_format();
-    $pretty_format = get_post_format_string($format);
-    $permalink = get_permalink();
 
-    if( $format ) echo '<a href="' . $permalink . '" class="entry-format">' . $pretty_format . '</a>';
+    switch ( get_post_format() ) {
+        case 'aside':
+            $pretty_format = '<i class="fa fa-asterisk"></i>';
+        break;
+        case 'chat':
+            $pretty_format = '<i class="fa fa-comments"></i>';
+        break;
+        case 'image':
+            $pretty_format = '<i class="fa fa-camera"></i>';
+        break;
+        case 'gallery':
+            $pretty_format = '<i class="fa fa-picture-o"></i>';
+        break;
+        case 'link':
+            $pretty_format = '<i class="fa fa-bookmark"></i>';
+        break;
+        case 'video':
+            $pretty_format = '<i class="fa fa-video-camera"></i>';
+        break;
+        case 'quote':
+            $pretty_format = '<i class="fa fa-quote-right"></i>';
+        break;
+        case 'audio':
+            $pretty_format = '<i class="fa fa-music"></i>';
+        break;
+        case 'status':
+            $pretty_format = '<i class="fa fa-coffee"></i>';
+        break;
+
+        default:
+            $pretty_format = '<i class="fa fa-bicycle"></i>';
+        break;
+    }
+
+    if( $format ) echo '<span class="entry__format  u-pull-right">' . $pretty_format . '</span>';
 }
 endif;
 

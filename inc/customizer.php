@@ -74,7 +74,7 @@ class Cultural_Customize {
       ?>
       <!--Customizer CSS-->
       <style type="text/css">
-           <?php self::generate_css('.menu--main', 'background-color', 'highlight_color'); ?>
+           <?php // self::generate_css('.menu--main', 'background-color', 'highlight_color'); ?>
       </style>
       <!--/Customizer CSS-->
       <?php
