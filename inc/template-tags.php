@@ -262,6 +262,28 @@ function _s_entry_footer() {
 }
 endif;
 
+if ( ! function_exists( 'cultural_categories' ) ) :
+function cultural_categories() {
+    global $post;
+
+    $before = '<span class="entry__categories">';
+    $after = '</span>';
+    $categories = get_the_category();
+    $separator = ' ';
+    $output = '';
+    if($categories){
+        foreach($categories as $category) {
+            $cat_data = get_option('category_' . $category->cat_ID );
+            $cat_color = $cat_data['color'];
+            $output .= '<a href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '" style="background-color:'. $cat_color . ';">' . $category->cat_name . '</a>'.$separator;
+        }
+        echo $before;
+        echo trim($output, $separator);
+        echo $after;
+    }
+}
+endif;
+
 /**
  * Returns true if a blog has more than 1 category.
  *
