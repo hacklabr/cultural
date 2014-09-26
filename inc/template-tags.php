@@ -164,13 +164,14 @@ function cultural_the_time() {
     $time = mysql2date( 'G', $post->post_date );
     $time_diff = time() - $time; ?>
 
-    <span class="entry-date">
+    <div class="entry__date">
+        <i class="fa fa-clock-o"></i>
         <?php if ( ! is_single() && ( $time_diff > 0 && $time_diff < 30*24*60*60 ) )
             printf( __( '%s ago', 'cultural' ), human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ) );
         else
             the_time( get_option( 'date_format' ) );
         ?>
-    </span>
+    </div>
 <?php }
 endif;
 
@@ -232,23 +233,23 @@ function _s_posted_on() {
 }
 endif;
 
-if ( ! function_exists( '_s_entry_footer' ) ) :
+if ( ! function_exists( 'cultural_entry_footer' ) ) :
 /**
  * Prints HTML with meta information for the categories, tags and comments.
  */
-function _s_entry_footer() {
+function cultural_entry_footer() {
     // Hide category and tag text for pages.
     if ( 'post' == get_post_type() ) {
         /* translators: used between list items, there is a space after the comma */
         $categories_list = get_the_category_list( __( ', ', 'cultural' ) );
         if ( $categories_list && cultural_categorized_blog() ) {
-            printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'cultural' ) . '</span>', $categories_list );
+            echo '<div class="cat-links"><i class="fa fa-folder-open"></i> ' . $categories_list . '</div>';
         }
 
         /* translators: used between list items, there is a space after the comma */
         $tags_list = get_the_tag_list( '', __( ', ', 'cultural' ) );
         if ( $tags_list ) {
-            printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'cultural' ) . '</span>', $tags_list );
+            echo '<div class="tags-links"><i class="fa fa-tags"></i> ' . $tags_list . '</div>';
         }
     }
 
@@ -266,8 +267,8 @@ if ( ! function_exists( 'cultural_categories' ) ) :
 function cultural_categories() {
     global $post;
 
-    $before = '<span class="entry__categories">';
-    $after = '</span>';
+    $before = '<div class="entry__categories  u-pull-left">';
+    $after = '</div>';
     $categories = get_the_category();
     $separator = ' ';
     $output = '';

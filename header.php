@@ -49,4 +49,4 @@
         </nav>
     </header><!-- /site-header -->
 
-	<div id="main" class="wrap cf">
+	<div class="main  cf">

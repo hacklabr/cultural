@@ -572,17 +572,14 @@ img.aligncenter {
 }
 
 .site-header {
-    background: #f5f5f5;
+    background-color: rgba(0,0,0,.04);
     height: 100%;
     overflow: scroll;
     overflow-x: hidden;
-    padding: 4rem 2% 2% 2%;
+    padding: 1.5rem;
     position: fixed;
     top: 0;
     -webkit-transform: translate(0px, 0px);
-       -moz-transform: translate(0px, 0px);
-        -ms-transform: translate(0px, 0px);
-         -o-transform: translate(0px, 0px);
             transform: translate(0px, 0px);
     width: 20%;
     z-index: 100;
@@ -593,20 +590,23 @@ img.aligncenter {
 @media (max-width: 768px) {
     .site-header {
         margin-left: 0;
-        padding: 4rem 5% 25px 5%;
+        padding: 2%;
         position: relative;
         width: 100%;
     }
 }
 
-#main {
+.main {
+    background-color: #f5f5f5;
     display: inline-block;
-    padding: 5% 6% 4% 26%;
+    padding: 2%;
+    padding-left: 22%;
     width: 100%;
 }
+
 @media (max-width: 768px) {
-    #main {
-        padding: 5%;
+    .main {
+        padding: 2%;
     }
 }
 
@@ -614,26 +614,32 @@ img.aligncenter {
     margin: 0 auto;
 }
 
-.content--full {
-    float: none;
-    padding: 0 1.5rem;
-    width: 100%;
+@media screen and (min-width: 40em) {
+    .content--sidebar {
+        float: left;
+        width: 70%;
+    }
+    .asides-content {
+        float: right;
+        width: 28%;
+    }
 }
 
 .content--sidebarless {
-    float: none;
+    width: 70%;
 }
 
 .site-footer {
     background-color: rgba(41,39,36,.9);
     display: inline-block;
-    padding: 5% 6% 4% 26%;
+    padding: 2%;
+    padding-left: 22%;
     width: 100%;
 }
 
 @media (max-width: 768px) {
     .site-footer {
-        padding: 5%;
+        padding: 2%;
     }
 }
 
@@ -909,13 +915,24 @@ img.aligncenter {
 }
 
 .hentry {
+    background-color: #fff;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
+.hentry.sticky {
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,.2);
+    box-shadow: 0 2px 2px rgba(0,0,0,.2);
+}
+
+.entry-header {
     margin-bottom: 1.5rem;
 }
 
 .entry-title {
+    clear: both;
     font-size: 2.25rem;
     line-height: 1.33;
-    margin-bottom: 1.5rem;
 }
 
 .entry-title a {
@@ -927,10 +944,10 @@ img.aligncenter {
     color: #444;
 }
 
-.entry-date {
+.entry__date {
     color: #888;
-    font-size: .88rem;
-    line-height: 1.71;
+    font-size: 0.75rem;
+    line-height: 2;
 }
 
 .entry__format {
@@ -947,13 +964,19 @@ img.aligncenter {
 }
 
 .entry__image {
-    margin: 1.5rem 0 1.5rem -150px;
+    margin: -1.5rem -1.5rem 1.5rem -1.5rem;
     overflow: hidden;
-    width: 998px;
+    padding: 0;
 }
 
 .entry__image img {
-    display: block;
+    -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+}
+
+.entry__image a:hover img {
+    -webkit-transform: scale(1.03);
+            transform: scale(1.03);
 }
 
 .entry__meta {
@@ -1049,7 +1072,8 @@ img.aligncenter {
 .comment-content p {
     -webkit-hyphens: auto;
        -moz-hyphens: auto;
-            hyphens: auto;
+            -ms-hyphens: auto;
+        hyphens: auto;
     line-height: 1.5;
     margin: 0 0 24px;
     margin: 0 0 1.5rem;
@@ -1230,21 +1254,6 @@ img.aligncenter {
     font-size: .88rem;
 }
 
-.related {
-    background-color: #f5f5f5;
-    border: 1px solid #ededed;
-    padding: 1.5rem;
-}
-
-.related .entry-title {
-    font-size: 1.13rem;
-    line-height: 1.33;
-}
-
-.related .entry-title a {
-    color: #c0392b;
-}
-
 .entry-share .comments-link {
     float: left;
 }
@@ -1257,8 +1266,14 @@ img.aligncenter {
     width: 40%;
 }
 
+.read-more {
+    color: #fff;
+    display: inline-block;
+}
+
 .entry__categories {
     font-size: 0.75rem;
+    overflow: hidden;
     line-height: 2;
 }
 
@@ -1640,17 +1655,18 @@ a.icon--vimeo:hover {
     float: right;
 }
 
-.gutter-sizer {
-    width: 2%;
-}
+@media screen and (min-width: 40em) {
+    .gutter-sizer {
+        width: 2%;
+    }
 
-.grid-sizer {
-    width: 48%;
-}
+    .grid-sizer {
+        width: 48%;
+    }
 
-.grid .hentry {
-    background: #f5f5f5;
-    width: 48%;
+    .grid .hentry {
+        width: 48%;
+    }
 }
 
 @media only screen and (min-width: 40em) {

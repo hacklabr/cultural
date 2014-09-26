@@ -77,6 +77,8 @@ function cultural_scripts() {
     /* Modernizr */
     wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr.js', '', '2.6.2' );
 
+    wp_enqueue_script( 'main', get_template_directory_uri() . '/js/main.js', array( 'imagesloaded', 'masonry' ), '', true );
+
     /* Load the comment reply JavaScript. */
     if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
         wp_enqueue_script( 'comment-reply' );
@@ -91,9 +93,9 @@ add_action( 'wp_enqueue_scripts', 'cultural_scripts' );
  */
 function cultural_widgets_init() {
   	register_sidebar( array (
-  		'name' => __( 'Primary Widget Area', 'cultural' ),
+  		'name' => __( 'Content Widget Area', 'cultural' ),
   		'description' => '',
-  		'id' => 'primary-widget-area',
+  		'id' => 'content-widget-area',
   		'before_widget' => '<aside id="%1$s" class="widget  %2$s">',
   		'after_widget' => "</aside>",
   		'before_title' => '<h3 class="widget__title">',

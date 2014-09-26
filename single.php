@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-		<div class="content">
+		<div class="content  content--sidebar">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -22,8 +22,9 @@ get_header(); ?>
 
 		<?php endwhile; // end of the loop. ?>
 
-		<?php cultural_post_nav( ); ?>
+		<?php // cultural_post_nav( ); ?>
 
 		</div><!-- #content .site-content --><!-- #primary .content-area -->
 
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>
