@@ -1,1 +1,1 @@
-$(function(){var n=$(".js-masonry");n.imagesLoaded(function(){n.masonry()})});
+jQuery(document).ready(function($){$("ul.toggle-bar a").click(function(){var a=$(this).attr("data-tab");return $("ul.toggle-bar li a").removeClass("current"),$(".tab-content").removeClass("current"),$(this).addClass("current"),$("#"+a).addClass("current"),!1});var a=$(".js-masonry");a.imagesLoaded(function(){a.masonry()})});

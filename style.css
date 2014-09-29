@@ -34,8 +34,8 @@ section {
 }
 
 img {
-    -ms-interpolation-mode: bicubic;
     border: 0;
+    -ms-interpolation-mode: bicubic;
     vertical-align: middle;
 }
 
@@ -220,7 +220,7 @@ h6 {
     font-weight: 400;
     margin: 0;
     -ms-word-wrap: break-word;
-    word-wrap: break-word;
+        word-wrap: break-word;
 }
 
 h2 {
@@ -374,9 +374,9 @@ textarea {
 .comment-content img[height],
 .entry-content img,
 .entry-summary img,
-img[class*="align"],
-img[class*="wp-image-"],
-img[class*="attachment-"],
+img[class*='align'],
+img[class*='wp-image-'],
+img[class*='attachment-'],
 #site-header img {
     height: auto;
 }
@@ -596,6 +596,53 @@ img.aligncenter {
     }
 }
 
+/* --------------------------------------------------------------
+5.5 Toggle Menus
+-------------------------------------------------------------- */
+.toggle-tabs {
+    position: relative;
+}
+
+.toggle-bar {
+    background: #e7e7e7;
+    margin: 0 0 1.5rem;
+    padding: .75rem;
+    text-align: center;
+    width: 100%;
+}
+
+.toggle-bar li {
+    display: inline-block;
+    margin: 0 1em;
+    list-style-type: none;
+    width: 18px;
+}
+
+.toggle-bar a {
+    color: #999;
+}
+
+.toggle-bar a:hover {
+    color: #c0392b;
+}
+
+.toggle-bar a.current {
+    color: #c0392b;
+    outline: none;
+}
+
+.toggle-bar .fa-folder-open {
+    display: none;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.current {
+    display: inherit;
+}
+
 .main {
     background-color: #f5f5f5;
     display: inline-block;
@@ -683,15 +730,15 @@ img.aligncenter {
     position: relative;
 }
 
-.menu .current_page_item,
+.menu .current-menu-item,
 .menu .current-menu-ancestor {
     position: static;
 }
 
-.menu .current_page_item > a,
+.menu .current-menu-item > a,
 .menu .current-page-ancestor > a,
 .menu .current-menu-ancestor > a {
-    box-shadow:inset 0 0 0 2px #c0392b;
+    box-shadow: inset 0 0 0 2px #c0392b;
     color: #c0392b;
 }
 
@@ -727,10 +774,10 @@ img.aligncenter {
     font-size: 1rem;
     height: 1px;
     left: 0;
+    left: 100%;
     margin: 0;
     overflow: hidden;
     position: absolute;
-    left: 100%;
     top: 0;
     width: 1px;
     z-index: 9999;
@@ -762,12 +809,11 @@ img.aligncenter {
     color: #111;
 }
 
-.sub-menu .current_page_item > a,
 .sub-menu .current-menu-item > a {
     background: #ededed;
 }
 
-.menu .current_page_item > .sub-menu,
+.menu .current-menu-item > .sub-menu,
 .menu .current-menu-ancestor > .sub-menu {
     background-color: #ededed;
     box-shadow: none;
@@ -787,7 +833,7 @@ img.aligncenter {
         width: inherit;
     }
 
-    .menu .current_page_item > .sub-menu,
+    .menu .current-menu-item > .sub-menu,
     .menu .current-menu-ancestor > .sub-menu {
         border-bottom: 1px solid #ccc;
         left: 0;
@@ -796,7 +842,7 @@ img.aligncenter {
         top: 100%;
     }
 
-    .menu .current_page_item > .sub-menu li,
+    .menu .current-menu-item > .sub-menu li,
     .menu .current-menu-ancestor > .sub-menu li {
         float: left;
     }
@@ -922,7 +968,7 @@ img.aligncenter {
 
 .hentry.sticky {
     -webkit-box-shadow: 0 0 4px rgba(0,0,0,.2);
-    box-shadow: 0 2px 2px rgba(0,0,0,.2);
+            box-shadow: 0 2px 2px rgba(0,0,0,.2);
 }
 
 .entry-header {
@@ -946,7 +992,7 @@ img.aligncenter {
 
 .entry__date {
     color: #888;
-    font-size: 0.75rem;
+    font-size: .75rem;
     line-height: 2;
 }
 
@@ -970,8 +1016,8 @@ img.aligncenter {
 }
 
 .entry__image img {
-    -webkit-transition: all 0.2s linear;
-            transition: all 0.2s linear;
+    -webkit-transition: all .2s linear;
+            transition: all .2s linear;
 }
 
 .entry__image a:hover img {
@@ -1072,12 +1118,12 @@ img.aligncenter {
 .comment-content p {
     -webkit-hyphens: auto;
        -moz-hyphens: auto;
-            -ms-hyphens: auto;
-        hyphens: auto;
+            hyphens: auto;
     line-height: 1.5;
     margin: 0 0 24px;
     margin: 0 0 1.5rem;
 
+        -ms-hyphens: auto;
         -ms-hyphens: auto;
         -ms-hyphens: auto;
 }
@@ -1272,9 +1318,9 @@ img.aligncenter {
 }
 
 .entry__categories {
-    font-size: 0.75rem;
-    overflow: hidden;
+    font-size: .75rem;
     line-height: 2;
+    overflow: hidden;
 }
 
 .entry__categories a {
@@ -1546,10 +1592,7 @@ img.aligncenter {
 }
 
 .widget {
-    background: #f5f5f5;
-    border: 1px solid #ededed;
     margin-bottom: 1.5rem;
-    padding: 1.5rem;
 }
 
 .widget a {
@@ -1566,7 +1609,7 @@ img.aligncenter {
     display: inline-block;
     font-size: 1rem;
     font-weight: normal;
-    margin: 0 0 1.5rem -1.5rem;
+    margin: 0 0 1.5rem;
     padding: 0 .5em;
 }
 
@@ -1670,7 +1713,6 @@ a.icon--vimeo:hover {
 }
 
 @media only screen and (min-width: 40em) {
-
     .site-footer .site-title {
         text-align: left;
     }
@@ -1702,3 +1744,36 @@ a.icon--vimeo:hover {
         width: 34%;
     }
 }
+
+/* --------------------------------------------------------------
+19.0 Animations
+-------------------------------------------------------------- */
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn; }
+
+.animated {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+.animated-faster {
+  -webkit-animation-duration: .2s;
+  animation-duration: .2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }

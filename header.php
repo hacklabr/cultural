@@ -27,26 +27,47 @@
 	<header class="site-header wrap cf">
 		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'cultural' ); ?>" class="assistive-text"><?php _e( 'Skip to content', 'cultural' ); ?></a>
 
-		<div class="branding">
-			<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
-            <?php
-            $logo = get_theme_mod('site_logo');
-            if ($logo == ''):
-            ?>
-                <h1 class="site-title"><?php bloginfo('name'); ?></h1>
-            <?php else: ?>
-                <img src="<?php echo esc_url($logo); ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
-            <?php endif; ?>
-            </a>
-        </div>
+		<ul class="toggle-bar">
+            <li><a href="#tabs-1" class="current main-toggle" data-tab="tab-1"><i class="fa fa-list-ul"></i></a></li>
+            <li><a href="#tab-2" class="highlights-toggle" data-tab="tab-2"><i class="fa fa-star"></i></a></li>
+            <li><a href="#tab-3" class="calendar-toggle" data-tab="tab-3"><i class="fa fa-calendar"></i></a></li>
+        </ul>
 
-        <nav class="access cf js-access" role="navigation">
-            <?php if ( wp_is_mobile() ) :
-                wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
-                else :
-                wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu  cf', 'fallback_cb' => 'default_menu' ) ); ?>
-            <?php endif; ?>
-        </nav>
+        <div id="tabs" class="toggle-tabs">
+            <div class="site-header-inside">
+                <!-- Logo, description and main navigation -->
+                <div id="tab-1" class="tab-content current animated fadeIn">
+                    <div class="branding">
+                        <a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+                        <?php
+                        $logo = get_theme_mod('site_logo');
+                        if ($logo == ''):
+                        ?>
+                            <h1 class="site-title"><?php bloginfo('name'); ?></h1>
+                        <?php else: ?>
+                            <img src="<?php echo esc_url($logo); ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />
+                        <?php endif; ?>
+                        </a>
+                    </div>
+                    <nav class="access cf js-access" role="navigation">
+                        <?php if ( wp_is_mobile() ) :
+                            wp_nav_menu( array( 'theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false ) );
+                            else :
+                            wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu  cf', 'fallback_cb' => 'default_menu' ) ); ?>
+                        <?php endif; ?>
+                    </nav>
+                </div><!-- #tab-1 -->
+
+                <div id="tab-2" class="tab-content animated fadeIn">
+                    Aqui vão os posts em destaque
+                </div><!-- #tab-3 -->
+
+                <!-- Sidebar widgets -->
+                <div id="tab-3" class="tab-content animated fadeIn">
+                    Aqui vão os eventos em destaque
+                </div><!-- #tab-3 -->
+            </div><!-- .site-header-inside -->
+        </div><!-- #tabs -->
     </header><!-- /site-header -->
 
 	<div class="main  cf">
