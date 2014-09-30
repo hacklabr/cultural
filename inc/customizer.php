@@ -4,6 +4,7 @@
  *
  * @link http://codex.wordpress.org/Theme_Customization_AP
  */
+
 class Cultural_Customize {
    /**
     * This hooks into 'customize_register' (available as of WP 3.4) and allows

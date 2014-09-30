@@ -240,11 +240,6 @@ if ( ! function_exists( 'cultural_entry_footer' ) ) :
 function cultural_entry_footer() {
     // Hide category and tag text for pages.
     if ( 'post' == get_post_type() ) {
-        /* translators: used between list items, there is a space after the comma */
-        $categories_list = get_the_category_list( __( ', ', 'cultural' ) );
-        if ( $categories_list && cultural_categorized_blog() ) {
-            echo '<div class="cat-links"><i class="fa fa-folder-open"></i> ' . $categories_list . '</div>';
-        }
 
         /* translators: used between list items, there is a space after the comma */
         $tags_list = get_the_tag_list( '', __( ', ', 'cultural' ) );
@@ -267,7 +262,7 @@ if ( ! function_exists( 'cultural_categories' ) ) :
 function cultural_categories() {
     global $post;
 
-    $before = '<div class="entry__categories  u-pull-left">';
+    $before = '<div class="entry__categories">';
     $after = '</div>';
     $categories = get_the_category();
     $separator = ' ';
