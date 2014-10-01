@@ -1,0 +1,1 @@
+!function($){wp.customize("title_type",function(t){t.bind(function(t){$(".entry-title").css("font-family",t)})})}(jQuery);

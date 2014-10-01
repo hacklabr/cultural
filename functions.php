@@ -60,9 +60,6 @@ function cultural_scripts() {
 
     wp_enqueue_style( 'cultural-style', get_stylesheet_uri() );
 
-    /* Lovely Brick Fonts for body and titles */
-    wp_enqueue_style( 'brick-fonts', '//brick.a.ssl.fastly.net/Open+Sans:400,700,400i,700i/Aleo:400,700,400i,700i' );
-
     /* JUDO Font Awesome for the icons */
     wp_enqueue_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' );
 

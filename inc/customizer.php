@@ -57,12 +57,86 @@ class Cultural_Customize {
           ) )
       );
 
+    $wp_customize->add_section( 'cultural_typography', array(
+        'title'          => __( 'Typography', 'cultural' ),
+        'priority'       => 35,
+    ) );
+
+    $wp_customize->add_setting( 'title_type', //No need to use a SERIALIZED name, as `theme_mod` settings already live under one db record
+       array(
+          'default' => 'aleo', //Default setting/value to save
+          'type' => 'theme_mod', //Is this an 'option' or a 'theme_mod'?
+          'transport' => 'postMessage'
+       )
+    );
+
+    $wp_customize->add_control( 'title_type', array(
+        'label'   => __( 'Title Type', 'cultural' ),
+        'section' => 'cultural_typography',
+        'type'    => 'select',
+        'choices'    => array(
+            'serif' => 'Serif',
+            'sansserif' => 'Sans Serif',
+            'slab' => 'Slab',
+    )
+    ));
+
+    $wp_customize->add_setting( 'body_type', //No need to use a SERIALIZED name, as `theme_mod` settings already live under one db record
+       array(
+          'default' => 'sansserif', //Default setting/value to save
+          'type' => 'theme_mod', //Is this an 'option' or a 'theme_mod'?
+          'transport' => 'postMessage'
+       )
+    );
+
+    $wp_customize->add_control( 'body_type', array(
+        'label'   => __( 'Body Type', 'cultural' ),
+        'section' => 'cultural_typography',
+        'type'    => 'select',
+        'choices'    => array(
+            'sansserif' => 'Sans Serif',
+            'serif' => 'Serif',
+    )
+    ));
+
       //4. We can also change built-in settings by modifying properties. For instance, let's make some stuff use live preview JS...
       $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
       $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
       $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
       $wp_customize->get_setting( 'background_color' )->transport = 'postMessage';
    }
+
+    /**
+    * This will output the custom WordPress settings to the live theme's WP head.
+    *
+    * Used by hook: 'wp_head'
+    *
+    * @see add_action('wp_head',$func
+    */
+    public static function enqueue_fonts() {
+
+        switch ( get_theme_mod( 'body_type' ) ) {
+            case 'sansserif':
+                wp_enqueue_style( 'opensans', '//brick.a.ssl.fastly.net/Open+Sans:400,700,400i,700i' );
+            break;
+            case 'serif':
+                wp_enqueue_style( 'crimson', '//brick.a.ssl.fastly.net/Crimson:400,700,400i,700i' );
+            break;
+        }
+
+        switch ( get_theme_mod( 'title_type' ) ) {
+            case 'serif':
+                wp_enqueue_style( 'crimson', '//brick.a.ssl.fastly.net/Crimson:400,700,400i,700i' );
+            break;
+            case 'sansserif':
+                wp_enqueue_style( 'montserrat', '//brick.a.ssl.fastly.net/Montserrat:400,700' );
+            break;
+            case 'slab':
+                wp_enqueue_style( 'bitter', '//brick.a.ssl.fastly.net/Bitter:400,700,400i,700i' );
+            break;
+        }
+
+    }
 
    /**
     * This will output the custom WordPress settings to the live theme's WP head.
@@ -72,12 +146,39 @@ class Cultural_Customize {
     * @see add_action('wp_head',$func
     */
    public static function header_output() {
-      ?>
-      <!--Customizer CSS-->
-      <style type="text/css">
-           <?php // self::generate_css('.menu--main', 'background-color', 'highlight_color'); ?>
-      </style>
-      <!--/Customizer CSS-->
+
+   $fft = get_theme_mod( 'title_type' );
+
+    switch ( get_theme_mod( 'title_type' ) ) {
+        case 'serif':
+            $fft = 'Crimson, serif';
+        break;
+        case 'sansserif':
+            $fft = 'Montserrat, sans-serif';
+        break;
+        case 'slab':
+            $fft = 'Bitter, serif';
+        break;
+    }
+
+    $ffb = get_theme_mod( 'body_type' );
+
+    switch ( get_theme_mod( 'body_type' ) ) {
+        case 'sansserif':
+            $ffb = 'Open Sans, sans-serif';
+        break;
+        case 'serif':
+            $ffb = 'Crimson, serif';
+        break;
+    }
+    ?>
+
+    <!--Customizer CSS-->
+    <style type="text/css">
+        .site-title,.access,.entry-title,.button,h1,h2,h3,h4,h5,h6 { font-family: <?php echo $fft ?>; }
+        body { font-family: <?php echo $ffb ?>; }
+    </style>
+    <!--/Customizer CSS-->
       <?php
    }
 
@@ -100,35 +201,6 @@ class Cultural_Customize {
            true // Specify whether to put in footer (leave this true)
       );
    }
-
-    /**
-     * This will generate a line of CSS for use in header output. If the setting
-     * ($mod_name) has no defined value, the CSS will not be output.
-     *
-     * @uses get_theme_mod()
-     * @param string $selector CSS selector
-     * @param string $style The name of the CSS *property* to modify
-     * @param string $mod_name The name of the 'theme_mod' option to fetch
-     * @param string $prefix Optional. Anything that needs to be output before the CSS property
-     * @param string $postfix Optional. Anything that needs to be output after the CSS property
-     * @param bool $echo Optional. Whether to print directly to the page (default: true).
-     * @return string Returns a single line of CSS with selectors and a property.
-     */
-    public static function generate_css( $selector, $style, $mod_name, $prefix='', $postfix='', $echo=true ) {
-      $return = '';
-      $mod = get_theme_mod($mod_name);
-      if ( ! empty( $mod ) ) {
-         $return = sprintf('%s { %s:%s; }',
-            $selector,
-            $style,
-            $prefix.$mod.$postfix
-         );
-         if ( $echo ) {
-            echo $return;
-         }
-      }
-      return $return;
-    }
 }
 
 // Setup the Theme Customizer settings and controls...
@@ -139,3 +211,5 @@ add_action( 'wp_head' , array( 'Cultural_Customize' , 'header_output' ) );
 
 // Enqueue live preview javascript in Theme Customizer admin screen
 add_action( 'customize_preview_init' , array( 'Cultural_Customize' , 'live_preview' ) );
+
+add_action( 'wp_enqueue_scripts', array( 'Cultural_Customize' , 'enqueue_fonts' ) );

@@ -6,13 +6,9 @@
  */
 ( function( $ ) {
 
-    wp.customize( 'highlight_color', function( value ) {
+    wp.customize( 'title_type', function( value ) {
         value.bind( function( newval ) {
-            $('.menu--main').css('background-color', newval );
-            $('.box--about').css('background-color', newval ).css('border-color', newval );
-            $('.box--news').css('border-color', newval );
-            $('.entry-title a').css('color', newval );
-            $('.entry-format').css('background-color', newval );
+            $('.entry-title').css('font-family', newval );
         } );
     } );
 
