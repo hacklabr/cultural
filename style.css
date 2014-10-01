@@ -223,23 +223,6 @@ h6 {
     word-wrap: break-word;
 }
 
-h2 {
-    font-size: 1.5rem;
-    line-height: 1;
-}
-
-h3 {
-    font-size: 20px;
-}
-
-h4,
-h5,
-h6 {
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-
 /* Paragraphs / Quotes */
 
 p {
@@ -921,7 +904,6 @@ img.aligncenter {
 }
 
 .hentry.sticky {
-    -webkit-box-shadow: 0 0 4px rgba(0,0,0,.2);
     box-shadow: 0 2px 2px rgba(0,0,0,.2);
 }
 
@@ -1028,43 +1010,38 @@ img.aligncenter {
 
 .entry-content h1,
 .comment-content h1 {
-    font-size: 21px;
-    font-size: 1.31rem;
-    line-height: 1.14;
+    font-size: 4.25rem;
+    line-height: 4.5rem;
 }
 
 .entry-content h2,
 .comment-content h2 {
-    font-size: 18px;
-    font-size: 1.33rem;
+    font-size: 2.625rem;
+    line-height: 3rem;
 }
 
 .entry-content h3,
 .comment-content h3 {
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 1.625rem;
+    line-height: 3rem;
 }
 
 .entry-content h4,
 .comment-content h4 {
-    font-size: 14px;
-    font-size: .88rem;
-    line-height: 1.71;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 .entry-content h5,
 .comment-content h5 {
-    font-size: 13px;
-    font-size: .81rem;
-    line-height: 1.85;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 .entry-content h6,
 .comment-content h6 {
-    font-size: 12px;
-    font-size: .75rem;
-    line-height: 2;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 .entry-content p,
@@ -1546,10 +1523,11 @@ img.aligncenter {
 }
 
 .widget {
-    background: #f5f5f5;
+    background: #fff;
     border: 1px solid #ededed;
     margin-bottom: 1.5rem;
     padding: 1.5rem;
+    position: relative;
 }
 
 .widget a {
@@ -1561,19 +1539,55 @@ img.aligncenter {
 }
 
 .widget__title {
-    background: #444;
-    color: #fff;
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: normal;
-    margin: 0 0 1.5rem -1.5rem;
-    padding: 0 .5em;
+    color: #444;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.333;
+    margin: 0 0 1.5rem;
 }
 
 .widget ul {
     font-size: .88rem;
     line-height: 1.71;
     list-style: none;
+}
+
+.widget--taped {
+    border-bottom-width: 3px;
+}
+
+.widget--taped:before {
+    background: rgba(254, 254, 254, .6);
+    border: 1px solid #fff;
+    box-shadow: 0 0 3px rgba(0,0,0,.1);
+    content: ' ';
+    display: block;
+    height: 1.5rem;
+    left: 50%;
+    margin-left: -2rem;
+    position: absolute;
+    top: -.75rem;
+    width: 4rem;
+    -webkit-transform: rotate(-1deg);
+            transform: rotate(-1deg);
+}
+
+.widget--folded {
+    border: none;
+}
+
+.widget--folded:before {
+    background: #dcdcdc;
+    border-color: #f5f5f5 #f5f5f5 transparent transparent;
+    border-style: solid;
+    border-width: 12px;
+    content: '';
+    /* Firefox 3.0 damage limitation */
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
 }
 
 .site-footer .site-title {

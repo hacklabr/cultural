@@ -121,4 +121,9 @@ require get_template_directory() . '/inc/customizer.php';
 
 require get_template_directory() . '/inc/category-colors.php';
 
+/**
+ * Extra classes for the widgets
+ */
+require get_template_directory() . '/inc/widgets-extra-classes.php';
+
 ?>
