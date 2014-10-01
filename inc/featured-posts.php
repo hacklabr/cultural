@@ -3,11 +3,14 @@ if ( $featured_posts->have_posts() ) : ?>
     <div class="featured-posts">
         <?php while($featured_posts->have_posts()) : $featured_posts->the_post(); ?>
             <article class="feature">
+                <a href="<?php the_permalink(); ?>">
                 <?php if ( has_post_thumbnail() ) the_post_thumbnail( 'medium' ); ?>
-                <div class="feature-content">
-                    <?php cultural_categories(); ?>
-                    <h2 class="feature__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                <div class="overlay">
+                    <div class="feature-content">
+                        <h2 class="feature__title"><?php the_title(); ?></h2>
+                    </div>
                 </div>
+                </a>
             </article>
         <?php endwhile; ?>
     </div><!-- /featured-posts -->
