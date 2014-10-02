@@ -102,7 +102,6 @@ class Cultural_Customize {
       //4. We can also change built-in settings by modifying properties. For instance, let's make some stuff use live preview JS...
       $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
       $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-      $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
       $wp_customize->get_setting( 'background_color' )->transport = 'postMessage';
    }
 
@@ -177,6 +176,9 @@ class Cultural_Customize {
     <style type="text/css">
         .site-title,.access,.entry-title,.button,h1,h2,h3,h4,h5,h6 { font-family: <?php echo $fft ?>; }
         body { font-family: <?php echo $ffb ?>; }
+        <?php self::generate_css('a:hover,a:focus,a:active,.toggle-bar a:hover,.toggle-bar a.current,.area-title a:hover,.entry__content h1,.comment-content h1,.entry__content h2,.comment-content h2,.entry__content h3,.comment-content h3,.entry__content h4,.comment-content h4,.entry__content h5,.comment-content h5,.entry__content h6,.comment-content h6', 'color', 'highlight_color'); ?>
+        <?php self::generate_css('.menu .current-menu-item > a,.menu .current-page-ancestor > a,.menu .current-menu-ancestor > a,.menu--main a:hover,.entry__categories a', 'background-color', 'highlight_color'); ?>
+        <?php self::generate_css('.entry__content a:hover', 'box-shadow-color', 'highlight_color'); ?>
     </style>
     <!--/Customizer CSS-->
       <?php
@@ -201,6 +203,35 @@ class Cultural_Customize {
            true // Specify whether to put in footer (leave this true)
       );
    }
+
+   /**
+     * This will generate a line of CSS for use in header output. If the setting
+     * ($mod_name) has no defined value, the CSS will not be output.
+     *
+     * @uses get_theme_mod()
+     * @param string $selector CSS selector
+     * @param string $style The name of the CSS *property* to modify
+     * @param string $mod_name The name of the 'theme_mod' option to fetch
+     * @param string $prefix Optional. Anything that needs to be output before the CSS property
+     * @param string $postfix Optional. Anything that needs to be output after the CSS property
+     * @param bool $echo Optional. Whether to print directly to the page (default: true).
+     * @return string Returns a single line of CSS with selectors and a property.
+     */
+    public static function generate_css( $selector, $style, $mod_name, $prefix='', $postfix='', $echo=true ) {
+      $return = '';
+      $mod = get_theme_mod($mod_name);
+      if ( ! empty( $mod ) ) {
+         $return = sprintf('%s { %s:%s; }',
+            $selector,
+            $style,
+            $prefix.$mod.$postfix
+         );
+         if ( $echo ) {
+            echo $return;
+         }
+      }
+      return $return;
+    }
 }
 
 // Setup the Theme Customizer settings and controls...

@@ -19,7 +19,7 @@
 
 	<?php else : ?>
 
-		<div class="entry-content cf">
+		<div class="entry__content cf">
 			<?php the_content( __( 'To be continued&hellip;', 'cultural' ) ); ?>
 			<?php wp_link_pages( 'before=<div class="page-link">' . __( 'Pages:', 'cultural' ) . '&after=</div>' ) ?>
 		</div><!-- /entry-content -->

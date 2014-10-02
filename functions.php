@@ -46,6 +46,10 @@ function cultural_setup() {
      */
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 
+    // Setup the WordPress core custom background feature.
+    add_theme_support( 'custom-background', apply_filters( 'cultural_custom_background_args', array(
+        'default-color' => '#f5f5f5'
+    ) ) );
 
 	// filtra os padroes dos uploads
 	update_option( 'image_default_align', 'center' );

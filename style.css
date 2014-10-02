@@ -341,7 +341,7 @@ textarea {
 /* Responsive images. Fluid images for posts, comments, and widgets */
 
 .comment-content img,
-.entry-content img,
+.entry__content img,
 .entry-summary img,
 #site-header img,
 .widget img,
@@ -355,7 +355,7 @@ textarea {
  */
 
 .comment-content img[height],
-.entry-content img,
+.entry__content img,
 .entry-summary img,
 img[class*='align'],
 img[class*='wp-image-'],
@@ -555,7 +555,9 @@ img.aligncenter {
 }
 
 .site-header {
-    background-color: #ededed;
+    background-color: transparent;
+    -webkit-box-shadow: 2px 0 2px rgba(0,0,0,.2);
+    box-shadow: 2px 0 4px rgba(0,0,0,.2);
     height: 100%;
     overflow: scroll;
     overflow-x: hidden;
@@ -592,7 +594,7 @@ body.admin-bar .site-header {
 }
 
 .toggle-bar {
-    background: #e7e7e7;
+    background-color: rgba(41,39,36,.1);
     margin: 0 0 1.5rem;
     padding: .75rem;
     text-align: center;
@@ -632,7 +634,6 @@ body.admin-bar .site-header {
 }
 
 .main {
-    background-color: #f5f5f5;
     display: inline-block;
     padding: 2%;
     padding-left: 22%;
@@ -668,14 +669,7 @@ body.admin-bar .site-header {
     background-color: rgba(41,39,36,.9);
     display: inline-block;
     padding: 2%;
-    padding-left: 22%;
     width: 100%;
-}
-
-@media (max-width: 768px) {
-    .site-footer {
-        padding: 2%;
-    }
 }
 
 .area-title {
@@ -707,8 +701,9 @@ body.admin-bar .site-header {
 }
 
 .menu a {
+    background-color: rgba(41,39,36,.1);
     color: #222;
-    display: block;
+    display: inline-block;
     padding: 0 1.3em;
     -webkit-transition: background-color .1s ease-out;
             transition: background-color .1s ease-out;
@@ -726,8 +721,8 @@ body.admin-bar .site-header {
 .menu .current-menu-item > a,
 .menu .current-page-ancestor > a,
 .menu .current-menu-ancestor > a {
-    box-shadow: inset 0 0 0 2px #c0392b;
-    color: #c0392b;
+    background-color: #c0392b;
+    color: #fff;
 }
 
 @media screen and (min-width: 40em) {
@@ -928,16 +923,15 @@ body.admin-bar .site-header {
 }
 
 .site-header .site-title {
-    border: 2px solid;
+    background-color: #222;
+    color: #fff;
     font-size: 1.125rem;
     line-height: 2.444;
     text-align: center;
 }
 
 .site-header .site-title:hover {
-    background-color: #222;
-    border-color: #222;
-    color: #fff;
+
 }
 
 .site-title img {
@@ -975,6 +969,10 @@ body.admin-bar .site-header {
 .entry-title a:hover,
 .single .entry-title a {
     color: #444;
+}
+
+.single .entry-title a {
+    cursor: default;
 }
 
 .entry__date {
@@ -1032,72 +1030,72 @@ body.admin-bar .site-header {
 /* =Entry content
 -------------------------------------------------------------- */
 
-.entry-content a {
+.entry__content a {
     box-shadow: inset 0 -2px 0 rgba(41,39,36,.2);
     color: inherit;
     -webkit-transition: all .1s ease-in-out;
             transition: all .1s ease-in-out;
 }
 
-.entry-content a:hover {
+.entry__content a:hover {
     box-shadow: inset 0 -2px 0 #c0392b;
     color: #222;
 }
 
-.entry-content h1,
+.entry__content h1,
 .comment-content h1,
-.entry-content h2,
+.entry__content h2,
 .comment-content h2,
-.entry-content h3,
+.entry__content h3,
 .comment-content h3,
-.entry-content h4,
+.entry__content h4,
 .comment-content h4,
-.entry-content h5,
+.entry__content h5,
 .comment-content h5,
-.entry-content h6,
+.entry__content h6,
 .comment-content h6 {
     color: #c0392b;
     margin: 24px 0;
     margin: 1.5rem 0;
 }
 
-.entry-content h1,
+.entry__content h1,
 .comment-content h1 {
     font-size: 4.25rem;
     line-height: 4.5rem;
 }
 
-.entry-content h2,
+.entry__content h2,
 .comment-content h2 {
     font-size: 2.625rem;
     line-height: 3rem;
 }
 
-.entry-content h3,
+.entry__content h3,
 .comment-content h3 {
     font-size: 1.625rem;
     line-height: 3rem;
 }
 
-.entry-content h4,
+.entry__content h4,
 .comment-content h4 {
     font-size: 1rem;
     line-height: 1.5rem;
 }
 
-.entry-content h5,
+.entry__content h5,
 .comment-content h5 {
     font-size: 1rem;
     line-height: 1.5rem;
 }
 
-.entry-content h6,
+.entry__content h6,
 .comment-content h6 {
     font-size: 1rem;
     line-height: 1.5rem;
 }
 
-.entry-content p,
+.entry__content p,
 .entry-summary p,
 .comment-content p {
     -webkit-hyphens: auto;
@@ -1113,14 +1111,14 @@ body.admin-bar .site-header {
         -ms-hyphens: auto;
 }
 
-.entry-content blockquote {
+.entry__content blockquote {
     font-size: .88rem;
     line-height: 1.71;
     margin-bottom: 1.5rem;
     position: relative;
 }
 
-.entry-content blockquote p:last-child {
+.entry__content blockquote p:last-child {
     margin-bottom: 0;
 }
 
@@ -1130,43 +1128,43 @@ body.admin-bar .site-header {
     padding: 1.5rem;
 }
 
-.entry-content ol,
+.entry__content ol,
 .comment-content ol,
-.entry-content ul,
+.entry__content ul,
 .comment-content ul {
     line-height: 1.5;
     margin: 0 0 24px;
     margin: 0 0 1.5rem;
 }
 
-.entry-content ul ul,
+.entry__content ul ul,
 .comment-content ul ul,
-.entry-content ol ol,
+.entry__content ol ol,
 .comment-content ol ol,
-.entry-content ul ol,
+.entry__content ul ol,
 .comment-content ul ol,
-.entry-content ol ul,
+.entry__content ol ul,
 .comment-content ol ul {
     margin-bottom: 0;
 }
 
-.entry-content ul,
+.entry__content ul,
 .comment-content ul {
     list-style: disc outside;
 }
 
-.entry-content ol,
+.entry__content ol,
 .comment-content ol {
     list-style: decimal outside;
 }
 
-.entry-content li,
+.entry__content li,
 .comment-content li {
     margin: 0 0 0 36px;
     margin: 0 0 0 2.25rem;
 }
 
-.entry-content table,
+.entry__content table,
 .comment-content table {
     border-bottom: 1px solid #ededed;
     color: #777;
@@ -1178,19 +1176,19 @@ body.admin-bar .site-header {
     width: 100%;
 }
 
-.entry-content table caption,
+.entry__content table caption,
 .comment-content table caption {
     margin: 24px 0;
     margin: 1.5rem 0;
 }
 
-.entry-content td,
+.entry__content td,
 .comment-content td {
     border-top: 1px solid #ededed;
     padding: 6px 10px 6px 0;
 }
 
-.entry-content address,
+.entry__content address,
 .comment-content address {
     display: block;
     line-height: 1.5;
@@ -1198,8 +1196,8 @@ body.admin-bar .site-header {
     margin: 0 0 1.5rem;
 }
 
-.entry-content ul,
-.entry-content ol {
+.entry__content ul,
+.entry__content ol {
     margin: 0 0 0 1.5em;
     padding: 0;
 }
@@ -1588,10 +1586,6 @@ body.admin-bar .site-header {
     color: #444;
 }
 
-.widget a:hover {
-    color: #c0392b;
-}
-
 .widget__title {
     color: #444;
     font-size: 1.125rem;
@@ -1652,10 +1646,6 @@ body.admin-bar .site-header {
 
 .site-footer .site-title a {
     color: #fff;
-}
-
-.site-footer .site-title a:hover {
-    color: #c0392b;
 }
 
 .site-footer .site-description {
