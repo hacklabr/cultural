@@ -46,6 +46,10 @@ function cultural_setup() {
      */
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 
+    // Setup the WordPress core custom background feature.
+    add_theme_support( 'custom-background', apply_filters( 'cultural_custom_background_args', array(
+        'default-color' => '#f5f5f5'
+    ) ) );
 
 	// filtra os padroes dos uploads
 	update_option( 'image_default_align', 'center' );
@@ -59,9 +63,6 @@ endif;
 function cultural_scripts() {
 
     wp_enqueue_style( 'cultural-style', get_stylesheet_uri() );
-
-    /* Lovely Brick Fonts for body and titles */
-    wp_enqueue_style( 'brick-fonts', '//brick.a.ssl.fastly.net/Open+Sans:400,700,400i,700i/Aleo:400,700,400i,700i' );
 
     /* JUDO Font Awesome for the icons */
     wp_enqueue_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' );
