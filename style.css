@@ -1313,6 +1313,10 @@ body.admin-bar .site-header {
     padding: 0 .5em;
 }
 
+.entry__categories a:hover {
+    color: #fff;
+}
+
 /* =Comments
 -------------------------------------------------------------- */
 
@@ -1700,6 +1704,22 @@ a.icon--vimeo:hover {
     font-size: 1.13rem;
     font-style: italic;
     line-height: 1.33;
+}
+
+.page-header {
+    background-color: #c0392b;
+    margin-bottom: 1.5rem;
+    padding: 0 1.5rem;
+}
+
+.page-title {
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 2.4;
+}
+
+.page-title .fa {
+    color: rgba(255,255,255,.6);
 }
 
 /* =Utility Classes
