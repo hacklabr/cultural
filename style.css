@@ -556,7 +556,6 @@ img.aligncenter {
 
 .site-header {
     background-color: transparent;
-    -webkit-box-shadow: 2px 0 2px rgba(0,0,0,.2);
     box-shadow: 2px 0 4px rgba(0,0,0,.2);
     height: 100%;
     overflow: scroll;
@@ -1835,6 +1834,58 @@ a.icon--vimeo:hover {
 
 .feature__title a {
     display: inline-block;
+}
+
+/* --------------------------------------------------------------
+19.0 Events
+-------------------------------------------------------------- */
+
+.event-container {
+    background-color: #f5f5f5;
+    font-size: .88rem;
+    line-height: 1.71;
+    overflow: hidden;
+    position: relative;
+}
+
+.event__image {
+    float: left;
+    margin: 0;
+}
+
+.event-data {
+    overflow: hidden;
+    padding: 1.5rem;
+}
+
+.event-data .event__title {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+}
+
+.event__subtitle {
+    display: block;
+    font-size: .88rem;
+    line-height: 1.71;
+}
+
+.event-data a.event__info {
+    background-color: #c0392b;
+    color: #fff;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    box-shadow: none;
+    padding: 0 .5em;
+    -webkit-transition: padding .2s ease-in-out;
+            transition: padding .2s ease-in-out;
+}
+
+.event-data a.event__info:hover {
+    color: #fff;
+    padding: 0 1em;
 }
 
 /* --------------------------------------------------------------
