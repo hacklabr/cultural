@@ -33,6 +33,17 @@ section {
     box-sizing: border-box;
 }
 
+.clearfix:after {
+visibility: hidden;
+display: block;
+font-size: 0;
+content: " ";
+clear: both;
+height: 0;
+}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
 img {
     border: 0;
     -ms-interpolation-mode: bicubic;
@@ -1598,6 +1609,30 @@ body.admin-bar .site-header {
     font-size: 16px;
     font-size: 1rem;
     padding: .5em 1em;
+}
+
+.nav-links {
+    margin: 20px 0 40px 0;
+}
+
+.nav-links .nav-previous {
+    float: left;
+}
+.nav-links .nav-next{
+    float: right;
+}
+
+.nav-links .nav-previous a,
+.nav-links .nav-next a {
+    background: #E9E8E8;
+    display: inline-block;
+    padding: 15px;
+}
+
+.nav-links .nav-previous a:hover,
+.nav-links .nav-next a:hover {
+    background: #C0392B;
+    color: #FFFFFF;
 }
 
 .widget {
