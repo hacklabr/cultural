@@ -1202,6 +1202,23 @@ body.admin-bar .site-header {
     padding: 0;
 }
 
+.tags-links {
+    border-top: solid 1px #EFEFEF;
+    padding-top: 20px;
+}
+
+.tags-links a {
+    border: solid 2px #000000;
+    color: #000000;
+    font-size: 14px;
+    margin-right: 3px;
+    padding: 2px 5px;
+}
+.tags-links a:hover {
+    background: #000000;
+    color: #FFFFFF;
+}
+
 .gallery {
     margin: 1.5rem auto;
 }

@@ -242,9 +242,9 @@ function cultural_entry_footer() {
     if ( 'post' == get_post_type() ) {
 
         /* translators: used between list items, there is a space after the comma */
-        $tags_list = get_the_tag_list( '', __( ', ', 'cultural' ) );
+        $tags_list = get_the_tag_list( '', __( ' ', 'cultural' ) );
         if ( $tags_list ) {
-            echo '<div class="tags-links"><i class="fa fa-tags"></i> ' . $tags_list . '</div>';
+            echo '<div class="tags-links">' . $tags_list . '</div>';
         }
     }
 
