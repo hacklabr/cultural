@@ -323,6 +323,7 @@ input::-moz-focus-inner {
 
 input[type='text'],
 input[type='email'],
+input[type='url'],
 input[type='password'],
 textarea {
     width: 100%;
@@ -1561,6 +1562,8 @@ body.admin-bar .site-header {
 }
 
 #commentform input[type='text'],
+#commentform input[type='email'],
+#commentform input[type='url'],
 #commentform textarea {
     border: 1px solid #ededed;
     outline: none;
@@ -1568,6 +1571,8 @@ body.admin-bar .site-header {
 }
 
 #commentform input[type='text']:focus,
+#commentform input[type='email']:focus,
+#commentform input[type='url']:focus,
 #commentform textarea:focus {
     border-color: #222;
     -webkit-transition: border-color .2s linear;
