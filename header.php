@@ -29,7 +29,9 @@
 
 		<ul class="toggle-bar">
             <li><a href="#tabs-1" class="current main-toggle" data-tab="tab-1"><i class="fa fa-list-ul"></i></a></li>
-            <li><a href="#tab-2" class="highlights-toggle" data-tab="tab-2"><i class="fa fa-fire"></i></a></li>
+            <?php if ( is_active_sidebar( 'header-widget-area' ) ) : ?>
+                <li><a href="#tab-2" class="highlights-toggle" data-tab="tab-2"><i class="fa fa-search"></i></a></li>
+            <?php endif; ?>
             <li><a href="#tab-3" class="calendar-toggle" data-tab="tab-3"><i class="fa fa-calendar"></i></a></li>
         </ul>
 
@@ -56,18 +58,22 @@
                             wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu  cf', 'fallback_cb' => 'default_menu' ) ); ?>
                         <?php endif; ?>
                     </nav>
-                </div><!-- #tab-1 -->
+                </div>
 
-                <div id="tab-2" class="tab-content animated fadeIn">
-                    <?php get_template_part( 'inc/featured-posts' ); ?>
-                </div><!-- #tab-3 -->
+                <?php if ( is_active_sidebar( 'header-widget-area' ) ) : ?>
+                    <div id="tab-2" class="tab-content animated fadeIn">
+                        <?php dynamic_sidebar( 'header-widget-area' ); ?>
+                    </div>
+                <?php endif; ?>
 
-                <!-- Sidebar widgets -->
                 <div id="tab-3" class="tab-content animated fadeIn">
-                    Aqui vão os eventos em destaque
-                </div><!-- #tab-3 -->
-            </div><!-- .site-header-inside -->
-        </div><!-- #tabs -->
-    </header><!-- /site-header -->
+                    <?php get_template_part( 'inc/featured-posts' ); ?>
+                    <div class="tab__description">
+                        <a href="#"><i class="fa fa-arrow-right"></i> Ver mais eventos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
 	<div class="main  cf">
