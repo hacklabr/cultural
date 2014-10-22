@@ -1229,20 +1229,21 @@ body.admin-bar .site-header {
 }
 
 .tags-links {
-    border-top: solid 1px #EFEFEF;
-    padding-top: 20px;
+    padding-top: 1.5rem;
 }
 
 .tags-links a {
-    border: solid 2px #000000;
-    color: #000000;
-    font-size: 14px;
-    margin-right: 3px;
-    padding: 2px 5px;
+    box-shadow:inset 0 0 0 2px #444;
+    color: #444;
+    font-size: .875rem;
+    line-height: 1.714;
+    margin-right: .5em;
+    padding: 0 .5em;
 }
+
 .tags-links a:hover {
-    background: #000000;
-    color: #FFFFFF;
+    background: #444;
+    color: #fff;
 }
 
 .gallery {
@@ -1625,28 +1626,130 @@ body.admin-bar .site-header {
     padding: .5em 1em;
 }
 
-.nav-links {
-    margin: 20px 0 40px 0;
+.navigation {
+    margin-bottom: 1.5rem;
 }
 
-.nav-links .nav-previous {
-    float: left;
-}
-.nav-links .nav-next{
-    float: right;
+.post-navigation {
+    font-weight: 700;
+    overflow: hidden;
 }
 
-.nav-links .nav-previous a,
-.nav-links .nav-next a {
-    background: #E9E8E8;
+.post-navigation a {
+    display: block;
+    padding: 1.5rem;
+}
+
+.post-navigation span {
+    display: block;
+}
+
+.post-navigation .meta-nav {
+    color: #999;
+    font-size: .688rem;
+    line-height: 2.182;
+    letter-spacing: 0.04em;
+    position: relative;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+.post-navigation .post-title {
+    font-size: 1.125rem;
+    line-height: 1;
+    position: relative;
+    z-index: 1.333;
+}
+
+.post-navigation a:hover .post-title,
+.post-navigation a:focus .post-title {
+    color: #c0392b;
+}
+
+.pagination {
+    font-size: 1.125rem;
+    line-height: 2.667;
+}
+
+.pagination .nav-links {
+    position: relative;
+    text-align: center;
+}
+
+.pagination .meta-nav {
+    margin-right: 0.3333em;
+}
+
+.pagination .page-numbers {
     display: inline-block;
-    padding: 15px;
+    line-height: 1.5;
+    padding: 0 0.6667em;
+    text-transform: uppercase;
 }
 
-.nav-links .nav-previous a:hover,
-.nav-links .nav-next a:hover {
-    background: #C0392B;
-    color: #FFFFFF;
+.pagination .current {
+    display: inline-block;
+    font-weight: 700;
+}
+
+.pagination .prev,
+.pagination .next {
+    background-color: #c0392b;
+    color: #fff;
+    display: inline-block;
+    height: 3rem;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 3rem;
+}
+
+.pagination .prev:before,
+.pagination .next:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-family: 'FontAwesome';
+    font-size: 1.75rem;
+    height: 100%;
+    line-height: 1.714;
+    position: relative;
+    width: 100%;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    speak: none;
+    text-align: center;
+    text-decoration: inherit;
+    text-transform: none;
+    vertical-align: top;
+}
+
+.pagination .prev:hover,
+.pagination .prev:focus,
+.pagination .next:hover,
+.pagination .next:focus {
+    background-color: #222;
+}
+
+.pagination .prev {
+    left: 0;
+}
+
+.pagination .prev:before {
+    content: "\f060";
+}
+
+.pagination .next {
+    right: 0;
+}
+
+.pagination .next:before {
+    content: "\f061";
+}
+
+.pagination .meta-nav {
+    display: none;
 }
 
 .widget {

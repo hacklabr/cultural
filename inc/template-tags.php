@@ -7,6 +7,84 @@
  * @package cultural
  */
 
+if ( ! function_exists( 'cultural_paging_nav' ) ) :
+/**
+ * Display navigation to next/previous set of posts when applicable.
+ *
+ * @since Twenty Fifteen 1.0
+ * @uses paginate_links()
+ *
+ * @global WP_Query $wp_query WordPress Query object.
+ */
+function cultural_paging_nav() {
+    // Don't print empty markup if there's only one page.
+    if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
+        return;
+    }
+
+    // Set up paginated links.
+    $links = paginate_links( array(
+        'prev_text'          => esc_html__( 'Previous', 'cultural' ),
+        'next_text'          => esc_html__( 'Next', 'cultural' ),
+        'before_page_number' => '<span class="meta-nav">' . esc_html__( 'Page', 'cultural' ) . '</span>',
+    ) );
+
+    if ( $links ) :
+    ?>
+    <nav class="navigation pagination" role="navigation">
+        <h1 class="screen-reader-text"><?php esc_html_e( 'Posts navigation', 'cultural' ); ?></h1>
+        <div class="nav-links">
+            <?php echo $links; ?>
+        </div><!-- .nav-links -->
+    </nav><!-- .pagination -->
+    <?php
+    endif;
+}
+endif;
+
+if ( ! function_exists( 'cultural_post_nav' ) ) :
+/**
+ * Display navigation to next/previous post when applicable.
+ *
+ * @since Twenty Fifteen 1.0
+ */
+function cultural_post_nav() {
+    // Don't print empty markup if there's nowhere to navigate.
+    $previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
+    $next     = get_adjacent_post( false, '', false );
+
+    if ( ( ! $next && ! $previous ) || ( is_attachment() && 'attachment' == $previous->post_type ) ) {
+        return;
+    }
+
+    $prev_class = $next_class = '';
+
+    if ( $previous && has_post_thumbnail( $previous->ID ) ) {
+        $prev_class = " has-post-thumbnail";
+    }
+
+    if ( $next && has_post_thumbnail( $next->ID ) ) {
+        $next_class = " has-post-thumbnail";
+    }
+
+    ?>
+    <nav class="navigation post-navigation" role="navigation">
+        <h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'cultural' ); ?></h1>
+        <div class="nav-links">
+            <?php
+            if ( is_attachment() ) :
+                previous_post_link( '<div class="nav-previous' . $prev_class . '">%link</div>', _x( '<span class="meta-nav">Published In</span><span class="post-title">%title</span>', 'Parent post link', 'cultural' ) );
+            else :
+                previous_post_link( '<div class="nav-previous' . $prev_class . '">%link</div>', _x( '<span class="meta-nav">Previous</span><span class="post-title">%title</span>', 'Previous post link', 'cultural' ) );
+                next_post_link( '<div class="nav-next' . $next_class . '">%link</div>', _x( '<span class="meta-nav">Next</span><span class="post-title">%title</span>', 'Next post link', 'cultural' ) );
+            endif;
+            ?>
+        </div><!-- .nav-links -->
+    </nav><!-- .post-navigation -->
+    <?php
+}
+endif;
+
 if ( ! function_exists( 'cultural_the_format' ) ) :
 /**
  * Return the post format (if not Standard)
@@ -97,34 +175,6 @@ function cultural_comment( $comment, $args, $depth ) {
 }
 endif;
 
-if ( ! function_exists( 'cultural_paging_nav' ) ) :
-/**
- * Display navigation to next/previous set of posts when applicable.
- */
-function cultural_paging_nav() {
-    // Don't print empty markup if there's only one page.
-    if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
-        return;
-    }
-    ?>
-    <nav class="navigation paging-navigation" role="navigation">
-        <h1 class="assistive-text"><?php _e( 'Posts navigation', 'cultural' ); ?></h1>
-        <div class="nav-links clearfix">
-
-            <?php if ( get_next_posts_link() ) : ?>
-            <div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'cultural' ) ); ?></div>
-            <?php endif; ?>
-
-            <?php if ( get_previous_posts_link() ) : ?>
-            <div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'cultural' ) ); ?></div>
-            <?php endif; ?>
-
-        </div><!-- .nav-links -->
-    </nav><!-- .navigation -->
-    <?php
-}
-endif;
-
 if ( ! function_exists( 'cultural_share' ) ) :
 function cultural_share() {
     global $post; ?>
@@ -173,32 +223,6 @@ function cultural_the_time() {
         ?>
     </div>
 <?php }
-endif;
-
-if ( ! function_exists( 'cultural_post_nav' ) ) :
-/**
- * Display navigation to next/previous post when applicable.
- */
-function cultural_post_nav() {
-    // Don't print empty markup if there's nowhere to navigate.
-    $previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-    $next     = get_adjacent_post( false, '', false );
-
-    if ( ! $next && ! $previous ) {
-        return;
-    }
-    ?>
-    <nav class="navigation post-navigation" role="navigation">
-        <h1 class="assistive-text"><?php _e( 'Post navigation', 'cultural' ); ?></h1>
-        <div class="nav-links">
-            <?php
-                previous_post_link( '<div class="nav-previous">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'cultural' ) );
-                next_post_link(     '<div class="nav-next">%link</div>',     _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link',     'cultural' ) );
-            ?>
-        </div><!-- .nav-links -->
-    </nav><!-- .navigation -->
-    <?php
-}
 endif;
 
 if ( ! function_exists( '_s_posted_on' ) ) :
