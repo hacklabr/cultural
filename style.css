@@ -567,9 +567,7 @@ img.aligncenter {
 }
 
 .site-header {
-    background-color: transparent;
-    -webkit-box-shadow: 2px 0 2px rgba(0,0,0,.2);
-    box-shadow: 2px 0 4px rgba(0,0,0,.2);
+    background-color: rgba(41,39,36,.08);
     height: 100%;
     overflow: scroll;
     overflow-x: hidden;
@@ -932,6 +930,12 @@ body.admin-bar .site-header {
 .branding {
     margin-bottom: 1.5rem;
     position: relative;
+}
+
+.branding img {
+    display: block;
+    height: auto;
+    max-width: 100%;
 }
 
 .site-header .site-title {
@@ -1765,6 +1769,7 @@ a.icon--vimeo:hover {
 
 .page-header {
     background-color: #c0392b;
+    box-shadow:inset 0 0 0 4px rgba(41,39,36,.08);
     margin-bottom: 1.5rem;
     padding: 0 1.5rem;
 }
@@ -1892,6 +1897,82 @@ a.icon--vimeo:hover {
 
 .feature__title a {
     display: inline-block;
+}
+
+/* --------------------------------------------------------------
+19.0 Events
+-------------------------------------------------------------- */
+
+.event-container {
+    background-color: rgba(41,39,36,.08);
+    box-shadow:inset 0 0 0 4px rgba(41,39,36,.08);
+    font-size: .88rem;
+    line-height: 1.71;
+    overflow: hidden;
+    position: relative;
+}
+
+.event__image {
+    float: left;
+    margin: 0;
+}
+
+.event-data {
+    overflow: hidden;
+    padding: 1.5rem;
+}
+
+.event-data .event__title {
+    font-size: 1.13rem;
+    line-height: 1.29;
+    margin: 0 0 1.5rem 0;
+}
+
+.event__subtitle {
+    display: block;
+    font-size: .88rem;
+    line-height: 1.71;
+}
+
+.event__occurrances {
+    margin-bottom: 1.5rem;
+}
+
+.event__venue {
+    font-weight: 700;
+}
+
+.event__classification {
+    background-color: #27ae60;
+    color: #fff;
+    display: inline-block;
+    font-size: .75rem;
+    line-height: 2;
+    padding: 0 .5em;
+}
+
+.event__price {
+    display: inline-block;
+}
+
+.event__price .fa-circle {
+    color: #f1c40f;
+}
+
+.event-data a.event__info {
+    background-color: #c0392b;
+    color: #fff;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    box-shadow: none;
+    padding: 0 .5em;
+}
+
+.event-data a.event__info:hover {
+    background-color: rgba(41,39,36,.9);
+    color: #fff;
 }
 
 /* --------------------------------------------------------------

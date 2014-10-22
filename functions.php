@@ -127,4 +127,9 @@ require get_template_directory() . '/inc/category-colors.php';
  */
 require get_template_directory() . '/inc/widgets-extra-classes.php';
 
+/**
+ * Handle Mapas Culturais support
+ */
+require get_template_directory() . '/inc/mapas-culturais.php';
+
 ?>
