@@ -358,7 +358,6 @@ textarea {
 .comment-content img,
 .entry__content img,
 .entry-summary img,
-#site-header img,
 .widget img,
 .wp-caption {
     max-width: 100%;
@@ -374,8 +373,7 @@ textarea {
 .entry-summary img,
 img[class*='align'],
 img[class*='wp-image-'],
-img[class*='attachment-'],
-#site-header img {
+img[class*='attachment-'] {
     height: auto;
 }
 
@@ -1920,6 +1918,13 @@ a.icon--vimeo:hover {
     color: rgba(255,255,255,.6);
 }
 
+.filter-bar {
+    background-color: #c0392b;
+    box-shadow: inset 0 0 0 4px rgba(41,39,36,.08);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
 /* =Utility Classes
 ----------------------------------------------------------------------------- */
 
@@ -2109,6 +2114,29 @@ a.icon--vimeo:hover {
 .event-data a.event__info:hover {
     background-color: rgba(41,39,36,.9);
     color: #fff;
+}
+
+.grid .event {
+    margin-bottom: 1.5rem;
+}
+
+.grid .event__image {
+    background-color: red;
+    background-position: center;
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.grid .event__image img {
+    display: block;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 40em) {
+    .grid .event {
+        width: 48%;
+    }
 }
 
 /* --------------------------------------------------------------
