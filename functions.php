@@ -84,6 +84,10 @@ function cultural_scripts() {
     if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
         wp_enqueue_script( 'comment-reply' );
 
+    if ( is_page_template( 'page-templates/events-list.php' ) )
+        wp_enqueue_script( 'classie', get_template_directory_uri() . '/js/classie.js', '', '3.1.5', true );
+        wp_enqueue_script( 'selectfx', get_template_directory_uri() . '/js/selectFx.js', '', '3.1.5', true );
+
 }
 add_action( 'wp_enqueue_scripts', 'cultural_scripts' );
 
