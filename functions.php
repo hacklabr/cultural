@@ -75,6 +75,8 @@ function cultural_scripts() {
 
     wp_enqueue_script( 'responsive-nav', get_template_directory_uri() . '/js/min/responsive-nav-min.js', array( 'jquery' ), '1.0.32', true );
 
+    wp_enqueue_script( 'slider', get_template_directory_uri() . '/js/min/idangerous.swiper-min.js', array( 'jquery' ), '1.0.32', true );
+
     /* Modernizr */
     wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr.js', '', '2.6.2' );
 
@@ -83,10 +85,6 @@ function cultural_scripts() {
     /* Load the comment reply JavaScript. */
     if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
         wp_enqueue_script( 'comment-reply' );
-
-    if ( is_page_template( 'page-templates/events-list.php' ) )
-        wp_enqueue_script( 'classie', get_template_directory_uri() . '/js/classie.js', '', '3.1.5', true );
-        wp_enqueue_script( 'selectfx', get_template_directory_uri() . '/js/selectFx.js', '', '3.1.5', true );
 
 }
 add_action( 'wp_enqueue_scripts', 'cultural_scripts' );

@@ -65,6 +65,8 @@
             </h1>
         </header><!-- .page-header -->
 
+        <?php get_template_part( 'partials/slider' ); ?>
+
             <div class="grid  js-masonry" data-masonry-options='{ "columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".hentry", "stamp": ".sticky" }'>
                 <div class="grid-sizer"></div>
                 <div class="gutter-sizer"></div>
