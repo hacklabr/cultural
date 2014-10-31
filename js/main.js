@@ -16,4 +16,13 @@ jQuery(document).ready(function( $ ) {
     $container.imagesLoaded( function() {
         $container.masonry();
     });
+
+    $(function(){
+      var mySwiper = $('.js-swiper').swiper({
+        loop: true,
+        autoplay: 8000,
+        pagination : '.swiper__pagination',
+        paginationClickable : true,
+        });
+    });
 });

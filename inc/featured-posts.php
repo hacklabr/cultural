@@ -6,10 +6,6 @@ if ( $featured_posts->have_posts() ) : ?>
                 <?php if ( has_post_thumbnail() ) the_post_thumbnail( 'medium' ); ?>
                 <div class="feature-content">
                     <h2 class="feature__title"><?php the_title(); ?></h2>
-                    <div class="job__description">
-                        <p><span>A collection of essays on Seinfeld episodes</span></p>
-                        <p><span>Jekyll</span></p>
-                    </div>
                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                 </div>
             </article>
