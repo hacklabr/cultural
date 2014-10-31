@@ -2013,56 +2013,126 @@ a.icon--vimeo:hover {
 -------------------------------------------------------------- */
 
 .feature {
-    background: #fff;
+    background-color: rgba(41,39,36,.8);
+    cursor: pointer;
     overflow: hidden;
     position: relative;
-    -webkit-transform-style: preserve-3d;
+    z-index: 3;
 }
 
-.overlay {
-    background-color: rgba(0,0,0,.6);
-    overflow: hidden;
-    opacity: 0;
-    padding: .75rem;
+.feature:before {
+    content: "";
+    display: block;
+    padding-top: 75%; /* 4:3 */;
+}
+
+.feature img {
     position: absolute;
     top: 0;
-    -webkit-transition: opacity .4s ease-in-out;
-            transition: opacity .4s ease-in-out;
+    left: 0;
+    display: block;
+    height: auto;
+    width: 100%;
+    opacity: .8;
+    max-width: none;
+    -webkit-transition: opacity 1s, -webkit-transform 1s;
+    transition: opacity 1s, transform 1s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.feature:hover img {
+    opacity: .4;
+    -webkit-transform: scale3d(1.1,1.1,1);
+    transform: scale3d(1.1,1.1,1);
+}
+
+.feature-content {
+    padding: 1.5rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.feature-content::before,
+.feature-content::after {
+    pointer-events: none;
+}
+
+.feature-content,
+.feature-content > a {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
 }
 
-.feature .wp-post-image {
-    display: block;
-    -webkit-transition: all 0.2s linear;
-            transition: all 0.2s linear;
-}
-
-.feature a {
-    color: #fff;
+.feature-content > a {
+    text-indent: 200%;
+    white-space: nowrap;
+    font-size: 0;
+    opacity: 0;
 }
 
 .feature__title {
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.333;
+    color: #fff;
+    font-size: 1rem;
+    margin: 0 0 2px 0;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
 }
 
-.no-touch .feature:hover .overlay,
-.feature.cs-hover .overlay {
-    opacity: 1;
-    -webkit-backface-visibility: hidden;
+.job__description p {
+    color: hsl(220, 9%, 20%);
+    font-size: .75rem;
+    line-height: 2;
+    margin: 0 0 2px 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(-600px,0,0);
+    transform: translate3d(-600px,0,0);
 }
 
-.no-touch .feature:hover .wp-post-image,
-.feature.cs-hover .wp-post-image {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-    -webkit-backface-visibility: hidden;
-}
-
-.feature__title a {
+.job__description p span {
+    background: hsla(0, 0%, 100%, 0.9);
     display: inline-block;
+    padding: 0 1em;
+}
+
+.job__description p:first-child {
+    -webkit-transition-delay: 0.15s;
+    transition-delay: 0.15s;
+}
+
+.job__description p:nth-of-type(2) {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+
+.job__description p:nth-of-type(3) {
+    -webkit-transition-delay: 0.05s;
+    transition-delay: 0.05s;
+}
+
+.job:hover p:first-child {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.job:hover p:nth-of-type(2) {
+    -webkit-transition-delay: 0.05s;
+    transition-delay: 0.05s;
+}
+
+.job:hover p:nth-of-type(3) {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+
+.job:hover p {
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
 }
 
 /* --------------------------------------------------------------
