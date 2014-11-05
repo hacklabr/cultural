@@ -12,7 +12,9 @@ Domain Path: /languages/
 Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 */
 
+@import "colors";
 @import "typography";
+@import "utilities";
 
 article,
 aside,
@@ -27,17 +29,6 @@ section {
     display: block;
 }
 
-.clearfix:after {
-visibility: hidden;
-display: block;
-font-size: 0;
-content: " ";
-clear: both;
-height: 0;
-}
-* html .clearfix             { zoom: 1; } /* IE6 */
-*:first-child+html .clearfix { zoom: 1; } /* IE7 */
-
 img {
     border: 0;
     -ms-interpolation-mode: bicubic;
@@ -46,13 +37,13 @@ img {
 
 ::-moz-selection {
     background: #fe6;
-    color: #000;
+    color: #111;
     text-shadow: none;
 }
 
 ::selection {
     background: #fe6;
-    color: #000;
+    color: #111;
     text-shadow: none;
 }
 
@@ -90,7 +81,7 @@ a {
     &:focus,
     &:active {
         border: 0;
-        color: #c0392b;
+        color: $color--highlight;
         -webkit-transition: color .1s ease-in-out;
                 transition: color .1s ease-in-out;
     }
@@ -129,7 +120,7 @@ dfn {
 
 mark {
     background-color: #fe6;
-    color: #000;
+    color: #111;
     font-weight: bold;
 }
 
@@ -176,9 +167,7 @@ kbd,
 samp {
     color: #666;
     font-family: consolas, monospace, sans-serif;
-    font-size: 14px;
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
 
     _font-family: 'Courier New', monospace, sans-serif;
 }
@@ -186,11 +175,8 @@ samp {
 pre {
     background: #fef7ea;
     color: #6981a3;
-    font-size: 14px;
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
     overflow-x: auto;
-    padding: 24px;
     padding: 1.5em;
 }
 
@@ -395,20 +381,6 @@ span > object {
     margin-bottom: 0;
 }
 
-.cf:before,
-.cf:after {
-    content: ' ';
-    display: table;
-}
-
-.cf:after {
-    clear: both;
-}
-
-.cf {
-    *zoom: 1;
-}
-
 .assistive-text,
 .screen-reader-text {
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
@@ -456,12 +428,11 @@ span > object {
     }
 }
 
-a.post-edit-link {
+.post-edit-link {
     background-color: rgba(41,39,36,.4);
     color: #fff;
     display: inline-block;
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
     padding: 0 .5em;
 
     &:hover {
@@ -479,7 +450,7 @@ a.post-edit-link {
 }
 
 .no-results {
-    color: rgba(0,0,0,.3);
+    color: rgba(41,39,36,.3);
     font-style: italic;
 }
 
@@ -508,7 +479,7 @@ a.post-edit-link {
     }
 }
 
-a.highlight {
+.highlight {
     background: #fdfddb !important;
     border: 1px solid #dbd22f;
     color: #888 !important;
@@ -573,6 +544,8 @@ img.aligncenter {
     z-index: 100;
 
     -webkit-overflow-scrolling: touch;
+
+    @extend %clearfix;
 }
 
 @media (max-width: 768px) {
@@ -584,7 +557,7 @@ img.aligncenter {
     }
 }
 
-body.admin-bar .site-header {
+.admin-bar .site-header {
     top: 32px;
 }
 
@@ -607,11 +580,11 @@ body.admin-bar .site-header {
         color: #999;
 
         &:hover {
-            color: #c0392b;
+            color: $color--highlight;
         }
 
         &.current {
-            color: #c0392b;
+            color: $color--highlight;
             outline: none;
         }
     }
@@ -637,8 +610,7 @@ body.admin-bar .site-header {
 }
 
 .tab__description {
-    font-size: .875rem;
-    line-height: 1.714;
+    @include size(14);
     margin-top: 1.5rem;
 }
 
@@ -682,8 +654,7 @@ body.admin-bar .site-header {
 }
 
 .area-title {
-    font-size: 1.25rem;
-    line-height: 1.2;
+    @include size(18);
     margin-bottom: 1.5rem;
 
     a {
@@ -691,7 +662,7 @@ body.admin-bar .site-header {
         color: #292724;
 
         &:hover {
-            color: #c0392b;
+            color: $color--highlight;
         }
     }
 }
@@ -711,7 +682,7 @@ body.admin-bar .site-header {
 
 .menu a {
     background-color: rgba(41,39,36,.1);
-    color: #222;
+    color: #292724;
     display: inline-block;
     padding: 0 1.3em;
     -webkit-transition: background-color .1s ease-out;
@@ -730,14 +701,14 @@ body.admin-bar .site-header {
 .menu .current-menu-item > a,
 .menu .current-page-ancestor > a,
 .menu .current-menu-ancestor > a {
-    background-color: #c0392b;
+    background-color: $color--highlight;
     color: #fff;
 }
 
 @media screen and (min-width: 40em) {
     .menu .menu-item-has-children > a:after {
+        @include has-icon();
         content: '\f107';
-        font-family: 'FontAwesome';
         margin-left: .5em;
     }
 }
@@ -749,19 +720,18 @@ body.admin-bar .site-header {
 }
 
 .menu--main a:hover {
-    background-color: #c0392b;
+    background-color: $color--highlight;
     color: #fff;
 }
 
 .menu--mobile {
-    background-color: #c0392b;
-    font-size: 1.25rem;
-    line-height: 2.4;
+    background-color: $color--highlight;
+    @include size(18,2);
 }
 
 .sub-menu {
     background-color: #fff;
-    box-shadow: 0 3px 3px rgba(0,0,0,.2);
+    box-shadow: 0 3px 3px rgba(41,39,36,.2);
     clip: rect(1px, 1px, 1px, 1px);
     font-size: 1rem;
     height: 1px;
@@ -788,7 +758,7 @@ body.admin-bar .site-header {
 
 .sub-menu a:hover {
     background: transparent;
-    color: #c0392b;
+    color: $color--highlight;
 }
 
 .sub-menu li {
@@ -875,8 +845,7 @@ body.admin-bar .site-header {
         color: #fff;
         display: block;
         font-family: $font--display;
-        font-size: 1.25rem;
-        line-height: 2.4;
+        @include size(18,2);
         overflow: hidden;
         padding: 0 1.3em;
         position: relative;
@@ -896,20 +865,11 @@ body.admin-bar .site-header {
     }
 
     .nav-toggle:before {
+        @include has-icon();
         color: #fff;
         content: '\f0d7';
-        display: block;
-        font-family: 'FontAwesome';
-        font-size: 100%;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
         position: absolute;
         right: 1.3em;
-        text-indent: 0;
-        text-transform: none;
-        width: 1em;
-
         speak: none;
     }
 
@@ -921,9 +881,8 @@ body.admin-bar .site-header {
 .no-menu {
     border: 1px dotted #ccc;
     clear: both;
-    font-size: 1.25rem;
-    line-height: 2.4;
-    padding: 0 1.3em;
+    @include size(18,2);
+    padding: 0 1.5em;
 }
 
 .branding {
@@ -938,10 +897,9 @@ body.admin-bar .site-header {
 }
 
 .site-header .site-title {
-    background-color: #222;
+    background-color: #292724;
     color: #fff;
-    font-size: 1.125rem;
-    line-height: 2.444;
+    @include size(18,2);
     text-align: center;
 }
 
@@ -959,18 +917,19 @@ body.admin-bar .site-header {
     padding: 1.5rem;
 
     &.sticky {
-        box-shadow: 0 2px 2px rgba(0,0,0,.2);
+        box-shadow: 0 2px 2px rgba(41,39,36,.2);
     }
 }
 
 .entry-header {
     margin-bottom: 1.5rem;
+
+    @extend %clearfix;
 }
 
 .entry-title {
     clear: both;
-    font-size: 2.25rem;
-    line-height: 1.33;
+    @include size(36,2);
 
     a {
         display: inline-block;
@@ -988,16 +947,14 @@ body.admin-bar .site-header {
 
 .entry__date {
     color: #888;
-    font-size: .75rem;
-    line-height: 2;
+    @include size(12);
 }
 
 .entry__format {
-    background-color: #222;
+    background-color: #292724;
     color: #fff !important;
     display: inline-block;
-    font-size: .750rem;
-    line-height: 2;
+    @include size(12);
     padding: 0 .5em;
 }
 
@@ -1024,8 +981,7 @@ body.admin-bar .site-header {
 }
 
 .entry__meta {
-    font-size: .88rem;
-    line-height: 1.75;
+    @include size(14);
     margin-bottom: 1.5rem;
 
     a {
@@ -1034,12 +990,16 @@ body.admin-bar .site-header {
 }
 
 .entry__info {
-    background: #c0392b;
+    background: $color--highlight;
     color: #fff;
 }
 
 /* =Entry content
 -------------------------------------------------------------- */
+
+.entry__content {
+    @extend %clearfix;
+}
 
 .entry__content a {
     box-shadow: inset 0 -2px 0 rgba(41,39,36,.2);
@@ -1048,12 +1008,10 @@ body.admin-bar .site-header {
             transition: all .1s ease-in-out;
 
     &:hover {
-        box-shadow: inset 0 -2px 0 #c0392b;
-        color: #222;
+        box-shadow: inset 0 -2px 0 $color--highlight;
+        color: #292724;
     }
 }
-
-.entry__content
 
 .entry__content h1,
 .comment-content h1,
@@ -1067,45 +1025,38 @@ body.admin-bar .site-header {
 .comment-content h5,
 .entry__content h6,
 .comment-content h6 {
-    color: #c0392b;
-    margin: 24px 0;
+    color: $color--highlight;
     margin: 1.5rem 0;
 }
 
 .entry__content h1,
 .comment-content h1 {
-    font-size: 4.25rem;
-    line-height: 4.5rem;
+    @include size(68,3);
 }
 
 .entry__content h2,
 .comment-content h2 {
-    font-size: 2.625rem;
-    line-height: 3rem;
+    @include size(42,2);
 }
 
 .entry__content h3,
 .comment-content h3 {
-    font-size: 1.625rem;
-    line-height: 3rem;
+    @include size(26,2);
 }
 
 .entry__content h4,
 .comment-content h4 {
-    font-size: 1rem;
-    line-height: 1.5rem;
+    @include size(16);
 }
 
 .entry__content h5,
 .comment-content h5 {
-    font-size: 1rem;
-    line-height: 1.5rem;
+    @include size(16);
 }
 
 .entry__content h6,
 .comment-content h6 {
-    font-size: 1rem;
-    line-height: 1.5rem;
+    @include size(16);
 }
 
 .entry__content p,
@@ -1116,15 +1067,10 @@ body.admin-bar .site-header {
             -ms-hyphens: auto;
         hyphens: auto;
     margin: 0 0 1.5rem;
-
-        -ms-hyphens: auto;
-        -ms-hyphens: auto;
-        -ms-hyphens: auto;
 }
 
 .entry__content blockquote {
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
     margin-bottom: 1.5rem;
     position: relative;
 }
@@ -1142,7 +1088,6 @@ body.admin-bar .site-header {
 .comment-content ol,
 .entry__content ul,
 .comment-content ul {
-    line-height: 1.5;
     margin: 0 0 1.5rem;
 }
 
@@ -1169,16 +1114,14 @@ body.admin-bar .site-header {
 
 .entry__content li,
 .comment-content li {
-    margin: 0 0 0 36px;
-    margin: 0 0 0 2.25rem;
+    margin: 0 0 0 1.5rem;
 }
 
 .entry__content table,
 .comment-content table {
     border-bottom: 1px solid #ededed;
     color: #777;
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
     margin: 0 0 1.5rem;
     width: 100%;
 }
@@ -1198,7 +1141,6 @@ body.admin-bar .site-header {
 .comment-content address {
     display: block;
     line-height: 1.5;
-    margin: 0 0 24px;
     margin: 0 0 1.5rem;
 }
 
@@ -1214,8 +1156,7 @@ body.admin-bar .site-header {
     a {
         box-shadow:inset 0 0 0 2px #444;
         color: #444;
-        font-size: .875rem;
-        line-height: 1.714;
+        @include size(14);
         margin-right: .5em;
         padding: 0 .5em;
 
@@ -1298,13 +1239,12 @@ body.admin-bar .site-header {
 
 .gallery-caption {
     color: #999;
-    font-size: .75rem;
-    line-height: 2;
+    @include size(12);
 }
 
 .entry-footer {
     color: #888;
-    font-size: .88rem;
+    @include size(14);
 }
 
 .entry-share .comments-link {
@@ -1325,12 +1265,11 @@ body.admin-bar .site-header {
 }
 
 .entry__categories {
-    font-size: .75rem;
-    line-height: 2;
+    @include size(12);
     overflow: hidden;
 
     a {
-        background-color: #c0392b;
+        background-color: $color--highlight;
         color: #fff;
         display: inline-block;
         padding: 0 .5em;
@@ -1345,21 +1284,19 @@ body.admin-bar .site-header {
 -------------------------------------------------------------- */
 
 #comments {
-    margin-bottom: 24px;
     margin-bottom: 1.5rem;
 }
 
 .comments-title,
 #reply-title {
-    color: #c0392b;
-    font-size: 1.5rem;
+    color: $color--highlight;
+    @include size(24);
     font-weight: normal;
-    line-height: 1;
     margin-bottom: 1.5rem;
 }
 
 .comments-title a {
-    background: #c0392b;
+    background: $color--highlight;
     color: #fff;
     float: right;
     font-size: 16px;
@@ -1369,7 +1306,7 @@ body.admin-bar .site-header {
     padding: 0 .5em;
 
     &:hover {
-        background: #222;
+        background: #292724;
         color: #fff;
         -webkit-transition: all .1s linear;
                 transition: all .1s linear;
@@ -1386,35 +1323,30 @@ body.admin-bar .site-header {
 }
 
 .comment-container {
-    margin-bottom: 24px;
     margin-bottom: 1.5rem;
 }
 
 .comment,
 .pingback {
     color: #666;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     overflow: hidden;
     position: relative;
 }
 
 .comments-list .children {
-    margin: 0 0 0 48px;
     margin: 0 0 0 3rem;
 }
 
 .comment-content {
-    background: #f5f5f5;
-    border-radius: 1rem;
-    line-height: 1.5;
-    margin-bottom: 16px;
-    margin-bottom: 1rem;
-    padding: 24px;
+    background: #fefefe;
+    border-radius: 1.5rem;
+    margin-bottom: 1.5rem;
     padding: 1.5rem;
     position: relative;
 
     &:after {
-        border-color: #f5f5f5 transparent;
+        border-color: #fefefe transparent;
         border-style: solid;
         border-width: 8px 8px 0;
         border-width: .5rem .5rem 0;
@@ -1439,10 +1371,8 @@ body.admin-bar .site-header {
 
 .comment-meta {
     color: #999;
-    line-height: 1.5;
     margin: 0;
     overflow: hidden;
-    padding: 0 24px;
     padding: 0 1.5rem;
     position: relative;
     z-index: 1;
@@ -1451,7 +1381,7 @@ body.admin-bar .site-header {
         color: #999;
 
         &:hover {
-            color: #c0392b;
+            color: $color--highlight;
         }
     }
 
@@ -1467,8 +1397,8 @@ body.admin-bar .site-header {
 
 .comment-author-avatar,
 .comment-author-avatar img {
-    height: 48px;
-    width: 48px;
+    height: 3rem;
+    width: 3rem;
 }
 
 .comment-author-avatar {
@@ -1497,15 +1427,11 @@ body.admin-bar .site-header {
 }
 
 .comments-list .pingback {
-    background: #f5f5f5;
+    background: #fefefe;
     border: 1px solid #ededed;
-    font-size: 14px;
-    font-size: .88em;
-    line-height: 16px;
-    margin-bottom: 24px;
+    @include size(14);
     margin-bottom: 1.5rem;
     overflow: hidden;
-    padding: 12px;
     padding: .75rem;
 }
 
@@ -1519,26 +1445,20 @@ body.admin-bar .site-header {
 }
 
 #respond {
-    background: #f5f5f5;
+    background: #fefefe;
     border-top: 1px solid #ededed;
     color: #666;
     overflow: hidden;
-    padding: 24px;
     padding: 1.5rem;
 }
 
 #cancel-comment-reply-link {
     color: #666;
-    font-size: 14px;
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
 }
 
 #respond p {
-    font-size: 12px;
-    font-size: .75rem;
-    line-height: 2;
-    margin-bottom: 24px;
+    @include size(12);
     margin-bottom: 1.5rem;
 }
 
@@ -1551,9 +1471,7 @@ body.admin-bar .site-header {
     color: #999;
     display: inline-block;
     display: -moz-inline-stack;
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 1.5;
+    @include size(16);
     zoom: 1;
 
     *display: inline;
@@ -1580,14 +1498,13 @@ body.admin-bar .site-header {
 #commentform input[type='email']:focus,
 #commentform input[type='url']:focus,
 #commentform textarea:focus {
-    border-color: #222;
+    border-color: #292724;
     -webkit-transition: border-color .2s linear;
             transition: border-color .2s linear;
 }
 
 .form-allowed-tags {
-    font-size: .75rem;
-    line-height: 2;
+    @include size(12);
     margin: 0;
     padding-top: 1.5rem;
 
@@ -1599,8 +1516,6 @@ body.admin-bar .site-header {
 #submit {
     border: none;
     color: #fff;
-    font-size: 16px;
-    font-size: 1rem;
     padding: .5em 1em;
 }
 
@@ -1623,8 +1538,7 @@ body.admin-bar .site-header {
 
     .meta-nav {
         color: #999;
-        font-size: .688rem;
-        line-height: 2.182;
+        @include size(11);
         letter-spacing: 0.04em;
         position: relative;
         text-transform: uppercase;
@@ -1632,8 +1546,7 @@ body.admin-bar .site-header {
     }
 
     .post-title {
-        font-size: 1.125rem;
-        line-height: 1;
+        @include size(24);
         position: relative;
         z-index: 1.333;
     }
@@ -1641,12 +1554,11 @@ body.admin-bar .site-header {
 
 .post-navigation a:hover .post-title,
 .post-navigation a:focus .post-title {
-    color: #c0392b;
+    color: $color--highlight;
 }
 
 .pagination {
-    font-size: 1.125rem;
-    line-height: 2.667;
+    @include size(18,2);
 
     .nav-links {
         position: relative;
@@ -1672,7 +1584,7 @@ body.admin-bar .site-header {
 
     .prev,
     .next {
-        background-color: #c0392b;
+        background-color: $color--highlight;
         color: #fff;
         display: inline-block;
         height: 3rem;
@@ -1682,28 +1594,18 @@ body.admin-bar .site-header {
         width: 3rem;
 
         &:before {
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-font-smoothing: antialiased;
-            display: inline-block;
-            font-family: 'FontAwesome';
+            @include has-icon();
             font-size: 1.75rem;
             height: 100%;
             line-height: 1.714;
             position: relative;
             width: 100%;
-            font-style: normal;
-            font-weight: normal;
-            font-variant: normal;
-            speak: none;
             text-align: center;
-            text-decoration: inherit;
-            text-transform: none;
-            vertical-align: top;
         }
 
         &:hover,
         &:focus {
-            background-color: #222;
+            background-color: #292724;
         }
     }
 
@@ -1736,17 +1638,15 @@ body.admin-bar .site-header {
     }
 
     ul {
-        font-size: .88rem;
-        line-height: 1.71;
+        @include size(14);
         list-style: none;
     }
 }
 
 .widget__title {
     color: #444;
-    font-size: 1.125rem;
+    @include size(18);
     font-weight: 700;
-    line-height: 1.333;
     margin: 0 0 1.5rem;
 }
 
@@ -1756,7 +1656,7 @@ body.admin-bar .site-header {
     &:before {
         background: rgba(254, 254, 254, .6);
         border: 1px solid #fff;
-        box-shadow: 0 0 3px rgba(0,0,0,.1);
+        box-shadow: 0 0 3px rgba(41,39,36,.1);
         content: ' ';
         display: block;
         height: 1.5rem;
@@ -1775,7 +1675,7 @@ body.admin-bar .site-header {
 
     &:before {
         background: #dcdcdc;
-        border-color: #f5f5f5 #f5f5f5 transparent transparent;
+        border-color: #fefefe #fefefe transparent transparent;
         border-style: solid;
         border-width: 12px;
         content: '';
@@ -1805,14 +1705,13 @@ body.admin-bar .site-header {
     display: inline-block;
 
     &:hover {
-        background: #c0392b;
+        background: $color--highlight;
         color: #fff;
     }
 }
 
 .site-footer .site-title {
-    font-size: 1.13rem;
-    line-height: 1.33;
+    @include size(18);
     text-align: center;
 
     a {
@@ -1822,8 +1721,7 @@ body.admin-bar .site-header {
 
 .site-footer .site-description {
     color: #ccc;
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
     text-align: center;
 }
 
@@ -1845,37 +1743,35 @@ body.admin-bar .site-header {
 
     > li {
         display: inline-block;
-        font-size: 1.33rem;
-        line-height: 48px;
+        @include size(18,2);
         margin-left: .5em;
     }
 }
 
-a.icon--twitter:hover {
+.icon--twitter:hover {
     color: #55acee;
 }
 
-a.icon--facebook:hover {
+.icon--facebook:hover {
     color: #3b5998;
 }
 
-a.icon--flickr:hover {
+.icon--flickr:hover {
     color: #ff0084;
 }
 
-a.icon--vimeo:hover {
+.icon--vimeo:hover {
     color: #1ab7ea;
 }
 
 .page .entry-summary {
     color: #888;
-    font-size: 1.13rem;
+    @include size(18,1);
     font-style: italic;
-    line-height: 1.33;
 }
 
 .page-header {
-    background-color: #c0392b;
+    background-color: $color--highlight;
     box-shadow:inset 0 0 0 4px rgba(41,39,36,.08);
     margin-bottom: 1.5rem;
     padding: 0 1.5rem;
@@ -1883,8 +1779,7 @@ a.icon--vimeo:hover {
 
 .page-title {
     color: #fff;
-    font-size: 1.25rem;
-    line-height: 2.4;
+    @include size(18,2);
 
     .fa {
         color: rgba(255,255,255,.6);
@@ -1892,7 +1787,8 @@ a.icon--vimeo:hover {
 }
 
 .filter-bar {
-    background-color: #c0392b;
+    @extend %clearfix;
+    background-color: $color--highlight;
     box-shadow: inset 0 0 0 4px rgba(41,39,36,.08);
     margin-bottom: 1.5rem;
     padding: 1.5rem .75rem;
@@ -1908,9 +1804,8 @@ a.icon--vimeo:hover {
 .filter .label {
     color: #fff;
     display: block;
-    font-size: .75rem;
+    @include size(12);
     font-weight: 700;
-    line-height: 2;
     text-transform: uppercase;
 }
 
@@ -2053,7 +1948,7 @@ a.icon--vimeo:hover {
 
 .feature__title {
     color: #fff;
-    font-size: 1rem;
+    @include size(16);
     margin: 0 0 2px 0;
     -webkit-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
@@ -2138,14 +2033,12 @@ a.icon--vimeo:hover {
 
     .entry-summary {
         color: #fff;
-        font-size: .875rem;
-        line-height: 1.714;
+        @include size(14);
     }
 
     .read-more {
         color: #fff;
-        font-size: .875rem;
-        line-height: 1.714;
+        @include size(14);
     }
 }
 
@@ -2189,8 +2082,7 @@ a.icon--vimeo:hover {
 .slider-title {
     background-color: rgba(255,255,255,.2);
     color: #fff;
-    font-size: .875rem;
-    line-height: 1.714;
+    @include size(14);
     padding: 0 .5em;
     position: absolute;
     top: 1.5rem;
@@ -2203,7 +2095,7 @@ a.icon--vimeo:hover {
 }
 
 .swiper-slide .slide-content {
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(41,39,36,.3);
     padding: 1.5rem;
     position: absolute;
     bottom: 0;
@@ -2220,8 +2112,7 @@ a.icon--vimeo:hover {
 .event-container {
     background-color: rgba(41,39,36,.08);
     box-shadow:inset 0 0 0 4px rgba(41,39,36,.08);
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
     overflow: hidden;
     position: relative;
 }
@@ -2236,13 +2127,12 @@ a.icon--vimeo:hover {
     padding: 1.5rem;
 
     .event__title {
-        font-size: 1.13rem;
-        line-height: 1.29;
+        @include size(18);
         margin: 0 0 1.5rem 0;
     }
 
-    a.event__info {
-        background-color: #c0392b;
+    .event__info {
+        background-color: $color--highlight;
         color: #fff;
         display: inline-block;
         position: absolute;
@@ -2260,8 +2150,7 @@ a.icon--vimeo:hover {
 
 .event__subtitle {
     display: block;
-    font-size: .88rem;
-    line-height: 1.71;
+    @include size(14);
 }
 
 .event__occurrances {
@@ -2276,8 +2165,7 @@ a.icon--vimeo:hover {
     background-color: #27ae60;
     color: #fff;
     display: inline-block;
-    font-size: .75rem;
-    line-height: 2;
+    @include size(12);
     padding: 0 .5em;
 }
 
@@ -2326,19 +2214,9 @@ a.icon--vimeo:hover {
         cursor: pointer;
 
         &:after {
+            @include has-icon();
             content: '\f107';
             float: right;
-            font-family: 'FontAwesome';
-            speak: none;
-            font-size: 100%;
-            font-weight: normal;
-            font-variant: normal;
-            text-transform: none;
-            line-height: 3;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            vertical-align: middle;
-            cursor: pointer;
         }
     }
 
@@ -2354,8 +2232,8 @@ a.icon--vimeo:hover {
         margin: 0;
         overflow: scroll;
         padding: .5em 0;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
-        -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0 1px 2px 0;
+        box-shadow: 0 1px 2px 0 rgba(41,39,36,.35);
+        -webkit-box-shadow: rgba(41,39,36,.35) 0 1px 2px 0;
         -webkit-transition: opacity .5s;
         transition: opacity .5s;
         opacity: 0;
@@ -2367,7 +2245,7 @@ a.icon--vimeo:hover {
             transition: all .2s;
 
             &:hover {
-                background: #eee;
+                background: #fefefe;
                 color: #444;
             }
         }
@@ -2407,8 +2285,8 @@ a.icon--vimeo:hover {
     background-color: #444;
 }
 
-.lista-de-filtro li.selected:before {
-    background-color: #c0392b;
+.lista-de-filtro .selected:before {
+    background-color: $color--highlight;
 }
 
 .lista-de-filtro li span {
