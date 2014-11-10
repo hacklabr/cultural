@@ -922,6 +922,7 @@ img.aligncenter {
 
 .entry-title {
     clear: both;
+
     @include size(36,2);
 
     a {
@@ -1246,7 +1247,7 @@ img.aligncenter {
 }
 
 .read-more {
-    color: #fff;
+    color: #222;
     display: inline-block;
 }
 
