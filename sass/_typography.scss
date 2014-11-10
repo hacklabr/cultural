@@ -1,0 +1,9 @@
+$font--body: 'Open Sans', 'Lucida Grande', sans-serif;
+$font--display: 'Aleo', serif;
+
+$line-height: 24;
+
+@mixin size( $font-size: 16, $lines: 1 ) {
+    font-size: ($font-size * .0625) + rem;
+    line-height: ($line-height / $font-size) * $lines;
+}

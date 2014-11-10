@@ -12,7 +12,7 @@
             <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
         </figure>
     <?php } ?>
-    <header class="entry-header  cf">
+    <header class="entry-header">
         <?php cultural_categories(); ?>
         <?php cultural_the_format(); ?>
         <?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
