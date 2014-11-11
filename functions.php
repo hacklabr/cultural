@@ -36,7 +36,8 @@ function cultural_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'cultural' ),
+        'primary' => __( 'Primary Menu', 'cultural' ),
+		'secondary' => __( 'Secondary Menu', 'cultural' ),
         'mobile' => __( 'Mobile Menu', 'cultural' )
 	) );
 

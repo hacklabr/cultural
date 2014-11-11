@@ -204,10 +204,41 @@ h3,
 h4,
 h5,
 h6 {
+  color: #c0392b;
   font-family: "Aleo", serif;
   font-weight: 400;
-  margin: 0;
+  margin: 1.5rem 0;
   word-wrap: break-word;
+}
+
+h1 {
+  font-size: 4.25rem;
+  line-height: 1.05882;
+}
+
+h2 {
+  font-size: 2.625rem;
+  line-height: 1.14286;
+}
+
+h3 {
+  font-size: 1.625rem;
+  line-height: 1.84615;
+}
+
+h4 {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h5 {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h6 {
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 /* Paragraphs / Quotes */
@@ -376,19 +407,6 @@ span > object {
   width: 1px;
 }
 
-.ir {
-  background-color: transparent;
-  border: 0;
-  overflow: hidden;
-  *text-indent: -9999px;
-}
-.ir:before {
-  content: '';
-  display: block;
-  height: 150%;
-  width: 0;
-}
-
 .bd {
   overflow: hidden;
   zoom: 1;
@@ -515,9 +533,9 @@ img.aligncenter {
   padding: 1.5rem;
   position: fixed;
   top: 0;
-  -webkit-transform: translate(0px, 0px);
-      -ms-transform: translate(0px, 0px);
-          transform: translate(0px, 0px);
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
   width: 20%;
   z-index: 100;
   -webkit-overflow-scrolling: touch;
@@ -646,15 +664,6 @@ img.aligncenter {
   margin: 0;
 }
 
-.menu a {
-  background-color: rgba(41, 39, 36, 0.1);
-  color: #292724;
-  display: inline-block;
-  padding: 0 1.3em;
-  -webkit-transition: background-color .1s ease-out;
-          transition: background-color .1s ease-out;
-}
-
 .menu .menu-item-has-children {
   position: relative;
 }
@@ -689,14 +698,35 @@ img.aligncenter {
   }
 }
 .menu--main {
-  line-height: 3;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
   position: relative;
 }
-
+.menu--main a {
+  background-color: rgba(41, 39, 36, 0.1);
+  color: #292724;
+  display: inline-block;
+  padding: .75rem 1em;
+  -webkit-transition: background-color .1s ease-out;
+          transition: background-color .1s ease-out;
+}
 .menu--main a:hover {
   background-color: #c0392b;
   color: #fff;
+}
+
+.menu--sub {
+  font-size: 0.875rem;
+  line-height: 1.71429;
+  text-transform: uppercase;
+}
+.menu--sub a {
+  color: #999;
+}
+.menu--sub a:hover {
+  color: #222;
+}
+.menu--sub a:before {
+  content: "- ";
 }
 
 .menu--mobile {
@@ -912,6 +942,7 @@ img.aligncenter {
 
 .entry-title {
   clear: both;
+  margin: 0;
   font-size: 2.25rem;
   line-height: 1.33333;
 }
@@ -991,58 +1022,6 @@ img.aligncenter {
 .entry__content a:hover {
   box-shadow: inset 0 -2px 0 #c0392b;
   color: #292724;
-}
-
-.entry__content h1,
-.comment-content h1,
-.entry__content h2,
-.comment-content h2,
-.entry__content h3,
-.comment-content h3,
-.entry__content h4,
-.comment-content h4,
-.entry__content h5,
-.comment-content h5,
-.entry__content h6,
-.comment-content h6 {
-  color: #c0392b;
-  margin: 1.5rem 0;
-}
-
-.entry__content h1,
-.comment-content h1 {
-  font-size: 4.25rem;
-  line-height: 1.05882;
-}
-
-.entry__content h2,
-.comment-content h2 {
-  font-size: 2.625rem;
-  line-height: 1.14286;
-}
-
-.entry__content h3,
-.comment-content h3 {
-  font-size: 1.625rem;
-  line-height: 1.84615;
-}
-
-.entry__content h4,
-.comment-content h4 {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.entry__content h5,
-.comment-content h5 {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.entry__content h6,
-.comment-content h6 {
-  font-size: 1rem;
-  line-height: 1.5;
 }
 
 .entry__content p,
@@ -1210,6 +1189,7 @@ img.aligncenter {
 
 .gallery .attachment-thumbnail {
   background: #fff;
+  box-shadow: 0 0 6px #999;
   box-shadow: 0 0 6px rgba(192, 192, 192, 0.5);
   display: inline-block;
   height: auto;
@@ -1219,6 +1199,7 @@ img.aligncenter {
 }
 
 .gallery a:hover .attachment-thumbnail {
+  box-shadow: 0 0 8px #666;
   box-shadow: 0 0 8px rgba(192, 192, 192, 0.8);
   top: -2px;
 }
@@ -1341,10 +1322,6 @@ img.aligncenter {
 
 .comment-content p {
   margin: 0;
-}
-
-.comment-content p + * {
-  margin-bottom: 1.5rem;
 }
 
 .comment-meta {
@@ -1681,6 +1658,7 @@ img.aligncenter {
 .site-footer .site-title {
   font-size: 1.125rem;
   line-height: 1.33333;
+  margin: 0;
   text-align: center;
 }
 .site-footer .site-title a {
@@ -1689,6 +1667,7 @@ img.aligncenter {
 
 .site-footer .site-description {
   color: #ccc;
+  margin: 0;
   font-size: 0.875rem;
   line-height: 1.71429;
   text-align: center;
@@ -1747,6 +1726,7 @@ img.aligncenter {
 
 .page-title {
   color: #fff;
+  margin: 0;
   font-size: 1.125rem;
   line-height: 2.66667;
 }
@@ -1940,24 +1920,24 @@ img.aligncenter {
   width: 100%;
   -webkit-transition-property: -webkit-transform, left, top;
   -webkit-transition-duration: 0s;
-  -webkit-transform: translate3d(0px, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
   -webkit-transition-timing-function: ease;
   -moz-transition-duration: 0s;
-  -moz-transform: translate3d(0px, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
   -moz-transition-timing-function: ease;
   -o-transition-duration: 0s;
-  -o-transform: translate3d(0px, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
   -o-transition-timing-function: ease;
-  -o-transform: translate(0px, 0px);
+  -o-transform: translate(0, 0);
   -ms-transition-duration: 0s;
-  -ms-transform: translate3d(0px, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
   -ms-transition-timing-function: ease;
   -webkit-transition-property: -webkit-transform, left, top;
   transition-property: transform, left, top;
   -webkit-transition-duration: 0s;
   transition-duration: 0s;
-  -webkit-transform: translate3d(0px, 0, 0);
-  transform: translate3d(0px, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-transition-timing-function: ease;
   transition-timing-function: ease;
   -moz-box-sizing: content-box;
@@ -2036,6 +2016,7 @@ img.aligncenter {
 .slider-title {
   background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
+  margin: 0;
   font-size: 0.875rem;
   line-height: 1.71429;
   padding: 0 .5em;
@@ -2178,7 +2159,7 @@ img.aligncenter {
   vertical-align: middle;
   cursor: pointer;
   content: '\f107';
-  float: right;
+  margin: 0 0 0 auto;
 }
 .dropdown .submenu-dropdown {
   height: 14rem;
