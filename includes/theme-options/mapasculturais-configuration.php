@@ -1,6 +1,6 @@
 <?php
 class MapasCulturaisConfiguration {
-    const NAME = "MC";
+    const NAME = "Mapas Culturais";
 
     protected static $nameClass;
     protected static $nameGroup;
