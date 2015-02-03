@@ -2,6 +2,14 @@
 
 session_start();
 
+// CONGELADO
+
+include dirname(__FILE__).'/includes/congelado-functions.php';
+include dirname(__FILE__).'/includes/html.class.php';
+include dirname(__FILE__).'/includes/utils.class.php';
+include dirname(__FILE__).'/includes/opengraph.php';
+
+
 if ( ! isset( $content_width ) )
 	$content_width = 1000;
 
@@ -144,5 +152,3 @@ require get_template_directory() . '/inc/widgets-extra-classes.php';
  * Handle Mapas Culturais support
  */
 require get_template_directory() . '/inc/mapas-culturais.php';
-
-?>
