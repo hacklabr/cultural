@@ -42,7 +42,7 @@ class MapasCulturaisConfiguration {
 
         define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
 
-        if(DCache::exists('API', 'configs', 30)){
+        if(DCache::exists('API', 'configs', 60 * 15)){
 
             _pr('PEGOU DO CACHE' . date('h:i:s'));
             $configs = DCache::get('API', 'configs');
@@ -127,8 +127,11 @@ class MapasCulturaisConfiguration {
                         <?php foreach($configs as $c):
                             $metaName = 'theme_options[' . self::$nameClass . '][' . $c->key . ']';
                             $metaValue = $selfOptions[$c->key]; ?>
-                            <label for="<?php echo $c->key; ?>"><strong><?php _e($c->label, "cultural"); ?></strong></label><br/>
 
+                            <?php if($c->type === 'entity') echo '<h1>'; else echo '<strong>';  ?>
+                                <?php _e($c->label, "cultural"); ?>
+                            <?php if($c->type === 'entity') echo '</h1>'; else echo '</strong>';  ?>
+                            <br>
                             <?php switch($c->type):
                                       case 'heading': ?>
                                     <br>
@@ -137,7 +140,7 @@ class MapasCulturaisConfiguration {
                                     <?php foreach($c->data as $entity): ?>
                                         <label>
                                             <a href="<?php echo $entity->singleUrl; ?>" target="_blank">
-                                                <img class="thumb" src="<?php if(!empty($entity->{'@files:avatar.avatarSmall'})) echo $entity->{'@files:avatar.avatarSmall'}->url; ?>" align="left">
+                                                <img class="thumb" src="<?php if(!empty($entity->{'@files:avatar.avatarSmall'})) echo $entity->{'@files:avatar.avatarSmall'}->url; ?>" align="left" alt="Ver Página">
                                             </a>
                                             <input type="checkbox" name="<?php echo "{$metaName}[{$entity->id}]"; ?>"  <?php if($metaValue[$entity->id]) echo 'checked'; ?> >
                                             <strong><?php echo $entity->name; ?></strong>
