@@ -39,39 +39,71 @@ class MapasCulturaisConfiguration {
     }
 
     static function callbackPage() {
-        define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
-        if(DCache::exists('API', 'config', 15 * 60)){
-            _pr('PEGOU DO CACHE' . date('h:i:s'));
-            $config = DCache::get('API', 'config');
-        }else{
-            //$linguagens = json_decode(file_get_contents(API_URL . 'term/list/linguagem'));
-            //$geoDivisions = json_decode(file_get_contents(API_URL . 'geoDivision/list/includeData:1'));
-            $eventDescription = json_decode(file_get_contents(API_URL . 'event/describe'));
-            $agents = json_decode(file_get_contents(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC'));
-            $spaces = json_decode(file_get_contents(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC'));
 
-            $config = [
-                //'linguagens' => $linguagens,
-                //'geoDivisions' => $geoDivisions,
-                'eventDescription' => $eventDescription,
-                'agents' => $agents,
-                'spaces' => $spaces
+        define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
+
+        if(false && DCache::exists('APIx1', 'configs', 30)){
+
+            _pr('PEGOU DO CACHE' . date('h:i:s'));
+            $configs = DCache::get('APIx1', 'configs');
+
+        }else{
+
+            $linguagens = json_decode(wp_remote_get(API_URL . 'term/list/linguagem')['body']);
+            $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/includeData:1')['body']);
+            $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe')['body']);
+            $agents = json_decode(wp_remote_get(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC&@limit=10')['body']);
+            $spaces = json_decode(wp_remote_get(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,endereco,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC&@limit=10')['body']);
+
+            $configs = [
+               'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
+               'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
+               'geoDivisions' => (object) ['order' => 2, 'key' => 'classificacaoEtaria', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
+               'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => $agents, 'type' => 'entity' ],
+               'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => $spaces, 'type' => 'entity']
             ];
 
-            DCache::set('API', 'config', $config);
+//            foreach($configs as $c){
+//                $c = json_decode
+//            }
+            $configs['linguagens']->data = $linguagens;
+            $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
 
+            $i=0;
+            foreach($geoDivisions as $geoDivision){
+                $i++;
+                $configs[$geoDivision->metakey] = (object) ['order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
+            }
+
+            usort($configs, function($a, $b){
+                return $a->order > $b->order;
+            });
+
+            //$configs[] = ['key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
+
+            //DCache::set('APIx1', 'configs', $configs);
         }
-        _pr($config);
+
+        //_pr($configs);
+
         ?>
+        <style>
+        .thumb {
+            width: 72px;
+            height: 72px;
+            background-color:#ccc;
+            margin-right: 5px;
+        }
+        </style>
         <div class="wrap span-20">
             <h2><?php echo __('Configuração dos Mapas Culturais', 'cultural'); ?></h2>
 
             <form action="options.php" method="post" class="clear prepend-top">
-
                 <?php settings_fields('theme_options_options'); ?>
                 <?php
                     $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
                     $selfOptions = $options[self::$nameClass];
+                    //var_dump($options);
                 ?>
 
                 <div class="span-20 ">
@@ -80,17 +112,65 @@ class MapasCulturaisConfiguration {
 
                     <h3><?php _e("Configuração da API de Eventos", 'cultural'); ?></h3>
 
+                    <p class="textright clear prepend-top">
+                        <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
+                    </p>
+
                     <div class="span-6 last">
-                        <label for="linguagens"><strong><?php _e("Linguagens", "cultural"); ?></strong></label><br/>
-                        <select id="linguagens" class="text" name="theme_options[<?php echo self::$nameClass; ?>][linguagens]" data-selected="<?php echo htmlspecialchars($selfOptions['linguagens']); ?>" style="width: 80%">
-                        </select>
-                        <br/><br/>
-                        <label for="wellcome_title"><strong><?php _e("Twitter", "cultural"); ?></strong></label><br/>
-                        <input type="text" id="wellcome_title" class="text" name="theme_options[social_networks][twitter]" value="<?php echo htmlspecialchars($options['social_networks']['facebook']); ?>" style="width: 80%"/>
-                        <br/><br/>
-                        <label for="asd"><strong><?php _e("RSS", "cultural"); ?></strong></label><br/>
-                        <input type="text" id="asd" class="text" name="theme_options[rss]" value="<?php echo htmlspecialchars($options['rss']); ?>" style="width: 80%"/>
-                        <br/><br/>
+                        <label>
+                            <strong>Palavra-Chave</strong> <br>
+                            <input type="text" name="<?php echo 'theme_options[' . self::$nameClass . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
+                        </label>
+                        <br><br>
+                        <label>
+                            <input type="checkbox" name="<?php echo 'theme_options[' . self::$nameClass . '][verified]'; ?>"  <?php if($selfOptions['verified']) echo 'checked'; ?>>
+                            <strong>Somente Eventos Verificados com Selo</strong>
+                        </label>
+                        <br><br>
+                        <?php foreach($configs as $c):
+                            $metaName = 'theme_options[' . self::$nameClass . '][' . $c->key . ']';
+                            $metaValue = $selfOptions[$c->key]; ?>
+                            <label for="<?php echo $c->key; ?>"><strong><?php _e($c->label, "cultural"); ?></strong></label><br/>
+
+                            <?php switch($c->type):
+                                      case 'heading': ?>
+                                    <br>
+                                    <?php break; ?>
+                                <?php case 'entity': ?>
+                                    <?php foreach($c->data as $entity): ?>
+                                        <label>
+                                            <a href="<?php echo $entity->singleUrl; ?>" target="_blank">
+                                                <img class="thumb" src="<?php if(!empty($entity->{'@files:avatar.avatarSmall'})) echo $entity->{'@files:avatar.avatarSmall'}->url; ?>" align="left">
+                                            </a>
+                                            <input type="checkbox" name="<?php echo "{$metaName}[{$entity->id}]"; ?>"  <?php if($metaValue[$entity->id]) echo 'checked'; ?> >
+                                            <strong><?php echo $entity->name; ?></strong>
+                                            <?php if($entity->endereco):?>
+                                                - <?php echo $entity->endereco; ?>
+                                            <?php endif; ?>
+                                            <br>Tipo: <?php echo $entity->type->name; ?>
+                                            <br>Área(s) de atuação: <?php echo implode(', ', $entity->terms->area); ?>
+                                            <br>
+                                            <?php if(!empty($entity->terms->tag)):?>
+                                                Tags: <?php echo implode(', ', $entity->terms->tag); ?>
+                                            <?php endif; ?>
+                                        </label>
+                                        <br>
+                                        <br>
+                                    <?php endforeach; ?>
+                                    <br>
+                                    <?php break; ?>
+                                <?php default: ?>
+                                    <?php foreach($c->data as $d): ?>
+                                        <label>
+                                            <input type="checkbox" name="<?php echo "{$metaName}[{$d}]"; ?>"  <?php if($metaValue[$d]) echo 'checked'; ?> >
+                                            <?php echo $d; ?>
+                                        </label>
+                                        <br>
+                                    <?php endforeach; ?>
+                                    <br>
+                                    <?php break; ?>
+                            <?php endswitch; ?>
+                        <?php endforeach; ?>
                     </div>
 
                     <?php ///// Edite daqui pra cima ////  ?>
@@ -98,7 +178,7 @@ class MapasCulturaisConfiguration {
                 </div>
 
                 <p class="textright clear prepend-top">
-                    <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'cultural'); ?>" />
+                    <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
                 </p>
             </form>
          </div>
