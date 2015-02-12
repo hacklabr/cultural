@@ -14,8 +14,8 @@ class MapasCulturaisConfiguration {
         add_action( 'admin_init', array( __CLASS__, 'optionsInit' ) );
         add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 
-        wp_enqueue_script( 'mapasculturais-configuration', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array('jquery'), '', true );
-        wp_enqueue_script( 'mapasculturais-configuration', 'https://raw.githubusercontent.com/ehynds/jquery-ui-multiselect-widget/1.13/src/jquery.multiselect.js', array('jquery'), '', true );
+        //wp_enqueue_script( 'mapasculturais-configuration', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array('jquery'), '', true );
+        //wp_enqueue_script( 'mapasculturais-configuration', 'https://raw.githubusercontent.com/ehynds/jquery-ui-multiselect-widget/1.13/src/jquery.multiselect.js', array('jquery'), '', true );
 
 
     }
@@ -100,7 +100,6 @@ class MapasCulturaisConfiguration {
                 <?php
                     $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
                     $selfOptions = $options[self::$nameClass];
-                    //var_dump($options);
                 ?>
 
                 <div class="span-20 ">
@@ -140,7 +139,14 @@ class MapasCulturaisConfiguration {
                                     <?php foreach($c->data as $entity): ?>
                                         <label>
                                             <a href="<?php echo $entity->singleUrl; ?>" target="_blank">
-                                                <img class="thumb" src="<?php if(!empty($entity->{'@files:avatar.avatarSmall'})) echo $entity->{'@files:avatar.avatarSmall'}->url; ?>" align="left" alt="Ver Página">
+                                                <?php
+                                                if(!empty($entity->{'@files:avatar.avatarSmall'})){
+                                                    $avatarUrl = $entity->{'@files:avatar.avatarSmall'}->url;
+                                                }else{
+                                                    $avatarUrl = API_URL . '../assets/img/avatar--' . substr($c->key, 0, -1) . '.png';
+                                                }
+                                                ?>
+                                                <img class="thumb" src="<?php echo $avatarUrl; ?>" align="left" alt="Ver Página">
                                             </a>
                                             <input type="checkbox" name="<?php echo "{$metaName}[{$entity->id}]"; ?>"  <?php if($metaValue[$entity->id]) echo 'checked'; ?> >
                                             <strong><?php echo $entity->name; ?></strong>
