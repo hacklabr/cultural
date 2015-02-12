@@ -51,21 +51,20 @@ class MapasCulturaisConfiguration {
 
             $linguagens = json_decode(wp_remote_get(API_URL . 'term/list/linguagem')['body']);
             $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/includeData:1')['body']);
-            $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe')['body']);
-            $agents = json_decode(wp_remote_get(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC&')['body']);
-            $spaces = json_decode(wp_remote_get(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,endereco,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC')['body']);
+            $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe', ['timeout'=>'120'])['body']);
+            $agents = json_decode(wp_remote_get(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
+            $spaces = json_decode(wp_remote_get(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,terms,endereco&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
+            $projects = json_decode(wp_remote_get(API_URL . 'project/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
 
             $configs = [
                'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
                'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
                'geoDivisions' => (object) ['order' => 2, 'key' => 'classificacaoEtaria', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
                'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => $agents, 'type' => 'entity' ],
-               'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => $spaces, 'type' => 'entity']
+               'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => $spaces, 'type' => 'entity'],
+               'projects' => (object) ['order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => $projects, 'type' => 'entity']
             ];
 
-//            foreach($configs as $c){
-//                $c = json_decode
-//            }
             $configs['linguagens']->data = $linguagens;
             $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
 
@@ -78,8 +77,6 @@ class MapasCulturaisConfiguration {
             usort($configs, function($a, $b){
                 return $a->order > $b->order;
             });
-
-            //$configs[] = ['key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
 
             DCache::set('API', 'configs', $configs);
         }
@@ -148,7 +145,10 @@ class MapasCulturaisConfiguration {
                                                 - <?php echo $entity->endereco; ?>
                                             <?php endif; ?>
                                             <br>Tipo: <?php echo $entity->type->name; ?>
-                                            <br>Área(s) de atuação: <?php echo implode(', ', $entity->terms->area); ?>
+                                            <br>
+                                            <?php if(!empty($entity->terms->area)):?>
+                                                Área(s) de atuação: <?php echo implode(', ', $entity->terms->area); ?>
+                                            <?php endif; ?>
                                             <br>
                                             <?php if(!empty($entity->terms->tag)):?>
                                                 Tags: <?php echo implode(', ', $entity->terms->tag); ?>
