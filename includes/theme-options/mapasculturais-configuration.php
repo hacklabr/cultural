@@ -42,18 +42,18 @@ class MapasCulturaisConfiguration {
 
         define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
 
-        if(false && DCache::exists('APIx1', 'configs', 30)){
+        if(DCache::exists('API', 'configs', 30)){
 
             _pr('PEGOU DO CACHE' . date('h:i:s'));
-            $configs = DCache::get('APIx1', 'configs');
+            $configs = DCache::get('API', 'configs');
 
         }else{
 
             $linguagens = json_decode(wp_remote_get(API_URL . 'term/list/linguagem')['body']);
             $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/includeData:1')['body']);
             $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe')['body']);
-            $agents = json_decode(wp_remote_get(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC&@limit=10')['body']);
-            $spaces = json_decode(wp_remote_get(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,endereco,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC&@limit=10')['body']);
+            $agents = json_decode(wp_remote_get(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC&')['body']);
+            $spaces = json_decode(wp_remote_get(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,endereco,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC')['body']);
 
             $configs = [
                'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
@@ -81,7 +81,7 @@ class MapasCulturaisConfiguration {
 
             //$configs[] = ['key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
 
-            //DCache::set('APIx1', 'configs', $configs);
+            DCache::set('API', 'configs', $configs);
         }
 
         //_pr($configs);
