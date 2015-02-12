@@ -1,6 +1,6 @@
 <?php
-class MapasCulturaisConfiguration {
-    const NAME = "Mapas Culturais";
+class MapasCulturaisConfigurationCategory {
+    const NAME = "Mapas Culturais - Cat";
 
     protected static $nameClass;
     protected static $nameGroup;
@@ -13,10 +13,6 @@ class MapasCulturaisConfiguration {
 
         add_action( 'admin_init', array( __CLASS__, 'optionsInit' ) );
         add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
-
-        //wp_enqueue_script( 'mapasculturais-configuration', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array('jquery'), '', true );
-        //wp_enqueue_script( 'mapasculturais-configuration', 'https://raw.githubusercontent.com/ehynds/jquery-ui-multiselect-widget/1.13/src/jquery.multiselect.js', array('jquery'), '', true );
-
 
     }
 
@@ -39,49 +35,26 @@ class MapasCulturaisConfiguration {
     }
 
     static function callbackPage() {
-
         define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
-
-        if(DCache::exists('API', 'configs', 60 * 60)){
-
-            _pr('PEGOU DO CACHE ' . date('h:i:s'));
-            $configs = DCache::get('API', 'configs');
-
-        }else{
-
-            $linguagens = json_decode(wp_remote_get(API_URL . 'term/list/linguagem', ['timeout'=>'120'])['body']);
-            $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/includeData:1', ['timeout'=>'120'])['body']);
-            $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe', ['timeout'=>'120'])['body']);
-            $agents = json_decode(wp_remote_get(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
-            $spaces = json_decode(wp_remote_get(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,terms,endereco&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
-            $projects = json_decode(wp_remote_get(API_URL . 'project/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
-
-            $configs = [
-               'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
-               'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
-               'geoDivisions' => (object) ['order' => 2, 'key' => 'classificacaoEtaria', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
-               'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => $agents, 'type' => 'entity' ],
-               'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => $spaces, 'type' => 'entity'],
-               'projects' => (object) ['order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => $projects, 'type' => 'entity']
-            ];
-
-            $configs['linguagens']->data = $linguagens;
-            $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
-
-            $i=0;
-            foreach($geoDivisions as $geoDivision){
-                $i++;
-                $configs[$geoDivision->metakey] = (object) ['order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
-            }
-
-            usort($configs, function($a, $b){
-                return $a->order > $b->order;
-            });
-
-            DCache::set('API', 'configs', $configs);
+        $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/includeData:1', ['timeout'=>'120'])['body']);
+        $configs = [
+           'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
+           'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
+           'geoDivisions' => (object) ['order' => 2, 'key' => 'classificacaoEtaria', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
+           'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => [], 'type' => 'entity' ],
+           'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => [], 'type' => 'entity'],
+           'projects' => (object) ['order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => [], 'type' => 'entity']
+        ];
+        $i=0;
+        foreach($geoDivisions as $geoDivision){
+            $i++;
+            $configs[$geoDivision->metakey] = (object) ['order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
         }
 
-        //_pr($configs);
+        usort($configs, function($a, $b){
+            return $a->order > $b->order;
+        });
+//        _pr($configs);
 
         ?>
         <style>
@@ -99,7 +72,9 @@ class MapasCulturaisConfiguration {
                 <?php settings_fields('theme_options_options'); ?>
                 <?php
                     $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
-                    $selfOptions = $options[self::$nameClass];
+                    $optionKey = 'mapasculturaisconfiguration';
+                    $selfOptions = $options[$optionKey];
+//                    var_dump($selfOptions);
                 ?>
 
                 <div class="span-20 ">
@@ -115,16 +90,24 @@ class MapasCulturaisConfiguration {
                     <div class="span-6 last">
                         <label>
                             <strong>Palavra-Chave</strong> <br>
-                            <input type="text" name="<?php echo 'theme_options[' . self::$nameClass . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
+                            <input type="text" name="<?php echo 'theme_options[' . $optionKey . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
                         </label>
                         <br><br>
                         <label>
-                            <input type="checkbox" name="<?php echo 'theme_options[' . self::$nameClass . '][verified]'; ?>"  <?php if($selfOptions['verified']) echo 'checked'; ?>>
+                            <input type="checkbox" name="<?php echo 'theme_options[' . $optionKey . '][verified]'; ?>"  <?php if($selfOptions['verified']) echo 'checked'; ?>>
                             <strong>Somente Eventos Verificados com Selo</strong>
                         </label>
                         <br><br>
                         <?php foreach($configs as $c):
-                            $metaName = 'theme_options[' . self::$nameClass . '][' . $c->key . ']';
+                            if(!$selfOptions[$c->key]) continue;
+                            if($c->type === 'entity'){
+                                foreach($selfOptions[$c->key] as $id => $json){
+                                    $c->data[$id] = json_decode($json);
+                                }
+                            }else{
+                                $c->data = array_keys($selfOptions[$c->key]);
+                                                            }
+                            $metaName = 'theme_options[' . $optionKey . '][' . $c->key . ']';
                             $metaValue = $selfOptions[$c->key]; ?>
 
                             <?php if($c->type === 'entity') echo '<h1>'; else echo '<strong>';  ?>
@@ -148,9 +131,7 @@ class MapasCulturaisConfiguration {
                                                 ?>
                                                 <img class="thumb" src="<?php echo $avatarUrl; ?>" align="left" alt="Ver Página">
                                             </a>
-
-                                            <input type="checkbox" name="<?php echo "{$metaName}[{$entity->id}]"; ?>"  <?php if($metaValue[$entity->id]) echo 'checked'; ?> value="<?php echo htmlspecialchars(json_encode($entity)); ?>">
-
+                                            <input type="checkbox" name="<?php echo "{$metaName}[{$entity->id}]"; ?>"  <?php if($metaValue[$entity->id]) echo 'checked'; ?> >
                                             <strong><?php echo $entity->name; ?></strong>
                                             <?php if($entity->endereco):?>
                                                 - <?php echo $entity->endereco; ?>
@@ -196,4 +177,4 @@ class MapasCulturaisConfiguration {
         <?php
     }
 }
-MapasCulturaisConfiguration::init();
+MapasCulturaisConfigurationCategory::init();
