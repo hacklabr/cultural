@@ -24,7 +24,6 @@ function mapasculturais_category_edit( $term ) {
         $availableFilters = $options['mapasculturaisconfiguration'];
         $selectedFilters = get_option("category_{$term->term_id}");
 
-        //var_dump($selectedFilters);
     ?>
 
     <tr>

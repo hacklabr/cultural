@@ -9,11 +9,20 @@
                 $(selector).append(option);
              });
              $(selector).attr('multiple', true);
-             $(selector).multiselect();
+             //$(selector).multiselect();
         });
     };
 
     $(function(){
-        MC.createMultiselect('#linguagens', MC.apiURL + '/term/list/linguagem');
+
+        console.log(vars);
+        console.log('generalFilters', JSON.parse(vars.generalFilters));
+        console.log('categoryFilters', JSON.parse(vars.categoryFilters));
+        
+        //MC.createMultiselect('#linguagens', MC.apiURL + '/term/list/linguagem');
+
+//        $('.js-entity input:checked').each(function(){
+//            $(this).parent().find('.js-entity-data').attr('name', $(this))
+//        });
     });
 })(jQuery);

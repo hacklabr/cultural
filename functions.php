@@ -104,6 +104,36 @@ function cultural_scripts() {
     if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
         wp_enqueue_script( 'comment-reply' );
 
+
+
+
+
+    //_pr(get_queried_object());
+
+    $savedFilters = get_theme_option('mapasculturaisconfiguration');
+    $configModel = MapasCulturaisConfiguration::getConfigModel();
+    foreach($savedFilters as $key => $data){
+        if($configModel[$key]->type === 'entity'){
+            foreach($data as $id => $json){
+                $data[$id] = json_decode($json);
+            }
+        }elseif(is_array($data)){
+            $data = array_keys($data);
+        }
+        $savedFilters[$key] = $data;
+    }
+
+    $category = get_queried_object();
+    //_pr(get_option("category_{$category->cat_ID}"));
+
+    wp_localize_script('main', 'vars', [
+        'generalFilters' => json_encode($savedFilters),
+        'categoryFilters' => json_encode(get_option("category_{$category->cat_ID}")),
+        'catid' => $category->cat_ID
+   ]);
+
+    wp_enqueue_script( 'mapasculturais', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array( 'main'), '', true );
+
 }
 add_action( 'wp_enqueue_scripts', 'cultural_scripts' );
 

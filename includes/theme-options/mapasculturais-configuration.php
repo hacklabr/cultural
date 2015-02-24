@@ -59,10 +59,10 @@ class MapasCulturaisConfiguration {
 
     static function fetchApiData($debug = false, $limit = null){
 
-        $cacheGroup = 'API1';
+        $cacheGroup = 'API';
         $cacheId = 'configs';
 
-        if(DCache::exists($cacheGroup, $cacheId, 60 * 60)){
+        if(DCache::exists($cacheGroup, $cacheId, 60 * 60 * 24)){
 
             if($debug){
                 _pr('PEGOU DO CACHE ' . date('h:i:s'));
@@ -115,7 +115,7 @@ class MapasCulturaisConfiguration {
 
     static function contentOutput() {
 
-        $configs = self::fetchApiData($debug=true, $limit=10);
+        $configs = self::fetchApiData($debug=true, $limit=20);
         ?>
         <style>
         .thumb {
