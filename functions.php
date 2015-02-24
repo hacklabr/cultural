@@ -9,6 +9,15 @@ include dirname(__FILE__).'/includes/html.class.php';
 include dirname(__FILE__).'/includes/utils.class.php';
 include dirname(__FILE__).'/includes/opengraph.php';
 
+if ( ! function_exists( 'get_theme_option' ) ){
+    function get_theme_option($option_name) {
+        $option = wp_parse_args(
+                        get_option('theme_options'),
+                        get_theme_default_options()
+                    );
+        return isset($option[$option_name]) ? $option[$option_name] : false;
+    }
+}
 
 if ( ! isset( $content_width ) )
 	$content_width = 1000;
