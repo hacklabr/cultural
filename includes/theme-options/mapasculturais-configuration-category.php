@@ -2,32 +2,14 @@
 
 define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
 
+if(!class_exists('MapasCulturaisConfiguration')){
+    require 'mapasculturais-configuration.php';
+}
+
+
 /** Add Colorpicker Field to "Add New Category" Form **/
 function mapasculturais_category_edit( $term ) {
-
-    $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/includeData:1', ['timeout'=>'120'])['body']);
-
-    $configs = [
-       'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
-       'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
-       'geoDivisions' => (object) ['order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
-       'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => [], 'type' => 'entity' ],
-       'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => [], 'type' => 'entity'],
-       'projects' => (object) ['order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => [], 'type' => 'entity']
-    ];
-
-    $i=0;
-    foreach($geoDivisions as $geoDivision){
-        $i++;
-        $configs[$geoDivision->metakey] = (object) ['order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
-    }
-
-    usort($configs, function($a, $b){
-        return $a->order > $b->order;
-    });
-
     ?>
-
     <style>
     .thumb {
         width: 72px;
@@ -62,7 +44,7 @@ function mapasculturais_category_edit( $term ) {
 
     <?php
 
-    foreach($configs as $c):
+    foreach(MapasCulturaisConfiguration::getConfigModel() as $c):
 
         if(!$availableFilters[$c->key]) {
             if($c->type === 'header'){
