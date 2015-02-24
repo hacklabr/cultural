@@ -1,88 +1,121 @@
 <?php
-class MapasCulturaisConfiguration {
-    const NAME = "Mapas Culturais";
 
-    protected static $nameClass;
-    protected static $nameGroup;
-    protected static $options;
-    protected static $widgetsName;
+define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
+
+class MapasCulturaisConfiguration {
+
+    protected static $optionName;
+    protected static $optionGroupName;
 
     static function init() {
-        self::$nameClass = strtolower(__CLASS__);
-        self::$nameGroup = strtolower(__CLASS__) . 'group';
+        self::$optionName = strtolower(__CLASS__);
+        self::$optionGroupName = strtolower(__CLASS__) . 'group';
 
-        add_action( 'admin_init', array( __CLASS__, 'optionsInit' ) );
-        add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
+        add_action( 'admin_init', function(){
+            register_setting( self::$optionGroupName, self::$optionName, array( __CLASS__, 'optionsValidation') );
+        } );
 
-        //wp_enqueue_script( 'mapasculturais-configuration', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array('jquery'), '', true );
-        //wp_enqueue_script( 'mapasculturais-configuration', 'https://raw.githubusercontent.com/ehynds/jquery-ui-multiselect-widget/1.13/src/jquery.multiselect.js', array('jquery'), '', true );
-
-
-    }
-
-    static function optionsInit() {
-        register_setting( self::$nameGroup, self::$nameClass, array( __CLASS__, 'optionsValidation') );
-    }
-
-    static function menu() {
-        add_menu_page (
-            self::NAME,
-            self::NAME,
-            'manage_options',
-            self::$nameClass,
-            array( __CLASS__, 'callbackPage' )
-        );
+        add_action( 'admin_menu', function(){
+            add_menu_page(
+                "Mapas Culturais",
+                "Mapas Culturais",
+                'manage_options',
+                self::$optionName,
+                array( __CLASS__, 'contentOutput' )
+            );
+        } );
     }
 
     static function optionsValidation($input) {
+        // Se necessário, faça aqui alguma validação ao salvar seu formulário
         return $input;
     }
 
-    static function callbackPage() {
+    static function getConfigModel(){
 
-        define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
+        $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/', ['timeout'=>'120'])['body']);
 
-        if(DCache::exists('API', 'configs', 60 * 60)){
+        $configs = [
+           'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
+           'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
+           'geoDivisions' => (object) ['order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
+           'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => [], 'type' => 'entity' ],
+           'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => [], 'type' => 'entity'],
+           'projects' => (object) ['order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => [], 'type' => 'entity']
+        ];
 
-            _pr('PEGOU DO CACHE ' . date('h:i:s'));
-            $configs = DCache::get('API', 'configs');
+        $i=0;
+        foreach($geoDivisions as $geoDivision){
+            $i++;
+            $configs[$geoDivision->metakey] = (object) ['order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => [] ];
+        }
+
+        uasort($configs, function($a, $b){
+            return $a->order > $b->order;
+        });
+
+        return $configs;
+    }
+
+    static function fetchApiData($debug = false, $limit = null){
+
+        $cacheGroup = 'API1';
+        $cacheId = 'configs';
+
+        if(DCache::exists($cacheGroup, $cacheId, 60 * 60)){
+
+            if($debug){
+                _pr('PEGOU DO CACHE ' . date('h:i:s'));
+            }
+
+            $configs = DCache::get($cacheGroup, $cacheId);
 
         }else{
 
-            $linguagens = json_decode(wp_remote_get(API_URL . 'term/list/linguagem', ['timeout'=>'120'])['body']);
-            $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/includeData:1', ['timeout'=>'120'])['body']);
-            $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe', ['timeout'=>'120'])['body']);
-            $agents = json_decode(wp_remote_get(API_URL . 'agent/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
-            $spaces = json_decode(wp_remote_get(API_URL . 'space/find/?@select=id,singleUrl,name,type,shortDescription,terms,endereco&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
-            $projects = json_decode(wp_remote_get(API_URL . 'project/find/?@select=id,singleUrl,name,type,shortDescription,terms&@files=(avatar.avatarSmall):url&@order=name%20ASC', ['timeout'=>'120'])['body']);
+            $configs = self::getConfigModel();
 
-            $configs = [
-               'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
-               'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
-               'geoDivisions' => (object) ['order' => 2, 'key' => 'classificacaoEtaria', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
-               'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => $agents, 'type' => 'entity' ],
-               'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => $spaces, 'type' => 'entity'],
-               'projects' => (object) ['order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => $projects, 'type' => 'entity']
-            ];
+            $defaultRequest = function($urlPath, $appendSelect='') use ($limit) {
+                $defaultQueryParameters = [
+                    '@select' => 'id,singleUrl,name,type,shortDescription,terms' . ',' . $appendSelect,
+                    '@files' =>'(avatar.avatarSmall):url',
+                    '@order' =>'name%20ASC'
+                ];
+                if($limit) {
+                    $defaultQueryParameters['@limit'] = $limit;
+                }
+                $queryString = '';
+                foreach($defaultQueryParameters as $key => $val){
+                    $queryString .= '&' . $key . '=' . $val;
+                }
+                $defaultRequestArgs = ['timeout'=>'120'];
+                return json_decode(wp_remote_get(API_URL . $urlPath . '?' . $queryString, $defaultRequestArgs)['body']);
+            };
 
-            $configs['linguagens']->data = $linguagens;
+            $configs['linguagens']->data = $defaultRequest('term/list/linguagem/');
+
+            $eventDescription = $defaultRequest('event/describe/');
             $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
 
-            $i=0;
+            $configs['agents']->data = $defaultRequest('agent/find/');
+            $configs['spaces']->data = $defaultRequest('space/find/', 'endereco');
+            $configs['projects']->data = $defaultRequest('project/find/');
+
+            $geoDivisions = $defaultRequest('geoDivision/list/includeData:1/');
             foreach($geoDivisions as $geoDivision){
-                $i++;
-                $configs[$geoDivision->metakey] = (object) ['order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => $geoDivision->data];
+                $configs[$geoDivision->metakey]->data = $geoDivision->data;
             }
 
-            usort($configs, function($a, $b){
-                return $a->order > $b->order;
-            });
-
-            DCache::set('API', 'configs', $configs);
+            DCache::set($cacheGroup, $cacheId, $configs);
         }
 
         //_pr($configs);
 
+        return $configs;
+    }
+
+    static function contentOutput() {
+
+        $configs = self::fetchApiData($debug=true, $limit=10);
         ?>
         <style>
         .thumb {
@@ -99,7 +132,7 @@ class MapasCulturaisConfiguration {
                 <?php settings_fields('theme_options_options'); ?>
                 <?php
                     $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
-                    $selfOptions = $options[self::$nameClass];
+                    $selfOptions = $options[self::$optionName];
                 ?>
 
                 <div class="span-20 ">
@@ -115,16 +148,16 @@ class MapasCulturaisConfiguration {
                     <div class="span-6 last">
                         <label>
                             <strong>Palavra-Chave</strong> <br>
-                            <input type="text" name="<?php echo 'theme_options[' . self::$nameClass . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
+                            <input type="text" name="<?php echo 'theme_options[' . self::$optionName . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
                         </label>
                         <br><br>
                         <label>
-                            <input type="checkbox" name="<?php echo 'theme_options[' . self::$nameClass . '][verified]'; ?>"  <?php if($selfOptions['verified']) echo 'checked'; ?>>
+                            <input type="checkbox" name="<?php echo 'theme_options[' . self::$optionName . '][verified]'; ?>"  <?php if($selfOptions['verified']) echo 'checked'; ?>>
                             <strong>Somente Eventos Verificados com Selo</strong>
                         </label>
                         <br><br>
                         <?php foreach($configs as $c):
-                            $metaName = 'theme_options[' . self::$nameClass . '][' . $c->key . ']';
+                            $metaName = 'theme_options[' . self::$optionName . '][' . $c->key . ']';
                             $metaValue = $selfOptions[$c->key]; ?>
 
                             <?php if($c->type === 'entity') echo '<h1>'; else echo '<strong>';  ?>
@@ -132,7 +165,7 @@ class MapasCulturaisConfiguration {
                             <?php if($c->type === 'entity') echo '</h1>'; else echo '</strong>';  ?>
                             <br>
                             <?php switch($c->type):
-                                      case 'heading': ?>
+                                      case 'header': ?>
                                     <br>
                                     <?php break; ?>
                                 <?php case 'entity': ?>
