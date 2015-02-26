@@ -110,6 +110,9 @@ function cultural_scripts() {
 
     //_pr(get_queried_object());
 
+
+
+
     $savedFilters = get_theme_option('mapasculturaisconfiguration');
     $configModel = MapasCulturaisConfiguration::getConfigModel();
     foreach($savedFilters as $key => $data){
@@ -126,16 +129,62 @@ function cultural_scripts() {
     $category = get_queried_object();
     //_pr(get_option("category_{$category->cat_ID}"));
 
+    $linguagens = json_decode(wp_remote_get(API_URL . 'term/list/linguagem/', ['timeout'=>'120'])['body']);
+    $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe/', ['timeout'=>'120'])['body']);
+
     wp_localize_script('main', 'vars', [
-        'generalFilters' => json_encode($savedFilters),
-        'categoryFilters' => json_encode(get_option("category_{$category->cat_ID}")),
+        'generalFilters' => $savedFilters,
+        'categoryFilters' => get_option("category_{$category->cat_ID}"),
+        'linguagens' => $linguagens,
+        'classificacoes' => array_values((array) $eventDescription->classificacaoEtaria->options),
         'catid' => $category->cat_ID
    ]);
+
+
+
+
+
 
     wp_enqueue_script( 'mapasculturais', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array( 'main'), '', true );
 
 }
 add_action( 'wp_enqueue_scripts', 'cultural_scripts' );
+
+//ANGULAR APP ASSETS FROM THEATRO MUNICIPAL
+if(!is_admin()){
+    add_action('wp_print_scripts', function (){
+            wp_enqueue_script('is_mobile', get_bloginfo('template_directory').'/js/lib/is_mobile.js', array('jquery'), null, false);
+
+//        if(is_home() || is_archive() && get_post_type() === 'evento'){
+            //ANGULAR
+            wp_enqueue_script('moment', get_bloginfo('template_directory').'/js/lib/moment.js', array('jquery'), null, false);
+            wp_enqueue_script('moment-ptbr', get_bloginfo('template_directory').'/js/lib/moment.pt-br.js', array('moment'), null, false);
+
+            wp_enqueue_script('angular-core', get_bloginfo('template_directory').'/js/lib/angular.min.js', array('moment-ptbr'), null, false);
+            //angular stable: wp_enqueue_script('angular-core', 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js', array('moment-ptbr'), null, false);
+            wp_enqueue_script('angular-ui-router', get_bloginfo('template_directory').'/js/lib/angular-ui-router.js', array('angular-core'), null, false);
+            //wp_enqueue_script('angular-resource', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js', array('angular-route'), null, false);
+
+            wp_enqueue_script('daterangepicker', get_bloginfo('template_directory').'/js/lib/daterangepicker.js', array('angular-core'), null, false);
+            wp_enqueue_script('angular-daterangepicker', get_bloginfo('template_directory').'/js/lib/angular-daterangepicker.js', array('angular-core'), null, false);
+
+            wp_enqueue_script('angular-sanitize', get_bloginfo('template_directory').'/js/lib/angular-sanitize.js', array('angular-core'), null, false);
+
+            wp_enqueue_script('angular-app', get_bloginfo('template_directory').'/js/ng-app/app.js', array('angular-core'), null, false);
+            wp_enqueue_script('angular-app-services', get_bloginfo('template_directory').'/js/ng-app/services.js', array('angular-app'), null, false);
+            wp_enqueue_script('angular-app-controllers', get_bloginfo('template_directory').'/js/ng-app/controllers.js', array('angular-app-services'), null, false);
+
+            //LOCALIZE
+            wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory'), 'site' => get_bloginfo('wpurl')) );
+
+//            if ( is_plugin_active( 'json-rest-api/plugin.php' ) )
+//                wp_localize_script( 'angular-core', 'wpApiOptions', array( 'base' => json_url(), 'nonce' => wp_create_nonce( 'wp_json' ) ) );
+//        }
+
+
+    });
+}
+
 
 /**
  * Register widgets areas
