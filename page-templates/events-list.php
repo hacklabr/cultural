@@ -70,10 +70,10 @@
                 </figure>
                 <div class="event-data">
                     <h1 class="event__title">Histórias Contadas com Origamis <span class="event__subtitle">Com Irene Tanabe</span></h1>
-                    <div class="event__occurrances">
+                    <div class="event__occurrences">
                         <div class="event__venue">Biblioteca Pública Marcos Rey</div>
                         <div class="event__time">13 de Outubro de 2014 às 14:00</div>
-                        <a href="#" class="js-more-occurrances"><i class="fa fa-plus-circle"></i></a>
+                        <a href="#" class="js-more-occurrences"><i class="fa fa-plus-circle"></i></a>
                     </div>
                     <span class="event__classification">Livre</span>
                     <div class="event__price">
