@@ -20,11 +20,9 @@
             if(!first) first = true; else $container.masonry('destroy');
             // initialize Masonry after all images have loaded
             $container.imagesLoaded(function() {
+                $container.masonry('destroy');
+                $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
                 console.log('eventsController: $scope.updateMasonry() ');
-                $container.masonry({
-                    //"itemSelector": '.event-container',
-                    "gutter": 0
-                });
             });
         };
 

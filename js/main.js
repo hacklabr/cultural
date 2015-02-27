@@ -12,10 +12,10 @@ jQuery(document).ready(function( $ ) {
         return false;
     } );
 
-    var $container = $('.js-masonry');
-    $container.imagesLoaded( function() {
-        $container.masonry();
-    });
+//    var $container = $('.js-masonry');
+//    $container.imagesLoaded( function() {
+//        $container.masonry();
+//    });
 
     $(function(){
       var mySwiper = $('.js-swiper').swiper({
