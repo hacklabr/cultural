@@ -65,11 +65,11 @@
             <div class="gutter-sizer"></div>
 
             <div class="event  event-container" ng-repeat="event in events" repeat-done="updateMasonry()">
-                <figure class="event__image" style="background-image: url(http://spcultura.prefeitura.sp.gov.br//files/event/13336/file/13654/irene_tanabe_2-1ce17e06cfa675e53a04217c87df3226.jpg);">
-                    <img src="http://spcultura.prefeitura.sp.gov.br//files/event/13336/file/13654/irene_tanabe_2-1ce17e06cfa675e53a04217c87df3226.jpg" alt="Histórias Contadas com Origamis" />
+                <figure class="event__image" data-style="background-image:url({{event['@files:header.header'].url}}); background-size: 100%; " >
+                    <img ng-src="{{event['@files:avatar.avatarBig'].url}}" alt="{{event.name}}" />
                 </figure>
                 <div class="event-data">
-                    <h1 class="event__title">Histórias Contadas com Origamis <span class="event__subtitle">Com Irene Tanabe</span></h1>
+                    <h1 class="event__title">{{event.name}} <span class="event__subtitle">{{event.subTitle}}</span></h1>
                     <div class="event__occurrances">
                         <div class="event__venue">Biblioteca Pública Marcos Rey</div>
                         <div class="event__time">13 de Outubro de 2014 às 14:00</div>
@@ -83,7 +83,7 @@
                         </span>
                         Grátis
                     </div>
-                    <a href="#" class="event__info">Mais informações</a>
+                    <a href="{{event.singleUrl}}" target="_blank" class="event__info">Mais informações</a>
                 </div>
             </div>
 

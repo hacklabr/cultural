@@ -128,16 +128,19 @@ function cultural_scripts() {
 
     $category = get_queried_object();
     //_pr(get_option("category_{$category->cat_ID}"));
+    $_linguagens = wp_remote_get(API_URL . 'term/list/linguagem/', array('timeout'=>'120'));
+    $linguagens = json_decode($_linguagens['body']);
 
-    $linguagens = json_decode(wp_remote_get(API_URL . 'term/list/linguagem/', ['timeout'=>'120'])['body']);
-    $eventDescription = json_decode(wp_remote_get(API_URL . 'event/describe/', ['timeout'=>'120'])['body']);
+    $_eventDescription = wp_remote_get(API_URL . 'event/describe/', array('timeout'=>'120'));
+    $eventDescription = json_decode($_eventDescription['body']);
 
     wp_localize_script('main', 'vars', [
         'generalFilters' => $savedFilters,
         'categoryFilters' => get_option("category_{$category->cat_ID}"),
         'linguagens' => $linguagens,
         'classificacoes' => array_values((array) $eventDescription->classificacaoEtaria->options),
-        'catid' => $category->cat_ID
+        'catid' => $category->cat_ID,
+        'apiUrl' => API_URL
    ]);
 
 

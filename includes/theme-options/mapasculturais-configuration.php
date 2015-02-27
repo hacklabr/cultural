@@ -1,6 +1,7 @@
 <?php
-
-define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
+if(!defined('API_URL')){
+    define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
+}
 
 class MapasCulturaisConfiguration {
 
@@ -32,8 +33,8 @@ class MapasCulturaisConfiguration {
     }
 
     static function getConfigModel(){
-
-        $geoDivisions = json_decode(wp_remote_get(API_URL . 'geoDivision/list/', ['timeout'=>'120'])['body']);
+        $_geoDivisions = wp_remote_get(API_URL . 'geoDivision/list/', array('timeout'=>'120'));
+        $geoDivisions = json_decode($_geoDivisions['body']);
 
         $configs = [
            'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],

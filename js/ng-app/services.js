@@ -18,10 +18,15 @@
             var deferred = $q.defer();
             var startDate = svc.data.startDate.format('YYYY-MM-DD');
             var endDate = svc.data.endDate.format('YYYY-MM-DD');
-            var url = 'http://spcultura.prefeitura.sp.gov.br/api/event/findByLocation/?&@from=2015-02-26&@to=2015-03-26&@select=id,singleUrl,name,type,shortDescription,terms,classificacaoEtaria,project.name,project.singleUrl,occurrences&@files=(avatar.avatarMedium):url&@page=1&@limit=10&@order=name%20ASC';
 
-            $http({method: 'GET', cache: true, url: url})
-                .success(function(results){
+            $http({method: 'GET', cache: true, url: vars.apiUrl + 'event/findByLocation/', params: {
+                    '@select': 'id,singleUrl,name,subTitle,type,shortDescription,terms,classificacaoEtaria,project.name,project.singleUrl,occurrences',
+                    '@page': 1,
+                    '@limit': 10,
+                    '@files': '(header.header,avatar.avatarBig):url',
+                    '@from': startDate,
+                    '@to': endDate
+                }}).success(function(results){
                     deferred.resolve(results);
                 });
 
