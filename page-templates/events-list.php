@@ -69,14 +69,23 @@
                     <img ng-src="{{event['@files:avatar.avatarBig'].url}}" alt="{{event.name}}" />
                 </figure>
                 <div class="event-data">
-                    <h1 class="event__title">{{event.name}} <span class="event__subtitle">{{event.subTitle}}</span></h1>
-                    linguagens: {{event.terms.linguagem.join(', ')}}
+                    <h1 class="event__title">
+                       {{event.name}}
+                       <a href="{{event.singleUrl}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                        <span class="event__subtitle">{{event.subTitle}}</span>
+                    </h1>
 
-                    <div class="event__occurrences">
+                    <div class="event__occurrences" ng-repeat="occs in event.occurrences">
+                        <div class="event__venue">
+                            {{occs.space.name}}
+                            <a href="{{occs.space.singleUrl}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                        </div>
+                        <div class="event__time">{{occs.rule.description}}</div>
+                        <!--a href="#" class="js-more-occurrences"><i class="fa fa-plus-circle"></i></a-->
+                    </div>
 
-                        <div class="event__venue">Biblioteca Pública Marcos Rey</div>
-                        <div class="event__time">13 de Outubro de 2014 às 14:00</div>
-                        <a href="#" class="js-more-occurrences"><i class="fa fa-plus-circle"></i></a>
+                    <div style="margin: -10px 0 10px 0">
+                        Linguagem(ns): {{event.terms.linguagem.join(', ')}}
                     </div>
                     <span class="event__classification">{{event.classificacaoEtaria}}</span>
                     <div class="event__price">
