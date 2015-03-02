@@ -4,13 +4,37 @@
 
     app.controller('eventsController', ['$rootScope', '$scope', '$log', '$location', '$timeout', 'searchService', '$sce', function(
                                             $rootScope,   $scope,   $log,   $location,   $timeout,   searchService,   $sce){
-        $scope.linguagens = vars.linguagens;
-        $scope.classificacoes = vars.classificacoes;
+
+        $scope.toggleListItem = function(list, item){
+            console.log($scope.data[list]);
+            $scope.data[list].some(function(i){
+                if(i === item){
+                    i.active = !i.active;
+                    console.log(i, item);
+                    if(i.active){
+                        searchService.data[list].push(i.name);
+                    }else{
+                        searchService.data[list].some(function(j, jindex){
+                            if(j === item.name){
+                                searchService.data[list].splice(jindex, 1);
+                            }
+                        });
+                    }
+                }
+            });
+            searchService.submit().then(receiveSearch);
+            console.log($scope.data[list]);
+        };
+
+        $scope.data = {
+            linguagens: vars.linguagens.map(function(el, i){ return {id: i, name: el}; }),
+            classificacoes: vars.classificacoes.map(function(el, i){ return {id: i, name: el}; })
+        };
 
         searchService.submit().then(receiveSearch);
 
         function receiveSearch(events){
-            console.log(events);
+            $log.debug('receiveSearch events', events);
             $scope.events = events;
         }
 

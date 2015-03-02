@@ -6,6 +6,8 @@
             filtersSkeleton = {
             startDate : moment(),
             endDate : moment().add(60, 'days'),
+            linguagens: [],
+            classificacoes: []
         };
 
         svc.data = angular.copy(filtersSkeleton);
@@ -16,19 +18,31 @@
 
         svc.submit = function(){
             var deferred = $q.defer();
-            var startDate = svc.data.startDate.format('YYYY-MM-DD');
-            var endDate = svc.data.endDate.format('YYYY-MM-DD');
+            var searchParams = {
+                '@select': 'id,singleUrl,name,subTitle,type,shortDescription,terms,classificacaoEtaria,project.name,project.singleUrl,occurrences',
+                '@page': 1,
+                '@limit': 10,
+                '@files': '(header.header,avatar.avatarBig):url',
+                '@from': svc.data.startDate.format('YYYY-MM-DD'),
+                '@to': svc.data.endDate.format('YYYY-MM-DD')
+            };
 
-            $http({method: 'GET', cache: true, url: vars.apiUrl + 'event/findByLocation/', params: {
-                    '@select': 'id,singleUrl,name,subTitle,type,shortDescription,terms,classificacaoEtaria,project.name,project.singleUrl,occurrences',
-                    '@page': 1,
-                    '@limit': 10,
-                    '@files': '(header.header,avatar.avatarBig):url',
-                    '@from': startDate,
-                    '@to': endDate
-                }}).success(function(results){
-                    deferred.resolve(results);
-                });
+            if(svc.data.linguagens && svc.data.linguagens.length){
+                searchParams['term:linguagem'] = 'IN(' + svc.data.linguagens.toString() + ')';
+            }
+
+            if(svc.data.classificacoes && svc.data.classificacoes.length){
+                searchParams.classificacaoEtaria = 'IN(' + svc.data.classificacoes.toString() + ')';
+            }
+            $log.debug('searchParams:', searchParams);
+            $http({
+                method: 'GET',
+                cache: true,
+                url: vars.apiUrl + 'event/findByLocation/',
+                params: searchParams
+            }).success(function(results){
+                deferred.resolve(results);
+            });
 
             return deferred.promise;
         };

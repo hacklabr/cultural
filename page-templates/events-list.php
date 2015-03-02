@@ -37,8 +37,8 @@
                     <div class="placeholder">Selecione as linguagens</div>
                     <div class="submenu-dropdown">
                         <ul class="lista-de-filtro select">
-                            <li ng-repeat="linguagem in linguagens" ng-class="{'selected':isSelected(data.event.linguagens, linguagem.id)}" ng-click="toggleSelection(data.event.linguagens, linguagem.id)" class="ng-scope">
-                                <span>{{linguagem}}</span>
+                            <li ng-repeat="linguagem in data.linguagens" ng-class="{'selected': linguagem.active}" ng-click="toggleListItem('linguagens', linguagem)" class="ng-scope">
+                                <span>{{linguagem.name}}</span>
                             </li>
                         </ul>
                     </div>
@@ -51,8 +51,8 @@
                     <div class="placeholder">Selecione a classificação</div>
                     <div class="submenu-dropdown">
                         <ul class="lista-de-filtro select">
-                            <li ng-repeat="classificacao in classificacoes" ng-class="{'selected':isSelected(data.event.classificacaoEtaria, classificacao.id)}" ng-click="toggleSelection(data.event.classificacaoEtaria, classificacao.id)" class="ng-scope">
-                                <span class="ng-binding">{{classificacao}}</span>
+                            <li ng-repeat="classificacao in data.classificacoes" ng-class="{'selected': classificacao.active}" ng-click="toggleListItem('classificacoes', classificacao)" class="ng-scope">
+                                <span class="ng-binding">{{classificacao.name}}</span>
                             </li>
                         </ul>
                     </div>
@@ -70,13 +70,15 @@
                 </figure>
                 <div class="event-data">
                     <h1 class="event__title">{{event.name}} <span class="event__subtitle">{{event.subTitle}}</span></h1>
+                    linguagens: {{event.terms.linguagem.join(', ')}}
+
                     <div class="event__occurrences">
 
                         <div class="event__venue">Biblioteca Pública Marcos Rey</div>
                         <div class="event__time">13 de Outubro de 2014 às 14:00</div>
                         <a href="#" class="js-more-occurrences"><i class="fa fa-plus-circle"></i></a>
                     </div>
-                    <span class="event__classification">Livre</span>
+                    <span class="event__classification">{{event.classificacaoEtaria}}</span>
                     <div class="event__price">
                         <span class="fa-stack">
                             <i class="fa fa-circle fa-stack-2x"></i>
