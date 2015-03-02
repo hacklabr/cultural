@@ -5,6 +5,28 @@
     app.controller('eventsController', ['$rootScope', '$scope', '$log', '$location', '$timeout', 'searchService', '$sce', function(
                                             $rootScope,   $scope,   $log,   $location,   $timeout,   searchService,   $sce){
 
+        $scope.data = {
+            linguagens: vars.linguagens.map(function(el, i){ return {id: i, name: el}; }),
+            classificacoes: vars.classificacoes.map(function(el, i){ return {id: i, name: el}; })
+        };
+
+        searchService.submit().then(receiveSearch);
+
+        function receiveSearch(events){
+            $log.debug('receiveSearch events', events);
+            $scope.events = events;
+        }
+
+        $scope.updateMasonry = function(){
+            var $container = jQuery('.js-masonry');
+            // initialize Masonry after all images have loaded
+            $container.imagesLoaded(function() {
+                $container.masonry('destroy');
+                $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
+                console.log('eventsController: $scope.updateMasonry() ');
+            });
+        };
+
         $scope.toggleListItem = function(list, item){
             console.log($scope.data[list]);
             $scope.data[list].some(function(i){
@@ -24,30 +46,6 @@
             });
             searchService.submit().then(receiveSearch);
             console.log($scope.data[list]);
-        };
-
-        $scope.data = {
-            linguagens: vars.linguagens.map(function(el, i){ return {id: i, name: el}; }),
-            classificacoes: vars.classificacoes.map(function(el, i){ return {id: i, name: el}; })
-        };
-
-        searchService.submit().then(receiveSearch);
-
-        function receiveSearch(events){
-            $log.debug('receiveSearch events', events);
-            $scope.events = events;
-        }
-
-        var first = false;
-        $scope.updateMasonry = function(){
-            var $container = jQuery('.js-masonry');
-            if(!first) first = true; else $container.masonry('destroy');
-            // initialize Masonry after all images have loaded
-            $container.imagesLoaded(function() {
-                $container.masonry('destroy');
-                $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
-                console.log('eventsController: $scope.updateMasonry() ');
-            });
         };
 
     }]);
