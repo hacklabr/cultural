@@ -34,7 +34,10 @@
             <div class="filter">
                 <span class="label">Linguagem</span>
                 <div class="dropdown">
-                    <div class="placeholder">Selecione as linguagens</div>
+                    <div class="placeholder">
+                        <span ng-if="!svc.data.linguagens.length">Selecione as linguagens</span>
+                        <span ng-if="svc.data.linguagens.length">{{svc.data.linguagens.join(', ')}}</span>
+                    </div>
                     <div class="submenu-dropdown">
                         <ul class="lista-de-filtro select">
                             <li ng-repeat="linguagem in data.linguagens" ng-class="{'selected': linguagem.active}" ng-click="toggleListItem('linguagens', linguagem)" class="ng-scope">
@@ -48,7 +51,10 @@
             <div class="filter">
                 <span class="label">Classificação</span>
                 <div id="classificacao" class="dropdown">
-                    <div class="placeholder">Selecione a classificação</div>
+                    <div class="placeholder">
+                        <span ng-if="!svc.data.classificacoes.length">Selecione a classificação</span>
+                        <span ng-if="svc.data.classificacoes.length">{{svc.data.classificacoes.join(', ')}}</span>
+                    </div>
                     <div class="submenu-dropdown">
                         <ul class="lista-de-filtro select">
                             <li ng-repeat="classificacao in data.classificacoes" ng-class="{'selected': classificacao.active}" ng-click="toggleListItem('classificacoes', classificacao)" class="ng-scope">

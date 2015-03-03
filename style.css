@@ -1751,8 +1751,11 @@ img.aligncenter {
   width: 100%; }
   .dropdown .placeholder {
     padding: 0 .5em;
-    cursor: pointer; }
-    .dropdown .placeholder:after {
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+    .dropdown .placeholder:before {
       display: inline-block;
       font-family: 'FontAwesome';
       speak: none;
@@ -1765,7 +1768,8 @@ img.aligncenter {
       vertical-align: middle;
       cursor: pointer;
       content: '\f107';
-      margin: 0 0 0 auto; }
+      margin: 0 0 0 auto;
+      float: right; }
   .dropdown .submenu-dropdown {
     height: 14rem;
     background-color: #fff;

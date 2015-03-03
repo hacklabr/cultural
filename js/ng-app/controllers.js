@@ -10,6 +10,8 @@
             classificacoes: vars.classificacoes.map(function(el, i){ return {id: i, name: el}; })
         };
 
+        $scope.svc = searchService;
+
         searchService.submit().then(receiveSearch);
 
         function receiveSearch(events){

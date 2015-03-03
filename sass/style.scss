@@ -2152,11 +2152,14 @@ img.aligncenter {
     .placeholder {
         padding: 0 .5em;
         cursor: pointer;
-
-        &:after {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        &:before {
             @include has-icon();
             content: '\f107';
             margin: 0 0 0 auto;
+            float:right;
         }
     }
 
