@@ -186,6 +186,10 @@ if(!is_admin()){
 
 
     });
+
+    add_action('wp_print_styles', function(){
+        wp_enqueue_style('daterange', get_bloginfo('template_directory').'/js/lib/daterangepicker-bs3.css');
+    });
 }
 
 

@@ -5,9 +5,13 @@
     app.controller('eventsController', ['$rootScope', '$scope', '$log', '$location', '$timeout', 'searchService', '$sce', function(
                                             $rootScope,   $scope,   $log,   $location,   $timeout,   searchService,   $sce){
 
+        $scope.mapasUrl = vars.apiUrl.replace('api/', '');
+
         $scope.data = {
             linguagens: vars.linguagens.map(function(el, i){ return {id: i, name: el}; }),
-            classificacoes: vars.classificacoes.map(function(el, i){ return {id: i, name: el}; })
+            classificacoes: vars.classificacoes.map(function(el, i){ return {id: i, name: el}; }),
+            startDate: searchService.data.startDate,
+            endDate: searchService.data.endDate
         };
 
         $scope.svc = searchService;
@@ -28,6 +32,18 @@
                 console.log('eventsController: $scope.updateMasonry() ');
             });
         };
+
+
+        $scope.dateRange = {
+            startDate: $scope.data.startDate,
+            endDate: $scope.data.endDate
+        };
+
+        $scope.$watch('dateRange', function(){
+            searchService.data.startDate = $scope.dateRange.startDate;
+            searchService.data.endDate = $scope.dateRange.endDate;
+            searchService.submit().then(receiveSearch);
+        });
 
         $scope.toggleListItem = function(list, item){
             console.log($scope.data[list]);

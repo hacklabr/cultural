@@ -20,16 +20,81 @@
         </article>
 
         <div class="filter-bar  cf">
-            <form method="get" class="filter  filter-date" action="<?php echo home_url( '/' ); ?>">
-                <div class="event__date  event__date--start">
-                    <label for="event__start-date">De</label>
-                    <input type="text" id="event__start-date" class="date ng-valid hasDatepicker ng-dirty" ng-model="data.event.from" ui-date="dateOptions" ui-date-format="yy-mm-dd" placeholder="00/00/0000" readonly>
+            <style>
+                .testApplyClass{
+
+                }
+                .testCancelClass{
+
+                }
+                .daterangepicker td.active, .daterangepicker td.active:hover {
+                    background-color: #b01116; /*#357ebd;*/
+                    border-color: #810d10 transparent transparent transparent; /*#3071a9;*/
+                    color: #fff;
+                }
+                .daterangepicker td.in-range {
+                    background:  #f4efef;/*#ebf4f8;*/
+                    border-radius: 0px;
+                }
+                .daterangepicker .calendar.left td.in-range {
+                    border-radius: 4px 0 0 4px;
+                }
+                .daterangepicker .calendar.right td.in-range {
+                    border-radius: 0 4px 4px 0;
+                }
+                .daterangepicker .calendar th.available:not(.active):hover,
+                .daterangepicker .calendar td.available:not(.active):hover{
+                    background: #e4cfcf;/*#eee;*/
+                }
+                .js-cancel{display:none;}
+                .daterangepicker .ranges{display:block!important;}
+                .daterangepicker {display:none;}
+                .date--picker {position: relative;}
+                .date--picker i {
+                    left: 10px;
+                    margin-right: 5px;
+                    position: absolute;
+                    top: 15px;
+                    z-index: 20;
+                }
+                .date--picker input{
+                    width:100%;
+                    letter-spacing: 1px;
+                }
+            </style>
+
+            <div class="filter">
+                <span class="label">Data</span>
+                <div class="date--picker">
+                    <i class="fa fa-calendar"></i>
+                    <!--
+
+                    Fonte do plugin jQuery Bootstrap: https://github.com/dangrossman/bootstrap-daterangepicker
+
+                    Diretiva Angular para o plugin: https://github.com/fragaria/angular-daterangepicker
+
+                    !important: O template, já um pouco modificado do daterangepicker está na linha 48 de js/lib/daterangpicker.js
+                    @TODO: Passar o template pra fora, aqui para o hipertexto
+
+                    -->
+                    <input class="form-control date-picker date" ng-model="dateRange"
+                        date-range-picker="{
+                            format:'DD/MMMM',
+                            separator: '  a  ',
+                            locale: {
+                                applyLabel: 'Aplicar',
+                                cancelLabel: 'Cancelar',
+                                fromLabel: 'De',
+                                toLabel: 'Até'
+                            },
+                            applyClass: 'testApplyClass btn-primary btn-xs',
+                            cancelClass: 'testCancelClass btn-xs',
+                        }"
+                        style="padding-left:38px"
+                        onfocus="this.blur()"
+                    >
                 </div>
-                <div class="event__date">
-                    <label for="event__start-date">A</label>
-                    <input type="text" id="event__end-date" class="date ng-valid hasDatepicker ng-dirty" ng-model="data.event.to" ui-date="dateOptions" ui-date-format="yy-mm-dd" placeholder="00/00/0000" readonly>
-                </div>
-            </form>
+            </div>
 
             <div class="filter">
                 <span class="label">Linguagem</span>
@@ -72,7 +137,7 @@
 
             <div class="event  event-container" ng-repeat="event in events" repeat-done="updateMasonry()">
                 <figure class="event__image" data-style="background-image:url({{event['@files:header.header'].url}}); background-size: 100%; " >
-                    <img ng-src="{{event['@files:avatar.avatarBig'].url}}" alt="{{event.name}}" />
+                    <img ng-src="{{event['@files:avatar.avatarBig'].url || mapasUrl + 'assets/img/avatar--event.png'}}" alt="{{event.name}}" />
                 </figure>
                 <div class="event-data">
                     <h1 class="event__title">
