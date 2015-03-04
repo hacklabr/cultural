@@ -247,3 +247,13 @@ require get_template_directory() . '/inc/widgets-extra-classes.php';
  * Handle Mapas Culturais support
  */
 require get_template_directory() . '/inc/mapas-culturais.php';
+
+add_filter('nav_menu_link_attributes', function($attr, $item){
+    if($item->object == 'category'){
+        $cat_data = get_option('category_' . $item->object_id );
+        $cat_color = $cat_data['color'];
+
+        $attr['style'] = 'background-color:' . $cat_color;
+    }
+    return $attr;
+},10,4);

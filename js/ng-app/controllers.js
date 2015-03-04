@@ -16,11 +16,14 @@
 
         $scope.svc = searchService;
 
+        $scope.loading = true;
+
         searchService.submit().then(receiveSearch);
 
         function receiveSearch(events){
             $log.debug('receiveSearch events', events);
             $scope.events = events;
+            $scope.loading = false;
         }
 
         $scope.updateMasonry = function(){
@@ -40,12 +43,14 @@
         };
 
         $scope.$watch('dateRange', function(){
+            $scope.loading = true;
             searchService.data.startDate = $scope.dateRange.startDate;
             searchService.data.endDate = $scope.dateRange.endDate;
             searchService.submit().then(receiveSearch);
         });
 
         $scope.toggleListItem = function(list, item){
+            $scope.loading = true;
             console.log($scope.data[list]);
             $scope.data[list].some(function(i){
                 if(i === item){

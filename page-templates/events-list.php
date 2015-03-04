@@ -131,25 +131,25 @@
             </div>
         </div>
 
-        <div class="events-list  grid  js-masonry" data-masonry-options='{ "columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event" }'>
+        <div ng-if="!loading" class="events-list  grid  js-masonry" data-masonry-options='{ "columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event" }'>
             <div class="grid-sizer"></div>
             <div class="gutter-sizer"></div>
 
             <div class="event  event-container" ng-repeat="event in events" repeat-done="updateMasonry()">
-                <figure class="event__image" data-style="background-image:url({{event['@files:header.header'].url}}); background-size: 100%; " >
-                    <img ng-src="{{event['@files:avatar.avatarBig'].url || mapasUrl + 'assets/img/avatar--event.png'}}" alt="{{event.name}}" />
+                <figure ng-if="event['@files:avatar.avatarBig']" class="event__image" style="background:#EDEDEC; background-image:url({{event['@files:avatar.avatarBig'].url}}); " >
+                    <img ng-src="{{event['@files:avatar.avatarBig'].url}}" alt="{{event.name}}" />
                 </figure>
                 <div class="event-data">
                     <h1 class="event__title">
                        {{event.name}}
-                       <a href="{{event.singleUrl}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                       <!--<a href="{{event.singleUrl}}" target="_blank"><i class="fa fa-external-link"></i></a>-->
                         <span class="event__subtitle">{{event.subTitle}}</span>
                     </h1>
 
-                    <div class="event__occurrences" ng-repeat="occs in event.occurrences">
+                    <div class="event__occurrences" ng-repeat="occs in event.occurrences" ng-if="$index<=2">
                         <div class="event__venue">
                             {{occs.space.name}}
-                            <a href="{{occs.space.singleUrl}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                            <!--a href="{{occs.space.singleUrl}}" target="_blank"><i class="fa fa-external-link"></i></a-->
                         </div>
                         <div class="event__time">{{occs.rule.description}}</div>
                         <!--a href="#" class="js-more-occurrences"><i class="fa fa-plus-circle"></i></a-->
@@ -164,12 +164,16 @@
                             <i class="fa fa-circle fa-stack-2x"></i>
                             <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
                         </span>
-                        Grátis
+                        {{event.occurrences[0].rule.price}}
                     </div>
                     <a href="{{event.singleUrl}}" target="_blank" class="event__info">Mais informações</a>
                 </div>
             </div>
 
+        </div>
+
+        <div ng-if="loading">
+            carregando
         </div>
 
         <?php comments_template('', true); ?>
