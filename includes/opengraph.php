@@ -55,7 +55,8 @@ Class openGraph {
          * Descrição do "post" se tiver em um ou do site
          *
          */
-        if ( is_single() && !empty(get_the_excerpt()) ) :
+        $excerpt = get_the_excerpt();
+        if ( is_single() && !empty($excerpt) ) :
             $this->properties['og:description'] = get_the_excerpt();
         else :
             $this->properties['og:description'] = get_bloginfo( 'description' );
