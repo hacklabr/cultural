@@ -36,19 +36,19 @@ class MapasCulturaisConfiguration {
         $_geoDivisions = wp_remote_get(API_URL . 'geoDivision/list/', array('timeout'=>'120'));
         $geoDivisions = json_decode($_geoDivisions['body']);
 
-        $configs = [
-           'linguagens' => (object) ['order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => [] ],
-           'classificacaoEtaria' => (object) ['order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => [] ],
-           'geoDivisions' => (object) ['order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => [], 'type' => 'header' ],
-           'agents' => (object) ['order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => [], 'type' => 'entity' ],
-           'spaces' => (object) ['order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => [], 'type' => 'entity'],
-           'projects' => (object) ['order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => [], 'type' => 'entity']
-        ];
+        $configs = array(
+           'linguagens' => (object) array('order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => array()),
+           'classificacaoEtaria' => (object) array('order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => array()),
+           'geoDivisions' => (object) array('order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => array(), 'type' => 'header'),
+           'agents' => (object) array('order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => array(), 'type' => 'entity'),
+           'spaces' => (object) array('order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => array(), 'type' => 'entity'),
+           'projects' => (object) array('order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => array(), 'type' => 'entity')
+        );
 
         $i=0;
         foreach($geoDivisions as $geoDivision){
             $i++;
-            $configs[$geoDivision->metakey] = (object) ['order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => [] ];
+            $configs[$geoDivision->metakey] = (object) array('order' => $configs['geoDivisions']->order+$i,'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => array());
         }
 
         uasort($configs, function($a, $b){
@@ -63,7 +63,7 @@ class MapasCulturaisConfiguration {
         $cacheGroup = 'API';
         $cacheId = 'configs';
 
-        if(DCache::exists($cacheGroup, $cacheId, 60 * 60 * 24)){
+        if(DCache::exists($cacheGroup, $cacheId, 60)){
 
             if($debug){
                 _pr('PEGOU DO CACHE ' . date('h:i:s'));
@@ -76,11 +76,11 @@ class MapasCulturaisConfiguration {
             $configs = self::getConfigModel();
 
             $defaultRequest = function($urlPath, $appendSelect='') use ($limit) {
-                $defaultQueryParameters = [
+                $defaultQueryParameters = array(
                     '@select' => 'id,singleUrl,name,type,shortDescription,terms' . ',' . $appendSelect,
                     '@files' =>'(avatar.avatarSmall):url',
                     '@order' =>'name%20ASC'
-                ];
+                );
                 if($limit) {
                     $defaultQueryParameters['@limit'] = $limit;
                 }
@@ -88,8 +88,9 @@ class MapasCulturaisConfiguration {
                 foreach($defaultQueryParameters as $key => $val){
                     $queryString .= '&' . $key . '=' . $val;
                 }
-                $defaultRequestArgs = ['timeout'=>'120'];
-                return json_decode(wp_remote_get(API_URL . $urlPath . '?' . $queryString, $defaultRequestArgs)['body']);
+                $defaultRequestArgs = array('timeout'=>'120');
+                $response = wp_remote_get(API_URL . $urlPath . '?' . $queryString, $defaultRequestArgs);
+                return json_decode($response['body']);
             };
 
             $configs['linguagens']->data = $defaultRequest('term/list/linguagem/');
