@@ -27,12 +27,12 @@
         }
 
         $scope.updateMasonry = function(){
-            var $container = jQuery('.js-masonry');
+            var $container = jQuery('.js-events-masonry');
             // initialize Masonry after all images have loaded
             $container.imagesLoaded(function() {
                 $container.masonry('destroy');
                 $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
-                console.log('eventsController: $scope.updateMasonry() ');
+                $log.debug('eventsController: $scope.updateMasonry() ');
             });
         };
 
@@ -51,11 +51,11 @@
 
         $scope.toggleListItem = function(list, item){
             $scope.loading = true;
-            console.log($scope.data[list]);
+            $log.debug($scope.data[list]);
             $scope.data[list].some(function(i){
                 if(i === item){
                     i.active = !i.active;
-                    console.log(i, item);
+                    $log.debug(i, item);
                     if(i.active){
                         searchService.data[list].push(i.name);
                     }else{
@@ -68,7 +68,7 @@
                 }
             });
             searchService.submit().then(receiveSearch);
-            console.log($scope.data[list]);
+            $log.debug($scope.data[list]);
         };
 
     }]);

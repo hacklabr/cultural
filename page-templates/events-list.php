@@ -131,7 +131,7 @@
             </div>
         </div>
 
-        <div ng-if="!loading" class="events-list  grid  js-masonry" data-masonry-options='{ "columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event" }'>
+        <div ng-if="!loading" class="events-list grid js-events-masonry">
             <div class="grid-sizer"></div>
             <div class="gutter-sizer"></div>
 

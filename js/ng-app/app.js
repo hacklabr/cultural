@@ -1,3 +1,4 @@
+
 (function(angular){
 
     var app = angular.module('CulturalTheme', [
@@ -6,7 +7,7 @@
     ]);
 
     app.config(['$logProvider', function($logProvider) {
-        $logProvider.debugEnabled(true);
+        $logProvider.debugEnabled(false);
 //        $urlRouterProvider.otherwise("/");
 //        $stateProvider
 //            .state('home', {
@@ -41,5 +42,6 @@
             $rootScope.isMobile.any = function(){return true};
         }
     }]);
+
 
 })(window.angular);
