@@ -28,11 +28,11 @@
             };
 
             if(svc.data.linguagens && svc.data.linguagens.length){
-                searchParams['term:linguagem'] = 'IN(' + svc.data.linguagens.toString() + ')';
+                searchParams['term:linguagem'] = 'IN(' + svc.data.linguagens.sort().toString() + ')';
             }
 
             if(svc.data.classificacoes && svc.data.classificacoes.length){
-                searchParams.classificacaoEtaria = 'IN(' + svc.data.classificacoes.toString() + ')';
+                searchParams.classificacaoEtaria = 'IN(' + svc.data.classificacoes.sort().toString() + ')';
             }
             $log.debug('searchParams:', searchParams);
             $http({
