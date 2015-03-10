@@ -56,7 +56,7 @@ function mapasculturais_category_edit( $term ) {
             foreach($availableFilters[$c->key] as $id => $json){
                 $c->data[$id] = json_decode($json);
             }
-        }else{
+        }elseif($c->type !== 'header'){
             $c->data = array_keys($availableFilters[$c->key]);
         }
 
@@ -102,7 +102,7 @@ function mapasculturais_category_edit( $term ) {
                         <br>
                     <?php endforeach; ?>
 
-                <?php else: ?>
+                <?php elseif($c->type !== 'header'): ?>
 
                     <?php foreach($c->data as $d): ?>
                         <label>

@@ -33,13 +33,20 @@ class MapasCulturaisConfiguration {
     }
 
     static function getConfigModel(){
-        $_geoDivisions = wp_remote_get(API_URL . 'geoDivision/list/', array('timeout'=>'120'));
-        $geoDivisions = json_decode($_geoDivisions['body']);
+
+        $savedFilters = get_theme_option('mapasculturaisconfiguration');
+        if(false && !empty($savedFilters['geoDivisions'])){
+            $geoDivisions_encoded = $savedFilters['geoDivisions'];
+        }else{
+            $_geoDivisions = wp_remote_get(API_URL . 'geoDivision/list/', array('timeout'=>'120'));
+            $geoDivisions_encoded = $_geoDivisions['body'];
+        }
+        $geoDivisions = json_decode($geoDivisions_encoded);
 
         $configs = array(
            'linguagens' => (object) array('order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => array()),
            'classificacaoEtaria' => (object) array('order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => array()),
-           'geoDivisions' => (object) array('order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => array(), 'type' => 'header'),
+           'geoDivisions' => (object) array('order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => $geoDivisions, 'type' => 'header'),
            'agents' => (object) array('order' => count($geoDivisions)+3+1, 'key' => 'agents', 'label' => 'Agentes', 'data' => array(), 'type' => 'entity'),
            'spaces' => (object) array('order' => count($geoDivisions)+3+2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => array(), 'type' => 'entity'),
            'projects' => (object) array('order' => count($geoDivisions)+3+3, 'key' => 'projects', 'label' => 'Projetos', 'data' => array(), 'type' => 'entity')
@@ -63,7 +70,7 @@ class MapasCulturaisConfiguration {
         $cacheGroup = 'API';
         $cacheId = 'configs';
 
-        if(DCache::exists($cacheGroup, $cacheId, 60)){
+        if(DCache::exists($cacheGroup, $cacheId, 60 * 60 * 24)){
 
             if($debug){
                 _pr('PEGOU DO CACHE ' . date('h:i:s'));
@@ -150,11 +157,12 @@ class MapasCulturaisConfiguration {
                     <div class="span-6 last">
                         <label>
                             <strong>Palavra-Chave</strong> <br>
-                            <input type="text" name="<?php echo 'theme_options[' . self::$optionName . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
+                            <input type="hidden" name="<?php echo 'theme_options[' . self::$optionName . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
                         </label>
                         <br><br>
                         <label>
-                            <input type="checkbox" name="<?php echo 'theme_options[' . self::$optionName . '][verified]'; ?>"  <?php if($selfOptions['verified']) echo 'checked'; ?>>
+                            <input type="hidden"   name="<?php echo 'theme_options[' . self::$optionName . '][verified]'; ?>"  value="0">
+                            <input type="checkbox" name="<?php echo 'theme_options[' . self::$optionName . '][verified]'; ?>"  value="1" <?php if($selfOptions['verified']) echo 'checked'; ?>>
                             <strong>Somente Eventos Verificados com Selo</strong>
                         </label>
                         <br><br>
@@ -168,6 +176,7 @@ class MapasCulturaisConfiguration {
                             <br>
                             <?php switch($c->type):
                                       case 'header': ?>
+                                    <input type="text"  name="<?php echo $metaName; ?>"  value="<?php echo htmlspecialchars(json_encode($c->data)); ?>">
                                     <br>
                                     <?php break; ?>
                                 <?php case 'entity': ?>
@@ -208,7 +217,8 @@ class MapasCulturaisConfiguration {
                                 <?php default: ?>
                                     <?php foreach($c->data as $d): ?>
                                         <label>
-                                            <input type="checkbox" name="<?php echo "{$metaName}[{$d}]"; ?>"  <?php if($metaValue[$d]) echo 'checked'; ?> >
+                                            <input type="hidden"   name="<?php echo "{$metaName}[{$d}]"; ?>"  value="0">
+                                            <input type="checkbox" name="<?php echo "{$metaName}[{$d}]"; ?>"  value="1" <?php if($metaValue[$d]) echo 'checked'; ?> >
                                             <?php echo $d; ?>
                                         </label>
                                         <br>
