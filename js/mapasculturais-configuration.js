@@ -14,6 +14,7 @@
     };
 
     $(function(){
+        alert('teste');
 
 //        console.log(vars);
 //        console.log('generalFilters', vars.generalFilters);

@@ -17,6 +17,12 @@ class MapasCulturaisConfiguration {
         } );
 
         add_action( 'admin_menu', function(){
+            if($_GET['page'] == 'mapasculturaisconfiguration'){
+                wp_enqueue_script('jquery-ui-tabs');
+                wp_enqueue_script('jquery-ui-autocomplete');
+
+                wp_enqueue_style('jui', get_stylesheet_directory_uri() . '/css/jquery-ui-1.11.4.custom/jquery-ui.min.css');
+            }
             add_menu_page(
                 "Mapas Culturais",
                 "Mapas Culturais",
@@ -125,6 +131,7 @@ class MapasCulturaisConfiguration {
     static function contentOutput() {
 
         $configs = self::fetchApiData($debug=true, $limit=20);
+
         ?>
         <style>
         .thumb {
@@ -134,8 +141,16 @@ class MapasCulturaisConfiguration {
             margin-right: 5px;
         }
         </style>
+        <script type="text/javascript">
+            (function($){
+                $(function(){
+                    $('#mapasculturais-config-tabs').tabs();
+                });
+            })(jQuery);
+        </script>
         <div class="wrap span-20">
             <h2><?php echo __('Configuração dos Mapas Culturais', 'cultural'); ?></h2>
+            <h3><?php _e("Configuração da API de Eventos", 'cultural'); ?></h3>
 
             <form action="options.php" method="post" class="clear prepend-top">
                 <?php settings_fields('theme_options_options'); ?>
@@ -143,16 +158,45 @@ class MapasCulturaisConfiguration {
                     $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
                     $selfOptions = $options[self::$optionName];
                 ?>
+                <p class="textright clear prepend-top">
+                    <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
+                </p>
+
+                <div id="mapasculturais-config-tabs">
+                    <ul>
+                        <li><a href="#tab-tipologia">Geral</a></li>
+                        <li><a href="#tab-tipologia">Tipologia</a></li>
+                        <li><a href="#tab-recorte-geografico">Recorte geográfico</a></li>
+                        <li><a href="#tab-agentes">Agentes Culturais</a></li>
+                        <li><a href="#tab-espacos">Espaços</a></li>
+                        <li><a href="#tab-projetos">Projetos/Editais</a></li>
+                    </ul>
+
+                    <div id="tab-tipologia">
+                        a
+                    </div>
+                    <div id="tab-recorte-geografico">
+                        b
+                    </div>
+                    <div id="tab-agentes">
+                        c
+                    </div>
+                    <div id="tab-espacos">
+                        e
+                    </div>
+                    <div id="tab-projetos">
+                        f
+                    </div>
+                </div>
+            </form>
+
+
 
                 <div class="span-20 ">
 
                     <?php //////////// Edite a partir daqui //////////  ?>
 
-                    <h3><?php _e("Configuração da API de Eventos", 'cultural'); ?></h3>
 
-                    <p class="textright clear prepend-top">
-                        <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
-                    </p>
 
                     <div class="span-6 last">
                         <label>
