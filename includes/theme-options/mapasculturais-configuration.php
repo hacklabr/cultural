@@ -128,9 +128,21 @@ class MapasCulturaisConfiguration {
         return $configs;
     }
 
-    static function contentOutput() {
+    static protected function metaName($key){
+        return 'theme_options[' . self::$optionName . '][' . $key . ']';
+    }
 
+    static function getMetaValue($key){
+        $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
+        $selfOptions = $options[self::$optionName];
+        return $selfOptions[$key];
+    }
+
+    static function contentOutput() {
         $configs = self::fetchApiData($debug=true, $limit=20);
+        _pr(array_keys($configs));
+        extract($configs);
+
 
         ?>
         <style>
@@ -139,6 +151,20 @@ class MapasCulturaisConfiguration {
             height: 72px;
             background-color:#ccc;
             margin-right: 5px;
+        }
+
+        .config-section {
+            float:left;
+            margin:0 1em;
+        }
+
+        .checkbox-list ul {
+            padding-right:15px;
+            max-height:300px;
+            overflow:auto;
+        }
+        .checkbox-list ul li {
+            white-space: nowrap;
         }
         </style>
         <script type="text/javascript">
@@ -149,70 +175,89 @@ class MapasCulturaisConfiguration {
             })(jQuery);
         </script>
         <div class="wrap span-20">
-            <h2><?php echo __('Configuração dos Mapas Culturais', 'cultural'); ?></h2>
-            <h3><?php _e("Configuração da API de Eventos", 'cultural'); ?></h3>
+            <h2><?php _e('Filtros da API do Mapas Culturais', 'cultural'); ?></h2>
+            <p>
+                <?php _e('Configure aqui quais eventos a API do Mapas Culturais deve retornar para o site.', 'cultural'); ?>
+            </p>
 
             <form action="options.php" method="post" class="clear prepend-top">
                 <?php settings_fields('theme_options_options'); ?>
-                <?php
-                    $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
-                    $selfOptions = $options[self::$optionName];
-                ?>
                 <p class="textright clear prepend-top">
                     <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
                 </p>
 
                 <div id="mapasculturais-config-tabs">
                     <ul>
-                        <li><a href="#tab-tipologia">Geral</a></li>
-                        <li><a href="#tab-tipologia">Tipologia</a></li>
+                        <li><a href="#tab-geral">Geral</a></li>
                         <li><a href="#tab-recorte-geografico">Recorte geográfico</a></li>
                         <li><a href="#tab-agentes">Agentes Culturais</a></li>
                         <li><a href="#tab-espacos">Espaços</a></li>
                         <li><a href="#tab-projetos">Projetos/Editais</a></li>
                     </ul>
 
-                    <div id="tab-tipologia">
-                        a
+                    <div id="tab-geral" class='config-tab'>
+                        <div class='config-section'>
+                            <h4>Classificação etária</h4>
+                            <ul>
+                            <?php
+                            $metaValue = self::getMetaValue('classificacaoEtaria');
+                            foreach($classificacaoEtaria->data as $d): ?>
+                                <li>
+                                    <label>
+                                        <input type="hidden"   name="theme_options[<?php echo self::$optionName ?>][classificacaoEtaria][<?php echo $d ?>]"  value="0">
+                                        <input type="checkbox" name="theme_options[<?php echo self::$optionName ?>][classificacaoEtaria][<?php echo $d ?>]"  value="1" <?php if($metaValue[$d]) echo 'checked'; ?> >
+                                        <?php echo $d; ?>
+                                    </label>
+                                </li>
+                            <?php endforeach; ?>
+                            </ul>
+
+                            <h4>Selo</h4>
+                            <label>
+                                <input type="hidden"   name="theme_options[<?php echo self::$optionName ?>][verified]"  value="0">
+                                <input type="checkbox" name="theme_options[<?php echo self::$optionName ?>][verified]"  value="1" <?php if(self::getMetaValue('verified')) echo 'checked'; ?>>
+                                Retornar somente eventos verificados com selo
+                            </label>
+                        </div>
+                        <div class='config-section checkbox-list'>
+                            <h4>Linguagens</h4>
+                            <ul>
+                            <?php
+                            $metaValue = self::getMetaValue('linguagens');
+                            foreach($linguagens->data as $d): ?>
+                                <li>
+                                    <label>
+                                        <input type="hidden"   name="theme_options[<?php echo self::$optionName ?>][linguagens][<?php echo $d ?>]"  value="0">
+                                        <input type="checkbox" name="theme_options[<?php echo self::$optionName ?>][linguagens][<?php echo $d ?>]"  value="1" <?php if($metaValue[$d]) echo 'checked'; ?> >
+                                        <?php echo $d; ?>
+                                    </label>
+                                </li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <div class='clear'></div>
                     </div>
                     <div id="tab-recorte-geografico">
-                        b
+                        recorte geográfico
                     </div>
                     <div id="tab-agentes">
-                        c
+                        agentes
                     </div>
                     <div id="tab-espacos">
-                        e
+                        espaços
                     </div>
                     <div id="tab-projetos">
-                        f
+                        projetos
                     </div>
                 </div>
             </form>
 
-
-
                 <div class="span-20 ">
-
                     <?php //////////// Edite a partir daqui //////////  ?>
-
-
-
                     <div class="span-6 last">
-                        <label>
-                            <strong>Palavra-Chave</strong> <br>
-                            <input type="hidden" name="<?php echo 'theme_options[' . self::$optionName . '][keyword]'; ?>"  value="<?php echo htmlspecialchars($selfOptions['keyword']); ?>" style="width:80%">
-                        </label>
-                        <br><br>
-                        <label>
-                            <input type="hidden"   name="<?php echo 'theme_options[' . self::$optionName . '][verified]'; ?>"  value="0">
-                            <input type="checkbox" name="<?php echo 'theme_options[' . self::$optionName . '][verified]'; ?>"  value="1" <?php if($selfOptions['verified']) echo 'checked'; ?>>
-                            <strong>Somente Eventos Verificados com Selo</strong>
-                        </label>
-                        <br><br>
                         <?php foreach($configs as $c):
-                            $metaName = 'theme_options[' . self::$optionName . '][' . $c->key . ']';
-                            $metaValue = $selfOptions[$c->key]; ?>
+                            $metaName = 'theme_options[' . self::$optionName . '][' . $c->key . ']'; ?>
+
 
                             <?php if($c->type === 'entity') echo '<h1>'; else echo '<strong>';  ?>
                                 <?php _e($c->label, "cultural"); ?>
@@ -254,17 +299,6 @@ class MapasCulturaisConfiguration {
                                             <?php endif; ?>
                                         </label>
                                         <br>
-                                        <br>
-                                    <?php endforeach; ?>
-                                    <br>
-                                    <?php break; ?>
-                                <?php default: ?>
-                                    <?php foreach($c->data as $d): ?>
-                                        <label>
-                                            <input type="hidden"   name="<?php echo "{$metaName}[{$d}]"; ?>"  value="0">
-                                            <input type="checkbox" name="<?php echo "{$metaName}[{$d}]"; ?>"  value="1" <?php if($metaValue[$d]) echo 'checked'; ?> >
-                                            <?php echo $d; ?>
-                                        </label>
                                         <br>
                                     <?php endforeach; ?>
                                     <br>
