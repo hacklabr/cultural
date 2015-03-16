@@ -7,12 +7,26 @@
 
         $scope.mapasUrl = vars.apiUrl.replace('api/', '');
 
+        var mapDataFunction = function(el, i){ return {id: i, name: el}; };
+
         $scope.data = {
-            linguagens: vars.linguagens.map(function(el, i){ return {id: i, name: el}; }),
-            classificacoes: vars.classificacoes.map(function(el, i){ return {id: i, name: el}; }),
             startDate: searchService.data.startDate,
             endDate: searchService.data.endDate
         };
+
+        try{
+            $scope.data.linguagens = Object.keys(vars.categoryFilters.linguagens).map(mapDataFunction);
+        }catch (e){
+            console.log(e);
+            $scope.data.linguagens = vars.linguagens.map(mapDataFunction);
+        }
+
+        try{
+            $scope.data.classificacoes = Object.keys(vars.categoryFilters.classificacoes).map(mapDataFunction);
+        }catch (e){
+            console.log(e);
+            $scope.data.classificacoes = vars.classificacoes.map(mapDataFunction);
+        }
 
         $scope.svc = searchService;
 

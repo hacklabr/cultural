@@ -76,6 +76,36 @@ add_action( 'after_setup_theme', 'cultural_setup' );
 endif;
 
 
+/*
+ *  ================ REWRITE RULES ================ *
+ */
+add_action('generate_rewrite_rules',  function ($wp_rewrite) {
+    // URL no formato http://theatro/orquestra-sinfonica/videos terão o primeiro
+    // nível como sendo o post_name e o segundo o template correspondente pra exibicao
+    $new_rules = array(
+        "^eventos/([^/]+)$" => "index.php?template=events&category_name=" . $wp_rewrite->preg_index(1),
+    );
+    $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+
+    return $wp_rewrite;
+});
+
+add_filter('query_vars', function ($public_query_vars) {
+    $public_query_vars[] = "template";
+    return $public_query_vars;
+});
+
+add_action('template_redirect', function() {
+    global $wp_query;
+    if(is_category() && $wp_query->query['template'] === 'events'){
+
+        include __DIR__ . '/page-templates/events-list.php';
+        die;
+    }
+
+});
+
+
 function theme_jquery_local_fallback($src, $handle) {
   static $add_jquery_fallback = false;
 
@@ -138,25 +168,32 @@ function cultural_scripts() {
             foreach($data as $id => $json){
                 $data[$id] = json_decode($json);
             }
+
         }elseif(is_array($data)){
             $data = array_keys($data);
+
         }elseif($key == 'geoDivisions'){
             $data = json_decode($data);
+
         }
         $savedFilters[$key] = $data;
     }
 
-    $category = get_queried_object();
 
-    wp_localize_script('main', 'vars', array(
+    $vars = array(
         'generalFilters' => $savedFilters,
-        'categoryFilters' => get_option("category_{$category->cat_ID}"),
         'linguagens' => $savedFilters['linguagens'],
         'classificacoes' => $savedFilters['classificacaoEtaria'],
-        'catid' => $category->cat_ID,
         'apiUrl' => API_URL
-   ));
+    );
 
+    if(is_category()){
+        $category = get_queried_object();
+        $vars['catid'] = $category->cat_ID;
+        $vars['categoryFilters'] = get_option("category_{$category->cat_ID}");
+    }
+
+    wp_localize_script('main', 'vars', $vars);
 
     wp_enqueue_script( 'mapasculturais', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array( 'main'), '', true );
 
