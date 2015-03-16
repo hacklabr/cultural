@@ -20,7 +20,11 @@ class MapasCulturaisConfiguration {
             if ($_GET['page'] == 'mapasculturaisconfiguration') {
                 wp_enqueue_script('jquery-ui-tabs');
                 wp_enqueue_script('jquery-ui-autocomplete');
-                wp_enqueue_script('mustache', get_stylesheet_directory_uri() . '/js/lib/mustache.min.js');
+                wp_enqueue_script('mustache', get_stylesheet_directory_uri() . '/js/lib/mustache.js');
+                wp_enqueue_script('mapasculturais-configuration', get_stylesheet_directory_uri() . '/js/mapasculturais-configuration.js');
+
+                wp_localize_script('mapasculturais-configuration', 'selectedEntities', self::getSelectedEntities());
+
 
                 wp_localize_script('jquery-ui-autocomplete', 'vars', array(
                     'apiUrl' => API_URL
@@ -54,9 +58,9 @@ class MapasCulturaisConfiguration {
             'linguagens' => (object) array('order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => array()),
             'classificacaoEtaria' => (object) array('order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => array()),
             'geoDivisions' => (object) array('order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => $geoDivisions, 'type' => 'header'),
-            'agents' => (object) array('order' => count($geoDivisions) + 3 + 1, 'key' => 'agents', 'label' => 'Agentes', 'data' => array(), 'type' => 'entity'),
-            'spaces' => (object) array('order' => count($geoDivisions) + 3 + 2, 'key' => 'spaces', 'label' => 'Espaços', 'data' => array(), 'type' => 'entity'),
-            'projects' => (object) array('order' => count($geoDivisions) + 3 + 3, 'key' => 'projects', 'label' => 'Projetos', 'data' => array(), 'type' => 'entity')
+            'agent' => (object) array('order' => count($geoDivisions) + 3 + 1, 'key' => 'agent', 'label' => 'Agentes', 'data' => array(), 'type' => 'entity'),
+            'space' => (object) array('order' => count($geoDivisions) + 3 + 2, 'key' => 'space', 'label' => 'Espaços', 'data' => array(), 'type' => 'entity'),
+            'project' => (object) array('order' => count($geoDivisions) + 3 + 3, 'key' => 'project', 'label' => 'Projetos', 'data' => array(), 'type' => 'entity')
         );
 
         $i = 0;
@@ -72,37 +76,22 @@ class MapasCulturaisConfiguration {
         return $configs;
     }
 
-    static function fetchApiData($debug = false, $limit = null) {
-
+    static function fetchApiData() {
+        // @TODO remover chamada por entidades
         $cacheGroup = 'API';
         $cacheId = 'configs';
 
         if (DCache::exists($cacheGroup, $cacheId, 60 * 60 * 24)) {
-
-            if ($debug) {
-                _pr('PEGOU DO CACHE ' . date('h:i:s'));
-            }
+            _pr('PEGOU DO CACHE ' . date('h:i:s'));
 
             $configs = DCache::get($cacheGroup, $cacheId);
         } else {
 
             $configs = self::getConfigModel();
 
-            $defaultRequest = function($urlPath, $appendSelect = '') use ($limit) {
-                $defaultQueryParameters = array(
-                    '@select' => 'id,singleUrl,name,type,shortDescription,terms' . ',' . $appendSelect,
-                    '@files' => '(avatar.avatarSmall):url',
-                    '@order' => 'name%20ASC'
-                );
-                if ($limit) {
-                    $defaultQueryParameters['@limit'] = $limit;
-                }
-                $queryString = '';
-                foreach ($defaultQueryParameters as $key => $val) {
-                    $queryString .= '&' . $key . '=' . $val;
-                }
+            $defaultRequest = function($urlPath){
                 $defaultRequestArgs = array('timeout' => '120');
-                $response = wp_remote_get(API_URL . $urlPath . '?' . $queryString, $defaultRequestArgs);
+                $response = wp_remote_get(API_URL . $urlPath, $defaultRequestArgs);
                 return json_decode($response['body']);
             };
 
@@ -111,10 +100,6 @@ class MapasCulturaisConfiguration {
             $eventDescription = $defaultRequest('event/describe/');
             $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
 
-            $configs['agents']->data = $defaultRequest('agent/find/');
-            $configs['spaces']->data = $defaultRequest('space/find/', 'endereco');
-            $configs['projects']->data = $defaultRequest('project/find/');
-
             $geoDivisions = $defaultRequest('geoDivision/list/includeData:1/');
             foreach ($geoDivisions as $geoDivision) {
                 $configs[$geoDivision->metakey]->data = $geoDivision->data;
@@ -122,8 +107,6 @@ class MapasCulturaisConfiguration {
 
             DCache::set($cacheGroup, $cacheId, $configs);
         }
-
-        //_pr($configs);
 
         return $configs;
     }
@@ -138,12 +121,27 @@ class MapasCulturaisConfiguration {
         return $selfOptions[$key];
     }
 
+    static function getSelectedEntities(){
+        $selectedEntities = array(
+            'agent' => self::getMetaValue('agent'),
+            'space' => self::getMetaValue('space'),
+            'project' => self::getMetaValue('project')
+        );
+
+        $decode_entity_json = function($e){
+            return json_decode($e);
+        };
+
+        $selectedEntities['agent'] = array_map($decode_entity_json, is_array($selectedEntities['agent']) ? $selectedEntities['agent'] : array());
+        $selectedEntities['space'] = array_map($decode_entity_json, is_array($selectedEntities['space']) ? $selectedEntities['space'] : array());
+        $selectedEntities['project'] = array_map($decode_entity_json, is_array($selectedEntities['project']) ? $selectedEntities['project'] : array());
+
+        return $selectedEntities;
+    }
+
     static function contentOutput() {
-        $configs = self::fetchApiData($debug = true, $limit = 20);
-        _pr(array_keys($configs));
+        $configs = self::fetchApiData();
         extract($configs);
-        _pr($geoZona);
-        _pr($geoDivisions);
         ?>
         <style>
             .thumb {
@@ -168,7 +166,9 @@ class MapasCulturaisConfiguration {
             }
 
             .ui-autocomplete {
-                max-height: 250px;
+                max-height: 550px;
+                min-width:350px;
+                max-width:700px;
                 overflow-y: auto;
                 /* prevent horizontal scrollbar */
                 overflow-x: hidden;
@@ -179,75 +179,61 @@ class MapasCulturaisConfiguration {
             .entity-list-item--name { font-weight: bold; }
             .entity-list-item label { font-weight: bold; }
 
+            .entity-container .entity-list-item { border: 1px solid #dfdfdf; margin:5px; width: 350px; min-height:120px; float:left; cursor: default;}
+            .entity-container .entity-list-item:hover { background-color: #dfdfdf;  }
+            .entity-container .entity-list-item .js-remove { float:right; background:red; color:white; width:20px; height:20px; text-decoration: none;}
+
             ul.ui-autocomplete, ul.ui-autocomplete article { max-width: 500px; }
         </style>
 
         <!-- template do resultado da busca por agentes -->
         <script id="template-autocomplete" type="text/html">
-            <article class='entity-list-item'>
+            <article class='entity-list-item js-add-entity-to-list'>
                 {{#avatarUrl}}
-                    <img src="{{avatarUrl}}" />
+                    <img src="{{avatarUrl}}" width='72' height='72'/>
                 {{/avatarUrl}}
+
                 <div class='entity-list-item--name'>{{name}}</div>
                 <div class='entity-list-item--type'><label>Tipo:</label> <span>{{type}}</span></div>
+
+                {{#endereco}}
+                    <div class='entity-list-item--endereco'><label>Endereço:</label> <span>{{endereco}}</span></div>
+                {{/endereco}}
+
                 {{#areas}}
                     <div class='entity-list-item--taxonomy'><label>Áreas de atuação:</label> <span>{{areas}}</span></div>
                 {{/areas}}
+
                 <div class='entity-list-item--taxonomy'><label>Tags:</label> <span>{{tags}}</span></div>
+
                 <div class='clear'></div>
             </article>
         </script>
 
-        <script type="text/javascript">
-            (function ($) {
-                $(function () {
-                    $('#mapasculturais-config-tabs').tabs();
+        <script id="template-entity" type="text/html">
+            <article class='entity-list-item js-entity-list-item'>
+                <a href="#" class="js-remove" title="Remover"></a>
+                <input type="hidden" value="{{json}}" name="theme_options[<?php echo self::$optionName ?>][{{entity}}][{{id}}]" />
 
-                    $('.entity-autocomplete').each(function () {
-                        var $this = $(this);
-                        $this.autocomplete({
-                            delay: 500,
-                            minLength: 1,
-                            source: function (request, response) {
-                                var term = request.term.replace(/ /g, ' % ');
-                                $.get(vars.apiUrl + $this.data('entity') + '/find', {
-                                    '@keyword': term,
-                                    '@order': 'name ASC',
-                                    '@select': 'id,type,name,shortDescription,terms',
-                                    '@files': '(avatar.avatarSmall):url'
-                                }, function (data) {
-                                    response(data);
-                                });
-                            },
-                            focus: function (event, ui) {
-                                // prevent autocomplete from updating the textbox
-                                event.preventDefault();
-                            },
-                            select: function (event, ui) {
-                                // prevent autocomplete from updating the textbox
-                                event.preventDefault();
-                                // navigate to the selected item's url
-                                window.open(ui.item.url);
-                            }
-                        }).data("ui-autocomplete")._renderItem = function (ul, item) {
-                            var template = document.getElementById('template-autocomplete').innerHTML;
+                {{#avatarUrl}}
+                    <img src="{{avatarUrl}}" width='72' height='72'/>
+                {{/avatarUrl}}
 
-                            console.log(item);
+                <div class='entity-list-item--name js-name'>{{name}}</div>
+                <div class='entity-list-item--type'><label>Tipo:</label> <span>{{type}}</span></div>
 
-                            var data = {
-                                avatarUrl: item['@files:avatar.avatarSmall'] ? item['@files:avatar.avatarSmall'].url : null,
-                                name: item.name,
-                                type: item.type.name,
-                                tags: item.terms.tag ? item.terms.tag.join(', ') : null,
-                                areas: item.terms.area ? item.terms.area.join(', ') : null,
+                {{#endereco}}
+                    <div class='entity-list-item--endereco'><label>Endereço:</label> <span>{{endereco}}</span></div>
+                {{/endereco}}
 
-                            };
+                {{#areas}}
+                    <div class='entity-list-item--taxonomy'><label>Áreas de atuação:</label> <span>{{areas}}</span></div>
+                {{/areas}}
 
-                            return $("<li></li>").append(Mustache.render(template, data)).appendTo(ul);
-                        };
-                    });
-                });
-            })(jQuery);
+                <div class='entity-list-item--taxonomy'><label>Tags:</label> <span>{{tags}}</span></div>
+
+                <div class='clear'></div>
+            </article>
         </script>
 
         <div class="wrap span-20">
@@ -338,96 +324,27 @@ class MapasCulturaisConfiguration {
                         <?php endforeach; ?>
                         <div class='clear'></div>
                     </div>
-                    <div id = "tab-agentes">
-                        <input  type='text' id='agent-autocomplete' class='entity-autocomplete' data-entity='agent'/>
+                    <div id="tab-agentes">
+                        <input  type='text' placeholder="Buscar Agente" class='entity-autocomplete' data-entity='agent'/>
+                        <div id="agent-container" class="entity-container js-entity-container"></div>
+                        <div class='clear'></div>
                     </div>
-                    <div id = "tab-espacos">
-                        espaços
+                    <div id="tab-espacos">
+                        <input  type='text' placeholder="Buscar Espaço" class='entity-autocomplete' data-entity='space'/>
+                        <div id="space-container" class="entity-container js-entity-container"></div>
+                        <div class='clear'></div>
                     </div>
-                    <div id = "tab-projetos">
-                        projetos
+                    <div id="tab-projetos">
+                        <input  type='text' placeholder="Buscar Projeto/Edital" class='entity-autocomplete' data-entity='project'/>
+                        <div id="project-container" class="entity-container js-entity-container"></div>
+                        <div class='clear'></div>
                     </div>
                 </div>
+                <p class="textright clear prepend-top">
+                    <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
+                </p>
             </form>
 
-            <div class = "span-20 ">
-                <?php //////////// Edite a partir daqui //////////
-                ?>
-                <div class="span-6 last">
-                    <?php
-                    foreach ($configs as $c):
-                        $metaName = 'theme_options[' . self::$optionName . '][' . $c->key . ']';
-                        ?>
-
-
-                        <?php
-                        if ($c->type === 'entity')
-                            echo '<h1>';
-                        else
-                            echo '<strong>';
-                        ?>
-                        <?php _e($c->label, "cultural"); ?>
-                        <?php
-                        if ($c->type === 'entity')
-                            echo '</h1>';
-                        else
-                            echo '</strong>';
-                        ?>
-                        <br>
-                        <?php
-                        switch ($c->type):
-                            case 'header':
-                                ?>
-                                <input type="text"  name="<?php echo $metaName; ?>"  value="<?php echo htmlspecialchars(json_encode($c->data)); ?>">
-                                <br>
-                                <?php break; ?>
-                            <?php case 'entity': ?>
-                                <?php foreach ($c->data as $entity): ?>
-                                    <label>
-                                        <a href="<?php echo $entity->singleUrl; ?>" target="_blank">
-                                            <?php
-                                            if (!empty($entity->{'@files:avatar.avatarSmall'})) {
-                                                $avatarUrl = $entity->{'@files:avatar.avatarSmall'}->url;
-                                            } else {
-                                                $avatarUrl = API_URL . '../assets/img/avatar--' . substr($c->key, 0, -1) . '.png';
-                                            }
-                                            ?>
-                                            <img class="thumb" src="<?php echo $avatarUrl; ?>" align="left" alt="Ver Página">
-                                        </a>
-
-                                        <input type="checkbox" name="<?php echo "{$metaName}[{$entity->id}]"; ?>"  <?php if ($metaValue[$entity->id]) echo 'checked'; ?> value="<?php echo htmlspecialchars(json_encode($entity)); ?>">
-
-                                        <strong><?php echo $entity->name; ?></strong>
-                                        <?php if ($entity->endereco): ?>
-                                            - <?php echo $entity->endereco; ?>
-                                        <?php endif; ?>
-                                        <br>Tipo: <?php echo $entity->type->name; ?>
-                                        <br>
-                                        <?php if (!empty($entity->terms->area)): ?>
-                                            Área(s) de atuação: <?php echo implode(', ', $entity->terms->area); ?>
-                                        <?php endif; ?>
-                                        <br>
-                                        <?php if (!empty($entity->terms->tag)): ?>
-                                            Tags: <?php echo implode(', ', $entity->terms->tag); ?>
-                                        <?php endif; ?>
-                                    </label>
-                                    <br>
-                                    <br>
-                                <?php endforeach; ?>
-                                <br>
-                                <?php break; ?>
-                        <?php endswitch; ?>
-                    <?php endforeach; ?>
-                </div>
-
-                <?php ///// Edite daqui pra cima ////       ?>
-
-            </div>
-
-            <p class="textright clear prepend-top">
-                <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
-            </p>
-        </form>
         </div>
         <?php
     }

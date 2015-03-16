@@ -42,9 +42,7 @@ function mapasculturais_category_edit( $term ) {
     </tr-->
 
     <?php
-
     foreach(MapasCulturaisConfiguration::getConfigModel() as $c):
-
         if(!$availableFilters[$c->key]) {
             if($c->type === 'header'){
                 ?><tr><th colspan="2"><?php _e($c->label, "cultural"); ?></th></tr><?php
@@ -53,11 +51,17 @@ function mapasculturais_category_edit( $term ) {
         }
 
         if($c->type === 'entity'){
-            foreach($availableFilters[$c->key] as $id => $json){
-                $c->data[$id] = json_decode($json);
+            foreach($availableFilters[$c->key] as $json){
+                $entity = json_decode($json);
+                $c->data[$entity->id] = $entity;
             }
         }elseif($c->type !== 'header'){
-            $c->data = array_keys($availableFilters[$c->key]);
+            $c->data = array();
+            foreach($availableFilters[$c->key] as $key => $val){
+                if($val){
+                    $c->data[] = $key;
+                }
+            }
         }
 
         $metaName = 'mapasculturais_category[' . $c->key . ']';
@@ -75,27 +79,28 @@ function mapasculturais_category_edit( $term ) {
                         <label>
                             <a href="<?php echo $entity->singleUrl; ?>" target="_blank">
                                 <?php
-                                if(!empty($entity->{'@files:avatar.avatarSmall'})){
-                                    $avatarUrl = $entity->{'@files:avatar.avatarSmall'}->url;
+                                if(!empty($entity->avatarUrl)){
+                                    $avatarUrl = $entity->avatarUrl;
                                 }else{
                                     $avatarUrl = API_URL . '../assets/img/avatar--' . substr($c->key, 0, -1) . '.png';
                                 }
                                 ?>
                                 <img class="thumb" src="<?php echo $avatarUrl; ?>" align="left" alt="Ver Página">
                             </a>
+
                             <input type="checkbox" name="<?php echo "{$metaName}[{$entity->id}]"; ?>"  <?php if($metaValue[$entity->id]) echo 'checked'; ?> >
                             <strong><?php echo $entity->name; ?></strong>
                             <?php if($entity->endereco):?>
                                 - <?php echo $entity->endereco; ?>
                             <?php endif; ?>
-                            <br>Tipo: <?php echo $entity->type->name; ?>
+                            <br>Tipo: <?php echo $entity->type; ?>
                             <br>
-                            <?php if(!empty($entity->terms->area)):?>
-                                Área(s) de atuação: <?php echo implode(', ', $entity->terms->area); ?>
+                            <?php if(!empty($entity->areas)):?>
+                                Área(s) de atuação: <?php echo $entity->areas; ?>
                             <?php endif; ?>
                             <br>
-                            <?php if(!empty($entity->terms->tag)):?>
-                                Tags: <?php echo implode(', ', $entity->terms->tag); ?>
+                            <?php if(!empty($entity->tags)):?>
+                                Tags: <?php echo $entity->tags; ?>
                             <?php endif; ?>
                         </label>
                         <br>
@@ -104,13 +109,13 @@ function mapasculturais_category_edit( $term ) {
 
                 <?php elseif($c->type !== 'header'): ?>
 
-                    <?php foreach($c->data as $d): ?>
+                    <?php foreach($c->data as $d): if($d): ?>
                         <label>
                             <input type="checkbox" name="<?php echo "{$metaName}[{$d}]"; ?>"  <?php if($metaValue[$d]) echo 'checked'; ?> >
                             <?php echo $d; ?>
                         </label>
                         <br>
-                    <?php endforeach; ?>
+                    <?php endif; endforeach; ?>
 
                 <?php endif; ?>
             </td>

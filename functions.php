@@ -97,9 +97,9 @@ function theme_jquery_local_fallback($src, $handle) {
 function cultural_scripts() {
 
 
-    wp_deregister_script('jquery'); // Remove WordPress core's jQuery
-    wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js', false, null, false);
-    add_filter('script_loader_src', 'theme_jquery_local_fallback', 10, 2);
+//    wp_deregister_script('jquery'); // Remove WordPress core's jQuery
+    wp_register_script('jquery'); //, '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js', false, null, false);
+//    add_filter('script_loader_src', 'theme_jquery_local_fallback', 10, 2);
 
 
     wp_enqueue_style( 'cultural-style', get_stylesheet_uri() );

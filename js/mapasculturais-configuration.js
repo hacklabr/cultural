@@ -1,30 +1,94 @@
-(function($){
-    var MC = {};
-    MC.apiURL = 'http://localhost/api';
+(function ($) {
+    $(function () {
+        var $entityContainer,
+            template = document.getElementById('template-entity').innerHTML;
 
-    MC.createMultiselect = function(selector, url){
-        $.getJSON(url, function(data){
-             $.each(data, function(key, value){
-                var option = $('<option value="' + value + '">' + value + '</option>');
-                $(selector).append(option);
-             });
-             $(selector).attr('multiple', true);
-             //$(selector).multiselect();
+        // create tabs
+        $('#mapasculturais-config-tabs').tabs();
+
+        // reder list of selected item
+        for (var entityName in selectedEntities) {
+            $entityContainer = $('#' + entityName + '-container');
+            selectedEntities[entityName].forEach(function (e) {
+                e.json = JSON.stringify(e);
+                var $e = Mustache.render(template, e);
+                $entityContainer.append($e);
+
+            });
+        }
+
+        // remove entity from list of selected entities
+        $('body').on('click', '.js-entity-container .js-remove', function (e) {
+            var $entity = $(this).parents('.js-entity-list-item');
+            var entityName = $entity.find('.js-name').html();
+            if (confirm("Deseja remover \"" + entityName + "\" da lista?")) {
+                $entity.remove();
+            }
         });
-    };
 
-    $(function(){
-        
 
-//        console.log(vars);
-//        console.log('generalFilters', vars.generalFilters);
-//        console.log('categoryFilters', vars.categoryFilters);
+        // add a selected entity to list of selected entity
+        $('body').on('click', '.js-add-entity-to-list', function (e) {
+            var data = $(this).data('item');
+            data.json = JSON.stringify(data);
+            var entity = data.entity;
+            var $container = $('#' + entity + '-container');
 
-        //MC.createMultiselect('#linguagens', MC.apiURL + '/term/list/linguagem');
+            var html = Mustache.render(template, data);
 
-//        $('.js-entity input:checked').each(function(){
-//            $(this).parent().find('.js-entity-data').attr('name', $(this))
-//        });
+            $container.append(html);
+        });
+
+        // search entity input
+        $('.entity-autocomplete').each(function () {
+            var $this = $(this);
+            $this.autocomplete({
+                delay: 500,
+                minLength: 1,
+                source: function (request, response) {
+                    var term = request.term.replace(/ /g, ' % ');
+                    var QUERY = {
+                        '@keyword': term,
+                        '@order': 'name ASC',
+                        '@select': 'id,type,name,shortDescription,terms',
+                        '@files': '(avatar.avatarSmall):url'
+                    };
+
+                    if ($this.data('entity') === 'space') {
+                        QUERY['@select'] += ',endereco';
+                    }
+
+                    $.get(vars.apiUrl + $this.data('entity') + '/find', QUERY, function (data) {
+                        response(data);
+                    });
+                },
+                focus: function (event, ui) {
+                    // prevent autocomplete from updating the textbox
+                    event.preventDefault();
+                },
+                select: function (event, ui) {
+                    // prevent autocomplete from updating the textbox
+                    event.preventDefault();
+                }
+            }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                var template = document.getElementById('template-autocomplete').innerHTML;
+
+                var data = {
+                    id: item.id,
+                    avatarUrl: item['@files:avatar.avatarSmall'] ? item['@files:avatar.avatarSmall'].url : vars.apiUrl + '../assets/img/avatar--' + $this.data('entity') + '.png',
+                    name: item.name,
+                    type: item.type.name,
+                    tags: item.terms.tag ? item.terms.tag.join(', ') : null,
+                    areas: item.terms.area ? item.terms.area.join(', ') : null,
+                    entity: $this.data('entity')
+                };
+
+                var $article = $(Mustache.render(template, data));
+                $article.data('item', data);
+
+                return $("<li></li>").append($article).appendTo(ul);
+            };
+        });
     });
 })(jQuery);
 
