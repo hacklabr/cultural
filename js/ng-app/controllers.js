@@ -22,7 +22,7 @@
         }
 
         try{
-            $scope.data.classificacoes = Object.keys(vars.categoryFilters.classificacoes).map(mapDataFunction);
+            $scope.data.classificacoes = Object.keys(vars.categoryFilters.classificacaoEtaria).map(mapDataFunction);
         }catch (e){
             console.log(e);
             $scope.data.classificacoes = vars.classificacoes.map(mapDataFunction);

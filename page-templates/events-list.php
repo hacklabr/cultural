@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="filter">
+            <div ng-if="data.linguagens.length > 1" class="filter">
                 <span class="label">Linguagem</span>
                 <div class="dropdown">
                     <div class="placeholder">
@@ -113,7 +113,7 @@
                 </div>
             </div>
 
-            <div class="filter">
+            <div ng-if="data.classificacoes" class="filter">
                 <span class="label">Classificação</span>
                 <div id="classificacao" class="dropdown">
                     <div class="placeholder">

@@ -195,8 +195,6 @@ function cultural_scripts() {
 
     wp_localize_script('main', 'vars', $vars);
 
-    wp_enqueue_script( 'mapasculturais', get_template_directory_uri() . '/js/mapasculturais-configuration.js', array( 'main'), '', true );
-
 }
 add_action( 'wp_enqueue_scripts', 'cultural_scripts' );
 
