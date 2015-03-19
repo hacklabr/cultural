@@ -166,6 +166,7 @@
                         </span>
                         {{event.occurrences[0].rule.price}}
                     </div>
+                    <div><strong>publicado por:</strong> <a href="{{event.owner.singleUrl}}">{{event.owner.name}}</a></div>
                     <a href="{{event.singleUrl}}" target="_blank" class="event__info">Mais informações</a>
                 </div>
             </div>

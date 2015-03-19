@@ -9,12 +9,12 @@
         // reder list of selected item
         for (var entityName in selectedEntities) {
             $entityContainer = $('#' + entityName + '-container');
-            selectedEntities[entityName].forEach(function (e) {
+            for(var id in selectedEntities[entityName]){
+                var e = selectedEntities[entityName][id];
                 e.json = JSON.stringify(e);
                 var $e = Mustache.render(template, e);
                 $entityContainer.append($e);
-
-            });
+            }
         }
 
         // remove entity from list of selected entities
