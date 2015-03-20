@@ -225,6 +225,16 @@ function cultural_the_time() {
 <?php }
 endif;
 
+if ( ! function_exists( 'cultural_the_post_author' ) ) :
+function cultural_the_post_author() {
+    ?>
+    <div class="entry__author">
+        <?php _e('By', 'cultural'); ?> <?php the_author_posts_link(); ?> 
+    </div>
+    <?php
+}
+endif;
+
 if ( ! function_exists( '_s_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
