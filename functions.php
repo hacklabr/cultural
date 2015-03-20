@@ -1,4 +1,9 @@
 <?php
+// define as constantes com os valores padrão se estas não forem configuradas no wp-config.php
+if (!defined('MAPASCULTURAIS_URL')) define('MAPASCULTURAIS_URL', 'http://spcultura.prefeitura.sp.gov.br/');
+if (!defined('MAPASCULTURAIS_API_URL')) define('MAPASCULTURAIS_API_URL', MAPASCULTURAIS_URL . 'api/');
+if (!defined('MAPASCULTURAIS_NAME')) define('MAPASCULTURAIS_NAME', 'SP Cultura');
+if (!defined('TRANSIENTE_TIMEOUT_EVENT_INFO')) define('TRANSIENTE_TIMEOUT_EVENT_INFO', 24 * 60 * 60);
 
 session_start();
 
@@ -8,6 +13,8 @@ include dirname(__FILE__) . '/includes/congelado-functions.php';
 include dirname(__FILE__) . '/includes/html.class.php';
 include dirname(__FILE__) . '/includes/utils.class.php';
 include dirname(__FILE__) . '/includes/opengraph.php';
+include dirname(__FILE__) . '/includes/mapasculturais2post/mapasculturais2post.php';
+
 
 if (!function_exists('get_theme_option')) {
 
@@ -182,7 +189,7 @@ function cultural_scripts() {
         'generalFilters' => $savedFilters,
         'linguagens' => $savedFilters['linguagens'],
         'classificacoes' => $savedFilters['classificacaoEtaria'],
-        'apiUrl' => API_URL
+        'apiUrl' => MAPASCULTURAIS_API_URL
     );
 
     if (is_category()) {
@@ -283,10 +290,6 @@ require get_template_directory() . '/inc/category-colors.php';
  */
 require get_template_directory() . '/inc/widgets-extra-classes.php';
 
-/**
- * Handle Mapas Culturais support
- */
-require get_template_directory() . '/inc/mapas-culturais.php';
 
 add_filter('nav_menu_link_attributes', function($attr, $item) {
     if ($item->object == 'category') {

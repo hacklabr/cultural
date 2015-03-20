@@ -1,7 +1,5 @@
 <?php
 
-define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
-
 if(!class_exists('MapasCulturaisConfiguration')){
     require 'mapasculturais-configuration.php';
 }
@@ -82,7 +80,7 @@ function mapasculturais_category_edit( $term ) {
                                 if(!empty($entity->avatarUrl)){
                                     $avatarUrl = $entity->avatarUrl;
                                 }else{
-                                    $avatarUrl = API_URL . '../assets/img/avatar--' . substr($c->key, 0, -1) . '.png';
+                                    $avatarUrl = MAPASCULTURAIS_URL . 'assets/img/avatar--' . substr($c->key, 0, -1) . '.png';
                                 }
                                 ?>
                                 <img class="thumb" src="<?php echo $avatarUrl; ?>" align="left" alt="Ver Página">

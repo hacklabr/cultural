@@ -1,8 +1,4 @@
 <?php
-if (!defined('API_URL')) {
-    define('API_URL', 'http://spcultura.prefeitura.sp.gov.br/api/');
-}
-
 class MapasCulturaisConfiguration {
 
     protected static $optionName;
@@ -27,7 +23,7 @@ class MapasCulturaisConfiguration {
 
 
                 wp_localize_script('jquery-ui-autocomplete', 'vars', array(
-                    'apiUrl' => API_URL
+                    'apiUrl' => MAPASCULTURAIS_API_URL
                 ));
 
                 wp_enqueue_style('jui', get_stylesheet_directory_uri() . '/css/jquery-ui-1.11.4.custom/jquery-ui.min.css');
@@ -49,7 +45,7 @@ class MapasCulturaisConfiguration {
         if (false && !empty($savedFilters['geoDivisions'])) {
             $geoDivisions_encoded = $savedFilters['geoDivisions'];
         } else {
-            $_geoDivisions = wp_remote_get(API_URL . 'geoDivision/list/', array('timeout' => '120'));
+            $_geoDivisions = wp_remote_get(MAPASCULTURAIS_API_URL . 'geoDivision/list/', array('timeout' => '120'));
             $geoDivisions_encoded = $_geoDivisions['body'];
         }
         $geoDivisions = json_decode($geoDivisions_encoded);
@@ -91,7 +87,7 @@ class MapasCulturaisConfiguration {
 
             $defaultRequest = function($urlPath){
                 $defaultRequestArgs = array('timeout' => '120');
-                $response = wp_remote_get(API_URL . $urlPath, $defaultRequestArgs);
+                $response = wp_remote_get(MAPASCULTURAIS_API_URL . $urlPath, $defaultRequestArgs);
                 return json_decode($response['body']);
             };
 
