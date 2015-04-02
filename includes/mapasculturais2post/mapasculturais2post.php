@@ -400,7 +400,7 @@ class MapasCulturais2Post {
                             <?php echo $price ? $price : 'Não informado' ?>
                         </div>
                     <?php endif; ?>
-                    <a href="<?php ?>" class="event__info">Mais informações</a>
+                    <a href="<?php echo $url ?>" class="event__info">Mais informações</a>
                 </div>
             </div>
 
