@@ -61,12 +61,13 @@ add_action('init', function(){
                 $src = wp_get_attachment_image_src($attachment_id, 'regua');
 
                 $marca_url = get_post_meta($item->object_id, 'link', true);
+
+                $item_title = esc_attr($item->title);
+
                 if(isset($src[0])){
-                    $output .= "<a href=\"{$marca_url}\" title=\"{$item->title}\"><img src=\"{$src[0]}\" width=\"{$src[1]}\" height=\"{$src[2]}\" alt=\"{$item->title}\"></a> ";
-
+                    $output .= "<a href=\"{$marca_url}\" title=\"{$item_title}\"><img src=\"{$src[0]}\" width=\"{$src[1]}\" height=\"{$src[2]}\" alt=\"{$item_title}\"></a> ";
                 }else{
-                    $output .= "<a href=\"{$marca_url}\" title=\"{$item->title}\">{$item->title}</a> ";
-
+                    $output .= "<a href=\"{$marca_url}\" title=\"{$item_title}\">{$item->title}</a> ";
                 }
             }
 
