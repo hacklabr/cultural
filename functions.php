@@ -134,11 +134,7 @@ function theme_jquery_local_fallback($src, $handle) {
  */
 function cultural_scripts() {
 
-
-//    wp_deregister_script('jquery'); // Remove WordPress core's jQuery
-    wp_register_script('jquery'); //, '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js', false, null, false);
-//    add_filter('script_loader_src', 'theme_jquery_local_fallback', 10, 2);
-
+    wp_enqueue_script('jquery');
 
     wp_enqueue_style('cultural-style', get_stylesheet_uri());
 
@@ -147,7 +143,9 @@ function cultural_scripts() {
 
     wp_enqueue_script('respond', get_template_directory_uri() . '/js/min/respond-min.js', '', '1.4.0');
 
-    wp_enqueue_script('imagesloaded', get_template_directory_uri() . '/js/min/imagesloaded-min.js', '', '3.1.8', true);
+    wp_enqueue_script('event-emmiter', get_template_directory_uri() . '/js/lib/EventEmitter.min.js', array('jquery'), '3.1.8', true);
+
+    wp_enqueue_script('imagesloaded', get_template_directory_uri() . '/js/min/imagesloaded-min.js', array('jquery', 'event-emmiter'), '3.1.8', true);
 
     wp_enqueue_script('masonry', get_template_directory_uri() . '/js/min/masonry-min.js', '', '3.1.5', true);
 
