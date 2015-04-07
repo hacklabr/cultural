@@ -5,10 +5,10 @@ add_action('init', function(){
     add_image_size('regua', 200, 100, false);
 
     $labels = array(
-        'name' => _x('Régua de marcas', 'Post Type General Name', 'cultural'),
+        'name' => _x('Régua de Marcas', 'Post Type General Name', 'cultural'),
         'singular_name' => _x('Marca', 'Post Type Singular Name', 'cultural'),
-        'menu_name' => __('Régua de marcas', 'cultural'),
-        'name_admin_bar' => __('Régua de marcas', 'cultural'),
+        'menu_name' => __('Régua de Marcas', 'cultural'),
+        'name_admin_bar' => __('Régua de Marcas', 'cultural'),
         'parent_item_colon' => __('', 'cultural'),
         'all_items' => __('Todas as marcas', 'cultural'),
         'add_new_item' => __('Adicionar nova marca', 'cultural'),
@@ -44,7 +44,7 @@ add_action('init', function(){
     );
     register_post_type('marca', $args);
 
-    register_nav_menu('regua', 'Régua de marcas');
+    register_nav_menu('regua', 'Régua de Marcas');
     // add menu
 
     class Regua_Menu_Walker extends Walker_Nav_Menu{
