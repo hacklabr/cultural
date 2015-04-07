@@ -10,6 +10,7 @@
     <?php if ('' != get_the_post_thumbnail()) { ?>
         <figure class="entry__image">
             <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('large'); ?></a>
+            <?php cultural_thumb_caption() ?>
         </figure>
     <?php } ?>
     <header class="entry-header">

@@ -2,6 +2,7 @@
     <?php if ('' != get_the_post_thumbnail()) { ?>
         <figure class="entry__image">
             <?php the_post_thumbnail('large'); ?>
+            <?php cultural_thumb_caption() ?>
         </figure>
     <?php } ?>
     <header class="entry-header">

@@ -138,6 +138,17 @@ if (!function_exists('cultural_the_format')) :
 
 endif;
 
+if (!function_exists('cultural_thumb_caption')) :
+    function cultural_thumb_caption() {
+            $thumb_image = get_post(get_post_thumbnail_id());
+            $thumb_caption = trim($thumb_image->post_excerpt);
+
+            if($thumb_caption):
+                ?><figcaption class="caption"><?php echo $thumb_caption ?></figcaption><?php
+            endif;
+    }
+endif;
+
 if (!function_exists('cultural_comment')) :
 
     function cultural_comment($comment, $args, $depth) {
