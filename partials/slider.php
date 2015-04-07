@@ -8,11 +8,8 @@
 
 <?php
 $args = array('ignore_sticky_posts' => 1, 'posts_per_page' => '4');
-if (is_category()) {
-    $args['cat'] = get_query_var('cat');
-}
-$featured_posts = new WP_Query($args);
 
+$featured_posts = Cultural_Hightlights::getHighlightedQuery();
 
 if ($featured_posts->have_posts()) :
     ?>
@@ -32,7 +29,9 @@ if ($featured_posts->have_posts()) :
                 </article>
             <?php endwhile; ?>
         </div>
-        <div class="swiper__pagination"></div>
+        <?php if($featured_posts->found_posts > 1): ?>
+            <div class="swiper__pagination"></div>
+        <?php endif; ?>
     </div>
 <?php endif; ?>
 <?php wp_reset_postdata(); ?>
