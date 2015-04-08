@@ -1,4 +1,23 @@
 <?php
+class CulturalConfigModel {
+    static $_ORDER = 0;
+
+    public $order;
+    public $key;
+    public $label;
+    public $type;
+    public $data;
+
+
+    public function __construct($key, $label, $type, $data = array()) {
+        $this->order = self::$_ORDER++;
+        $this->key = $key;
+        $this->label = $label;
+        $this->type = $type;
+        $this->data = $data;
+    }
+}
+
 class MapasCulturaisConfiguration {
 
     protected static $optionName;
@@ -51,18 +70,19 @@ class MapasCulturaisConfiguration {
         $geoDivisions = json_decode($geoDivisions_encoded);
 
         $configs = array(
-            'linguagens' => (object) array('order' => 0, 'key' => 'linguagens', 'label' => 'Linguagens', 'data' => array()),
-            'classificacaoEtaria' => (object) array('order' => 1, 'key' => 'classificacaoEtaria', 'label' => 'Classificação Etária', 'data' => array()),
-            'geoDivisions' => (object) array('order' => 2, 'key' => 'geoDivisions', 'label' => 'Divisões Geográficas:', 'data' => $geoDivisions, 'type' => 'header'),
-            'agent' => (object) array('order' => count($geoDivisions) + 3 + 1, 'key' => 'agent', 'label' => 'Agentes', 'data' => array(), 'type' => 'entity'),
-            'space' => (object) array('order' => count($geoDivisions) + 3 + 2, 'key' => 'space', 'label' => 'Espaços', 'data' => array(), 'type' => 'entity'),
-            'project' => (object) array('order' => count($geoDivisions) + 3 + 3, 'key' => 'project', 'label' => 'Projetos', 'data' => array(), 'type' => 'entity')
+            'verified'              => new CulturalConfigModel('verified', 'Resultados Verificados', 'header', false),
+            'linguagens'            => new CulturalConfigModel('linguagens', 'Linguagens', 'header'),
+            'classificacaoEtaria'   => new CulturalConfigModel('classificacaoEtaria', 'Classificação Etária', 'header'),
+            'geoDivisions'          => new CulturalConfigModel('geoDivisions', 'Divisões Geográficas', 'header'),
+            'agent'                 => new CulturalConfigModel('agent', 'Agentes', 'entity'),
+            'space'                 => new CulturalConfigModel('space', 'Espaços', 'entity'),
+            'project'               => new CulturalConfigModel('project', 'Projetos', 'entity')
         );
 
         $i = 0;
         foreach ($geoDivisions as $geoDivision) {
             $i++;
-            $configs[$geoDivision->metakey] = (object) array('order' => $configs['geoDivisions']->order + $i, 'key' => $geoDivision->metakey, 'label' => $geoDivision->name, 'data' => array());
+            $configs[$geoDivision->metakey] = new CulturalConfigModel($geoDivision->metakey, $geoDivision->name, 'header');
         }
 
         uasort($configs, function($a, $b) {
@@ -114,7 +134,7 @@ class MapasCulturaisConfiguration {
     static function getMetaValue($key) {
         $options = wp_parse_args(get_option('theme_options'), get_theme_default_options());
         $selfOptions = $options[self::$optionName];
-        return $selfOptions[$key];
+        return isset($selfOptions[$key]) ? $selfOptions[$key] : null;
     }
 
     static function getSelectedEntities(){
