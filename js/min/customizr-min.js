@@ -1,1 +1,0 @@
-!function($){wp.customize("highlight_color",function(o){o.bind(function(o){$(".menu--main").css("background-color",o),$(".box--about").css("background-color",o).css("border-color",o),$(".box--news").css("border-color",o),$(".entry-title a").css("color",o),$(".entry-format").css("background-color",o)})})}(jQuery);

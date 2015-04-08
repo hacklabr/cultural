@@ -138,25 +138,25 @@ function cultural_scripts() {
 
     wp_enqueue_style('cultural-style', get_stylesheet_uri());
 
+    $js_lib_path = get_bloginfo('template_directory') . (WP_DEBUG ? '/js/lib/' : '/js/min/');
+
     /* JUDO Font Awesome for the icons */
     wp_enqueue_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 
-    wp_enqueue_script('respond', get_template_directory_uri() . '/js/min/respond-min.js', '', '1.4.0');
+    wp_enqueue_script('event-emmiter', $js_lib_path . 'EventEmitter.js', array('jquery'), '3.1.8', true);
 
-    wp_enqueue_script('event-emmiter', get_template_directory_uri() . '/js/lib/EventEmitter.min.js', array('jquery'), '3.1.8', true);
+    wp_enqueue_script('imagesloaded', $js_lib_path . 'imagesloaded.pkgd.js', array('jquery', 'event-emmiter'), '3.1.8', true);
 
-    wp_enqueue_script('imagesloaded', get_template_directory_uri() . '/js/min/imagesloaded-min.js', array('jquery', 'event-emmiter'), '3.1.8', true);
+    wp_enqueue_script('masonry', $js_lib_path . 'masonry.pkgd.js', '', '3.1.5', true);
 
-    wp_enqueue_script('masonry', get_template_directory_uri() . '/js/min/masonry-min.js', '', '3.1.5', true);
-
-    wp_enqueue_script('responsive-nav', get_template_directory_uri() . '/js/min/responsive-nav-min.js', array('jquery'), '1.0.32', true);
-
-    wp_enqueue_script('slider', get_template_directory_uri() . '/js/min/idangerous.swiper-min.js', array('jquery'), '1.0.32', true);
+    wp_enqueue_script('responsive-nav', $js_lib_path . 'responsive-nav.js', array('jquery'), '1.0.32', true);
 
     /* Modernizr */
-    wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/modernizr.js', '', '2.6.2');
+    wp_enqueue_script('modernizr', $js_lib_path . 'modernizr.js', '', '2.6.2');
 
-    wp_enqueue_script('main', get_template_directory_uri() . '/js/main.js', array('imagesloaded', 'masonry'), '', true);
+
+    wp_enqueue_script('slider', get_bloginfo('template_directory') . '/js/min/idangerous.swiper-min.js', array('jquery'), '1.0.32', true);
+    wp_enqueue_script('main', get_bloginfo('template_directory') . '/js/main.js', array('imagesloaded', 'masonry'), '', true);
 
     /* Load the comment reply JavaScript. */
     if (is_singular() && get_option('thread_comments') && comments_open())
@@ -204,22 +204,24 @@ add_action('wp_enqueue_scripts', 'cultural_scripts');
 //ANGULAR APP ASSETS FROM THEATRO MUNICIPAL
 if (!is_admin()) {
     add_action('wp_print_scripts', function () {
+        $js_lib_path = get_bloginfo('template_directory') . (WP_DEBUG ? '/js/lib/' : '/js/min/');
+
         wp_enqueue_script('is_mobile', get_bloginfo('template_directory') . '/js/lib/is_mobile.js', array('jquery'), null, false);
 
 //        if(is_home() || is_archive() && get_post_type() === 'evento'){
         //ANGULAR
-        wp_enqueue_script('moment', get_bloginfo('template_directory') . '/js/lib/moment.js', array('jquery'), null, false);
-        wp_enqueue_script('moment-ptbr', get_bloginfo('template_directory') . '/js/lib/moment.pt-br.js', array('moment'), null, false);
+        wp_enqueue_script('moment', $js_lib_path . 'moment.js', array('jquery'), null, false);
+        wp_enqueue_script('moment-ptbr', $js_lib_path . 'moment.pt-br.js', array('moment'), null, false);
 
-        wp_enqueue_script('angular-core', get_bloginfo('template_directory') . '/js/lib/angular.min.js', array('moment-ptbr'), null, false);
-        //angular stable: wp_enqueue_script('angular-core', 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js', array('moment-ptbr'), null, false);
-        wp_enqueue_script('angular-ui-router', get_bloginfo('template_directory') . '/js/lib/angular-ui-router.js', array('angular-core'), null, false);
+        wp_enqueue_script('angular-core', $js_lib_path . 'angular.js', array('moment-ptbr'), null, false);
+
+        wp_enqueue_script('angular-ui-router', $js_lib_path . 'angular-ui-router.js', array('angular-core'), null, false);
         //wp_enqueue_script('angular-resource', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js', array('angular-route'), null, false);
 
         wp_enqueue_script('daterangepicker', get_bloginfo('template_directory') . '/js/lib/daterangepicker.js', array('angular-core'), null, false);
         wp_enqueue_script('angular-daterangepicker', get_bloginfo('template_directory') . '/js/lib/angular-daterangepicker.js', array('angular-core'), null, false);
 
-        wp_enqueue_script('angular-sanitize', get_bloginfo('template_directory') . '/js/lib/angular-sanitize.js', array('angular-core'), null, false);
+        wp_enqueue_script('angular-sanitize', $js_lib_path . 'angular-sanitize.js', array('angular-core'), null, false);
 
         wp_enqueue_script('angular-app', get_bloginfo('template_directory') . '/js/ng-app/app.js', array('angular-core'), null, false);
         wp_enqueue_script('angular-app-services', get_bloginfo('template_directory') . '/js/ng-app/services.js', array('angular-app'), null, false);
