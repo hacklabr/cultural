@@ -10,6 +10,7 @@
         for (var entityName in selectedEntities) {
             $entityContainer = $('#' + entityName + '-container');
             for(var id in selectedEntities[entityName]){
+                console.log(entityName, id, selectedEntities[entityName]);
                 var e = selectedEntities[entityName][id];
                 e.json = JSON.stringify(e);
                 var $e = Mustache.render(template, e);
@@ -42,12 +43,12 @@
         // search entity input
         $('.entity-autocomplete').each(function () {
             var $this = $(this);
-            
+
             $this.autocomplete({
                 delay: 500,
                 minLength: 1,
                 source: function (request, response) {
-                    var term = request.term.replace(/ /g, ' % ');
+                    var term = request.term.replace(/ /g, '%');
                     var QUERY = {
                         '@keyword': term,
                         '@order': 'name ASC',
@@ -58,8 +59,8 @@
                     if ($this.data('entity') === 'space') {
                         QUERY['@select'] += ',endereco';
                     }
-                    
-                    if(selectedEntities[$this.data('entity') + 'Ids']){
+
+                    if(selectedEntities[$this.data('entity') + 'Ids'] && selectedEntities[$this.data('entity') + 'Ids'].length > 0){
                         QUERY['id'] = 'IN(' + selectedEntities[$this.data('entity') + 'Ids'] + ')';
                     }
 
@@ -93,8 +94,8 @@
 
                 return $("<li></li>").append($article).appendTo(ul);
             };
-            
-            if(selectedEntities[$this.data('entity') + 'Ids']){
+
+            if(selectedEntities[$this.data('entity') + 'Ids'] && selectedEntities[$this.data('entity') + 'Ids'].length > 0){
                 $this.focus(function(){
                     $this.autocomplete('search', '%');
                 });

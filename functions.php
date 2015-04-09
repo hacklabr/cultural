@@ -89,8 +89,8 @@ add_filter('query_vars', function ($public_query_vars) {
 });
 
 add_action('template_redirect', function() {
-    global $wp_query;
-    if (is_category() && $wp_query->query['template'] === 'events') {
+
+    if (is_category() && get_query_var('template') === 'events') {
 
         include __DIR__ . '/page-templates/events-list.php';
         die;

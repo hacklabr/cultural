@@ -47,7 +47,7 @@ class MapasCulturaisConfiguration {
             );
         });
     }
-    
+
     static function enqueueScripts(){
         wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('jquery-ui-autocomplete');
@@ -61,7 +61,7 @@ class MapasCulturaisConfiguration {
             'apiUrl' => MAPASCULTURAIS_API_URL
         ));
 
-        wp_enqueue_style('jui', get_stylesheet_directory_uri() . '/css/jquery-ui-1.11.4.custom/jquery-ui.min.css');    
+        wp_enqueue_style('jui', get_stylesheet_directory_uri() . '/css/jquery-ui-1.11.4.custom/jquery-ui.min.css');
     }
 
     static function optionsValidation($input) {
@@ -165,13 +165,14 @@ class MapasCulturaisConfiguration {
 
     static function getSelectedEntities() {
         $decode_entity_json = function($e) {
+
             return json_decode(stripslashes($e));
         };
-        
+
         $get_id = function($e){
             return $e->id;
         };
-        
+
         $selectedEntities = array(
             'agent' => self::getValue('agent'),
             'space' => self::getValue('space'),
@@ -181,20 +182,20 @@ class MapasCulturaisConfiguration {
         $selectedEntities['agent'] = array_map($decode_entity_json, is_array($selectedEntities['agent']) ? $selectedEntities['agent'] : array());
         $selectedEntities['space'] = array_map($decode_entity_json, is_array($selectedEntities['space']) ? $selectedEntities['space'] : array());
         $selectedEntities['project'] = array_map($decode_entity_json, is_array($selectedEntities['project']) ? $selectedEntities['project'] : array());
-        
+
         if(isset($_GET['taxonomy']) && $_GET['taxonomy'] == 'category' && isset($_GET['tag_ID'])){
             $selectedFilters = get_option("category_{$_GET['tag_ID']}");
-            
+
             $selectedEntities = array(
                 'agentIds' => array_values(array_map($get_id, $selectedEntities['agent'])),
                 'spaceIds' => array_values(array_map($get_id, $selectedEntities['space'])),
                 'projectIds' => array_values(array_map($get_id, $selectedEntities['project'])),
-                
+
                 'agent' => self::getValue('agent', $selectedFilters),
                 'space' => self::getValue('space', $selectedFilters),
                 'project' => self::getValue('project', $selectedFilters)
             );
-            
+
             $selectedEntities['agent'] = array_map($decode_entity_json, is_array($selectedEntities['agent']) ? $selectedEntities['agent'] : array());
             $selectedEntities['space'] = array_map($decode_entity_json, is_array($selectedEntities['space']) ? $selectedEntities['space'] : array());
             $selectedEntities['project'] = array_map($decode_entity_json, is_array($selectedEntities['project']) ? $selectedEntities['project'] : array());
@@ -205,10 +206,10 @@ class MapasCulturaisConfiguration {
     }
 
     static function printForm($category_id = null, $categoryOptions = null) {
-        
+
         $configs = self::fetchApiData();
-        
-        extract($configs); 
+
+        extract($configs);
         ?>
         <style>
             .thumb {
@@ -241,6 +242,8 @@ class MapasCulturaisConfiguration {
                 overflow-x: hidden;
             }
 
+            .entity-tab { min-height:350px; }
+
             .entity-list-item { border-bottom: 1px solid #ddd; cursor: pointer; padding:10px; }
             .entity-list-item img { float:left; margin-right:12px;  }
             .entity-list-item--name { font-weight: bold; }
@@ -250,6 +253,7 @@ class MapasCulturaisConfiguration {
             .entity-container .entity-list-item:hover { background-color: #dfdfdf;  }
             .entity-container .entity-list-item .js-remove { float:right; background:red; color:white; width:20px; height:20px; text-decoration: none;}
 
+            ul.ui-autocomplete { max-height:300px; }
             ul.ui-autocomplete, ul.ui-autocomplete article { max-width: 500px; }
         </style>
 
@@ -325,7 +329,7 @@ class MapasCulturaisConfiguration {
                     <h4>Classificação etária</h4>
                     <ul>
                         <?php
-                        $generalMetaValue = self::getValue('classificacaoEtaria');                        
+                        $generalMetaValue = self::getValue('classificacaoEtaria');
 
                         $_selected = 0;
                         foreach ($classificacaoEtaria->data as $d){
@@ -335,7 +339,7 @@ class MapasCulturaisConfiguration {
                         }
 
                         $metaValue = self::getValue('classificacaoEtaria', $categoryOptions);
-                        
+
                         foreach ($classificacaoEtaria->data as $d):
                             if($category_id && $_selected && !$generalMetaValue[$d]){
                                 continue;
@@ -355,7 +359,7 @@ class MapasCulturaisConfiguration {
                     <h4>Linguagens</h4>
                     <ul>
                         <?php
-                        $generalMetaValue = self::getValue('linguagens');                        
+                        $generalMetaValue = self::getValue('linguagens');
 
                         $_selected = 0;
                         foreach ($linguagens->data as $d){
@@ -386,8 +390,8 @@ class MapasCulturaisConfiguration {
                 <?php
                 foreach ($geoDivisions->data as $geoDivisionMetadata):
                     $geoDivision = ${$geoDivisionMetadata->metakey};
-                    
-                    $generalMetaValue = self::getValue($geoDivisionMetadata->metakey);                        
+
+                    $generalMetaValue = self::getValue($geoDivisionMetadata->metakey);
 
                     $_selected = 0;
                     foreach ($geoDivision->data as $d){
@@ -395,14 +399,14 @@ class MapasCulturaisConfiguration {
                             $_selected++;
                         }
                     }
-                    
+
                     $metaValue = self::getValue($geoDivisionMetadata->metakey, $categoryOptions);
                     ?>
                     <div class='config-section checkbox-list'>
                         <h4><?php echo $geoDivisionMetadata->name ?></h4>
                         <ul>
-                            <?php 
-                            foreach ($geoDivision->data as $d): 
+                            <?php
+                            foreach ($geoDivision->data as $d):
                                 if($category_id && $_selected && !$generalMetaValue[$d]){
                                     continue;
                                 }
@@ -420,17 +424,17 @@ class MapasCulturaisConfiguration {
                 <?php endforeach; ?>
                 <div class='clear'></div>
             </div>
-            <div id="tab-agentes">
+            <div id="tab-agentes" class="entity-tab">
                 <input  type='text' placeholder="Buscar Agente" class='entity-autocomplete' data-entity='agent'/>
                 <div id="agent-container" class="entity-container js-entity-container"></div>
                 <div class='clear'></div>
             </div>
-            <div id="tab-espacos">
+            <div id="tab-espacos" class="entity-tab">
                 <input  type='text' placeholder="Buscar Espaço" class='entity-autocomplete' data-entity='space'/>
                 <div id="space-container" class="entity-container js-entity-container"></div>
                 <div class='clear'></div>
             </div>
-            <div id="tab-projetos">
+            <div id="tab-projetos" class="entity-tab">
                 <input  type='text' placeholder="Buscar Projeto/Edital" class='entity-autocomplete' data-entity='project'/>
                 <div id="project-container" class="entity-container js-entity-container"></div>
                 <div class='clear'></div>

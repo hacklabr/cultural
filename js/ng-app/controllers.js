@@ -17,14 +17,12 @@
         try{
             $scope.data.linguagens = Object.keys(vars.categoryFilters.linguagens).map(mapDataFunction);
         }catch (e){
-            console.log(e);
             $scope.data.linguagens = vars.linguagens.map(mapDataFunction);
         }
 
         try{
             $scope.data.classificacoes = Object.keys(vars.categoryFilters.classificacaoEtaria).map(mapDataFunction);
         }catch (e){
-            console.log(e);
             $scope.data.classificacoes = vars.classificacoes.map(mapDataFunction);
         }
 
@@ -40,12 +38,23 @@
             $scope.loading = false;
         }
 
+        $scope.complete = false;
+
         $scope.updateMasonry = function(){
             var $container = jQuery('.js-events-masonry');
             // initialize Masonry after all images have loaded
             $container.imagesLoaded(function() {
-                $container.masonry('destroy');
-                $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
+                if(!$scope.complete){
+                    $scope.complete = true;
+                    $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
+                }else{
+
+                    $container.masonry('reloadItems');
+                    $container.masonry('layout');
+                }
+
+                window.$container = $container;
+
                 $log.debug('eventsController: $scope.updateMasonry() ');
             });
         };
