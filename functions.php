@@ -1,10 +1,4 @@
 <?php
-// define as constantes com os valores padrão se estas não forem configuradas no wp-config.php
-if (!defined('MAPASCULTURAIS_URL')) define('MAPASCULTURAIS_URL', 'http://spcultura.prefeitura.sp.gov.br/');
-if (!defined('MAPASCULTURAIS_API_URL')) define('MAPASCULTURAIS_API_URL', MAPASCULTURAIS_URL . 'api/');
-if (!defined('MAPASCULTURAIS_NAME')) define('MAPASCULTURAIS_NAME', 'SP Cultura');
-if (!defined('TRANSIENTE_TIMEOUT_EVENT_INFO')) define('TRANSIENTE_TIMEOUT_EVENT_INFO', 24 * 60 * 60);
-
 session_start();
 
 // CONGELADO
@@ -15,17 +9,6 @@ include dirname(__FILE__) . '/includes/utils.class.php';
 include dirname(__FILE__) . '/includes/opengraph.php';
 include dirname(__FILE__) . '/includes/mapasculturais2post/mapasculturais2post.php';
 
-
-if (!function_exists('get_theme_option')) {
-
-    function get_theme_option($option_name) {
-        $option = wp_parse_args(
-            get_option('theme_options'), get_theme_default_options()
-        );
-        return isset($option[$option_name]) ? $option[$option_name] : false;
-    }
-
-}
 
 if (!isset($content_width))
     $content_width = 1000;
@@ -166,7 +149,7 @@ function cultural_scripts() {
     //_pr(get_queried_object());
 
 
-    $savedFilters = get_theme_option('mapasculturaisconfiguration');
+    $savedFilters = MapasCulturaisConfiguration::getOption();
     //var_dump(array_keys($savedFilters['classificacaoEtaria']));
     $configModel = MapasCulturaisConfiguration::getConfigModel();
     foreach ($savedFilters as $key => $data) {

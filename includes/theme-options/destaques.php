@@ -156,8 +156,8 @@ class Cultural_Hightlights {
 
     static function getDefaultOptions() {
         $item_cgf = array(
-            'highlights' => array(),
-            'fixed' => array()
+            'highlights' => '',
+            'fixed' => ''
         );
 
         $result = array(
@@ -191,7 +191,7 @@ class Cultural_Hightlights {
 
             <?php if (isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true'): ?>
                 <div id="message" class="updated below-h2">
-                    <p>Atualizações salvas.</p>
+                    <p>Configurações salvas.</p>
                     <div class="clear"></div>
                 </div>
                 <script type="text/javascript">

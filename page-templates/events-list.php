@@ -7,12 +7,10 @@
  */
 ?>
 
-<?php
-get_header();
-the_post();
-?>
+<?php get_header(); ?>
 
 <div class="content  content--full" ng-controller="eventsController">
+    <?php if(is_page()): the_post();?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <div class="hentry-wrap">
             <div class="entry-content">
@@ -21,6 +19,7 @@ the_post();
             </div>
         </div>
     </article>
+    <?php endif; ?>
 
     <div class="filter-bar  cf">
         <style>

@@ -42,6 +42,7 @@
         // search entity input
         $('.entity-autocomplete').each(function () {
             var $this = $(this);
+            
             $this.autocomplete({
                 delay: 500,
                 minLength: 1,
@@ -56,6 +57,10 @@
 
                     if ($this.data('entity') === 'space') {
                         QUERY['@select'] += ',endereco';
+                    }
+                    
+                    if(selectedEntities[$this.data('entity') + 'Ids']){
+                        QUERY['id'] = 'IN(' + selectedEntities[$this.data('entity') + 'Ids'] + ')';
                     }
 
                     $.get(vars.apiUrl + $this.data('entity') + '/find', QUERY, function (data) {
@@ -88,6 +93,12 @@
 
                 return $("<li></li>").append($article).appendTo(ul);
             };
+            
+            if(selectedEntities[$this.data('entity') + 'Ids']){
+                $this.focus(function(){
+                    $this.autocomplete('search', '%');
+                });
+            }
         });
     });
 })(jQuery);
