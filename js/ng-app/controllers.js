@@ -49,8 +49,11 @@
                     $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
                 }else{
 
-                    $container.masonry('reloadItems');
-                    $container.masonry('layout');
+//                    $container.masonry('reloadItems');
+//                    $container.masonry('layout');
+
+                    $container.masonry('destroy');
+                    $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
                 }
 
                 window.$container = $container;

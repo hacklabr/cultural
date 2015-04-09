@@ -20,7 +20,7 @@ class Cultural_Hightlights {
         if(!$key){
             $key = self::getCurrentPageKey();
         }
-        
+
         $cid = $key . $type;
         if(isset(self::$idsCache[$cid])){
             return self::$idsCache[$cid];
@@ -141,7 +141,7 @@ class Cultural_Hightlights {
     }
 
     static function initAdmin() {
-        register_setting('theme_options_options', self::OPTION_NAME);
+        register_setting(self::OPTION_NAME, self::OPTION_NAME);
     }
 
     static function addMenu() {
@@ -205,7 +205,7 @@ class Cultural_Hightlights {
                 <p class="alignright">
                     <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'cultural'); ?>" />
                 </p>
-                <?php settings_fields('theme_options_options'); ?>
+                <?php settings_fields(self::OPTION_NAME); ?>
                 <div class="span-20 ">
                     <p class="help">
                         Cole na caixas abaixo as URLs dos posts que você deseja destacar para cada seção do site, uma URL por linha, na ordem que você deseja que apareça.<br>

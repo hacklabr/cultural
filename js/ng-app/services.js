@@ -29,8 +29,6 @@
 
             var spaces, projects, agents;
 
-            console.log(vars.categoryFilters.linguagens);
-
             // LINGUAGENS
             // se tem filtro selecionado na busca
             if(svc.data.linguagens && svc.data.linguagens.length){
@@ -51,7 +49,7 @@
                 searchParams.classificacaoEtaria = 'IN(' + Object.keys(vars.categoryFilters.classificacaoEtaria).sort().toString() + ')';
             }
 
-            if(vars.categoryFilters.space){
+            if(vars.categoryFilters && vars.categoryFilters.space){
                 spaces = Object.keys(vars.categoryFilters.space).map(function(e){ return '@Space:' + e; });
                 searchParams['space'] = "IN(" + spaces + ")";
             }else if(vars.generalFilters.space){
@@ -59,7 +57,7 @@
                 searchParams['space'] = "IN(" + spaces + ")";
             }
 
-            if(vars.categoryFilters.agent){
+            if(vars.categoryFilters && vars.categoryFilters.agent){
                 agents = Object.keys(vars.categoryFilters.agent).map(function(e){ return '@Agent:' + e; });
                 searchParams['owner'] = "IN(" + agents + ")";
             }else if(vars.generalFilters.agent){
@@ -67,7 +65,7 @@
                 searchParams['owner'] = "IN(" + agents + ")";
             }
 
-            if(vars.categoryFilters.project){
+            if(vars.categoryFilters && vars.categoryFilters.project){
                 projects = Object.keys(vars.categoryFilters.project).map(function(e){ return '@Project:' + e; });
                 searchParams['project'] = "IN(" + projects + ")";
             }else if(vars.generalFilters.project){

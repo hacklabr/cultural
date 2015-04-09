@@ -35,7 +35,7 @@ class MapasCulturaisConfiguration {
         });
 
         add_action('admin_init', function() {
-            register_setting('theme_options_options', self::OPTION_NAME, array(__CLASS__, 'optionsValidation'));
+            register_setting(self::OPTION_NAME, self::OPTION_NAME, array(__CLASS__, 'optionsValidation'));
         });
 
         add_action('admin_menu', function() {
@@ -452,7 +452,7 @@ class MapasCulturaisConfiguration {
             </p>
 
             <form action="options.php" method="post" class="clear prepend-top">
-                <?php settings_fields('theme_options_options'); ?>
+                <?php settings_fields(self::OPTION_NAME); ?>
                 <p class="textright clear prepend-top">
                     <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
                 </p>

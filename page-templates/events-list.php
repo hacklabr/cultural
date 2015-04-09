@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-
+<span>{{events.length}} eventos encontrados</span>
     <div class="events-list grid js-events-masonry">
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>

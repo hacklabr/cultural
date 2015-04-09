@@ -25,4 +25,8 @@ jQuery(document).ready(function( $ ) {
         paginationClickable : true,
         });
     });
+
+    // inicializando galeria
+
+
 });

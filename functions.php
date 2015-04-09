@@ -165,7 +165,7 @@ function cultural_scripts() {
         $savedFilters[$key] = $data;
     }
 
-
+    
     $vars = array(
         'generalFilters' => $savedFilters,
         'linguagens' => $savedFilters['linguagens'],
