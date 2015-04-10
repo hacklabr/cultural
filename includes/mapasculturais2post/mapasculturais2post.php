@@ -270,7 +270,7 @@ class MapasCulturais2Post {
         // verify this came from the our screen and with proper authorization,
         // because save_post can be triggered at other times
 
-        if (!wp_verify_nonce($_POST[__CLASS__ . '_noncename'], 'save_' . __CLASS__))
+        if (!isset($_POST[__CLASS__ . '_noncename']) || !wp_verify_nonce($_POST[__CLASS__ . '_noncename'], 'save_' . __CLASS__))
             return;
 
 

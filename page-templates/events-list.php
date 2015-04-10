@@ -138,8 +138,8 @@
         <div class="gutter-sizer"></div>
 
         <div class="event  event-container" ng-repeat="event in events" repeat-done="updateMasonry()">
-            <figure ng-if="event['@files:avatar.avatarBig']" class="event__image" style="background:#EDEDEC; background-image:url({{event['@files:avatar.avatarBig'].url}}); " >
-                <img ng-src="{{event['@files:avatar.avatarBig'].url}}" alt="{{event.name}}" />
+            <figure ng-if="event['@files:header.header']" class="event__image" style="background:transparent" >
+                <img ng-src="{{event['@files:header.header'].url}}" alt="{{event.name}}" style="width:100%"/>
             </figure>
             <div class="event-data">
                 <h1 class="event__title">

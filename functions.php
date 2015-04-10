@@ -137,6 +137,8 @@ function cultural_scripts() {
     /* Modernizr */
     wp_enqueue_script('modernizr', $js_lib_path . 'modernizr.js', '', '2.6.2');
 
+    wp_enqueue_script('magnific-popup', $js_lib_path . 'jquery.magnific-popup.js', array('jquery'), '2.6.2');
+    wp_enqueue_style('magnific-popup', get_bloginfo('template_directory') . '/css/magnific-popup.css');
 
     wp_enqueue_script('slider', get_bloginfo('template_directory') . '/js/min/idangerous.swiper-min.js', array('jquery'), '1.0.32', true);
     wp_enqueue_script('main', get_bloginfo('template_directory') . '/js/main.js', array('imagesloaded', 'masonry'), '', true);
@@ -165,7 +167,7 @@ function cultural_scripts() {
         $savedFilters[$key] = $data;
     }
 
-    
+
     $vars = array(
         'generalFilters' => $savedFilters,
         'linguagens' => $savedFilters['linguagens'],
@@ -218,6 +220,7 @@ if (!is_admin()) {
     });
 
     add_action('wp_print_styles', function() {
+
         wp_enqueue_style('daterange', get_bloginfo('template_directory') . '/js/lib/daterangepicker-bs3.css');
     });
 }
