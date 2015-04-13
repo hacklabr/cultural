@@ -15,6 +15,16 @@ get_header();
         <?php get_template_part('content', 'single'); ?>
 
         <?php
+        $entity_url = get_post_meta(get_the_ID(), 'mc-entity-relation', true);
+        if($entity_url && MapasCulturais2Post::parseEventUrl($entity_url)):
+            global $__event_url, $__image;
+            $__image = 'avatar.avatarBig';
+            $__event_url = $entity_url;
+            ?>
+            <?php get_template_part('partials/event-box'); ?>
+        <?php endif; ?>
+
+        <?php
         // If comments are open or we have at least one comment, load up the comment template
         if (comments_open() || '0' != get_comments_number())
             comments_template('', true);

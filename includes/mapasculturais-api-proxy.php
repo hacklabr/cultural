@@ -29,7 +29,7 @@ class MapasCulturaisApiProxy {
     static function fetch($query) {
         $cache_id = 'MAPI:' . md5($query);
 
-        if(!$response = wp_cache_get($cache_id)){
+        if(true || !$response = wp_cache_get($cache_id)){
 
             $rs = wp_remote_get($query, array('timeout' => '120'));
 
@@ -45,6 +45,7 @@ class MapasCulturaisApiProxy {
 
                 $response->body = json_encode($bodyObject);
             } else {
+
                 $response->body = $rs['body'];
             }
 
@@ -80,7 +81,7 @@ class MapasCulturaisApiProxy {
         self::mapObjects($object);
 
         $urls = implode("','",array_map(function($e){
-            return addslashes($e->singleUrl);
+            return addslashes($e[0]->singleUrl);
         }, self::$objects));
 
         $query = "SELECT post_ID, meta_value FROM {$wpdb->postmeta} WHERE meta_value IN('{$urls}')";
@@ -90,7 +91,9 @@ class MapasCulturaisApiProxy {
 
             while($obj = @mysqli_fetch_object($rs)){
                 $post_permalink = get_permalink($obj->post_ID);
-                self::$objects[$obj->meta_value]->singleUrl = $post_permalink;
+                foreach(self::$objects[$obj->meta_value] as $k => $o){
+                    $o->singleUrl = $post_permalink;
+                }
             }
         }else{
             $rs = mysql_query($query);
@@ -111,7 +114,11 @@ class MapasCulturaisApiProxy {
         }else if(is_object($object)){
             foreach ($object as $prop => $val){
                 if($prop == 'singleUrl'){
-                    self::$objects[$val] = $object;
+                    if(!isset(self::$objects[$val])){
+                        self::$objects[$val] = array();
+                    }
+                    self::$objects[$val][] = $object;
+
                 }else if(is_array($val) || is_object($val)){
                     self::mapObjects($val);
                 }

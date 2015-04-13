@@ -139,9 +139,17 @@ class MapasCulturais2Post {
         die;
     }
 
-    static function getEventInfoFromAPI($event_url, $use_transient = false, $files = 'avatar,gallery', $select = 'id,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+    static function getEventInfoFromAPIProxy($event_url, $use_transient = false, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+        return self::_getEventInfo(true, $event_url, $use_transient, $files, $select);
+    }
 
-        $transient_key = 'event_info:' . md5("$event_url:$files:$select");
+    static function getEventInfoFromAPI($event_url, $use_transient = false, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+        return self::_getEventInfo(false, $event_url, $use_transient, $files, $select);
+    }
+
+    static function _getEventInfo($use_proxy, $event_url, $use_transient = false, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+
+        $transient_key = 'event_info:' . md5("$event_url:$files:$select:$use_proxy");
 
         if ($use_transient && !current_user_can('edit_posts')) {
             $event_info = get_transient($transient_key);
@@ -151,8 +159,12 @@ class MapasCulturais2Post {
         }
 
         if ($event_id = self::parseEventUrl($event_url)) {
+            if($use_proxy){
+                $event_json = self::getEventJSONFromAPIProxy($event_id, $files, $select);
 
-            $event_json = self::getEventJSONFromAPI($event_id, $files, $select);
+            }else{
+                $event_json = self::getEventJSONFromAPI($event_id, $files, $select);
+            }
 
             if ($event_json) {
                 $event_info = self::parseEventJSON($event_json);
@@ -177,22 +189,22 @@ class MapasCulturais2Post {
         return array_map(function($e) use($date_format) {
             $occ = new stdClass;
 
-            $occ->startsAt = $e->rule->startsAt;
-            $occ->endsAt = $e->rule->endsAt;
+            $occ->startsAt = @$e->rule->startsAt;
+            $occ->endsAt = @$e->rule->endsAt;
 
-            $_startsOn = new DateTime($e->rule->startsOn->date);
+            $_startsOn = new DateTime(@$e->rule->startsOn->date);
             $occ->startsOn = $_startsOn->format($date_format);
 
-            $_endsOn = new DateTime($e->rule->endsOn->date);
+            $_endsOn = new DateTime(@$e->rule->endsOn->date);
             $occ->endsOn = $_endsOn->format($date_format);
 
-            $occ->duration = $e->rule->duration;
-            $occ->price = trim($e->rule->price);
+            $occ->duration = @$e->rule->duration;
+            $occ->price = trim(@$e->rule->price);
 
-            if ($e->rule->description) {
+            if (@$e->rule->description) {
                 $occ->description = $e->rule->description;
             } else {
-                $occ->description = MapasCulturais2Post::generateOccurrenceDescription($e->rule);
+                $occ->description = MapasCulturais2Post::generateOccurrenceDescription(@$e->rule);
             }
 
             $space = new stdClass;
@@ -204,11 +216,14 @@ class MapasCulturais2Post {
 
             if ($e->space->avatar) {
                 $space->avatar = new stdClass;
+
                 $space->avatar->url = $e->space->avatar->url;
                 $space->avatar->files = new stdClass;
 
-                foreach ($e->space->avatar->files as $group => $f) {
-                    $space->avatar->files->$group = $f->url;
+                foreach ($e->space->avatar as $group => $f) {
+                    if(is_object($f)){
+                        $space->avatar->files->$group = $f->url;
+                    }
                 }
             }
 
@@ -247,8 +262,16 @@ class MapasCulturais2Post {
         }
     }
 
-    static function getEventJSONFromAPI($event_id, $files = 'avatar,gallery', $select = 'id,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
-        $rs = wp_remote_get(MAPASCULTURAIS_URL . "api/event/findOne/?id=EQ({$event_id})&@select={$select}&@files=({$files}):url");
+
+    static function getEventJSONFromAPIProxy($event_id, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+        $result = MapasCulturaisApiProxy::fetch(MAPASCULTURAIS_URL . "api/event/findOne/?id=EQ({$event_id})&@select={$select}&@files=({$files}):url");
+        return $result->body;
+    }
+
+    static function getEventJSONFromAPI($event_id, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+        $url = MAPASCULTURAIS_URL . "api/event/findOne/?id=EQ({$event_id})&@select={$select}&@files=({$files}):url";
+        $rs = wp_remote_get($url, array('timeout' => '120'));
+        
         $json = false;
         if ($rs['response']['code'] == 200) {
             if (isset($rs['body']) && $rs['body']) {
@@ -258,6 +281,7 @@ class MapasCulturais2Post {
             $json = false;
         }
         return $json;
+
     }
 
     static function savePost($post_id) {
@@ -302,8 +326,7 @@ class MapasCulturais2Post {
      * Shortcode to display an event
      *
      */
-    function shortcode($atts) {
-        ob_start();
+    static function shortcode($atts) {
 
         extract(shortcode_atts(array(
             'type' => 'post',
@@ -314,67 +337,31 @@ class MapasCulturais2Post {
             'fabric' => '',
             'category' => '',
                 ), $atts));
-        $url = isset($atts[0]) ? $atts[0] : null;
+
+        $url = isset($atts[0]) ? trim($atts[0]) : null;
+
 
         if (!$url) { // se não foi informado uma url
             if (current_user_can('edit_post')) {
                 return "<div class='shortcode-error'>Informe a url do evento dentro do tag evento da seguinte forma: <strong>[evento http://" . MAPASCULTURAIS_URL . "evento/0000]</strong></div>";
             }
         } else { // se a url foi informada
-            $image = 'avatar.avatarBig';
+            global $__event_url, $__image;
 
-            $event = self::getEventInfoFromAPI($url, false, $image);
-            $price = '';
-            $same_price = true;
-            foreach ($event->occurrences as $i => $occ) {
-                if ($i > 0 && $price != $occ->price) {
-                    $same_price = false;
-                }
-                $price = $occ->price;
+            if (substr($url, -1) != '/') {
+                $url .= '/';
             }
-            ?>
-            <div class="event-container">
-                <?php if ($event->files->$image): ?>
-                    <figure class="event__image">
-                        <img src="<?php echo $event->files->$image ?>" alt="<?php echo $event->name ?>" />
-                    </figure>
-                <?php endif; ?>
-                <div class="event-data">
-                    <h1 class="event__title"><?php echo $event->name ?> <span class="event__subtitle"><?php echo $event->subTitle ?></span></h1>
-                    <?php foreach ($event->occurrences as $occ): ?>
-                        <div class="event__occurrences">
-                            <div class="event__venue"><?php echo $occ->space->name ?></div>
-                            <div class="event__time"><?php echo $occ->description ?></div>
-                            <?php if (!$same_price && $occ->price): ?>
-                                <div class="event__price">
-                                    <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                    <?php echo $occ->price ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    <?php endforeach; ?>
-                    <span class="event__classification"><?php echo $event->classificacaoEtaria ?></span>
-                    <?php if ($same_price): ?>
-                        <div class="event__price">
-                            <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <?php echo $price ? $price : 'Não informado' ?>
-                        </div>
-                    <?php endif; ?>
-                    <a href="<?php echo $url ?>" class="event__info">Mais informações</a>
-                </div>
-            </div>
 
-            <?php
+            $__image = 'avatar.avatarBig';
+            $__event_url = $url;
+
+            ob_start();
+            get_template_part('partials/event-box');
+            return ob_get_clean();
         }
-        $myvariable = ob_get_clean();
-        return $myvariable;
     }
+
+
 
 }
 

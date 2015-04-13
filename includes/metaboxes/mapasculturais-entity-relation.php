@@ -4,9 +4,9 @@ class MCEntityRelationMetabox {
 
     protected static $metabox_config = array(
         'mc-entity-relation', // slug do metabox
-        'Linkar com a entidade do Mapas Culturais',
-        array('post', 'page'),
-        'normal'
+        'Linkar com a entidade do Mapas Culturais ' . MAPASCULTURAIS_NAME , // título do metabox
+        array('post', 'page'), // array('post','page','etc'), // post types
+        'normal' // onde colocar o metabox
     );
 
     static function init() {
@@ -33,6 +33,15 @@ class MCEntityRelationMetabox {
 
 
     static function filterValue($meta_key, $value){
+        $value = trim($value);
+        if (!preg_match('#^https?:\/\/.*#', $value)) {
+            $value = 'http://' . $value;
+        }
+
+        if (substr($value, -1) != '/') {
+            $value .= '/';
+        }
+
         return $value;
     }
 
