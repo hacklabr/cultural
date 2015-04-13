@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // CONGELADO
 
 include dirname(__FILE__) . '/includes/congelado-functions.php';
@@ -8,6 +7,7 @@ include dirname(__FILE__) . '/includes/html.class.php';
 include dirname(__FILE__) . '/includes/utils.class.php';
 include dirname(__FILE__) . '/includes/opengraph.php';
 include dirname(__FILE__) . '/includes/mapasculturais2post/mapasculturais2post.php';
+include dirname(__FILE__) . '/includes/mapasculturais-api-proxy.php';
 
 
 if (!isset($content_width))
@@ -172,7 +172,7 @@ function cultural_scripts() {
         'generalFilters' => $savedFilters,
         'linguagens' => $savedFilters['linguagens'],
         'classificacoes' => $savedFilters['classificacaoEtaria'],
-        'apiUrl' => MAPASCULTURAIS_API_URL
+        'apiUrl' => MapasCulturaisApiProxy::getProxyURL()
     );
 
     if (is_category()) {
@@ -218,6 +218,7 @@ if (!is_admin()) {
             'site' => get_bloginfo('wpurl')
         ));
     });
+
 
     add_action('wp_print_styles', function() {
         wp_deregister_style('cultural-style');

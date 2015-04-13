@@ -5,7 +5,7 @@
         var svc = {}, //this, the service
             filtersSkeleton = {
             startDate : moment(),
-            endDate : moment().add(60, 'days'),
+            endDate : moment().add(15, 'days'),
             linguagens: [],
             classificacoes: []
         };
