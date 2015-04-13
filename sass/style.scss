@@ -1722,6 +1722,7 @@ img.aligncenter {
 }
 
 .page-header {
+    @extend %clearfix;
     background-color: $color--highlight;
     box-shadow:inset 0 0 0 4px rgba(41,39,36,.08);
     margin-bottom: 1.5rem;
@@ -1731,10 +1732,20 @@ img.aligncenter {
 .page-title {
     color: #fff;
     margin: 0;
+    float: left;
     @include size(18,2);
 
     .fa {
         color: rgba(255,255,255,.6);
+    }
+}
+
+.category-events-link {
+    float: right;
+    color: #fff;
+    @include size(12,2);
+    &:hover {
+        color: #000;
     }
 }
 

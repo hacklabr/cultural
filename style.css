@@ -11,10 +11,10 @@ Text Domain: cultural;
 Domain Path: /languages/
 Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 */
-.site-header:before, .entry-header:before, .entry__content:before, .filter-bar:before, .site-header:after, .entry-header:after, .entry__content:after, .filter-bar:after {
+.site-header:before, .entry-header:before, .entry__content:before, .page-header:before, .filter-bar:before, .site-header:after, .entry-header:after, .entry__content:after, .page-header:after, .filter-bar:after {
   content: "";
   display: table; }
-.site-header:after, .entry-header:after, .entry__content:after, .filter-bar:after {
+.site-header:after, .entry-header:after, .entry__content:after, .page-header:after, .filter-bar:after {
   clear: both; }
 
 .daterangepicker .ranges .input-mini {
@@ -1496,10 +1496,19 @@ img.aligncenter {
 .page-title {
   color: #fff;
   margin: 0;
+  float: left;
   font-size: 1.125rem;
   line-height: 2.66667; }
   .page-title .fa {
     color: rgba(255, 255, 255, 0.6); }
+
+.category-events-link {
+  float: right;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 4; }
+  .category-events-link:hover {
+    color: #000; }
 
 .filter-bar {
   background-color: #c0392b;

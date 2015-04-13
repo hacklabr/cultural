@@ -64,6 +64,12 @@
                 endif;
                 ?>
             </h1>
+            <?php if (is_category()) : ?>
+                <a href="#" class="category-events-link">
+                    Ver eventos
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            <?php endif; ?>
         </header><!-- .page-header -->
 
         <?php get_template_part('partials/slider'); ?>
@@ -73,7 +79,7 @@
             <div class="gutter-sizer"></div>
 
             <?php get_template_part('partials/loop') ?>
-            
+
         </div><!-- /grid -->
 
         <?php cultural_paging_nav(); ?>
