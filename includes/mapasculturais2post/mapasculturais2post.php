@@ -16,7 +16,6 @@ class MapasCulturais2Post {
         add_filter('http_request_host_is_external', array(__CLASS__, 'addExternalSafeURL'), 0, 3);
 
         add_action('admin_enqueue_scripts', array(__CLASS__, 'addAdminPostJS'));
-        add_action('virada-single-after-content', array(__CLASS__, 'addCaixaServicos'));
 
         // add shortcode
         add_shortcode('evento', array(__CLASS__, 'shortcode'));
@@ -289,39 +288,6 @@ class MapasCulturais2Post {
             foreach ($_POST[__CLASS__] as $meta_key => $value)
                 update_post_meta($post_id, $meta_key, $value);
         }
-    }
-
-    //OUTPUT
-    static function addCaixaServicos($post_id) {
-        if (!$post_id)
-            return;
-
-        $metadata = get_metadata('post', $post_id);
-
-        if (!isset($metadata['mapas_local_id']) || !is_numeric($metadata['mapas_local_id'])) {
-            return;
-        }
-        ?>
-        <div class="servico">
-            <p>
-                <?php if (isset($metadata['mapas_titutlo'])): ?>
-                    <span>Atração:</span> <?php echo $metadata['mapas_titutlo'][0]; ?><br>
-                <?php endif; ?>
-
-                <?php if (isset($metadata['mapas_local'])): ?>
-                    <span>Local:</span> <a href="<?php echo site_url('/programacao/local/##'); ?><?php echo $metadata['mapas_local_id'][0]; ?>"><?php echo $metadata['mapas_local'][0]; ?></a><br>
-                <?php endif; ?>
-
-                <?php if (isset($metadata['mapas_data'])): ?>
-                    <span>Data:</span> <?php echo $metadata['mapas_data'][0]; ?><br>
-                <?php endif; ?>
-                <?php if (isset($metadata['mapas_hora'])): ?>
-                    <span>Horário:</span> <?php echo $metadata['mapas_hora'][0]; ?><br>
-                <?php endif; ?>
-            </p>
-
-        </div>
-        <?php
     }
 
     /**
