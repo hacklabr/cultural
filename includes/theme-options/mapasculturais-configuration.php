@@ -26,13 +26,11 @@ class MapasCulturaisConfiguration {
 
     static function init() {
 
-        add_action('init', function() {
-            // define as constantes com os valores padrão se estas não forem configuradas no wp-config.php
-            define('MAPASCULTURAIS_URL', MapasCulturaisConfiguration::getValue('URL'));
-            define('MAPASCULTURAIS_API_URL', MAPASCULTURAIS_URL . 'api/');
-            define('MAPASCULTURAIS_NAME', 'SP Cultura');
-            define('TRANSIENTE_TIMEOUT_EVENT_INFO', 24 * 60 * 60);
-        });
+        // define as constantes com os valores padrão se estas não forem configuradas no wp-config.php
+        define('MAPASCULTURAIS_URL', MapasCulturaisConfiguration::getValue('URL'));
+        define('MAPASCULTURAIS_NAME', MapasCulturaisConfiguration::getValue('NAME'));
+        define('MAPASCULTURAIS_API_URL', MAPASCULTURAIS_URL . 'api/');
+        define('TRANSIENTE_TIMEOUT_EVENT_INFO', 24 * 60 * 60);
 
         add_action('admin_init', function() {
             register_setting(self::OPTION_NAME, self::OPTION_NAME, array(__CLASS__, 'optionsValidation'));
@@ -100,6 +98,7 @@ class MapasCulturaisConfiguration {
 
         $configs = array(
             'URL' => new CulturalConfigModel('URL', 'URL da instalação do Mapas Culturais', 'header', ''),
+            'NAME' => new CulturalConfigModel('URL', 'Nome da instalação do Mapas Culturais', 'header', ''),
             'verified' => new CulturalConfigModel('verified', 'Resultados Verificados', 'header', false),
             'linguagens' => new CulturalConfigModel('linguagens', 'Linguagens', 'header'),
             'classificacaoEtaria' => new CulturalConfigModel('classificacaoEtaria', 'Classificação Etária', 'header'),
@@ -447,9 +446,11 @@ class MapasCulturaisConfiguration {
         ?>
         <div class="wrap span-20">
             <h2><?php _e('Filtros da API do Mapas Culturais', 'cultural'); ?></h2>
+            <?php if (MAPASCULTURAIS_URL): ?>
             <p>
-                <?php _e('Configure aqui quais eventos a API do Mapas Culturais deve retornar para o site.', 'cultural'); ?>
+                Configure aqui quais eventos a API da plataforma <?php echo MAPASCULTURAIS_NAME ?> deve retornar para o site.
             </p>
+            <?php endif; ?>
 
             <form action="options.php" method="post" class="clear prepend-top">
                 <?php settings_fields(self::OPTION_NAME); ?>
@@ -461,6 +462,7 @@ class MapasCulturaisConfiguration {
 
                 <?php endif; ?>
                 <label> URL da instalação do mapas culturais <input type="text" name="<?php echo self::OPTION_NAME ?>[URL]" value="<?php echo self::getValue('URL') ?>"></label>
+                <label> Nome da instalação do mapas culturais <input type="text" name="<?php echo self::OPTION_NAME ?>[NAME]" value="<?php echo self::getValue('NAME') ?>"></label>
                 <p class="textright clear prepend-top">
                     <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
                 </p>
