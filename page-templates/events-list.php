@@ -21,50 +21,7 @@
     </article>
     <?php endif; ?>
 
-    <div class="filter-bar  cf">
-        <style>
-            .testApplyClass{
-
-            }
-            .testCancelClass{
-
-            }
-            .daterangepicker td.active, .daterangepicker td.active:hover {
-                background-color: #b01116; /*#357ebd;*/
-                border-color: #810d10 transparent transparent transparent; /*#3071a9;*/
-                color: #fff;
-            }
-            .daterangepicker td.in-range {
-                background:  #f4efef;/*#ebf4f8;*/
-                border-radius: 0px;
-            }
-            .daterangepicker .calendar.left td.in-range {
-                border-radius: 4px 0 0 4px;
-            }
-            .daterangepicker .calendar.right td.in-range {
-                border-radius: 0 4px 4px 0;
-            }
-            .daterangepicker .calendar th.available:not(.active):hover,
-            .daterangepicker .calendar td.available:not(.active):hover{
-                background: #e4cfcf;/*#eee;*/
-            }
-            .js-cancel{display:none;}
-            .daterangepicker .ranges{display:block!important;}
-            .daterangepicker {display:none;}
-            .date--picker {position: relative;}
-            .date--picker i {
-                left: 10px;
-                margin-right: 5px;
-                position: absolute;
-                top: 15px;
-                z-index: 20;
-            }
-            .date--picker input{
-                width:100%;
-                letter-spacing: 1px;
-            }
-        </style>
-
+    <div class="filter-bar cf">
         <div class="filter">
             <span class="label">Data</span>
             <div class="date--picker">
