@@ -221,9 +221,11 @@ if (!is_admin()) {
 
 
     add_action('wp_print_styles', function() {
-
-        wp_enqueue_style('daterange', get_bloginfo('template_directory') . '/js/lib/daterangepicker-bs3.css');
-    });
+        wp_deregister_style('cultural-style');
+        wp_register_style('daterange', get_bloginfo('template_directory') . '/js/lib/daterangepicker-bs3.css');
+        wp_register_style( 'cultural-style', get_stylesheet_uri(), array( 'daterange' ));
+        wp_enqueue_style('cultural-style');
+    },0);
 }
 
 /**

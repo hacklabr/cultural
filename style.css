@@ -17,6 +17,71 @@ Tags: one-column, two-columns, right-sidebar, custom-menu, editor-style, microfo
 .site-header:after, .entry-header:after, .entry__content:after, .filter-bar:after {
   clear: both; }
 
+.daterangepicker .ranges .input-mini {
+  border: 0 solid #ccc;
+  border-radius: 0;
+  color: #444; }
+
+.daterangepicker td, .daterangepicker th {
+  border-radius: 0; }
+
+.daterangepicker .calendar th, .daterangepicker .calendar td {
+  font-family: "Open Sans", "Lucida Grande", sans-serif; }
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: #c0392b;
+  border-color: #c0392b transparent transparent transparent;
+  color: #fff; }
+
+.daterangepicker td.in-range {
+  background: rgba(41, 39, 36, 0.08);
+  border-radius: 0px; }
+
+.daterangepicker td.available + td.start-date {
+  border-radius: 0; }
+
+.daterangepicker td.in-range + td.end-date {
+  border-radius: 0; }
+
+.daterangepicker td.start-date.end-date {
+  border-radius: 0 !important; }
+
+.daterangepicker .calendar th.available:not(.active):hover {
+  color: #c0392b; }
+
+.daterangepicker .calendar td.available:not(.active):hover {
+  background: rgba(41, 39, 36, 0.16);
+  color: #c0392b; }
+
+.js-cancel {
+  display: none; }
+
+.daterangepicker .ranges {
+  display: block !important; }
+
+.daterangepicker .calendar-date {
+  border-width: 0;
+  border-radius: 0;
+  background-color: rgba(41, 39, 36, 0.08); }
+
+.daterangepicker {
+  display: none;
+  border-radius: 0; }
+
+.date--picker {
+  position: relative; }
+
+.date--picker i {
+  left: 10px;
+  margin-right: 5px;
+  position: absolute;
+  top: 15px;
+  z-index: 20; }
+
+.date--picker input {
+  width: 100%;
+  letter-spacing: 1px; }
+
 article,
 aside,
 details,
@@ -49,7 +114,9 @@ img {
 html {
   overflow-y: scroll;
   box-sizing: border-box;
-  text-size-adjust: 100%; }
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%; }
 
 *,
 *:before,
@@ -69,7 +136,8 @@ a {
   a:hover, a:focus, a:active {
     border: 0;
     color: #c0392b;
-    transition: color .1s ease-in-out; }
+    -webkit-transition: color .1s ease-in-out;
+            transition: color .1s ease-in-out; }
   a:focus {
     outline: thin dotted; }
   a:hover, a:active {
@@ -386,7 +454,8 @@ span > object {
   font-family: "Aleo", serif;
   padding: .5em;
   position: relative;
-  transition: background-color .3s ease-in-out; }
+  -webkit-transition: background-color .3s ease-in-out;
+          transition: background-color .3s ease-in-out; }
   .button:hover {
     background-color: #4f902b; }
   .button:active {
@@ -445,7 +514,9 @@ img.aligncenter {
   padding: 1.5rem;
   position: fixed;
   top: 0;
-  transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
   width: 20%;
   z-index: 100;
   -webkit-overflow-scrolling: touch; }
@@ -581,7 +652,8 @@ img.aligncenter {
     color: #292724;
     display: inline-block;
     padding: .75rem 1em;
-    transition: background-color .1s ease-out; }
+    -webkit-transition: background-color .1s ease-out;
+            transition: background-color .1s ease-out; }
   .menu--main a:hover {
     background-color: #c0392b;
     color: #fff; }
@@ -809,13 +881,17 @@ img.aligncenter {
   margin: -1.5rem -1.5rem 1.5rem -1.5rem;
   overflow: hidden;
   padding: 0;
-  backface-visibility: hidden; }
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
 
 .entry__image a img {
-  transition: all .2s linear; }
+  -webkit-transition: all .2s linear;
+          transition: all .2s linear; }
 
 .entry__image a:hover img {
-  transform: scale(1.03); }
+  -webkit-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+          transform: scale(1.03); }
 
 .entry__meta {
   font-size: 0.875rem;
@@ -833,7 +909,8 @@ img.aligncenter {
 .entry__content a {
   box-shadow: inset 0 -2px 0 rgba(41, 39, 36, 0.2);
   color: inherit;
-  transition: all .1s ease-in-out; }
+  -webkit-transition: all .1s ease-in-out;
+          transition: all .1s ease-in-out; }
   .entry__content a:hover {
     box-shadow: inset 0 -2px 0 #c0392b;
     color: #292724; }
@@ -841,7 +918,10 @@ img.aligncenter {
 .entry__content p,
 .entry-summary p,
 .comment-content p {
-  hyphens: auto;
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
   margin: 0 0 1.5rem; }
 
 .entry__content blockquote {
@@ -1041,7 +1121,8 @@ img.aligncenter {
   .comments-title a:hover {
     background: #292724;
     color: #fff;
-    transition: all .1s linear; }
+    -webkit-transition: all .1s linear;
+            transition: all .1s linear; }
 
 .comments-list {
   list-style: none; }
@@ -1183,7 +1264,8 @@ img.aligncenter {
 #commentform input[type='url']:focus,
 #commentform textarea:focus {
   border-color: #292724;
-  transition: border-color .2s linear; }
+  -webkit-transition: border-color .2s linear;
+          transition: border-color .2s linear; }
 
 .form-allowed-tags {
   font-size: 0.75rem;
@@ -1320,7 +1402,9 @@ img.aligncenter {
     position: absolute;
     top: -.75rem;
     width: 4rem;
-    transform: rotate(-1deg); }
+    -webkit-transform: rotate(-1deg);
+        -ms-transform: rotate(-1deg);
+            transform: rotate(-1deg); }
 
 .widget--folded {
   border: none; }
@@ -1377,7 +1461,8 @@ img.aligncenter {
     position: relative; }
     .social a:hover {
       bottom: 2px;
-      transition: all .1s linear; }
+      -webkit-transition: all .1s linear;
+              transition: all .1s linear; }
   .social > li {
     display: inline-block;
     font-size: 1.125rem;
@@ -1498,7 +1583,7 @@ img.aligncenter {
   .feature:before {
     content: "";
     display: block;
-    padding-top: 75%;
+    padding-top: 75%
     /* 4:3 */ }
   .feature img {
     position: absolute;
@@ -1509,16 +1594,20 @@ img.aligncenter {
     width: 100%;
     opacity: .8;
     max-width: none;
-    transition: opacity 1s, transform 1s;
-    backface-visibility: hidden; }
+    -webkit-transition: opacity 1s, -webkit-transform 1s;
+            transition: opacity 1s, transform 1s;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden; }
 
 .feature:hover img {
   opacity: .4;
-  transform: scale3d(1.1, 1.1, 1); }
+  -webkit-transform: scale3d(1.1, 1.1, 1);
+          transform: scale3d(1.1, 1.1, 1); }
 
 .feature-content {
   padding: 1.5rem;
-  backface-visibility: hidden; }
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
   .feature-content::before, .feature-content::after {
     pointer-events: none; }
 
@@ -1541,14 +1630,16 @@ img.aligncenter {
   font-size: 1rem;
   line-height: 1.5;
   margin: 0 0 2px 0;
-  transform: translate3d(0, 0, 0); }
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
 
 /* Swiper Slider */
 .swiper {
   margin: 0 auto 1.5rem auto;
   position: relative;
   overflow: hidden;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   z-index: 1;
   width: 100%; }
   .swiper:before {
@@ -1588,7 +1679,8 @@ img.aligncenter {
   box-sizing: content-box; }
 
 .swiper-free-mode > .swiper-wrapper {
-  transition-timing-function: ease-out;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
   margin: 0 auto; }
 
 .swiper-slide {
@@ -1635,11 +1727,14 @@ img.aligncenter {
   height: .75rem;
   margin: 0 .35rem;
   width: .75rem;
-  transition: transform 0.3s ease, background-color 0.3s ease; }
+  -webkit-transition: -webkit-transform 0.3s ease, background-color 0.3s ease;
+          transition: transform 0.3s ease, background-color 0.3s ease; }
 
 .swiper-active-switch {
   background-color: white;
-  transform: scale(1.5); }
+  -webkit-transform: scale(1.5);
+      -ms-transform: scale(1.5);
+          transform: scale(1.5); }
 
 .slider-title {
   background-color: rgba(255, 255, 255, 0.2);
@@ -1783,12 +1878,14 @@ img.aligncenter {
     overflow: scroll;
     padding: .5em 0;
     box-shadow: 0 1px 2px 0 rgba(41, 39, 36, 0.35);
-    transition: opacity .5s;
+    -webkit-transition: opacity .5s;
+            transition: opacity .5s;
     opacity: 0; }
     .dropdown .submenu-dropdown li {
       padding: 0 .5em;
       cursor: pointer;
-      transition: all .2s; }
+      -webkit-transition: all .2s;
+              transition: all .2s; }
       .dropdown .submenu-dropdown li:hover {
         background: #fefefe;
         color: #444; }
