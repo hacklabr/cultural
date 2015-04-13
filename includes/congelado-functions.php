@@ -7,10 +7,10 @@ $autoinclude_base_dir = dirname(__FILE__) . '/';
 include $autoinclude_base_dir . '/db-updates.php';
 
 $autoinclude_folders = array(
+    'theme-options/',
     'metaboxes/',
     'post-types/',
     'taxonomies/',
-    'theme-options/',
     'widgets/',
     'shortcodes/'
 );
@@ -51,7 +51,7 @@ function rrmdir($dir) {
  * 		$result = "ALGUMA COISA";
  * 		RCache::set(__METHOD__, $nome, $result);
  * 		return $result;
- *  } 
+ *  }
  *  </pre>
  * @author rafael
  */
@@ -61,7 +61,7 @@ class RCache {
 
     /**
      * Salva o cache
-     * @param string $group pode ser usado __METHOD__ 
+     * @param string $group pode ser usado __METHOD__
      * @param string $id um identificador para o cache, deve ser único para o mesmo $group
      * @param mixed $data o que deve ser cacheado
      * @example RCache::set(__METHOD__, $post_id, $post);
@@ -83,7 +83,7 @@ class RCache {
 
     /**
      * Retorna o que estiver cacheado
-     * @param string $group 
+     * @param string $group
      * @param string $id
      * @example $value = RCache(__METHOD__, $post_id);
      * @return mixed o que estiver cacheado ou null se o cache não existir
@@ -116,12 +116,12 @@ class RCache {
  * 		$result = "ALGUMA COISA";
  * 		DCache::set(__METHOD__, $nome, $result);
  * 		return $result;
- *  } 
+ *  }
  *  </pre>
  * @author rafael
  */
 class DCache {
-    
+
     protected static function disabled(){
         return defined('HL_DISABLE_DCACHE') && HL_DISABLE_DCACHE;
     }
@@ -144,47 +144,47 @@ class DCache {
             }
         }
     }
-    
+
     protected static function getGroupPath ($group){
         $group = md5($group);
-        
+
         $path = $group;
 
         $full_path = "";
         for($index = 0; $index < strlen($path); $index++){
             $full_path .= $index % 3 === 0 ? '/'.$path[$index] : $path[$index];
         }
-        
+
         return $full_path.'/';
     }
 
     public static function getFilename($group, $id) {
         // para evitar que o diretório raíz do cache tenha muitos diretórios
-        // e estoure o limite de arquivos do sistema de arquivos 
+        // e estoure o limite de arquivos do sistema de arquivos
         $path = self::getGroupPath($group);
-        
+
         if (!is_dir(self::getPath() . $path))
             @mkdir(self::getPath() . $path, 0777, true);
-        
+
         return self::getPath() . $path . md5($id).'.cache';
     }
-    
+
     /**
      * Salva o cache
-     * @param string $group pode ser usado __METHOD__ 
+     * @param string $group pode ser usado __METHOD__
      * @param string $id um identificador para o cache, deve ser único para o mesmo $group
      * @param mixed $data o que deve ser cacheado
      * @example DCache::set(__METHOD__, $post_id, $post);
      */
     public static function set($group, $id, $data) {
         if(self::disabled()) return false;
-            
+
         $filename = self::getFilename($group, $id);
         if (file_exists(self::getPath()) && is_writable(self::getPath())) {
             if (!file_exists($filename) || (file_exists($filename) && is_writable($filename)))
                 @file_put_contents($filename, serialize($data));
         }
-        
+
     }
 
     /**
@@ -206,13 +206,13 @@ class DCache {
                 $exists = false;
             }
         }
-        
+
         return $exists;
     }
 
     /**
      * Retorna o que estiver cacheado
-     * @param string $group 
+     * @param string $group
      * @param string $id
      * @example $value = DCache(__METHOD__, $post_id);
      * @return mixed o que estiver cacheado ou null se o cache não existir
@@ -227,7 +227,7 @@ class DCache {
 
 
         }
-        
+
         return $result;
     }
 
@@ -237,7 +237,7 @@ class DCache {
      * @param string|null $id
      */
     public static function delete($group, $id = null) {
-        
+
         $filename = self::getFilename($group, $id);
         if (file_exists($filename) && is_writable($filename))
             @unlink($filename);
@@ -259,57 +259,57 @@ class DCache {
  * 		$result = "ALGUMA COISA";
  * 		MCache::set(__METHOD__, $nome, $result);
  * 		return $result;
- *  } 
+ *  }
  *  </pre>
  * @author rafael
  */
 class MCache{
     /**
-     * @var Memcache 
+     * @var Memcache
      */
      protected static $memcache = null;
-     
+
      protected static $expiration_times = array();
-     
+
      protected static $data = array();
-     
-    
+
+
      protected static function disabled(){
         return defined('HL_DISABLE_MCACHE') && HL_DISABLE_MCACHE;
      }
-     
+
      public static function init(){
-         
+
          if(self::disabled() || !class_exists("Memcache"))
             return null;
-         
+
          self::$memcache = new Memcache();
          $host = defined("HL_MEMCACHE_HOST") ? HL_MEMCACHE_HOST : '127.0.0.1';
-         
+
          self::$memcache->pconnect($host);
      }
-     
-     
+
+
      protected static function key($group, $id){
          return md5("$group:$id");
      }
-     
+
     /**
      * Salva o cache
-     * @param string $group pode ser usado __METHOD__ 
+     * @param string $group pode ser usado __METHOD__
      * @param string $id um identificador para o cache, deve ser único para o mesmo $group
      * @param mixed $data o que deve ser cacheado
      * @example MCache::set(__METHOD__, $post_id, $post);
      */
     public static function set($group, $id, $data) {
         if(self::disabled()) return false;
-        
+
         if(!self::$memcache)
             return false;
         $key = self::key($group, $id);
-        
+
         $expiration_time = isset(self::$expiration_times[$key]) ? self::$expiration_times[$key] : 0;
-        
+
         self::$memcache->add($key, $data, 0, $expiration_time);
     }
 
@@ -322,34 +322,34 @@ class MCache{
      */
     public static function exists($group, $id, $expiration_time = 0) {
         if(self::disabled()) return false;
-        
+
         if(!self::$memcache)
             return false;
-        
+
         $key = self::key($group, $id);
         self::$expiration_times[$key] = $expiration_time;
-        
-        return self::get($group, $id) !== false ? true : false; 
+
+        return self::get($group, $id) !== false ? true : false;
     }
 
     /**
      * Retorna o que estiver cacheado
-     * @param string $group 
+     * @param string $group
      * @param string $id
      * @example $value = MCache(__METHOD__, $post_id);
      * @return mixed o que estiver cacheado ou null se o cache não existir
      */
     public static function get($group, $id) {
         if(self::disabled()) return null;
-        
+
         if(!self::$memcache)
             return null;
-        
+
         $key = self::key($group, $id);
-        
+
         if(isset(self::$data[$key]))
             return self::$data[$key];
-        
+
         $data = self::$memcache->get($key);
         self::$data[$key] = $data;
         return $data;
@@ -364,10 +364,10 @@ class MCache{
         if(!self::$memcache)
             return false;
         $key = self::key($group, $id);
-        
+
         if(isset(self::$data[$key]))
             unset(self::$data[$key]);
-        
+
         self::$memcache->delete($key);
     }
 }
@@ -384,14 +384,14 @@ MCache::init();
  * 		$result = "ALGUMA COISA";
  * 		XCache::set(__METHOD__, $nome, $result);
  * 		return $result;
- *  } 
+ *  }
  *  </pre>
  * @author rafael
  */
 class XCache{
     /**
      * Salva o cache
-     * @param string $group pode ser usado __METHOD__ 
+     * @param string $group pode ser usado __METHOD__
      * @param string $id um identificador para o cache, deve ser único para o mesmo $group
      * @param mixed $data o que deve ser cacheado
      * @example XCache::set(__METHOD__, $post_id, $post);
@@ -412,13 +412,13 @@ class XCache{
         $result = MCache::exists($group, $id, $expiration_time);
         if(!$result)
             $result = DCache::exists($group, $id, $expiration_time);
-        
+
         return $result;
     }
 
     /**
      * Retorna o que estiver cacheado
-     * @param string $group 
+     * @param string $group
      * @param string $id
      * @example $value = XCache(__METHOD__, $post_id);
      * @return mixed o que estiver cacheado ou null se o cache não existir
@@ -427,7 +427,7 @@ class XCache{
         $result = MCache::get($group, $id);
         if(!is_null($result))
             $result = DCache::get ($group, $id);
-        
+
         return $result;
     }
 
@@ -448,7 +448,7 @@ class XCache{
 /**
  * Guarda em uma entrada da tabela wp_usermeta
  * a data do último login de cada usuário.
- * 
+ *
  * @param $login
  * @return null
  */
@@ -462,9 +462,9 @@ add_action('wp_login', 'congelado_last_login');
 
 /**
  * Atalho para ser usado no arquivo db-updates.php. Chama a função get_option()
- * e se a opção existir retorna false. Se a opção não existir cria ela e 
+ * e se a opção existir retorna false. Se a opção não existir cria ela e
  * retorna true.
- * 
+ *
  * @param string $option_name nome da opção
  * @return bool
  */
@@ -539,7 +539,7 @@ function _pr($var, $die = false) {
 }
 
 /**
- * _pr(debug_backtrace()) somente se $HL_DEBUG estiver definida como true 
+ * _pr(debug_backtrace()) somente se $HL_DEBUG estiver definida como true
  * @param mixed $var
  * @param boolean $die executa um die; no final
  */
@@ -551,7 +551,7 @@ function _bt() {
 }
 
 /**
- * imprime <pre>print_r($var)</pre> somente se $HL_DEBUG estiver definida como true 
+ * imprime <pre>print_r($var)</pre> somente se $HL_DEBUG estiver definida como true
  * @param mixed $var
  * @param boolean $die executa um die; no final
  */
