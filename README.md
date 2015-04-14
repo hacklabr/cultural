@@ -21,6 +21,7 @@ Ao Criar uma categoria você pode configurar uma cor, que será utilizada em div
 
 #### Régua de marcas
 A configuração da régua de marcas é feita em duas etapas:
+
 1. Primeiro é necessário cadastrar as marcas que serão utilizadas (*menu **Régua de Marcas***);
 2. Configuração da régua de marcas na página **Menus** do menu **Aparência** (*em inglês **Appearence***)
 
