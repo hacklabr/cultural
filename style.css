@@ -861,10 +861,11 @@ img.aligncenter {
 .single .entry-title a {
   cursor: default; }
 
-.entry__date {
+.entry__date, .entry__author {
   color: #888;
   font-size: 0.75rem;
-  line-height: 2; }
+  line-height: 2;
+  display: inline-block; }
 
 .entry__format {
   background-color: #292724;

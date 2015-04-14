@@ -967,9 +967,11 @@ img.aligncenter {
     cursor: default;
 }
 
-.entry__date {
+
+.entry__date, .entry__author {
     color: #888;
     @include size(12);
+    display: inline-block;
 }
 
 .entry__format {

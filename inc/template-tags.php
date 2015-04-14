@@ -261,7 +261,7 @@ if (!function_exists('cultural_comment')) :
         function cultural_the_post_author() {
             ?>
             <div class="entry__author">
-                <?php _e('By', 'cultural'); ?> <?php the_author_posts_link(); ?>
+                <?php _e('by', 'cultural'); ?> <?php the_author_posts_link(); ?>
             </div>
             <?php
         }
