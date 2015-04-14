@@ -64,7 +64,7 @@
                 endif;
                 ?>
             </h1>
-            <?php if (is_category()) : ?>
+            <?php if (is_category() && isset($cat_data['use_events']) && $cat_data['use_events']) : ?>
                 <a href="<?php bloginfo('url') ?>/eventos/<?php echo $wp_query->query['category_name'] ?>/" class="category-events-link">
                     Ver eventos
                     <i class="fa fa-arrow-right"></i>

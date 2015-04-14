@@ -1,7 +1,26 @@
 (function ($) {
     $(function () {
         var $entityContainer,
-            template = document.getElementById('template-entity').innerHTML;
+            template = document.getElementById('template-entity') ? document.getElementById('template-entity').innerHTML : null;
+
+
+        // category filter
+
+        if($('#category-use-events').length){
+            if($('#category-use-events').is(':checked')){
+                $('#category-events-filter').show();
+            }else{
+                $('#category-events-filter').hide();
+            }
+
+            $('#category-use-events').change(function(){
+                if($('#category-use-events').is(':checked')){
+                    $('#category-events-filter').show();
+                }else{
+                    $('#category-events-filter').hide();
+                }
+            });
+        }
 
         // create tabs
         $('#mapasculturais-config-tabs').tabs();
