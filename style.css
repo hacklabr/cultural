@@ -1516,6 +1516,21 @@ button.mfp-arrow-left {
   line-height: 1.71429;
   text-align: center; }
 
+.site-sponsors {
+  list-style: none; }
+  .site-sponsors h3 {
+    color: #ccc;
+    margin-top: 0;
+    margin-bottom: .75rem;
+    font-size: 0.875rem;
+    line-height: 1.71429; }
+  .site-sponsors li {
+    display: inline-block;
+    margin-top: 1.5rem;
+    margin-right: 1.5rem; }
+    .site-sponsors li img {
+      margin-right: 1.5rem; }
+
 .social {
   list-style: none;
   margin: 0;

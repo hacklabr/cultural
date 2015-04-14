@@ -2,7 +2,7 @@
 
 // Hook into the 'init' action
 add_action('init', function(){
-    add_image_size('regua', 200, 100, false);
+    add_image_size('regua', 120, 60, false);
 
     $labels = array(
         'name' => _x('Régua de Marcas', 'Post Type General Name', 'cultural'),
@@ -55,7 +55,7 @@ add_action('init', function(){
 
         public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
             if($depth === 0){
-                $output .= "<li class=\"alignleft\"><span>{$item->title}</span><br>";
+                $output .= "<li><h3>{$item->title}</h3>";
             }else{
                 $attachment_id = get_post_thumbnail_id($item->object_id);
                 $src = wp_get_attachment_image_src($attachment_id, 'regua');

@@ -1757,6 +1757,24 @@ button.mfp-arrow-left {
     text-align: center;
 }
 
+.site-sponsors {
+    list-style: none;
+    h3 {
+        color:  #ccc;
+        margin-top: 0;
+        margin-bottom: .75rem;
+        @include size(14);
+    }
+    li {
+        display: inline-block;
+        margin-top: 1.5rem;
+        margin-right: 1.5rem;
+        img {
+            margin-right: 1.5rem;
+        }
+    }
+}
+
 .social {
     list-style: none;
     margin: 0;
