@@ -4,7 +4,7 @@ class MCEntityRelationMetabox {
 
     protected static $metabox_config = array(
         'mc-entity-relation', // slug do metabox
-        'Linkar com a entidade do Mapas Culturais ' . MAPASCULTURAIS_NAME , // título do metabox
+        'Linkar com a entidade do Mapas Culturais' , // título do metabox
         array('post', 'page'), // array('post','page','etc'), // post types
         'normal' // onde colocar o metabox
     );
