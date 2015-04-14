@@ -219,8 +219,16 @@ class MapasCulturaisConfiguration {
             }
 
             .config-section {
+                box-sizing: border-box;
                 float:left;
-                margin:0 1em;
+                width: 33%;
+                padding: 1.5rem;
+                border-right: 1px solid #eee;
+
+            }
+
+            div.config-section:last-child {
+                border-right: none;
             }
 
             .checkbox-list ul {
@@ -230,6 +238,67 @@ class MapasCulturaisConfiguration {
             }
             .checkbox-list ul li {
                 white-space: nowrap;
+            }
+            .ui-widget-content {
+                border: none;
+                color: inherit;
+            }
+            .ui-widget-header {
+                border: none;
+                border-bottom: 1px solid #ccc;
+                color: inherit;
+                background: inherit;
+            }
+            .ui-corner-top {
+                border-radius: 0;
+            }
+            .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+                padding: 6px 10px;
+                font-size: 15px;
+                line-height: 24px;
+            }
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+                background: #e4e4e4;
+                border: 1px solid #ccc;
+                font-weight: bold;
+            }
+            .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover{
+                background: #fff;
+            }
+            .ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link {
+                color: #555;
+            }
+            .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+                background: #f1f1f1;
+                border: 1px solid #ccc;
+                font-weight: bold;
+            }
+            .ui-state-active a, .ui-state-active a:hover, .ui-state-active a:link {
+                color: #000;
+            }
+
+            .ui-widget {
+                font-family: inherit;
+                font-size: inherit;
+                background: inherit;
+            }
+            .ui-tabs, .ui-tabs-nav {
+                margin: 0 0 23px !important;
+                padding: 0 !important;
+            }
+            .ui-tabs .ui-tabs-panel {
+                background: #fff;
+                border: 1px solid #dfdfdf;
+                box-shadow: 0 1px 1px rgba(0,0,0,.04);
+                padding: 1.5rem;
+            }
+            .ui-tabs .ui-tabs-panel:before,
+            .ui-tabs .ui-tabs-panel:after {
+                content: "";
+                display: table;
+            }
+            .ui-tabs .ui-tabs-panel:after {
+                clear: both;
             }
 
             .ui-autocomplete {
@@ -317,7 +386,7 @@ class MapasCulturaisConfiguration {
             <div id="tab-geral" class='config-tab'>
                 <div class='config-section'>
                     <?php if (!$category_id || !self::getValue('verified')): ?>
-                        <h4>Selo</h4>
+                        <h3>Selo</h3>
                         <label>
                             <input type="hidden"   name="<?php echo self::OPTION_NAME ?>[verified]"  value="0">
                             <input type="checkbox" name="<?php echo self::OPTION_NAME ?>[verified]"  value="1" <?php if (self::getValue('verified', $categoryOptions)) echo 'checked'; ?>>
@@ -325,7 +394,7 @@ class MapasCulturaisConfiguration {
                         </label>
                     <?php endif; ?>
 
-                    <h4>Classificação etária</h4>
+                    <h3>Classificação etária</h3>
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('classificacaoEtaria');
@@ -355,7 +424,7 @@ class MapasCulturaisConfiguration {
                     </ul>
                 </div>
                 <div class='config-section checkbox-list'>
-                    <h4>Linguagens</h4>
+                    <h3>Linguagens</h3>
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('linguagens');
@@ -383,7 +452,6 @@ class MapasCulturaisConfiguration {
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <div class='clear'></div>
             </div>
             <div id="tab-recorte-geografico">
                 <?php
@@ -402,7 +470,7 @@ class MapasCulturaisConfiguration {
                     $metaValue = self::getValue($geoDivisionMetadata->metakey, $categoryOptions);
                     ?>
                     <div class='config-section checkbox-list'>
-                        <h4><?php echo $geoDivisionMetadata->name ?></h4>
+                        <h3><?php echo $geoDivisionMetadata->name ?></h3>
                         <ul>
                             <?php
                             foreach ($geoDivision->data as $d):
@@ -421,22 +489,19 @@ class MapasCulturaisConfiguration {
                         </ul>
                     </div>
                 <?php endforeach; ?>
-                <div class='clear'></div>
             </div>
             <div id="tab-agentes" class="entity-tab">
+                <label>Buscar Agente</label>
                 <input  type='text' placeholder="Buscar Agente" class='entity-autocomplete' data-entity='agent'/>
                 <div id="agent-container" class="entity-container js-entity-container"></div>
-                <div class='clear'></div>
             </div>
             <div id="tab-espacos" class="entity-tab">
                 <input  type='text' placeholder="Buscar Espaço" class='entity-autocomplete' data-entity='space'/>
                 <div id="space-container" class="entity-container js-entity-container"></div>
-                <div class='clear'></div>
             </div>
             <div id="tab-projetos" class="entity-tab">
                 <input  type='text' placeholder="Buscar Projeto/Edital" class='entity-autocomplete' data-entity='project'/>
                 <div id="project-container" class="entity-container js-entity-container"></div>
-                <div class='clear'></div>
             </div>
         </div>
         <?php
@@ -452,18 +517,23 @@ class MapasCulturaisConfiguration {
             </p>
             <?php endif; ?>
 
-            <form action="options.php" method="post" class="clear prepend-top">
+            <form action="options.php" method="post" class="form-wrap">
                 <?php settings_fields(self::OPTION_NAME); ?>
-                <p class="textright clear prepend-top">
-                    <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
-                </p>
                 <?php if (MAPASCULTURAIS_URL): ?>
                     <?php self::printForm() ?>
 
                 <?php endif; ?>
-                <label> URL da instalação do mapas culturais <input type="text" name="<?php echo self::OPTION_NAME ?>[URL]" value="<?php echo self::getValue('URL') ?>"></label>
-                <label> Nome da instalação do mapas culturais <input type="text" name="<?php echo self::OPTION_NAME ?>[NAME]" value="<?php echo self::getValue('NAME') ?>"></label>
-                <p class="textright clear prepend-top">
+                <div class="form-field">
+                    <label>Insira a URL da instalação do Mapas Culturais:</label>
+                    <input type="text" name="<?php echo self::OPTION_NAME ?>[URL]" value="<?php echo self::getValue('URL') ?>" class="regular-text" />
+                    <p>O endereço do site de onde os eventos serão alimentados.</p>
+                </div>
+                <div class="form-field">
+                    <label>Nome da instalação do Mapas Culturais:</label>
+                    <input type="text" name="<?php echo self::OPTION_NAME ?>[NAME]" value="<?php echo self::getValue('NAME') ?>" class="regular-text" />
+                    <p>O nome do site de onde os eventos serão alimentados.</p>
+                </div>
+                <p class="submit">
                     <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
                 </p>
             </form>
