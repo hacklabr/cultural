@@ -885,6 +885,12 @@ img.aligncenter {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden; }
 
+.entry__image .caption {
+  color: #888;
+  font-size: 0.75rem;
+  line-height: 2;
+  font-style: italic; }
+
 .entry__image a img {
   -webkit-transition: all .2s linear;
           transition: all .2s linear; }
@@ -1065,9 +1071,66 @@ img.aligncenter {
   top: -2px; }
 
 .gallery-caption {
-  color: #999;
+  color: #888;
   font-size: 0.75rem;
-  line-height: 2; }
+  line-height: 2;
+  font-style: italic; }
+
+.mfp-zoom-out-cur {
+  cursor: default; }
+
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: pointer; }
+
+.mfp-bg {
+  background-color: #000;
+  opacity: 0.9; }
+
+.mfp-figure:after {
+  box-shadow: none;
+  background: transparent; }
+
+.mfp-figure figure {
+  margin: 0; }
+
+.mfp-image-holder .mfp-close {
+  padding: 0;
+  opacity: 1;
+  color: #c0392b; }
+
+.mfp-image-holder .mfp-close:hover {
+  color: #fff;
+  font-size: 24px; }
+
+button.mfp-arrow {
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  background: #c0392b;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  opacity: 1;
+  font-size: 24px; }
+
+button.mfp-arrow:active {
+  margin-top: -21px; }
+
+button.mfp-arrow:hover {
+  background: #fff;
+  color: #c0392b; }
+
+button.mfp-arrow-right {
+  margin-right: 10px; }
+
+button.mfp-arrow-left {
+  margin-left: 10px; }
+
+.mfp-arrow:after, .mfp-arrow:before {
+  display: none; }
 
 .entry-footer {
   color: #888;

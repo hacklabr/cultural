@@ -119,7 +119,7 @@ function cultural_scripts() {
 
     wp_enqueue_script('jquery');
 
-    wp_enqueue_style('cultural-style', get_stylesheet_uri());
+    wp_enqueue_style('cultural-style', get_stylesheet_uri(),array('magnific-popup'));
 
     $js_lib_path = get_bloginfo('template_directory') . (WP_DEBUG ? '/js/lib/' : '/js/min/');
 
@@ -240,7 +240,7 @@ if (!is_admin()) {
     add_action('wp_print_styles', function() {
         wp_deregister_style('cultural-style');
         wp_register_style('daterange', get_bloginfo('template_directory') . '/js/lib/daterangepicker-bs3.css');
-        wp_register_style( 'cultural-style', get_stylesheet_uri(), array( 'daterange' ));
+        wp_register_style( 'cultural-style', get_stylesheet_uri(), array( 'daterange',  'magnific-popup'));
         wp_enqueue_style('cultural-style');
     },0);
 }
