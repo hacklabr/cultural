@@ -6,7 +6,7 @@ A WordPress magazine theme ready to connect with the [Mapas Culturais API](https
 ## Guia de instalação, configuração e utilização
 
 ### Instalação
-1. Baixe a última versão da [página de releases](https://github.com/hacklabr/cultural/release]);
+1. Baixe a última versão da [página de releases](https://github.com/hacklabr/cultural/releases);
 2. Descompacte o arquivo baixado na pasta **wp-contentent/themes/** de seu site wordpress;
 3. Logado como administrador no seu site wordpress, entre na página **Temas** (*em inglês **Themes***) do menu **Aparência** (*em inglês **Appearence***) e ative o tema **Cultural**;
 4. Entre na página do menu **Mapas Culturais** e informe os campos **URL da instalação do Mapas Culturais** (*exemplo **http://spcultura.prefeitura.sp.gov.br/** ou **http://mapa.cultura.rs.gov.br/** *) e **Nome da instalação do Mapas Culturais** (*exemplo **SP Cultura**, ou **Mapa da Cultura***).
