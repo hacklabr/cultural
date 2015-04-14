@@ -5,6 +5,10 @@
  *
  * @package cultural
  */
+
+$category = get_category(get_query_var('cat'));
+$cat_data = get_option('category_' . $category->cat_ID);
+$cat_color = $cat_data['color'];
 ?>
 
 <?php get_header(); ?>
@@ -21,7 +25,7 @@
     </article>
     <?php endif; ?>
 
-    <div class="filter-bar cf">
+    <div class="filter-bar cf" style="background: <?php echo $cat_color ?>" >
         <div class="filter">
             <span class="label">Data</span>
             <div class="date--picker">
@@ -89,8 +93,8 @@
             </div>
         </div>
     </div>
-<span>{{events.length}} eventos encontrados</span>
-    <div class="events-list grid js-events-masonry">
+    <span ng-if="!loading">{{events.length}} eventos encontrados</span>
+    <div class="events-list grid js-events-masonry" ng-show="!loading">
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
 

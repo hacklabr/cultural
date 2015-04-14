@@ -175,10 +175,27 @@ function cultural_scripts() {
         'apiUrl' => MapasCulturaisApiProxy::getProxyURL()
     );
 
+
     if (is_category()) {
         $category = get_queried_object();
+
+        $catFilters = array();
+
+        foreach(get_option("category_{$category->cat_ID}") as $key => $options){
+            if(in_array($key, array('linguagens', 'classificacaoEtaria')) || substr($key,0,3) === 'geo'){
+                $catFilters[$key] = array();
+                foreach($options as $name => $val){
+                    if($val){
+                        $catFilters[$key][$name] = true;
+                    }
+                }
+            }else{
+                $catFilters[$key] = $options;
+            }
+        }
+
         $vars['catid'] = $category->cat_ID;
-        $vars['categoryFilters'] = get_option("category_{$category->cat_ID}");
+        $vars['categoryFilters'] = $catFilters;
     }
 
     wp_localize_script('main', 'vars', $vars);

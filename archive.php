@@ -65,7 +65,7 @@
                 ?>
             </h1>
             <?php if (is_category()) : ?>
-                <a href="#" class="category-events-link">
+                <a href="<?php bloginfo('url') ?>/eventos/<?php echo $wp_query->query['category_name'] ?>/" class="category-events-link">
                     Ver eventos
                     <i class="fa fa-arrow-right"></i>
                 </a>
