@@ -42,7 +42,6 @@ add_action('category_add_form_fields', 'mapasculturais_category_add', 11);
 
 /** Save Category Meta **/
 function mapasculturais_category_save( $term_id ) {
-    echo "category_$term_id";
     if ( isset( $_POST[MapasCulturaisConfiguration::OPTION_NAME] ) ) {
         $t_id = $term_id;
         $cat_meta = get_option( "category_$t_id");
