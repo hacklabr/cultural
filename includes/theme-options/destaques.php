@@ -32,7 +32,7 @@ class Cultural_Hightlights {
             return array();
         }
 
-        $post_ids = [];
+        $post_ids = array();
 
         foreach (explode("\n", $option[$type]) as $url){
             $url = trim($url);
