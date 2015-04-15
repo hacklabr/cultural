@@ -14,10 +14,10 @@ A WordPress magazine theme ready to connect with the [Mapas Culturais API](https
 ### Configuração
 
 #### Filtros de eventos
-A configuração de quais eventos serão "puxados" da plataforma Mapas Culturais é feita na página do menu **Mapas Culturais** e ela aparece automaticamente após a configuração da URL e do Nome da instalação do Mapas Culturais (_item 4 da seção [Instalação](#Instalação)_);
+A configuração de quais eventos serão "puxados" da plataforma Mapas Culturais é feita na página do menu **Mapas Culturais** e ela aparece automaticamente após a configuração da URL e do Nome da instalação do Mapas Culturais (_item 4 da seção [Instalação](#Instalação)_).
 
 #### Categorias
-Ao Criar uma categoria você pode configurar uma cor, que será utilizada em diversas partes do site, e informar se esta categoria terá, ou não, uma agenda de eventos relacionada. Para categorias com agenda de eventos um formulário será exibido para a configuração dos filtros a serem utilizados para a agenda desta categoria;
+Ao Criar uma categoria você pode configurar uma cor, que será utilizada em diversas partes do site, e informar se esta categoria terá, ou não, uma agenda de eventos relacionada. Para categorias com agenda de eventos um formulário será exibido para a configuração dos filtros a serem utilizados para a agenda desta categoria.
 
 #### Menus
 A configuração dos menus do site é feita na página **Menus** do menu **Aparência** (_em inglês **Appearence**_).
@@ -38,7 +38,7 @@ Após cadastrar as marcas você deve configurar a régua. Para isto entre na pá
 No primeiro nível do menu você deve colocar as seções (_exemplos: **Patrocinadores**, **Organizadores**, **Realização**, etc_) utilizando links e no segundo nível as marcas.
 
 #### Destaques da Home e das Categorias
-Para destacar ou fixar posts nos começos das listagens da home e das categorias cole as urls dos posts desejados nas caixas da página do menu **Post Highlights**
+Para destacar ou fixar posts nos começos das listagens da home e das categorias cole as urls dos posts desejados nas caixas da página do menu **Post Highlights**.
 
 ### Posts/Páginas
 #### Relacionando post/página com entidade do Mapas Culturais
@@ -49,7 +49,7 @@ Além das mudanças de urls dos links pelo site, se a entidade que está sendo r
 Para relacionar um post a uma entidade do Mapas Culturais copie a url da entidade (_exemplos: **http://spcultura.prefeitura.sp.gov.br/espaco/0000/** ou **http://spcultura.prefeitura.sp.gov.br/evento/0000/**) e cole na caixa **Linkar com entidade do Mapas Culturais**.
 
 #### Importando imagens das entidades do Mapas Culturais
-Você pode importar as imagens de uma entidade e anexá-las ao post clicando no botão **Importar imagens da plataforma**
+Você pode importar as imagens de uma entidade e anexá-las ao post clicando no botão **Importar imagens da plataforma**.
 
 #### Caixas de serviço de eventos
-Você pode adicionar caixas de serviço de eventos utilizando o shortcode **[evento ]** em qualquer ponto do conteúdo do post/página. Exemplo **[evento http://spcultura.prefeitura.sp.gov.br/evento/00000/]**
+Você pode adicionar caixas de serviço de eventos utilizando o shortcode **[evento ]** em qualquer ponto do conteúdo do post/página. Exemplo **[evento http://spcultura.prefeitura.sp.gov.br/evento/00000/]**.
