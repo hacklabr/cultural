@@ -33,15 +33,15 @@ class MapasCulturaisConfiguration {
         define('TRANSIENTE_TIMEOUT_EVENT_INFO', 24 * 60 * 60);
 
         add_action('admin_init', function() {
-            register_setting(self::OPTION_NAME, self::OPTION_NAME, array(__CLASS__, 'optionsValidation'));
+            register_setting(MapasCulturaisConfiguration::OPTION_NAME, MapasCulturaisConfiguration::OPTION_NAME, array(__CLASS__, 'optionsValidation'));
         });
 
         add_action('admin_menu', function() {
-            if (isset($_GET['page']) && $_GET['page'] == self::OPTION_NAME || isset($_GET['taxonomy']) && $_GET['taxonomy'] == 'category') {
-                self::enqueueScripts();
+            if (isset($_GET['page']) && $_GET['page'] == MapasCulturaisConfiguration::OPTION_NAME || isset($_GET['taxonomy']) && $_GET['taxonomy'] == 'category') {
+                MapasCulturaisConfiguration::enqueueScripts();
             }
             add_menu_page(
-                    "Mapas Culturais", "Mapas Culturais", 'manage_options', self::OPTION_NAME, array(__CLASS__, 'contentOutput')
+                    "Mapas Culturais", "Mapas Culturais", 'manage_options', MapasCulturaisConfiguration::OPTION_NAME, array(__CLASS__, 'contentOutput')
             );
         });
     }
