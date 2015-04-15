@@ -6,7 +6,7 @@ A WordPress magazine theme ready to connect with the [Mapas Culturais API](https
 ## Guia de instalação, configuração e utilização
 
 ### Instalação
-1. Baixe a última versão da [página de releases](https://github.com/hacklabr/cultural/releases);
+1. Faça download da última versão disponível do tema na [página de releases](https://github.com/hacklabr/cultural/releases);
 2. Descompacte o arquivo baixado na pasta **wp-contentent/themes/** de seu site wordpress;
 3. Logado como administrador no seu site wordpress, entre na página **Temas** (_em inglês **Themes**_) do menu **Aparência** (*em inglês **Appearence***) e ative o tema **Cultural**;
 4. Entre na página do menu **Mapas Culturais** e informe os campos **URL da instalação do Mapas Culturais** (_exemplo **http://spcultura.prefeitura.sp.gov.br/** ou **http://mapa.cultura.rs.gov.br/**_) e **Nome da instalação do Mapas Culturais** (_exemplo **SP Cultura**, ou **Mapa da Cultura**_).
@@ -38,10 +38,18 @@ Após cadastrar as marcas você deve configurar a régua. Para isto entre na pá
 No primeiro nível do menu você deve colocar as seções (_exemplos: **Patrocinadores**, **Organizadores**, **Realização**, etc_) utilizando links e no segundo nível as marcas.
 
 #### Destaques da Home e das Categorias
-1. Highlights
-2. Posts Fixos
+Para destacar ou fixar posts nos começos das listagens da home e das categorias cole as urls dos posts desejados nas caixas da página do menu **Post Highlights**
 
-### Relacionando entidades do Mapas Culturais com posts do seu site
-1. Relacionar post com entidade do Mapas Culturais
-2. Importando imagens das entidades do Mapas Culturais
-3. Shortcode **[evento ]**
+### Posts/Páginas
+#### Relacionando post/página com entidade do Mapas Culturais
+Relacionar uma entidade do Mapas Culturais a um post de seu site você faz com que, em diversos lugares do site, as urls dos links para esta entidade do Mapas Culturais seja substituido pela url do post relacionado. Por exemplo, se você relacionar um post Y a um evento X e este evento X aparecer no resultado de uma busca por eventos, o link de **mais imformações** levará ao post Y ao invés de levar para a página do evento X no Mapas Culturais.
+
+Além das mudanças de urls dos links pelo site, se a entidade que está sendo relacionada ao post for um evento, uma caixa de serviço do evento será exibida ao final do post.
+
+Para relacionar um post a uma entidade do Mapas Culturais copie a url da entidade (_exemplos: **http://spcultura.prefeitura.sp.gov.br/espaco/0000/** ou **http://spcultura.prefeitura.sp.gov.br/evento/0000/**) e cole na caixa **Linkar com entidade do Mapas Culturais**.
+
+#### Importando imagens das entidades do Mapas Culturais
+Você pode importar as imagens de uma entidade e anexá-las ao post clicando no botão **Importar imagens da plataforma**
+
+#### Caixas de serviço de eventos
+Você pode adicionar caixas de serviço de eventos utilizando o shortcode **[evento ]** em qualquer ponto do conteúdo do post/página. Exemplo **[evento http://spcultura.prefeitura.sp.gov.br/evento/00000/]**
