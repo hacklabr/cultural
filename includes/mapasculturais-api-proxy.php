@@ -97,8 +97,10 @@ class MapasCulturaisApiProxy {
 
             while($obj = @mysqli_fetch_object($rs)){
                 $post_permalink = get_permalink($obj->post_ID);
-                foreach(self::$objects[$obj->meta_value] as $o){
-                    $o->singleUrl = $post_permalink;
+                if(isset(self::$objects[$obj->meta_value]) && is_array(self::$objects[$obj->meta_value])){
+                    foreach(self::$objects[$obj->meta_value] as $o){
+                        $o->singleUrl = $post_permalink;
+                    }
                 }
             }
         }else{
@@ -106,8 +108,10 @@ class MapasCulturaisApiProxy {
 
             while($obj = @mysql_fetch_object($rs)){
                 $post_permalink = get_permalink($obj->post_ID);
-                foreach(self::$objects[$obj->meta_value] as $o){
-                    $o->singleUrl = $post_permalink;
+                if(isset(self::$objects[$obj->meta_value]) && is_array(self::$objects[$obj->meta_value])){
+                    foreach(self::$objects[$obj->meta_value] as $o){
+                        $o->singleUrl = $post_permalink;
+                    }
                 }
             }
         }
