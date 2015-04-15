@@ -29,13 +29,15 @@ class MapasCulturaisApiProxy {
     static function fetch($query) {
         $cache_id = 'MAPI:' . md5($query);
 
-        if(true || !$response = wp_cache_get($cache_id)){
+        if(!$response = wp_cache_get($cache_id)){
 
             $rs = wp_remote_get($query, array('timeout' => '120'));
 
             $response = new stdClass;
 
             $response->responseCode = $rs['response']['code'];
+            $response->responseMessage = $rs['response']['message'];
+
             $response->apiMetadata = isset($rs['headers']['api-metadata']) ? $rs['headers']['api-metadata'] : false;
             $response->contentType = $rs['headers']['content-type'];
             if ($response->responseCode == 200 && $response->contentType == "application/json") {
@@ -65,7 +67,11 @@ class MapasCulturaisApiProxy {
         }
 
         if ($response->responseCode) {
-            http_response_code($response->responseCode);
+//            if(function_exists('http_response_code')){
+//                http_response_code($response->responseCode);
+//            }else{
+                header("HTTP/1.1 {$response->responseCode} {$response->responseMessage}");
+//            }
         }
 
         echo $response->body;
