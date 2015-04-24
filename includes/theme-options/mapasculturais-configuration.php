@@ -211,49 +211,160 @@ class MapasCulturaisConfiguration {
         extract($configs);
         ?>
         <style>
-            .thumb {
-                width: 72px;
-                height: 72px;
-                background-color:#ccc;
-                margin-right: 5px;
+            .ui-widget {
+                font-family: inherit;
+                font-size: inherit;
+                background: inherit;
+            }
+            .ui-widget-content {
+                border: none;
+                color: inherit;
+            }
+            .ui-widget-header {
+                border: none;
+                border-bottom: 1px solid #ccc;
+                color: inherit;
+                background: inherit;
+            }
+            .ui-corner-top {
+                border-radius: 0;
+            }
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+                background: #e4e4e4;
+                border: 1px solid #ccc;
+                font-weight: bold;
+            }
+            .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover{
+                background: #fff;
+            }
+            .ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link {
+                color: #555;
+            }
+            .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+                background: #f1f1f1;
+                border: 1px solid #ccc;
+                font-weight: bold;
+            }
+            .ui-state-active a, .ui-state-active a:hover, .ui-state-active a:link {
+                color: #000;
+            }
+            .ui-tabs, .ui-tabs-nav {
+                margin: 0 0 23px !important;
+                padding: 0 !important;
+            }
+            .ui-tabs .ui-tabs-panel {
+                background: #fff;
+                border: 1px solid #dfdfdf;
+                box-shadow: 0 1px 1px rgba(0,0,0,.04);
+                padding: 24px;
+            }
+            .ui-tabs .ui-tabs-panel:before,
+            .ui-tabs .ui-tabs-panel:after {
+                content: "";
+                display: table;
+            }
+            .ui-tabs .ui-tabs-panel:after {
+                clear: both;
+            }
+            .ui-autocomplete {
+                max-height: 550px;
+                min-width: 350px;
+                max-width: 700px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+                background: #fff;
+                border: 1px solid #dfdfdf;
+                box-shadow: 0 3px 5px rgba(0,0,0,.2);
+            }
+            ul.ui-autocomplete {
+                max-height: 315px;
+            }
+            ul.ui-autocomplete, ul.ui-autocomplete article {
+                max-width: 500px;
+            }
+            .ui-menu-item {
+                border-bottom: 1px solid #eee;
+            }
+            .ui-menu-item.ui-state-focus {
+                background: #f1f1f1;
+                border: none;
+                border-bottom: inherit;
+                margin: 0;
+            }
+            .config-section {
+                box-sizing: border-box;
+                float: left;
+                width: 33%;
+                padding: 24px;
+                border-right: 1px solid #eee;
+
             }
 
-            .config-section {
-                float:left;
-                margin:0 1em;
+            div.config-section:last-child {
+                border-right: none;
             }
 
             .checkbox-list ul {
-                padding-right:15px;
-                max-height:300px;
-                overflow:auto;
+                padding-right: 15px;
+                max-height: 300px;
+                overflow: auto;
             }
             .checkbox-list ul li {
                 white-space: nowrap;
             }
-
-            .ui-autocomplete {
-                max-height: 550px;
-                min-width:350px;
-                max-width:700px;
-                overflow-y: auto;
-                /* prevent horizontal scrollbar */
-                overflow-x: hidden;
+            .entity-tab {
+                min-height: 350px;
             }
-
-            .entity-tab { min-height:350px; }
-
-            .entity-list-item { border-bottom: 1px solid #ddd; cursor: pointer; padding:10px; }
-            .entity-list-item img { float:left; margin-right:12px;  }
-            .entity-list-item--name { font-weight: bold; }
-            .entity-list-item label { font-weight: bold; }
-
-            .entity-container .entity-list-item { border: 1px solid #dfdfdf; margin:5px; width: 350px; min-height:120px; float:left; cursor: default;}
-            .entity-container .entity-list-item:hover { background-color: #dfdfdf;  }
-            .entity-container .entity-list-item .js-remove { float:right; background:red; color:white; width:20px; height:20px; text-decoration: none;}
-
-            ul.ui-autocomplete { max-height:300px; }
-            ul.ui-autocomplete, ul.ui-autocomplete article { max-width: 500px; }
+            .entity-header {
+                background: #f5f5f5;
+                margin: -24px -24px 23px;
+                padding: 10px;
+                border-bottom: 1px solid #dfdfdf;
+            }
+            .entity-header label {
+                display: inline;
+            }
+            .entity-list-item {
+                cursor: pointer;
+                padding: 10px 10px 10px 92px;
+                position: relative;
+                min-height: 72px;
+                white-space: normal;
+                line-height: 1.5;
+            }
+            .entity-list-item img {
+                position: absolute;
+                left: 10px;
+            }
+            .entity-list-item--name {
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+            .entity-list-item label {
+                font-weight: bold;
+                vertical-align: inherit;
+                display: inline;
+            }
+            .entity-container {
+                margin: 24px 0;
+            }
+            .entity-container .entity-list-item {
+                border-bottom: 1px solid #dfdfdf;
+                cursor: default;
+            }
+            .entity-container .entity-list-item:hover {
+                background: #f1f1f1;
+            }
+            .entity-container .entity-list-item .js-remove {
+                color: #a00;
+            }
+            .entity-container .entity-list-item .js-remove:hover {
+                color: red;
+                text-decoration: none;
+                border: none;
+            }
         </style>
 
         <!-- template do resultado da busca por agentes -->
@@ -282,7 +393,6 @@ class MapasCulturaisConfiguration {
 
         <script id="template-entity" type="text/html">
             <article class='entity-list-item js-entity-list-item'>
-                <a href="#" class="js-remove" title="Remover"></a>
                 <input type="hidden" value="{{json}}" name="<?php echo self::OPTION_NAME ?>[{{entity}}][{{id}}]" />
 
                 {{#avatarUrl}}
@@ -301,8 +411,7 @@ class MapasCulturaisConfiguration {
                 {{/areas}}
 
                 <div class='entity-list-item--taxonomy'><label>Tags:</label> <span>{{tags}}</span></div>
-
-                <div class='clear'></div>
+                <a href="#" class="js-remove" title="Remover">Remover</a>
             </article>
         </script>
         <div id="mapasculturais-config-tabs">
@@ -317,7 +426,7 @@ class MapasCulturaisConfiguration {
             <div id="tab-geral" class='config-tab'>
                 <div class='config-section'>
                     <?php if (!$category_id || !self::getValue('verified')): ?>
-                        <h4>Selo</h4>
+                        <h3>Selo</h3>
                         <label>
                             <input type="hidden"   name="<?php echo self::OPTION_NAME ?>[verified]"  value="0">
                             <input type="checkbox" name="<?php echo self::OPTION_NAME ?>[verified]"  value="1" <?php if (self::getValue('verified', $categoryOptions)) echo 'checked'; ?>>
@@ -325,7 +434,7 @@ class MapasCulturaisConfiguration {
                         </label>
                     <?php endif; ?>
 
-                    <h4>Classificação etária</h4>
+                    <h3>Classificação etária</h3>
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('classificacaoEtaria');
@@ -355,7 +464,7 @@ class MapasCulturaisConfiguration {
                     </ul>
                 </div>
                 <div class='config-section checkbox-list'>
-                    <h4>Linguagens</h4>
+                    <h3>Linguagens</h3>
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('linguagens');
@@ -383,7 +492,6 @@ class MapasCulturaisConfiguration {
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <div class='clear'></div>
             </div>
             <div id="tab-recorte-geografico">
                 <?php
@@ -402,7 +510,7 @@ class MapasCulturaisConfiguration {
                     $metaValue = self::getValue($geoDivisionMetadata->metakey, $categoryOptions);
                     ?>
                     <div class='config-section checkbox-list'>
-                        <h4><?php echo $geoDivisionMetadata->name ?></h4>
+                        <h3><?php echo $geoDivisionMetadata->name ?></h3>
                         <ul>
                             <?php
                             foreach ($geoDivision->data as $d):
@@ -421,22 +529,31 @@ class MapasCulturaisConfiguration {
                         </ul>
                     </div>
                 <?php endforeach; ?>
-                <div class='clear'></div>
             </div>
             <div id="tab-agentes" class="entity-tab">
-                <input  type='text' placeholder="Buscar Agente" class='entity-autocomplete' data-entity='agent'/>
-                <div id="agent-container" class="entity-container js-entity-container"></div>
-                <div class='clear'></div>
+                <div class="entity-header">
+                    <label>Buscar agente: </label>
+                    <input  type='text' class='entity-autocomplete' data-entity='agent'/>
+                    <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
+                </div>
+                <div id="agent-container" class="entity-container js-entity-container">
+                </div>
             </div>
             <div id="tab-espacos" class="entity-tab">
-                <input  type='text' placeholder="Buscar Espaço" class='entity-autocomplete' data-entity='space'/>
+                <div class="entity-header">
+                    <label>Buscar espaço: </label>
+                    <input  type='text' class='entity-autocomplete' data-entity='space'/>
+                    <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
+                </div>
                 <div id="space-container" class="entity-container js-entity-container"></div>
-                <div class='clear'></div>
             </div>
             <div id="tab-projetos" class="entity-tab">
-                <input  type='text' placeholder="Buscar Projeto/Edital" class='entity-autocomplete' data-entity='project'/>
+                <div class="entity-header">
+                    <label>Buscar projeto ou edital: </label>
+                    <input  type='text' class='entity-autocomplete' data-entity='project'/>
+                    <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
+                </div>
                 <div id="project-container" class="entity-container js-entity-container"></div>
-                <div class='clear'></div>
             </div>
         </div>
         <?php
@@ -452,19 +569,24 @@ class MapasCulturaisConfiguration {
             </p>
             <?php endif; ?>
 
-            <form action="options.php" method="post" class="clear prepend-top">
+            <form action="options.php" method="post" class="form-wrap">
                 <?php settings_fields(self::OPTION_NAME); ?>
-                <p class="textright clear prepend-top">
-                    <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
-                </p>
                 <?php if (MAPASCULTURAIS_URL): ?>
                     <?php self::printForm() ?>
 
                 <?php endif; ?>
-                <label> URL da instalação do mapas culturais <input type="text" name="<?php echo self::OPTION_NAME ?>[URL]" value="<?php echo self::getValue('URL') ?>"></label>
-                <label> Nome da instalação do mapas culturais <input type="text" name="<?php echo self::OPTION_NAME ?>[NAME]" value="<?php echo self::getValue('NAME') ?>"></label>
-                <p class="textright clear prepend-top">
-                    <input type="submit" class="button-primary" value="<?php _e('Salvar', 'cultural'); ?>" />
+                <div class="form-field">
+                    <label>Insira a URL da instalação do Mapas Culturais:</label>
+                    <input type="text" name="<?php echo self::OPTION_NAME ?>[URL]" value="<?php echo self::getValue('URL') ?>" class="regular-text" />
+                    <p>O endereço do site de onde os eventos serão alimentados.</p>
+                </div>
+                <div class="form-field">
+                    <label>Nome da instalação do Mapas Culturais:</label>
+                    <input type="text" name="<?php echo self::OPTION_NAME ?>[NAME]" value="<?php echo self::getValue('NAME') ?>" class="regular-text" />
+                    <p>O nome do site de onde os eventos serão alimentados.</p>
+                </div>
+                <p class="submit">
+                    <input type="submit" class="button-primary" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
                 </p>
             </form>
 
