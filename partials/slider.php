@@ -31,6 +31,8 @@ if ($featured_posts->have_posts()) :
         </div>
         <?php if($featured_posts->found_posts > 1): ?>
             <div class="swiper__pagination"></div>
+        <?php else: ?>
+            <div class="swiper__pagination" style="display:none"></div>
         <?php endif; ?>
     </div>
 <?php endif; ?>

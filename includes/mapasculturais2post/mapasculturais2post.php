@@ -180,10 +180,6 @@ class MapasCulturais2Post {
         return false;
     }
 
-    static function generateOccurrenceDescription($occurrence) {
-        return "@TODO: " . __METHOD__;
-    }
-
     static function parseOccurrences($occurrences) {
         $date_format = get_option('date_format');
         return array_map(function($e) use($date_format) {
@@ -201,11 +197,7 @@ class MapasCulturais2Post {
             $occ->duration = @$e->rule->duration;
             $occ->price = trim(@$e->rule->price);
 
-            if (@$e->rule->description) {
-                $occ->description = $e->rule->description;
-            } else {
-                $occ->description = MapasCulturais2Post::generateOccurrenceDescription(@$e->rule);
-            }
+            $occ->description = @$e->rule->description;
 
             $space = new stdClass;
 
@@ -217,7 +209,7 @@ class MapasCulturais2Post {
             if ($e->space->avatar) {
                 $space->avatar = new stdClass;
 
-                $space->avatar->url = $e->space->avatar->url;
+                $space->avatar->url = @$e->space->avatar->url;
                 $space->avatar->files = new stdClass;
 
                 foreach ($e->space->avatar as $group => $f) {
@@ -271,7 +263,7 @@ class MapasCulturais2Post {
     static function getEventJSONFromAPI($event_id, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
         $url = MAPASCULTURAIS_URL . "api/event/findOne/?id=EQ({$event_id})&@select={$select}&@files=({$files}):url";
         $rs = wp_remote_get($url, array('timeout' => '120'));
-        
+
         $json = false;
         if ($rs['response']['code'] == 200) {
             if (isset($rs['body']) && $rs['body']) {
