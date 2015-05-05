@@ -213,10 +213,10 @@ class Cultural_Hightlights {
                     <?php
                     foreach ($terms as $term):
                         $name = function($option_name) use($term) {
-                            echo self::OPTION_NAME . "[{$term->slug}][{$option_name}]";
+                            echo Cultural_Hightlights::OPTION_NAME . "[{$term->slug}][{$option_name}]";
                         };
 
-                        $option = self::getOption($term->slug);
+                        $option = Cultural_Hightlights::getOption($term->slug);
                         ?>
                         <div class="highlights">
                             <h3><?php echo $term->name ?></h3>
