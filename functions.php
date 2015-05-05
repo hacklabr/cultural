@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 // CONGELADO
 
@@ -119,7 +120,7 @@ function cultural_scripts() {
 
     wp_enqueue_script('jquery');
 
-    wp_enqueue_style('cultural-style', get_stylesheet_uri(),array('magnific-popup'));
+    wp_enqueue_style('cultural-style', get_stylesheet_uri(), array('magnific-popup'));
 
     $js_lib_path = get_bloginfo('template_directory') . (WP_DEBUG ? '/js/lib/' : '/js/min/');
 
@@ -152,6 +153,7 @@ function cultural_scripts() {
 
 
     $savedFilters = MapasCulturaisConfiguration::getOption();
+
     //var_dump(array_keys($savedFilters['classificacaoEtaria']));
     $configModel = MapasCulturaisConfiguration::getConfigModel();
     foreach ($savedFilters as $key => $data) {
@@ -160,18 +162,35 @@ function cultural_scripts() {
                 $data[$id] = json_decode($json);
             }
         } elseif (is_array($data)) {
-            $data = array_keys($data);
-        } elseif ($key == 'geoDivisions') {
-            $data = json_decode($data);
+            $_data = array_keys(array_filter($data, function($e) {
+                    if ($e)
+                        return $e;
+                }));
+            if (!$_data && substr($key, 0, 3) === 'geo') {
+                $_data = array_keys($data);
+            }
+            $data = $_data;
         }
+
         $savedFilters[$key] = $data;
     }
 
+    $geoDivisions = array();
+
+    foreach ($savedFilters as $key => $val) {
+        if (substr($key, 0, 3) === 'geo') {
+            unset($savedFilters[$key]);
+            $geoDivisions[$key] = $val;
+        }
+    }
+
+    $savedFilters['geoDivisions'] = $geoDivisions;
 
     $vars = array(
         'generalFilters' => $savedFilters,
-        'linguagens' => $savedFilters['linguagens'],
-        'classificacoes' => $savedFilters['classificacaoEtaria'],
+//        'linguagens' => $savedFilters['linguagens'],
+//        'classificacoes' => $savedFilters['classificacaoEtaria'],
+//        'geoDivisions' => $geoDivisions,
         'apiUrl' => MapasCulturaisApiProxy::getProxyURL()
     );
 
@@ -179,17 +198,21 @@ function cultural_scripts() {
     if (is_category()) {
         $category = get_queried_object();
 
-        $catFilters = array();
+        $catFilters = array('geoDivisions' => array());
 
-        foreach(get_option("category_{$category->cat_ID}") as $key => $options){
-            if(in_array($key, array('linguagens', 'classificacaoEtaria')) || substr($key,0,3) === 'geo'){
+
+        foreach (get_option("category_{$category->cat_ID}") as $key => $options) {
+            if (substr($key, 0, 3) === 'geo' && $options) {
+                $catFilters['geoDivisions'][$key] = array_keys($options);
+
+            } elseif (in_array($key, array('linguagens', 'classificacaoEtaria'))) {
                 $catFilters[$key] = array();
-                foreach($options as $name => $val){
-                    if($val){
+                foreach ($options as $name => $val) {
+                    if ($val) {
                         $catFilters[$key][$name] = true;
                     }
                 }
-            }else{
+            } else {
                 $catFilters[$key] = $options;
             }
         }
@@ -240,9 +263,9 @@ if (!is_admin()) {
     add_action('wp_print_styles', function() {
         wp_deregister_style('cultural-style');
         wp_register_style('daterange', get_bloginfo('template_directory') . '/js/lib/daterangepicker-bs3.css');
-        wp_register_style( 'cultural-style', get_stylesheet_uri(), array( 'daterange',  'magnific-popup'));
+        wp_register_style('cultural-style', get_stylesheet_uri(), array('daterange', 'magnific-popup'));
         wp_enqueue_style('cultural-style');
-    },0);
+    }, 0);
 }
 
 /**

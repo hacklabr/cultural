@@ -143,5 +143,5 @@ $cat_color = $cat_data['color'];
     <?php comments_template('', true); ?>
 </div>
 
-<?php 
-get_footer(); 
+<?php
+get_footer();
