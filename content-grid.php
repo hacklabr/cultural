@@ -26,7 +26,7 @@
     </div><!-- /entry-summary -->
 
     <footer class="entry-footer">
-        <a href="<?php the_permalink(); ?>" title="<?php printf(__('Permalink to &ldquo;%s&rdquo;', 'cultural'), the_title_attribute('echo=0')); ?>" rel="bookmark" class="u-pull-right"><i class="fa fa-link"></i></a>
-        <a href="<?php the_permalink(); ?>" class="read-more"><i class="fa fa-align-left"></i> <?php _e('Read more', 'cultural'); ?></a>
+        <a href="<?php the_permalink(); ?>" title="<?php printf(__('Permalink para &ldquo;%s&rdquo;', 'cultural'), the_title_attribute('echo=0')); ?>" rel="bookmark" class="u-pull-right"><i class="fa fa-link"></i></a>
+        <a href="<?php the_permalink(); ?>" class="read-more"><i class="fa fa-align-left"></i> <?php _e('Mais informações', 'cultural'); ?></a>
     </footer><!-- /entry-footer -->
 </article><!-- /post-<?php the_ID(); ?> -->

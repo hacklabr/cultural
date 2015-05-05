@@ -19,7 +19,7 @@ $cat_color = $cat_data['color'];
         <div class="hentry-wrap">
             <div class="entry-content">
                 <?php the_content(); ?>
-                <?php wp_link_pages('before=<div class="page-link">' . __('Pages:', 'cultural') . '&after=</div>') ?>
+                <?php wp_link_pages('before=<div class="page-link">' . __('Páginas:', 'cultural') . '&after=</div>') ?>
             </div>
         </div>
     </article>
@@ -27,7 +27,7 @@ $cat_color = $cat_data['color'];
 
     <div class="filter-bar cf" style="background: <?php echo $cat_color ?>" >
         <div class="filter">
-            <span class="label">Data</span>
+            <span class="label"><?php _e('Data', 'cultural'); ?></span>
             <div class="date--picker">
                 <i class="fa fa-calendar"></i>
                 <!--
@@ -60,10 +60,10 @@ $cat_color = $cat_data['color'];
         </div>
 
         <div ng-if="data.linguagens.length > 1" class="filter">
-            <span class="label">Linguagem</span>
+            <span class="label"><?php _e('Linguagem', 'cultural'); ?></span>
             <div class="dropdown">
                 <div class="placeholder">
-                    <span ng-if="!svc.data.linguagens.length">Selecione as linguagens</span>
+                    <span ng-if="!svc.data.linguagens.length"><?php _e('Selecione as linguagens', 'cultural'); ?></span>
                     <span ng-if="svc.data.linguagens.length">{{svc.data.linguagens.join(', ')}}</span>
                 </div>
                 <div class="submenu-dropdown">
@@ -77,10 +77,10 @@ $cat_color = $cat_data['color'];
         </div>
 
         <div ng-if="data.classificacoes" class="filter">
-            <span class="label">Classificação</span>
+            <span class="label"><?php _e('Classificação', 'cultural'); ?></span>
             <div id="classificacao" class="dropdown">
                 <div class="placeholder">
-                    <span ng-if="!svc.data.classificacoes.length">Selecione a classificação</span>
+                    <span ng-if="!svc.data.classificacoes.length"><?php _e('Selecione a classificação', 'cultural'); ?></span>
                     <span ng-if="svc.data.classificacoes.length">{{svc.data.classificacoes.join(', ')}}</span>
                 </div>
                 <div class="submenu-dropdown">
@@ -93,7 +93,7 @@ $cat_color = $cat_data['color'];
             </div>
         </div>
     </div>
-    <span ng-if="!loading">{{events.length}} eventos encontrados</span>
+    <span ng-if="!loading">{{events.length}} {{events.length == 1 ? '<?php _e('evento encontrado', 'cultural'); ?>' : '<?php _e('eventos encontrados', 'cultural'); ?>'}}</span>
     <div class="events-list grid js-events-masonry" ng-show="!loading">
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
@@ -119,7 +119,7 @@ $cat_color = $cat_data['color'];
                 </div>
 
                 <div style="margin: -10px 0 10px 0">
-                    Linguagem(ns): {{event.terms.linguagem.join(', ')}}
+                    {{event.terms.linguagem.length == 1 ? '<?php _e('Linguagem', 'cultural'); ?>' : '<?php _e('Linguagens', 'cultural'); ?>'}}: {{event.terms.linguagem.join(', ')}}
                 </div>
                 <span class="event__classification">{{event.classificacaoEtaria}}</span>
                 <div class="event__price">
@@ -130,17 +130,18 @@ $cat_color = $cat_data['color'];
                     {{event.occurrences[0].rule.price}}
                 </div>
                 <div><strong>publicado por:</strong> <a href="{{event.owner.singleUrl}}">{{event.owner.name}}</a></div>
-                <a href="{{event.singleUrl}}" target="_blank" class="event__info">Mais informações</a>
+                <a href="{{event.singleUrl}}" target="_blank" class="event__info"><?php _e('Mais informações', 'cultural'); ?></a>
             </div>
         </div>
 
     </div>
 
     <div ng-if="loading">
-        carregando
+        <?php _e('Carregando', 'cultural') ?>
     </div>
 
     <?php comments_template('', true); ?>
 </div>
 
-<?php get_footer(); ?>
+<?php 
+get_footer(); 

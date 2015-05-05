@@ -45,9 +45,9 @@ if (!function_exists('cultural_setup')) :
         add_theme_support('post-thumbnails');
 
         register_nav_menus(array(
-            'primary' => __('Primary Menu', 'cultural'),
-            'secondary' => __('Secondary Menu', 'cultural'),
-            'mobile' => __('Mobile Menu', 'cultural')
+            'primary' => __('Menu Principal', 'cultural'),
+            'secondary' => __('Menu Secundário', 'cultural'),
+            'mobile' => __('Menu Mobile', 'cultural')
         ));
 
         /*
@@ -252,8 +252,8 @@ if (!is_admin()) {
  */
 function cultural_widgets_init() {
     register_sidebar(array(
-        'name' => __('Header Widget Area', 'cultural'),
-        'description' => __('Appears in the header area, under the magnifying glass icon', 'cultural'),
+        'name' => __('Área de widget do header', 'cultural'),
+        'description' => __('Aparece na área do header, sob o ícone da lupa', 'cultural'),
         'id' => 'header-widget-area',
         'before_widget' => '<aside id="%1$s" class="widget  %2$s">',
         'after_widget' => "</aside>",
@@ -262,7 +262,7 @@ function cultural_widgets_init() {
     ));
 
     register_sidebar(array(
-        'name' => __('Content Widget Area', 'cultural'),
+        'name' => __('Área de widget do conteúdo', 'cultural'),
         'description' => '',
         'id' => 'content-widget-area',
         'before_widget' => '<aside id="%1$s" class="widget  %2$s">',

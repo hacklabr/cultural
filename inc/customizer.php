@@ -35,7 +35,7 @@ class Cultural_Customize {
             $wp_customize, //Pass the $wp_customize object (required)
             'mytheme_highlight_color', //Set a unique ID for the control
             array(
-            'label' => __('Highlight Color', 'cultural'), //Admin-visible name of the control
+            'label' => __('Cor destacada', 'cultural'), //Admin-visible name of the control
             'section' => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
             'settings' => 'highlight_color', //Which setting to load and manipulate (serialized is okay)
             'priority' => 10, //Determines the order this control appears in for the specified section
@@ -48,7 +48,7 @@ class Cultural_Customize {
         );
         $wp_customize->add_control(new WP_Customize_Image_Control(
             $wp_customize, 'upload_site_logo', array(
-            'label' => __('Site Logo', 'cultural'),
+            'label' => __('Logo do site', 'cultural'),
             'section' => 'title_tagline',
             'settings' => 'site_logo',
             'priority' => 10,
@@ -56,7 +56,7 @@ class Cultural_Customize {
         );
 
         $wp_customize->add_section('cultural_typography', array(
-            'title' => __('Typography', 'cultural'),
+            'title' => __('Tipografia', 'cultural'),
             'priority' => 35,
         ));
 
@@ -69,7 +69,7 @@ class Cultural_Customize {
         );
 
         $wp_customize->add_control('title_type', array(
-            'label' => __('Title Type', 'cultural'),
+            'label' => __('Fonte do título', 'cultural'),
             'section' => 'cultural_typography',
             'type' => 'select',
             'choices' => array(
@@ -88,7 +88,7 @@ class Cultural_Customize {
         );
 
         $wp_customize->add_control('body_type', array(
-            'label' => __('Body Type', 'cultural'),
+            'label' => __('Fonte do corpo', 'cultural'),
             'section' => 'cultural_typography',
             'type' => 'select',
             'choices' => array(

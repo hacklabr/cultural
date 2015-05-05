@@ -24,15 +24,15 @@ if (!function_exists('cultural_paging_nav')) :
 
         // Set up paginated links.
         $links = paginate_links(array(
-            'prev_text' => esc_html__('Previous', 'cultural'),
-            'next_text' => esc_html__('Next', 'cultural'),
-            'before_page_number' => '<span class="meta-nav">' . esc_html__('Page', 'cultural') . '</span>',
+            'prev_text' => esc_html__('Anterior', 'cultural'),
+            'next_text' => esc_html__('Próximo', 'cultural'),
+            'before_page_number' => '<span class="meta-nav">' . esc_html__('Página', 'cultural') . '</span>',
         ));
 
         if ($links) :
             ?>
             <nav class="navigation pagination" role="navigation">
-                <h1 class="screen-reader-text"><?php esc_html_e('Posts navigation', 'cultural'); ?></h1>
+                <h1 class="screen-reader-text"><?php esc_html_e('Paginação de posts', 'cultural'); ?></h1>
                 <div class="nav-links">
                     <?php echo $links; ?>
                 </div><!-- .nav-links -->
@@ -70,14 +70,14 @@ if (!function_exists('cultural_post_nav')) :
         }
         ?>
         <nav class="navigation post-navigation" role="navigation">
-            <h1 class="screen-reader-text"><?php esc_html_e('Post navigation', 'cultural'); ?></h1>
+            <h1 class="screen-reader-text"><?php esc_html_e('Paginação de posts', 'cultural'); ?></h1>
             <div class="nav-links">
                 <?php
                 if (is_attachment()) :
-                    previous_post_link('<div class="nav-previous' . $prev_class . '">%link</div>', _x('<span class="meta-nav">Published In</span><span class="post-title">%title</span>', 'Parent post link', 'cultural'));
+                    previous_post_link('<div class="nav-previous' . $prev_class . '">%link</div>', _x('<span class="meta-nav">Publicado em</span><span class="post-title">%title</span>', 'Parent post link', 'cultural'));
                 else :
-                    previous_post_link('<div class="nav-previous' . $prev_class . '">%link</div>', _x('<span class="meta-nav">Previous</span><span class="post-title">%title</span>', 'Previous post link', 'cultural'));
-                    next_post_link('<div class="nav-next' . $next_class . '">%link</div>', _x('<span class="meta-nav">Next</span><span class="post-title">%title</span>', 'Next post link', 'cultural'));
+                    previous_post_link('<div class="nav-previous' . $prev_class . '">%link</div>', _x('<span class="meta-nav">Anterior</span><span class="post-title">%title</span>', 'Previous post link', 'cultural'));
+                    next_post_link('<div class="nav-next' . $next_class . '">%link</div>', _x('<span class="meta-nav">Próximo</span><span class="post-title">%title</span>', 'Next post link', 'cultural'));
                 endif;
                 ?>
             </div><!-- .nav-links -->
@@ -158,7 +158,7 @@ if (!function_exists('cultural_comment')) :
             case 'trackback' :
                 ?>
                 <li class="pingback">
-                    <?php if (function_exists('cultural_get_favicon')) { ?><img src="<?php echo cultural_get_favicon($comment->comment_author_url); ?>" alt="Favicon" class="favicon" /><?php } ?><?php comment_author_link(); ?><?php edit_comment_link(sprintf(__('%s Edit', 'cultural'), '<i class="fa fa-pencil"></i>')); ?>
+                    <?php if (function_exists('cultural_get_favicon')) { ?><img src="<?php echo cultural_get_favicon($comment->comment_author_url); ?>" alt="Favicon" class="favicon" /><?php } ?><?php comment_author_link(); ?><?php edit_comment_link(sprintf(__('%s Editar', 'cultural'), '<i class="fa fa-pencil"></i>')); ?>
                     <?php
                     break;
                 default :
@@ -177,12 +177,12 @@ if (!function_exists('cultural_comment')) :
                                 <?php echo get_comment_author_link(); ?>
                             </cite>
                             <?php comment_reply_link(array_merge($args, array('reply_text' => '<i class="fa fa-reply"></i>', 'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
-                            <a href="<?php echo esc_url(get_comment_link($comment->comment_ID)); ?>" title="<?php printf(__('%1$s at %2$s', 'cultural'), get_comment_date(), get_comment_time()); ?>" class="comment-permalink"><i class="fa fa-check"></i><span class="assistive-text"><? _e('Permalink', 'cultural'); ?></span></a>
-                            <?php edit_comment_link(sprintf(__('%s Edit', 'cultural'), '<i class="fa fa-pencil"></i>')); ?>
+                            <a href="<?php echo esc_url(get_comment_link($comment->comment_ID)); ?>" title="<?php printf(__('%1$s às %2$s', 'cultural'), get_comment_date(), get_comment_time()); ?>" class="comment-permalink"><i class="fa fa-check"></i><span class="assistive-text"><?php _e('Permalink', 'cultural'); ?></span></a>
+                            <?php edit_comment_link(sprintf(__('%s Editar', 'cultural'), '<i class="fa fa-pencil"></i>')); ?>
                         </footer>
 
                         <?php if ($comment->comment_approved == '0') : ?>
-                            <em class="comment-on-hold"><?php _e('Your comment is awaiting moderation.', 'cultural'); ?></em>
+                            <em class="comment-on-hold"><?php _e('Seu comentário está aguardando moderação.', 'cultural'); ?></em>
                         <?php endif; ?>
                     </article><!-- /comment -->
 
@@ -203,7 +203,7 @@ if (!function_exists('cultural_comment')) :
                                 this.select();" readonly="readonly" />
 
                 <?php if (!post_password_required() && ( comments_open() || '0' != get_comments_number() )) : ?>
-                    <a href="<?php comments_link(); ?>" class="comments-link"><i class="fa fa-comment"></i> <?php echo comments_number(__('Leave a reply', 'cultural'), __('One comment', 'cultural'), __('% comments', 'cultural')); ?></a>
+                    <a href="<?php comments_link(); ?>" class="comments-link"><i class="fa fa-comment"></i> <?php echo comments_number(__('Deixe uma resposta', 'cultural'), __('Um comentário', 'cultural'), __('% comentários', 'cultural')); ?></a>
                 <?php endif; ?>
             </div>
             <?php
@@ -246,7 +246,7 @@ if (!function_exists('cultural_comment')) :
                 <i class="fa fa-clock-o"></i>
                 <?php
                 if (!is_single() && ( $time_diff > 0 && $time_diff < 30 * 24 * 60 * 60 ))
-                    printf(__('%s ago', 'cultural'), human_time_diff(get_the_time('U'), current_time('timestamp')));
+                    printf(__('%s atrás', 'cultural'), human_time_diff(get_the_time('U'), current_time('timestamp')));
                 else
                     the_time(get_option('date_format'));
                 ?>
@@ -261,7 +261,7 @@ if (!function_exists('cultural_comment')) :
         function cultural_the_post_author() {
             ?>
             <div class="entry__author">
-                <?php _e('by', 'cultural'); ?> <?php the_author_posts_link(); ?>
+                <?php _e('por', 'cultural'); ?> <?php the_author_posts_link(); ?>
             </div>
             <?php
         }
@@ -283,11 +283,11 @@ if (!function_exists('cultural_comment')) :
             );
 
             $posted_on = sprintf(
-                _x('Posted on %s', 'post date', 'cultural'), '<a href="' . esc_url(get_permalink()) . '" rel="bookmark">' . $time_string . '</a>'
+                _x('Postado em %s', 'post date', 'cultural'), '<a href="' . esc_url(get_permalink()) . '" rel="bookmark">' . $time_string . '</a>'
             );
 
             $byline = sprintf(
-                _x('by %s', 'post author', 'cultural'), '<span class="author vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html(get_the_author()) . '</a></span>'
+                _x('por %s', 'post author', 'cultural'), '<span class="author vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html(get_the_author()) . '</a></span>'
             );
 
             echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
@@ -313,11 +313,11 @@ if (!function_exists('cultural_comment')) :
 
             if (!is_single() && !post_password_required() && ( comments_open() || get_comments_number() )) {
                 echo '<span class="comments-link">';
-                comments_popup_link(__('Leave a comment', 'cultural'), __('1 Comment', 'cultural'), __('% Comments', 'cultural'));
+                comments_popup_link(__('Deixe um comentário', 'cultural'), __('1 Comentário', 'cultural'), __('% Comentários', 'cultural'));
                 echo '</span>';
             }
 
-            edit_post_link(__('Edit', 'cultural'), '<span class="edit-link">', '</span>');
+            edit_post_link(__('Editar', 'cultural'), '<span class="edit-link">', '</span>');
         }
 
     endif;

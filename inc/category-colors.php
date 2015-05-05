@@ -4,9 +4,9 @@
 function category_form_custom_field_add($taxonomy) {
     ?>
     <div class="form-field">
-        <label for="category_custom_color"><?php _e('Highlight Color', 'cultural'); ?></label>
+        <label for="category_custom_color"><?php _e('Cor destacada', 'cultural'); ?></label>
         <input name="cat_meta[color]" class="colorpicker" type="text" value="" />
-        <p class="description"><?php _e('Pick a Highlight Color', 'cultural'); ?></p>
+        <p class="description"><?php _e('Selecione uma cor destacada', 'cultural'); ?></p>
     </div>
     <?php
 }
@@ -19,10 +19,10 @@ function extra_category_fields($tag) {
     $cat_meta = get_option("category_$t_id");
     ?>
     <tr class="form-field">
-        <th scope="row" valign="top"><label for="meta-color"><?php _e('Highlight Color', 'cultural'); ?></label></th>
+        <th scope="row" valign="top"><label for="meta-color"><?php _e('Cor destacada', 'cultural'); ?></label></th>
         <td>
             <input type="text" name="cat_meta[color]" class="colorpicker" value="<?php echo (isset($cat_meta['color'])) ? $cat_meta['color'] : '#fff'; ?>" />
-            <p class="description"><?php _e('Pick a Highlight Color', 'cultural'); ?></p>
+            <p class="description"><?php _e('Selecione uma cor destacada', 'cultural'); ?></p>
         </td>
     </tr>
     <?php

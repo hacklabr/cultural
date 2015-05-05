@@ -51,9 +51,9 @@ foreach ($event->occurrences as $i => $occ) {
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
                 </span>
-                <?php echo $price ? $price : 'Não informado' ?>
+                <?php echo $price ? $price : __('Não informado', 'cultural') ?>
             </div>
         <?php endif; ?>
-        <a href="<?php echo $event->singleUrl ?>" class="event__info">Mais informações</a>
+        <a href="<?php echo $event->singleUrl ?>" class="event__info"><?php _e('Mais informações', 'cultural'); ?></a>
     </div>
 </div>

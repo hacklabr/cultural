@@ -14,7 +14,7 @@ $featured_posts = Cultural_Hightlights::getHighlightedQuery();
 if ($featured_posts->have_posts()) :
     ?>
     <div class="swiper  js-swiper">
-        <h3 class="slider-title"><i class="fa fa-bullhorn"></i> <?php _e('Featured', 'cultural'); ?></h3>
+        <h3 class="slider-title"><i class="fa fa-bullhorn"></i> <?php _e('Destaque', 'cultural'); ?></h3>
         <div class="swiper-wrapper">
             <?php while ($featured_posts->have_posts()) : $featured_posts->the_post(); ?>
                 <article class="swiper-slide">
@@ -24,7 +24,7 @@ if ($featured_posts->have_posts()) :
                         <div class="entry-summary">
                             <?php the_excerpt(); ?>
                         </div>
-                        <a href="<?php the_permalink(); ?>" class="read-more"><i class="fa fa-align-left"></i> <?php _e('Read more', 'cultural'); ?></a>
+                        <a href="<?php the_permalink(); ?>" class="read-more"><i class="fa fa-align-left"></i> <?php _e('Mais informações', 'cultural'); ?></a>
                     </div>
                 </article>
             <?php endwhile; ?>

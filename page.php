@@ -10,7 +10,7 @@ the_post();
             <h1 class="entry-title"><?php the_title(); ?></h1>
             <div class="entry-content">
                 <?php the_content(); ?>
-                <?php wp_link_pages('before=<div class="page-link">' . __('Pages:', 'cultural') . '&after=</div>') ?>
+                <?php wp_link_pages('before=<div class="page-link">' . __('Páginas:', 'cultural') . '&after=</div>') ?>
             </div><!-- /entry-content -->
         </div>
     </article><!-- /page-<?php the_ID(); ?> -->

@@ -25,7 +25,7 @@
         <?php do_action('before'); ?>
 
         <header class="site-header wrap">
-            <a href="#main" title="<?php esc_attr_e('Skip to content', 'cultural'); ?>" class="assistive-text"><?php _e('Skip to content', 'cultural'); ?></a>
+            <a href="#main" title="<?php esc_attr_e('Ir para o conteúdo', 'cultural'); ?>" class="assistive-text"><?php _e('Ir para o conteúdo', 'cultural'); ?></a>
 
             <ul class="toggle-bar">
                 <li><a href="#tabs-1" class="current main-toggle" data-tab="tab-1"><i class="fa fa-list-ul"></i></a></li>

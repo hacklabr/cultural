@@ -145,9 +145,9 @@ class Cultural_Hightlights {
     }
 
     static function addMenu() {
-        $topLevelMenuLabel = __('Post Highlights', 'cultural');
-        $page_title = __('Post Highlights', 'cultural');
-        $menu_title = __('Post Highlights', 'cultural');
+        $topLevelMenuLabel = __('Post destacados', 'cultural');
+        $page_title = __('Post destacados', 'cultural');
+        $menu_title = __('Post destacados', 'cultural');
 
         /* Top level menu */
         add_submenu_page('highlights', $page_title, $menu_title, 'manage_options', 'highlights', array(__CLASS__, 'renderPage'));
@@ -175,7 +175,7 @@ class Cultural_Hightlights {
         $homeObject = new stdClass;
 
         $homeObject->slug = self::FRONT_PAGE_SLUG;
-        $homeObject->name = __('Front Page', 'cultural');
+        $homeObject->name = __('Página principal', 'cultural');
 
         $terms = array_merge(array($homeObject), get_terms('category'));
 
@@ -187,7 +187,7 @@ class Cultural_Hightlights {
             .highlights textarea { width:100%; height:100px; }
         </style>
         <div class="wrap span-20">
-            <h2><?php _e('Post Highlights', 'cultural'); ?></h2>
+            <h2><?php _e('Destaques', 'cultural'); ?></h2>
 
             <?php if (isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true'): ?>
                 <div id="message" class="updated below-h2">
@@ -203,13 +203,12 @@ class Cultural_Hightlights {
 
             <form action="options.php" method="post" class="clear prepend-top">
                 <p class="alignright">
-                    <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'cultural'); ?>" />
+                    <input type="submit" class="button-primary" value="<?php _e('Salvar modificações', 'cultural'); ?>" />
                 </p>
                 <?php settings_fields(self::OPTION_NAME); ?>
                 <div class="span-20 ">
                     <p class="help">
-                        Cole na caixas abaixo as URLs dos posts que você deseja destacar para cada seção do site, uma URL por linha, na ordem que você deseja que apareça.<br>
-                        Deixe em branco se desejar que sejam destacados os últimos posts.
+                        <?php _e("Cole na caixas abaixo as URLs dos posts que você deseja destacar para cada seção do site, uma URL por linha, na ordem que você deseja que apareça.<br>Deixe em branco se desejar que sejam destacados os últimos posts.",'cultural'); ?>
                     </p>
                     <?php
                     foreach ($terms as $term):
@@ -222,12 +221,12 @@ class Cultural_Hightlights {
                         <div class="highlights">
                             <h3><?php echo $term->name ?></h3>
                             <section class="js-posts">
-                                <strong><?php _e('Highlighted posts', 'cultural'); ?></strong><br>
+                                <strong><?php _e('Posts destacados', 'cultural'); ?></strong><br>
                                 <textarea name="<?php echo $name('highlights') ?>"><?php echo $option['highlights'] ?></textarea>
                             </section>
 
                             <section class="js-posts">
-                                <strong><?php _e('Fixed posts', 'cultural'); ?></strong><br>
+                                <strong><?php _e('Posts fixos', 'cultural'); ?></strong><br>
                                 <textarea name="<?php echo $name('fixed') ?>"><?php echo $option['fixed'] ?></textarea>
                             </section>
                             <div class="clear"></div>
@@ -235,7 +234,7 @@ class Cultural_Hightlights {
                     <?php endforeach; ?>
                 </div>
                 <p class="textright clear prepend-top">
-                    <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'cultural'); ?>" />
+                    <input type="submit" class="button-primary" value="<?php _e('Salvar modificações', 'cultural'); ?>" />
                 </p>
             </form>
         </div>

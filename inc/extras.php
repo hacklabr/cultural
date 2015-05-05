@@ -50,7 +50,7 @@ function default_menu() {
 
     <ul id="menu-main" class="menu--main  menu  cf">
         <?php if (is_user_logged_in() && current_user_can('level_10')) : ?>
-            <li><a href="<?php bloginfo('url'); ?>/wp-admin/nav-menus.php"><?php _e('Hey admin, don\'t forget to set up a menu!', 'cultural'); ?></a></li>
+            <li><a href="<?php bloginfo('url'); ?>/wp-admin/nav-menus.php"><?php _e('Admin, não se esqueça de configurar um menu', 'cultural'); ?></a></li>
         <?php endif; ?>
         <?php wp_list_pages('title_li='); ?>
         <?php wp_list_categories('title_li='); ?>

@@ -20,46 +20,46 @@
                     single_tag_title();
 
                 elseif (is_author()) :
-                    printf(__('Author: %s', 'cultural'), '<span class="vcard">' . get_the_author() . '</span>');
+                    printf(__('Autor: %s', 'cultural'), '<span class="vcard">' . get_the_author() . '</span>');
 
                 elseif (is_day()) :
-                    printf(__('Day: %s', 'cultural'), '<span>' . get_the_date() . '</span>');
+                    printf(__('Dia: %s', 'cultural'), '<span>' . get_the_date() . '</span>');
 
                 elseif (is_month()) :
-                    printf(__('Month: %s', 'cultural'), '<span>' . get_the_date(_x('F Y', 'monthly archives date format', 'cultural')) . '</span>');
+                    printf(__('Mês: %s', 'cultural'), '<span>' . get_the_date(_x('F Y', 'monthly archives date format', 'cultural')) . '</span>');
 
                 elseif (is_year()) :
-                    printf(__('Year: %s', 'cultural'), '<span>' . get_the_date(_x('Y', 'yearly archives date format', 'cultural')) . '</span>');
+                    printf(__('Ano: %s', 'cultural'), '<span>' . get_the_date(_x('Y', 'yearly archives date format', 'cultural')) . '</span>');
 
                 elseif (is_tax('post_format', 'post-format-aside')) :
-                    _e('Asides', 'cultural');
+                    _e('Notas', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-gallery')) :
-                    _e('Galleries', 'cultural');
+                    _e('Galerias', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-image')) :
-                    _e('Images', 'cultural');
+                    _e('Imagens', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-video')) :
-                    _e('Videos', 'cultural');
+                    _e('Vídeos', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-quote')) :
-                    _e('Quotes', 'cultural');
+                    _e('Citações', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-link')) :
                     _e('Links', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-status')) :
-                    _e('Statuses', 'cultural');
+                    _e('Status', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-audio')) :
-                    _e('Audios', 'cultural');
+                    _e('Áudios', 'cultural');
 
                 elseif (is_tax('post_format', 'post-format-chat')) :
                     _e('Chats', 'cultural');
 
                 else :
-                    _e('Archives', 'cultural');
+                    _e('Arquivos', 'cultural');
 
                 endif;
                 ?>

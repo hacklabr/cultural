@@ -10,7 +10,7 @@ function cultural_in_widget_form($t, $return, $instance) {
         $instance['style'] = null;
     ?>
     <p>
-        <label for="<?php echo $t->get_field_id('style'); ?>"><?php _e('Style:', 'cultural'); ?></label>
+        <label for="<?php echo $t->get_field_id('style'); ?>"><?php _e('Estilo:', 'cultural'); ?></label>
         <select id="<?php echo $t->get_field_id('style'); ?>" name="<?php echo $t->get_field_name('style'); ?>">
             <option <?php selected($instance['style'], 'default'); ?> value="default"><?php _e('Default', 'cultural'); ?></option>
             <option <?php selected($instance['style'], 'taped'); ?>value="taped"><?php _e('Taped', 'cultural'); ?></option>
