@@ -112,8 +112,7 @@ if(is_category()){
 
                 <div class="event__occurrences" ng-repeat="occs in event.occurrences" ng-if="$index <= 2">
                     <div class="event__venue">
-                        {{occs.space.name}}
-                        <!--a href="{{occs.space.singleUrl}}" target="_blank"><i class="fa fa-external-link"></i></a-->
+                        <a href="{{occs.space.singleUrl}}">{{occs.space.name}}</a>
                     </div>
                     <div class="event__time">{{occs.rule.description}}</div>
                     <!--a href="#" class="js-more-occurrences"><i class="fa fa-plus-circle"></i></a-->
