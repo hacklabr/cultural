@@ -22,7 +22,7 @@ class CulturalConfigModel {
 class MapasCulturaisConfiguration {
 
     const OPTION_NAME = 'mapasculturais-configuration';
-    const TRANSIENT_TIMEOUT = 30;
+    const TRANSIENT_TIMEOUT = 1;
 
     static function init() {
 

@@ -15,15 +15,15 @@
         };
 
         try{
-            $scope.data.linguagens = Object.keys(vars.categoryFilters.linguagens).map(mapDataFunction);
+            $scope.data.linguagens = vars.categoryFilters.linguagens.map(mapDataFunction);
         }catch (e){
-            $scope.data.linguagens = vars.linguagens.map(mapDataFunction);
+            $scope.data.linguagens = vars.generalFilters.linguagens.map(mapDataFunction);
         }
 
         try{
-            $scope.data.classificacoes = Object.keys(vars.categoryFilters.classificacaoEtaria).map(mapDataFunction);
+            $scope.data.classificacoes = vars.categoryFilters.classificacaoEtaria.map(mapDataFunction);
         }catch (e){
-            $scope.data.classificacoes = vars.classificacoes.map(mapDataFunction);
+            $scope.data.classificacoes = vars.generalFilters.classificacaoEtaria.map(mapDataFunction);
         }
 
         $scope.svc = searchService;

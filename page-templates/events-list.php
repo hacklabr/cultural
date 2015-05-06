@@ -5,10 +5,11 @@
  *
  * @package cultural
  */
-
-$category = get_category(get_query_var('cat'));
-$cat_data = get_option('category_' . $category->cat_ID);
-$cat_color = $cat_data['color'];
+if(is_category()){
+    $category = get_category(get_query_var('cat'));
+    $cat_data = get_option('category_' . $category->cat_ID);
+    $cat_color = $cat_data['color'];
+}
 ?>
 
 <?php get_header(); ?>
@@ -25,7 +26,7 @@ $cat_color = $cat_data['color'];
     </article>
     <?php endif; ?>
 
-    <div class="filter-bar cf" style="background: <?php echo $cat_color ?>" >
+    <div class="filter-bar cf" <?php if(is_category()): ?> style="background: <?php echo $cat_color ?>" <?php endif; ?>>
         <div class="filter">
             <span class="label"><?php _e('Data', 'cultural'); ?></span>
             <div class="date--picker">

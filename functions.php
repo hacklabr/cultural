@@ -153,7 +153,6 @@ function cultural_scripts() {
 
 
     $savedFilters = MapasCulturaisConfiguration::getOption();
-
     //var_dump(array_keys($savedFilters['classificacaoEtaria']));
     $configModel = MapasCulturaisConfiguration::getConfigModel();
     foreach ($savedFilters as $key => $data) {
@@ -163,12 +162,11 @@ function cultural_scripts() {
             }
         } elseif (is_array($data)) {
             $_data = array_keys(array_filter($data, function($e) {
-                    if ($e)
+                    if ($e){
                         return $e;
-                }));
-            if (!$_data && substr($key, 0, 3) === 'geo') {
-                $_data = array_keys($data);
-            }
+                    }
+            }));
+            
             $data = $_data;
         }
 
@@ -203,13 +201,13 @@ function cultural_scripts() {
 
         foreach (get_option("category_{$category->cat_ID}") as $key => $options) {
             if (substr($key, 0, 3) === 'geo' && $options) {
-                $catFilters['geoDivisions'][$key] = array_keys($options);
+                $catFilters['geoDivisions'][$key] = array_keys(array_filter($options));
 
             } elseif (in_array($key, array('linguagens', 'classificacaoEtaria'))) {
                 $catFilters[$key] = array();
                 foreach ($options as $name => $val) {
                     if ($val) {
-                        $catFilters[$key][$name] = true;
+                        $catFilters[$key][] = $name;
                     }
                 }
             } else {
@@ -250,7 +248,7 @@ if (!is_admin()) {
 
         wp_enqueue_script('angular-app', get_bloginfo('template_directory') . '/js/ng-app/app.js', array('angular-core'), null, false);
         wp_enqueue_script('angular-app-services', get_bloginfo('template_directory') . '/js/ng-app/services.js', array('angular-app'), null, false);
-        wp_enqueue_script('angular-app-controllers', get_bloginfo('template_directory') . '/js/ng-app/controllers.js', array('angular-app-services'), null, false);
+        wp_enqueue_script('angular-app-controllers', get_bloginfo('template_directory') . '/js/ng-app/controllers.js', array('angular-app-services', 'main'), null, false);
 
         //LOCALIZE
         wp_localize_script('angular-core', 'Directory', array(

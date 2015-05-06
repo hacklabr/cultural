@@ -44,13 +44,8 @@ add_action('category_add_form_fields', 'mapasculturais_category_add', 11);
 function mapasculturais_category_save( $term_id ) {
     if ( isset( $_POST[MapasCulturaisConfiguration::OPTION_NAME] ) ) {
         $t_id = $term_id;
-        $cat_meta = get_option( "category_$t_id");
-        $cat_keys = array_keys($_POST[MapasCulturaisConfiguration::OPTION_NAME]);
-        foreach ($cat_keys as $key){
-            if (isset($_POST[MapasCulturaisConfiguration::OPTION_NAME][$key])){
-                $cat_meta[$key] = $_POST[MapasCulturaisConfiguration::OPTION_NAME][$key];
-            }
-        }
+        $cat_meta = $_POST[MapasCulturaisConfiguration::OPTION_NAME];
+        
         //save the option array
         update_option( "category_$t_id", $cat_meta );
     }

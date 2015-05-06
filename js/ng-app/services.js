@@ -35,20 +35,32 @@
                 searchParams['term:linguagem'] = 'IN(' + svc.data.linguagens.sort().toString() + ')';
 
             // ou se está numa categoria tem filtro configurado para a mesma
-            }else if(vars.categoryFilters && vars.categoryFilters.linguagens && Object.keys(vars.categoryFilters.linguagens).length){
-                searchParams['term:linguagem'] = 'IN(' + Object.keys(vars.categoryFilters.linguagens).sort().toString() + ')';
+            }else {
+                if(vars.categoryFilters && vars.categoryFilters.linguagens && vars.categoryFilters.linguagens.length){
+                    searchParams['term:linguagem'] = 'IN(' + vars.categoryFilters.linguagens.sort().toString() + ')';
+                    
+                }else if(vars.generalFilters.linguagens && vars.generalFilters.linguagens.length){
+                    searchParams['term:linguagem'] = 'IN(' + vars.generalFilters.linguagens.sort().toString() + ')';
+                }
             }
 
             // CLASSIFICAÇÃO
             // se tem filtro selecionado na busca
             if(svc.data.classificacoes && svc.data.classificacoes.length){
                 searchParams.classificacaoEtaria = 'IN(' + svc.data.classificacoes.sort().toString() + ')';
-
             // ou se está numa categoria tem filtro configurado para a mesma
-            }else if(vars.categoryFilters && vars.categoryFilters.classificacaoEtaria && Object.keys(vars.categoryFilters.classificacaoEtaria).length){
-                searchParams.classificacaoEtaria = 'IN(' + Object.keys(vars.categoryFilters.classificacaoEtaria).sort().toString() + ')';
+            }else {
+                
+                if(vars.categoryFilters && vars.categoryFilters.classificacaoEtaria && vars.categoryFilters.classificacaoEtaria.length){
+                    searchParams.classificacaoEtaria = 'IN(' + vars.categoryFilters.classificacaoEtaria.sort().toString() + ')';
+                    
+                }else if(vars.generalFilters.classificacaoEtaria && vars.generalFilters.classificacaoEtaria.length){
+                    searchParams.classificacaoEtaria = 'IN(' + vars.generalFilters.classificacaoEtaria.sort().toString() + ')';
+                    
+                }
+                
             }
-
+            
             if(vars.categoryFilters && vars.categoryFilters.space){
                 spaces = Object.keys(vars.categoryFilters.space).map(function(e){ return '@Space:' + e; });
                 searchParams['space'] = "IN(" + spaces + ")";
@@ -72,17 +84,22 @@
                 projects = Object.keys(vars.generalFilters.project).map(function(e){ return '@Project:' + e; });
                 searchParams['project'] = "IN(" + projects + ")";
             }
-
-            // ESPAÇOS
-            // se tem filtro selecionado na busca
-            if(svc.data.classificacoes && svc.data.classificacoes.length){
-                searchParams.classificacaoEtaria = 'IN(' + svc.data.classificacoes.sort().toString() + ')';
-
-            // ou se está numa categoria tem filtro configurado para a mesma
-            }else if(vars.categoryFilters && vars.categoryFilters.classificacaoEtaria && Object.keys(vars.categoryFilters.classificacaoEtaria).length){
-                searchParams.classificacaoEtaria = 'IN(' + Object.keys(vars.categoryFilters.classificacaoEtaria).sort().toString() + ')';
+            
+            // geodivisions
+            
+            for(var geo in vars.generalFilters.geoDivisions){
+                var divisions;
+                if(vars.categoryFilters && vars.categoryFilters.geoDivisions && vars.categoryFilters.geoDivisions[geo] && vars.categoryFilters.geoDivisions[geo].length){
+                    divisions = vars.categoryFilters.geoDivisions[geo];
+                }else{
+                    divisions = vars.generalFilters.geoDivisions[geo];
+                }
+                
+                if(divisions.length){
+                    searchParams['space:' + geo] = 'IN(' + divisions.toString() + ')';
+                }
             }
-
+            
             $log.debug('searchParams:', searchParams);
             $http({
                 method: 'GET',
