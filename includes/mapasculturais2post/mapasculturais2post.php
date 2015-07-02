@@ -2,6 +2,8 @@
 
 class MapasCulturais2Post {
 
+    const EVENT_FIELDS = 'id,singleUrl,name,subTitle,project.id,project.name,project.singleUrl,owner.id,owner.name,owner.singleUrl,classificacaoEtaria,shortDescription,description,occurrences';
+
     static function init() {
 
 
@@ -45,6 +47,7 @@ class MapasCulturais2Post {
                 <a id="mc-import-image-all" class="button">Importar todas</a>
                 <a id="mc-import-image-selected" class="button">Importar selecionadas</a>
                 <span id="mc-import-image--search-spinner" class="spinner" style="display:none;"></span>
+                <span id="mc-import-image--feedback" style="display:none; float:right;">Imagens inportadas e anexadas ao post.</span>
             </p>
             {{#images}}
             <label class="mc-image">
@@ -139,15 +142,15 @@ class MapasCulturais2Post {
         die;
     }
 
-    static function getEventInfoFromAPIProxy($event_url, $use_transient = false, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+    static function getEventInfoFromAPIProxy($event_url, $use_transient = false, $files = 'avatar,gallery', $select = self::EVENT_FIELDS) {
         return self::_getEventInfo(true, $event_url, $use_transient, $files, $select);
     }
 
-    static function getEventInfoFromAPI($event_url, $use_transient = false, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+    static function getEventInfoFromAPI($event_url, $use_transient = false, $files = 'avatar,gallery', $select = self::EVENT_FIELDS) {
         return self::_getEventInfo(false, $event_url, $use_transient, $files, $select);
     }
 
-    static function _getEventInfo($use_proxy, $event_url, $use_transient = false, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+    static function _getEventInfo($use_proxy, $event_url, $use_transient = false, $files = 'avatar,gallery', $select = self::EVENT_FIELDS) {
 
         $transient_key = 'event_info:' . md5("$event_url:$files:$select:$use_proxy");
 
@@ -255,12 +258,12 @@ class MapasCulturais2Post {
     }
 
 
-    static function getEventJSONFromAPIProxy($event_id, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+    static function getEventJSONFromAPIProxy($event_id, $files = 'avatar,gallery', $select = self::EVENT_FIELDS) {
         $result = MapasCulturaisApiProxy::fetch(MAPASCULTURAIS_URL . "api/event/findOne/?id=EQ({$event_id})&@select={$select}&@files=({$files}):url");
         return $result->body;
     }
 
-    static function getEventJSONFromAPI($event_id, $files = 'avatar,gallery', $select = 'id,singleUrl,name,subTitle,classificacaoEtaria,shortDescription,description,occurrences') {
+    static function getEventJSONFromAPI($event_id, $files = 'avatar,gallery', $select = self::EVENT_FIELDS) {
         $url = MAPASCULTURAIS_URL . "api/event/findOne/?id=EQ({$event_id})&@select={$select}&@files=({$files}):url";
         $rs = wp_remote_get($url, array('timeout' => '120'));
 

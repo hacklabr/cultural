@@ -88,7 +88,9 @@ class MapasCulturaisApiProxy {
 
         $urls = implode("','",array_map(function($e){
             return addslashes($e[0]->singleUrl);
-        }, self::$objects));
+        }, array_filter(self::$objects, function($e){
+            return (bool) $e[0]->singleUrl;
+        })));
 
         $query = "SELECT post_ID, meta_value FROM {$wpdb->postmeta} WHERE meta_value IN('{$urls}')";
 

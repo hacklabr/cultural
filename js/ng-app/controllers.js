@@ -5,6 +5,8 @@
     app.controller('eventsController', ['$rootScope', '$scope', '$log', '$location', '$timeout', 'searchService', '$sce', function(
                                             $rootScope,   $scope,   $log,   $location,   $timeout,   searchService,   $sce){
 
+        $scope.keyword = "";
+
         $scope.mapasUrl = vars.apiUrl.replace('api/', '');
 
         var mapDataFunction = function(el, i){ return {id: i, name: el}; };
@@ -34,6 +36,16 @@
 
         function receiveSearch(events){
             $log.debug('receiveSearch events', events);
+            var format = 'YYYY-MM-DD';
+            var start = $scope.dateRange.startDate.format(format) + ' 00:00:00';
+            var end = $scope.dateRange.endDate.format(format) + ' 00:00:00';
+
+            events.forEach(function(e){
+                e.occurrences.forEach(function(occ){
+                    occ.inPeriod = (occ.startsOn.date >= start && occ.startsOn.date <= end) || (occ.startsOn.date <= end && occ.until && occ.until.date >= end);
+                });
+            });
+
             $scope.events = events;
             $scope.loading = false;
         }
@@ -42,24 +54,24 @@
 
         $scope.updateMasonry = function(){
             var $container = jQuery('.js-events-masonry');
-            // initialize Masonry after all images have loaded
-            $container.imagesLoaded(function() {
+
+            $timeout(function(){
                 if(!$scope.complete){
                     $scope.complete = true;
                     $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
                 }else{
 
-//                    $container.masonry('reloadItems');
-//                    $container.masonry('layout');
-
                     $container.masonry('destroy');
                     $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
                 }
 
-                window.$container = $container;
+                // initialize Masonry after all images have loaded
+                $container.imagesLoaded(function() {
+                    $container.masonry('destroy');
+                    $container.masonry({"columnWidth": ".grid-sizer", "gutter": ".gutter-sizer", "itemSelector": ".event"});
+                });
+            },0);
 
-                $log.debug('eventsController: $scope.updateMasonry() ');
-            });
         };
 
 
@@ -67,6 +79,20 @@
             startDate: $scope.data.startDate,
             endDate: $scope.data.endDate
         };
+
+        var keywordTimeout;
+
+        $scope.$watch('keyword', function(){
+            $scope.loading = true;
+            if(keywordTimeout){
+                $timeout.cancel(keywordTimeout);
+            }
+            keywordTimeout = $timeout(function(){
+                console.log($scope.keyword);
+                searchService.data.keyword = $scope.keyword;
+                searchService.submit().then(receiveSearch);
+            },500);
+        });
 
         $scope.$watch('dateRange', function(){
             $scope.loading = true;
@@ -120,6 +146,7 @@
             searchService.submit().then(receiveSearch);
         });
         var first = false;
+
         $scope.updateMasonry = function(){
             var $container = jQuery('.results--content');
             if(!first) first = true; else $container.masonry('destroy');
@@ -130,6 +157,7 @@
                     "gutter": 0
                 });
             });
+
 
             $scope.removeFilters = function(){
                 $rootScope.$broadcast('removeFilters');

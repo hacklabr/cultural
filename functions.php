@@ -155,6 +155,9 @@ function cultural_scripts() {
     $savedFilters = MapasCulturaisConfiguration::getOption();
     //var_dump(array_keys($savedFilters['classificacaoEtaria']));
     $configModel = MapasCulturaisConfiguration::getConfigModel();
+
+    $empty = [];
+
     foreach ($savedFilters as $key => $data) {
         if ($configModel[$key]->type === 'entity') {
             foreach ($data as $id => $json) {
@@ -166,12 +169,20 @@ function cultural_scripts() {
                         return $e;
                     }
             }));
-            
-            $data = $_data;
+
+            if($_data){
+                $data = $_data;
+            }else{
+                $data = array_keys($data);
+                $empty[$key] = true;
+            }
         }
 
         $savedFilters[$key] = $data;
+
     }
+
+    $savedFilters['empty'] = $empty;
 
     $geoDivisions = array();
 

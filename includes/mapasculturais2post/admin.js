@@ -12,6 +12,10 @@
             }
         });
 
+        function importImagesFeedback(){
+            $('#mc-import-image--feedback').fadeIn('fast').delay(5000).fadeOut('fast');
+        }
+
         function importImages(selector){
             var $checkboxes = $(selector);
             imageImportationSpinnerCount += $checkboxes.length;
@@ -32,6 +36,10 @@
                         data: data,
                         complete: function (request, status) {
                             imageImportationSpinnerCount--;
+
+                            if(imageImportationSpinnerCount === 0){
+                                importImagesFeedback();
+                            }
                         }
                     });
 

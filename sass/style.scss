@@ -1857,7 +1857,7 @@ button.mfp-arrow-left {
     .filter {
         float: left;
         padding: 0 .75rem;
-        width: 33.333%;
+        width: 25%;
     }
 }
 
@@ -1868,6 +1868,12 @@ button.mfp-arrow-left {
     @include size(12);
     font-weight: 700;
     text-transform: uppercase;
+}
+
+.filter input.keyword {
+    padding: .75rem;
+    letter-spacing: 1px;
+    font: 400 100%/1.5 "Open Sans", "Lucida Grande", sans-serif;
 }
 
 .event__date {
@@ -2283,7 +2289,8 @@ button.mfp-arrow-left {
         min-width: 100%;
         display: none;
         margin: 0;
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: auto;
         padding: .5em 0;
         box-shadow: 0 1px 2px 0 rgba(41,39,36,.35);
         transition: opacity .5s;
@@ -2343,4 +2350,60 @@ button.mfp-arrow-left {
     display: inline-block;
     width: 80%;
     vertical-align: top;
+}
+
+
+/* loading */
+
+.spinner-bars {
+  margin: 100px auto;
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.spinner-bars > div {
+  background-color: rgba(41, 39, 36, 0.0784314);
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner-bars .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner-bars .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner-bars .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner-bars .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
 }

@@ -15,7 +15,7 @@ if(is_category()){
 <?php get_header(); ?>
 
 <div class="content  content--full" ng-controller="eventsController">
-    <?php if(is_page()): the_post();?>
+    <?php if(is_page() && get_the_content()): the_post();?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <div class="hentry-wrap">
             <div class="entry-content">
@@ -27,6 +27,13 @@ if(is_category()){
     <?php endif; ?>
 
     <div class="filter-bar cf" <?php if(is_category()): ?> style="background: <?php echo $cat_color ?>" <?php endif; ?>>
+        <div class="filter">
+            <label>
+                <span class="label"><?php _e('Palavra-Chave', 'cultural'); ?></span>
+                <input type="text" ng-model="keyword" class="placeholder keyword">
+            </label>
+        </div>
+
         <div class="filter">
             <span class="label"><?php _e('Data', 'cultural'); ?></span>
             <div class="date--picker">
@@ -94,14 +101,26 @@ if(is_category()){
             </div>
         </div>
     </div>
-    <span ng-if="!loading">{{events.length}} {{events.length == 1 ? '<?php _e('evento encontrado', 'cultural'); ?>' : '<?php _e('eventos encontrados', 'cultural'); ?>'}}</span>
+
+    <h3 class="aligncenter texcenter" ng-if="!loading">{{events.length}} {{events.length == 1 ? '<?php _e('evento encontrado', 'cultural'); ?>' : '<?php _e('eventos encontrados', 'cultural'); ?>'}}</h3>
+
+    <div ng-if="loading">
+        <div class="spinner-bars">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+
     <div class="events-list grid js-events-masonry" ng-show="!loading">
         <div class="grid-sizer"></div>
         <div class="gutter-sizer"></div>
 
         <div class="event  event-container" ng-repeat="event in events" repeat-done="updateMasonry()">
             <figure ng-if="event['@files:header.header']" class="event__image" style="background:transparent" >
-                <img ng-src="{{event['@files:header.header'].url}}" alt="{{event.name}}" style="width:100%"/>
+                <img src="{{event['@files:header.header'].url}}" alt="{{event.name}}" style="width:100%"/>
             </figure>
             <div class="event-data">
                 <h1 class="event__title">
@@ -110,7 +129,8 @@ if(is_category()){
                     <span class="event__subtitle">{{event.subTitle}}</span>
                 </h1>
 
-                <div class="event__occurrences" ng-repeat="occs in event.occurrences" ng-if="$index <= 2">
+
+                <div class="event__occurrences" ng-repeat="occs in event.occurrences" ng-if="occs.inPeriod">
                     <div class="event__venue">
                         <a href="{{occs.space.singleUrl}}">{{occs.space.name}}</a>
                     </div>
@@ -129,15 +149,13 @@ if(is_category()){
                     </span>
                     {{event.occurrences[0].rule.price}}
                 </div>
+
+                <div ng-if="event.project.name"><strong>projeto:</strong> <a href="{{event.project.singleUrl}}">{{event.project.name}}</a></div>
                 <div><strong>publicado por:</strong> <a href="{{event.owner.singleUrl}}">{{event.owner.name}}</a></div>
                 <a href="{{event.singleUrl}}" target="_blank" class="event__info"><?php _e('Mais informações', 'cultural'); ?></a>
             </div>
         </div>
 
-    </div>
-
-    <div ng-if="loading">
-        <?php _e('Carregando', 'cultural') ?>
     </div>
 
     <?php comments_template('', true); ?>
