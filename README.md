@@ -22,7 +22,7 @@ Ao Criar uma categoria você pode configurar uma cor, que será utilizada em div
 #### Menus
 A configuração dos menus do site é feita na página **Menus** do menu **Aparência** (_em inglês **Appearence**_).
 Crie 4 menus e associe as posições abaixo: 
-- **Menu primário** - _Utilize este menu para colocar os links para as categorias. Este menu é sensível às cores configuradas nas categorias_;
+- **Menu primário** - _Utilize este menu para colocar os links para as categorias. Este menu é sensível às cores configuradas nas categorias. **IMPORTANTE**: Utilize apenas um nível de menu_;
 - **Menu secundário** - _Fica abaixo do menu principal, com um estilo mais discreto. Utilize este menu para páginas de expediente, contato, etc_;
 - **Menu Mobile** - _Usado para configurar o menu do site na versão mobile_;
 - **Régua de Marcas** - _Usado para configurar a régua de marcas do rodapé do site. Ver seção [Régua de marcas](#Régua de marcas)_
