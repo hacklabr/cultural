@@ -53,3 +53,7 @@ Você pode importar as imagens de uma entidade e anexá-las ao post clicando no 
 
 #### Caixas de serviço de eventos
 Você pode adicionar caixas de serviço de eventos utilizando o shortcode **[evento ]** em qualquer ponto do conteúdo do post/página. Exemplo **[evento http://spcultura.prefeitura.sp.gov.br/evento/00000/]**.
+
+## Plugins recomendados
+- [WordPress SEO by Yoast](https://wordpress.org/plugins/wordpress-seo/)
+- [Custom Favicon](https://wordpress.org/plugins/custom-favicon/])
