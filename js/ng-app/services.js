@@ -19,7 +19,7 @@
         svc.submit = function(){
             var deferred = $q.defer();
             var searchParams = {
-                '@select': 'id,singleUrl,name,subTitle,type,shortDescription,terms,classificacaoEtaria,owner.name,owner.singleUrl,project.name,project.singleUrl,occurrences',
+                '@select': 'id,singleUrl,name,subTitle,type,shortDescription,terms,classificacaoEtaria,traducaoLibras,descricaoSonora,owner.name,owner.singleUrl,project.name,project.singleUrl,occurrences',
 //                '@page': 1,
 //                '@limit': 10,
                 '@files': '(header.header,avatar.avatarBig):url',

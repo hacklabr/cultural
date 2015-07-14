@@ -57,8 +57,7 @@ foreach ($event->occurrences as $i => $occ) {
 
 
         <span class="event__classification"><?php echo $event->classificacaoEtaria ?></span>
-
-
+        
         <?php if ($same_price): ?>
             <div class="event__price">
                 <span class="fa-stack">
@@ -67,6 +66,20 @@ foreach ($event->occurrences as $i => $occ) {
                 </span>
                 <?php echo $price ? $price : __('Não informado', 'cultural') ?>
             </div>
+        <?php endif; ?>
+        
+        <?php 
+        $accessibility = '';
+        if($event->traducaoLibras == 'Sim'){
+            $accessibility .= 'Tradução para LIBRAS';
+        }
+        
+        if($event->descricaoSonora == 'Sim'){
+            $accessibility .= $accessibility ? ', Áudio descrição' : 'Áudio descrição';
+        }
+        ?>
+        <?php if($accessibility): ?>
+            <span class="event__accessibility"><strong>acessibilidade:</strong> <?php echo $accessibility ?></span>
         <?php endif; ?>
 
         <div><strong>projeto:</strong> <a href="<?php echo $event->project->singleUrl ?>" class="ng-binding"><?php echo $event->project->name ?></a></div>

@@ -2,7 +2,7 @@
 
 class MapasCulturais2Post {
 
-    const EVENT_FIELDS = 'id,singleUrl,name,subTitle,project.id,project.name,project.singleUrl,owner.id,owner.name,owner.singleUrl,classificacaoEtaria,shortDescription,description,occurrences';
+    const EVENT_FIELDS = 'id,singleUrl,name,subTitle,project.id,project.name,project.singleUrl,owner.id,owner.name,owner.singleUrl,classificacaoEtaria,traducaoLibras,descricaoSonora,shortDescription,description,occurrences';
 
     static function init() {
 

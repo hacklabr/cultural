@@ -142,6 +142,7 @@ if(is_category()){
                     {{event.terms.linguagem.length == 1 ? '<?php _e('Linguagem', 'cultural'); ?>' : '<?php _e('Linguagens', 'cultural'); ?>'}}: {{event.terms.linguagem.join(', ')}}
                 </div>
                 <span class="event__classification">{{event.classificacaoEtaria}}</span>
+                
                 <div class="event__price">
                     <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-2x"></i>
@@ -150,6 +151,10 @@ if(is_category()){
                     {{event.occurrences[0].rule.price}}
                 </div>
 
+                <div ng-if="event.traducaoLibras == 'Sim' && event.descricaoSonora == 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Tradução para LIBRAS, Áudio descrição</div>
+                <div ng-if="event.traducaoLibras == 'Sim' && event.descricaoSonora != 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Tradução para LIBRAS</div>
+                <div ng-if="event.traducaoLibras != 'Sim' && event.descricaoSonora == 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Áudio descrição</div>
+                
                 <div ng-if="event.project.name"><strong>projeto:</strong> <a href="{{event.project.singleUrl}}">{{event.project.name}}</a></div>
                 <div><strong>publicado por:</strong> <a href="{{event.owner.singleUrl}}">{{event.owner.name}}</a></div>
                 <a href="{{event.singleUrl}}" target="_blank" class="event__info"><?php _e('Mais informações', 'cultural'); ?></a>
