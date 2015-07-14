@@ -125,7 +125,7 @@ function cultural_scripts() {
     $js_lib_path = get_bloginfo('template_directory') . (WP_DEBUG ? '/js/lib/' : '/js/min/');
 
     /* JUDO Font Awesome for the icons */
-    wp_enqueue_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+    wp_enqueue_style('font-awesome', get_bloginfo('template_directory') . '/css/font-awesome-4.3.0/css/font-awesome.min.css');
 
     wp_enqueue_script('event-emmiter', $js_lib_path . 'EventEmitter.js', array('jquery'), '3.1.8', true);
 
