@@ -49,6 +49,12 @@ jQuery(document).ready(function( $ ) {
         });
     });
 
+   $("#share-buttons a.facebook").data('href', 'http://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.location.toString()) );
+   $("#share-buttons a.twitter").data('href', 'http://twitter.com/intent/tweet?status=' + encodeURIComponent(document.title + "\n" + document.location.toString()) );
+   $("#share-buttons a.gplus").data('href', 'https://plus.google.com/share?url=' + encodeURIComponent(document.location.toString()) );
 
+   $('.js-share').click(function() {
+        window.open( $(this).data('href'), 'Compartilhar', 'width=500, height=500');
+    });
 
 });

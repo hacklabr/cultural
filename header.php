@@ -52,6 +52,13 @@
                 <li><a href="#tab-3" class="calendar-toggle" data-tab="tab-3"><i class="fa fa-calendar"></i></a></li>
             </ul>
 
+            <div id="share-buttons">
+                <span>Compartilhe:</span>
+                <a href="#" title="Compartilhar no Facebook" class="facebook js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_button_share.png" alt="Facebook"></a>
+                <a href="#" title="Compartilhar no Twitter" class="twitter js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_button_share.png" alt="Twitter"></a>
+                <a href="#" title="Compartilhar no Google Plus" class="gplus js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/gplus_button_share.png" alt="Google+"></a>
+            </div>
+
             <div id="tabs" class="toggle-tabs">
                 <div class="site-header-inside">
                     <!-- Logo, description and main navigation -->
