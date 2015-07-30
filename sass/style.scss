@@ -566,6 +566,32 @@ img.aligncenter {
     top: 32px;
 }
 
+#share-buttons {
+    margin-bottom: 24px;
+
+    img,
+    span {
+     display: inline;
+    }
+
+    span {
+        font-size: 0.75rem;
+    }
+
+    img {
+        margin: 0 0.2rem;
+        vertical-align: middle;
+        width: 1.5rem;
+    }
+
+    @media (min-width: 768px) and (max-width: 1200px) {
+        span {
+            display: block;
+        }
+    }
+
+}
+
 
 /* --------------------------------------------------------------
 5.5 Toggle Menus
