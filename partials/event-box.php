@@ -27,11 +27,6 @@ foreach ($event->occurrences as $i => $occ) {
 }
 ?>
 <div class="event-container">
-    <?php if ($event->files->$image): ?>
-        <figure class="event__image">
-            <img src="<?php echo $event->files->$image ?>" alt="<?php echo $event->name ?>" />
-        </figure>
-    <?php endif; ?>
     <div class="event-data">
         <h1 class="event__title">
             <?php echo $event->name ?>
@@ -39,6 +34,19 @@ foreach ($event->occurrences as $i => $occ) {
                 <span class="event__subtitle"><?php echo $event->subTitle ?></span>
             <?php endif; ?>
         </h1>
+
+        <div class="event__price">
+            <span class="event__classification"><?php echo $event->classificacaoEtaria ?></span>
+            <?php if ($same_price): ?>
+                <span class="fa-stack">
+                    <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
+                </span>
+                <?php echo $price ? $price : __('Não informado', 'cultural') ?>
+            <?php endif; ?>
+        </div>
+
+        <h4><?php _e('Local', 'cultural');?></h4>
+
         <?php foreach ($event->occurrences as $occ): ?>
             <div class="event__occurrences">
                 <div class="event__venue"><a href="<?php echo $occ->space->singleUrl ?>"><?php echo $occ->space->name ?></a></div>
@@ -55,25 +63,12 @@ foreach ($event->occurrences as $i => $occ) {
             </div>
         <?php endforeach; ?>
 
-
-        <span class="event__classification"><?php echo $event->classificacaoEtaria ?></span>
-        
-        <?php if ($same_price): ?>
-            <div class="event__price">
-                <span class="fa-stack">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
-                </span>
-                <?php echo $price ? $price : __('Não informado', 'cultural') ?>
-            </div>
-        <?php endif; ?>
-        
         <?php 
         $accessibility = '';
         if($event->traducaoLibras == 'Sim'){
             $accessibility .= 'Tradução para LIBRAS';
         }
-        
+
         if($event->descricaoSonora == 'Sim'){
             $accessibility .= $accessibility ? ', Áudio descrição' : 'Áudio descrição';
         }
@@ -82,12 +77,20 @@ foreach ($event->occurrences as $i => $occ) {
             <span class="event__accessibility"><strong>acessibilidade:</strong> <?php echo $accessibility ?></span>
         <?php endif; ?>
 
-        <div><strong>projeto:</strong> <a href="<?php echo $event->project->singleUrl ?>" class="ng-binding"><?php echo $event->project->name ?></a></div>
-        <div><strong>publicado por:</strong> <a href="<?php echo $event->owner->singleUrl ?>" class="ng-binding"><?php echo $event->owner->name ?></a></div>
+        <?php if ( $event->project->name ) : ?>
+            <div>
+                <h4><?php _e('Projeto', 'cultural');?></h4>
+                <a href="<?php echo $event->project->singleUrl ?>" class="ng-binding"><?php echo $event->project->name ?></a>
+            </div>
+        <?php endif; ?>
 
-
+        <?php if ($event->owner->name) : ?>
+            <div>
+                <h4><?php _e('Publicado por', 'cultural');?></h4>
+                <a href="<?php echo $event->owner->singleUrl ?>" class="ng-binding"><?php echo $event->owner->name ?></a>
+            </div>
+        <?php endif;?>
 
         <a href="<?php echo $event->singleUrl ?>" class="event__info"><?php _e('Mais informações', 'cultural'); ?></a>
-
     </div>
 </div>

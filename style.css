@@ -1846,12 +1846,13 @@ button.mfp-arrow-left {
 19.0 Events
 -------------------------------------------------------------- */
 .event-container {
-  background-color: rgba(41, 39, 36, 0.08);
-  box-shadow: inset 0 0 0 4px rgba(41, 39, 36, 0.08);
+  box-shadow: inset 0 0 0 4px #EEEEED;
   font-size: 0.875rem;
   line-height: 1.71429;
   overflow: hidden;
   position: relative; }
+  .event-container h4 {
+    margin-bottom: 0; }
 
 .event__image {
   float: left;
@@ -1863,7 +1864,9 @@ button.mfp-arrow-left {
   .event-data .event__title {
     font-size: 1.125rem;
     line-height: 1.33333;
-    margin: 0 0 1.5rem 0; }
+    background: #EEEEED;
+    padding: 1.5rem;
+    margin: -1.5rem -1.5rem 1.5rem -1.5rem; }
   .event-data .event__info {
     background-color: #c0392b;
     color: #fff;
@@ -1894,12 +1897,14 @@ button.mfp-arrow-left {
   display: inline-block;
   font-size: 0.75rem;
   line-height: 2;
-  padding: 0 .5em; }
+  padding: .15em .5em; }
 
 .event__price {
   display: inline-block; }
   .event__price .fa-circle {
     color: #f1c40f; }
+  .event__price .fa-stack {
+    background: #F1C40F; }
 
 .grid .event {
   margin-bottom: 1.5rem; }
