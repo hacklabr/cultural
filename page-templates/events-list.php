@@ -138,8 +138,8 @@ if(is_category()){
                     <!--a href="#" class="js-more-occurrences"><i class="fa fa-plus-circle"></i></a-->
                 </div>
 
-                <div style="margin: -10px 0 10px 0">
-                    {{event.terms.linguagem.length == 1 ? '<?php _e('Linguagem', 'cultural'); ?>' : '<?php _e('Linguagens', 'cultural'); ?>'}}: {{event.terms.linguagem.join(', ')}}
+                <div class="event__languages" style="margin: -10px 0 10px 0">
+                    <h4 class="event__languages--title">{{event.terms.linguagem.length == 1 ? '<?php _e('Linguagem', 'cultural'); ?>' : '<?php _e('Linguagens', 'cultural'); ?>'}}:</h4> {{event.terms.linguagem.join(', ')}}
                 </div>
                 <span class="event__classification">{{event.classificacaoEtaria}}</span>
                 
@@ -155,8 +155,14 @@ if(is_category()){
                 <div ng-if="event.traducaoLibras == 'Sim' && event.descricaoSonora != 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Tradução para LIBRAS</div>
                 <div ng-if="event.traducaoLibras != 'Sim' && event.descricaoSonora == 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Áudio descrição</div>
                 
-                <div ng-if="event.project.name"><strong>projeto:</strong> <a href="{{event.project.singleUrl}}">{{event.project.name}}</a></div>
-                <div><strong>publicado por:</strong> <a href="{{event.owner.singleUrl}}">{{event.owner.name}}</a></div>
+                <div ng-if="event.project.name">
+                    <h4>projeto:</h4>
+                    <a href="{{event.project.singleUrl}}">{{event.project.name}}</a>
+                </div>
+                <div ng-if="event.owner.name">
+                    <h4>publicado por:</h4>
+                    <a href="{{event.owner.singleUrl}}">{{event.owner.name}}</a>
+                </div>
                 <a href="{{event.singleUrl}}" target="_blank" class="event__info"><?php _e('Mais informações', 'cultural'); ?></a>
             </div>
         </div>
