@@ -4,6 +4,8 @@ jQuery(document).ready(function( $ ) {
     $( "ul.toggle-bar a" ).click( function() {
         var tab_id = $( this ).attr( "data-tab" );
 
+		if (typeof(tab_id) == 'undefined') return true; 
+
         $( "ul.toggle-bar li a" ).removeClass( "current" );
         $( ".tab-content" ).removeClass( "current" );
 
