@@ -661,7 +661,8 @@ img.aligncenter {
     color: #292724;
     display: inline-block;
     padding: .75rem 1em;
-    transition: background-color .1s ease-out; }
+    transition: background-color .1s ease-out;
+    width: 100%; }
   .menu--main a:hover {
     background-color: #c0392b;
     color: #fff; }
