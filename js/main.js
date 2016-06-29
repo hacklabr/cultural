@@ -13,6 +13,14 @@ jQuery(document).ready(function( $ ) {
         $( "#"+tab_id ).addClass( "current" );
         return false;
     } );
+    
+    $( "#mobile-menu-handler a" ).click( function() {
+
+        $(this).find('i').toggleClass('fa-bars');
+        $(this).find('i').toggleClass('fa-close');
+        $('#mobile-nav').toggle();
+        return false;
+    } );
 
     var $container = $('.js-masonry');
     $container.imagesLoaded( function() {
