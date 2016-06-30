@@ -776,8 +776,12 @@ img.aligncenter {
 }
 
 .menu--mobile {
-    background-color: $color--highlight;
+    // background-color: #d8e7f6;
+    @extend .menu--main;
     @include size(18,2);
+    @media screen and (min-width: 40em){
+        display: none;
+    }
 }
 
 .sub-menu {
