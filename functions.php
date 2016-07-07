@@ -331,12 +331,11 @@ function cultural_widgets_init() {
 
 add_action('widgets_init', 'cultural_widgets_init');
 
-add_filter('nav_menu_link_attributes', function($attr, $item) {
-    if ($item->object == 'category') {
-        $cat_data = get_option('category_' . $item->object_id);
-        $cat_color = $cat_data['color'];
-
-        $attr['style'] = 'background-color:' . $cat_color;
-    }
-    return $attr;
-}, 10, 4);
+// add_filter('nav_menu_link_attributes', function($attr, $item) {
+//     if ($item->object == 'category') {
+//         $cat_data = get_option('category_' . $item->object_id);
+//         $cat_color = $cat_data['color'];
+//         $attr['style'] = 'background-color:' . $cat_color;
+//     }
+//     return $attr;
+// }, 10, 4);

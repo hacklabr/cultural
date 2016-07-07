@@ -11,7 +11,20 @@ class Cultural_Hightlights {
         $option = wp_parse_args(
             get_option(self::OPTION_NAME), self::getDefaultOptions()
         );
-
+        
+         date_default_timezone_set('America/Sao_Paulo');
+		//Remove options expirados
+		for($i = 0; $i<5;$i++){
+			if(isset($option[$key]['highlights'][$i]['data_expiracao']) && isset($option[$key]['highlights'][$i]['url'])){
+				if(($option[$key]['highlights'][$i]['data_expiracao'] != "") && (strtotime($option[$key]['highlights'][$i]['data_expiracao']) <= strtotime(date('d/m/Y H:i', time())))){
+					unset($option[$key]['highlights'][$i]);
+				}
+				if($option[$key]['highlights'][$i]['data_expiracao'] == "" && $option[$key]['highlights'][$i]['url'] == ""){
+					unset($option[$key]['highlights'][$i]);
+				}
+			}	
+		}
+		$option[$key]['highlights'] = array_values($option[$key]['highlights']);	
         return isset($option[$key]) ? $option[$key] : false;
     }
 
@@ -34,14 +47,18 @@ class Cultural_Hightlights {
 
         $post_ids = array();
 
-        foreach (explode("\n", $option[$type]) as $url){
-            $url = trim($url);
-            $post_id = url_to_postid($url);
-            if($post_id){
-                $post_ids[] = $post_id;
-            }
-        }
-
+       date_default_timezone_set('America/Sao_Paulo');
+		/*Realiza  busca de posts no vetor de posts destacados*/
+		foreach ($option[$type] as $post){
+			/*Não exibe posts expirados*/
+			if(($post['data_expiracao'] == "") || (!(strtotime($post['data_expiracao']) < strtotime(date('d/m/Y H:i', time()))))){
+				$url = trim($post['url']);
+				$post_id = url_to_postid($url);
+				if($post_id){
+					$post_ids[] = $post_id;
+				}
+			}
+		}
         self::$idsCache[$cid] = $post_ids;
 
         return $post_ids;
@@ -210,6 +227,13 @@ class Cultural_Hightlights {
                     <p class="help">
                         <?php _e("Cole na caixas abaixo as URLs dos posts que você deseja destacar para cada seção do site, uma URL por linha, na ordem que você deseja que apareça.<br>Deixe em branco se desejar que sejam destacados os últimos posts.",'cultural'); ?>
                     </p>
+                    
+                    <script>  
+						jQuery(document).ready(function() {	
+							jQuery.datetimepicker.setLocale('pt-BR');
+							jQuery('.datetimepicker').datetimepicker({format: 'd/m/Y H:i'});
+						});
+					</script>
                     <?php
                     foreach ($terms as $term):
                         $name = function($option_name) use($term) {
@@ -219,16 +243,38 @@ class Cultural_Hightlights {
                         $option = Cultural_Hightlights::getOption($term->slug);
                         ?>
                         <div class="highlights">
+							
                             <h3><?php echo $term->name ?></h3>
-                            <section class="js-posts">
+                            <div style="margin:10px">
+								
                                 <strong><?php _e('Posts destacados', 'cultural'); ?></strong><br>
-                                <textarea name="<?php echo $name('highlights') ?>"><?php echo $option['highlights'] ?></textarea>
-                            </section>
+								<table class="table" style="width:100%">                               
+									<thead>
+										<th>URL do Post</th>
+										<th>Data/Hora de Expiração</th>
+									</thead>
+									<tbody>
+										
+								<?php
+									for($i = 0; $i<5;$i++){
+										//Se o post estiver expirado, ele não é exibido e quando o usuário clicar em salvar, ele sumirá definitivamente
+                                 ?>
+									<tr>
+										<td style="width:70%"><input style="padding:7px; width:100%" type="text" name="<?php echo $name('highlights')."[".$i."]" ?>[url]" value="<?php echo $option['highlights'][$i]['url'] ?>" /></td>
+										<td style="width:20%;margin:auto; text-align:center"><input class="datetimepicker" style="padding:7px; width:100%" type="text" name="<?php echo $name('highlights')."[".$i."]" ?>[data_expiracao]" value="<?php echo $option['highlights'][$i]['data_expiracao'] ?>" /></td>
+									</tr>
+			                     <?php 
+			                      } ?>
+			                     </tbody>
+			                     </table>
 
-                            <section class="js-posts">
+                               <!-- <textarea name="<?php echo $name('highlights') ?>"><?php echo $option['highlights'] ?></textarea>-->
+                            </div>
+
+                           <!-- <section class="js-posts">
                                 <strong><?php _e('Posts fixos', 'cultural'); ?></strong><br>
                                 <textarea name="<?php echo $name('fixed') ?>"><?php echo $option['fixed'] ?></textarea>
-                            </section>
+                            </section>-->
                             <div class="clear"></div>
                         </div>
                     <?php endforeach; ?>

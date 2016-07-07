@@ -378,6 +378,9 @@ img.size-large,
   height: auto;
   max-width: 100%; }
 
+img.size-full {
+  width: 100%; }
+
 /* Make sure embeds and iframes fit their containers */
 embed,
 iframe,
@@ -499,7 +502,7 @@ img.aligncenter {
 .site-header::-webkit-scrollbar {
   display: none; }
 
-.fullscreen {
+.fullscreen, .hidden {
   display: none; }
 
 .site-header {
@@ -653,16 +656,17 @@ img.aligncenter {
     cursor: pointer;
     content: '\f107';
     margin-left: .5em; } }
-.menu--main {
+.menu--main, .menu--mobile {
   margin: 0 0 1.5rem 0;
   position: relative; }
-  .menu--main a {
+  .menu--main a, .menu--mobile a {
     background-color: rgba(41, 39, 36, 0.1);
     color: #292724;
     display: inline-block;
     padding: .75rem 1em;
-    transition: background-color .1s ease-out; }
-  .menu--main a:hover {
+    transition: background-color .1s ease-out;
+    width: 100%; }
+  .menu--main a:hover, .menu--mobile a:hover {
     background-color: #c0392b;
     color: #fff; }
 
@@ -678,9 +682,11 @@ img.aligncenter {
     content: "- "; }
 
 .menu--mobile {
-  background-color: #c0392b;
   font-size: 1.125rem;
   line-height: 2.66667; }
+  @media screen and (min-width: 40em) {
+    .menu--mobile {
+      display: none; } }
 
 .sub-menu {
   background-color: #fff;
@@ -2053,5 +2059,11 @@ button.mfp-arrow-left {
   20% {
     transform: scaleY(1);
     -webkit-transform: scaleY(1); } }
+@media screen and (max-width: 40em) {
+  #mobile-menu-handler {
+    display: block; }
+
+  #tabs-menu-handler {
+    display: none; } }
 
 /*# sourceMappingURL=style.css.map */

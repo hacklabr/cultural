@@ -4,13 +4,21 @@ jQuery(document).ready(function( $ ) {
     $( "ul.toggle-bar a" ).click( function() {
         var tab_id = $( this ).attr( "data-tab" );
 
-		if (typeof(tab_id) == 'undefined') return true; 
+		if (typeof(tab_id) == 'undefined') return true;
 
         $( "ul.toggle-bar li a" ).removeClass( "current" );
         $( ".tab-content" ).removeClass( "current" );
 
         $( this ).addClass( "current" );
         $( "#"+tab_id ).addClass( "current" );
+        return false;
+    } );
+
+    $( "#mobile-menu-handler a" ).click( function() {
+
+        $(this).find('i').toggleClass('fa-bars');
+        $(this).find('i').toggleClass('fa-close');
+        $('#mobile-nav').toggle(300);
         return false;
     } );
 

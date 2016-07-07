@@ -66,24 +66,22 @@ if(is_category()){
                        >
             </div>
         </div>
-
         <div ng-if="data.linguagens.length > 1" class="filter">
-            <span class="label"><?php _e('Linguagem', 'cultural'); ?></span>
-            <div class="dropdown">
-                <div class="placeholder">
-                    <span ng-if="!svc.data.linguagens.length"><?php _e('Selecione as linguagens', 'cultural'); ?></span>
-                    <span ng-if="svc.data.linguagens.length">{{svc.data.linguagens.join(', ')}}</span>
-                </div>
-                <div class="submenu-dropdown">
-                    <ul class="lista-de-filtro select">
-                        <li ng-repeat="linguagem in data.linguagens" ng-class="{'selected': linguagem.active}" ng-click="toggleListItem('linguagens', linguagem)" class="ng-scope">
-                            <span>{{linguagem.name}}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
+             <span class="label"><?php _e('Linguagem', 'cultural'); ?></span>
+             <div class="dropdown">
+                 <div class="placeholder">
+                     <span ng-if="!svc.data.linguagens.length"><?php _e('Selecione as linguagens', 'cultural'); ?></span>
+                     <span ng-if="svc.data.linguagens.length">{{svc.data.linguagens.join(', ')}}</span>
+                 </div>
+                 <div class="submenu-dropdown">
+                     <ul class="lista-de-filtro select">
+                         <li ng-repeat="linguagem in data.linguagens" ng-class="{'selected': linguagem.active}" ng-click="toggleListItem('linguagens', linguagem)" class="ng-scope">
+                             <span>{{linguagem.name}}</span>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+         </div>
         <div ng-if="data.classificacoes" class="filter">
             <span class="label"><?php _e('Classificação', 'cultural'); ?></span>
             <div id="classificacao" class="dropdown">
@@ -142,7 +140,7 @@ if(is_category()){
                     <h4 class="event__languages--title">{{event.terms.linguagem.length == 1 ? '<?php _e('Linguagem', 'cultural'); ?>' : '<?php _e('Linguagens', 'cultural'); ?>'}}:</h4> {{event.terms.linguagem.join(', ')}}
                 </div>
                 <span class="event__classification">{{event.classificacaoEtaria}}</span>
-                
+
                 <div class="event__price">
                     <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-2x"></i>
@@ -154,7 +152,7 @@ if(is_category()){
                 <div ng-if="event.traducaoLibras == 'Sim' && event.descricaoSonora == 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Tradução para LIBRAS, Áudio descrição</div>
                 <div ng-if="event.traducaoLibras == 'Sim' && event.descricaoSonora != 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Tradução para LIBRAS</div>
                 <div ng-if="event.traducaoLibras != 'Sim' && event.descricaoSonora == 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Áudio descrição</div>
-                
+
                 <div ng-if="event.project.name">
                     <h4>projeto:</h4>
                     <a href="{{event.project.singleUrl}}">{{event.project.name}}</a>

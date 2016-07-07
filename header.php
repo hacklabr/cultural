@@ -44,13 +44,17 @@
         <header class="site-header wrap">
             <a href="#main" title="<?php esc_attr_e('Ir para o conteúdo', 'cultural'); ?>" class="assistive-text"><?php _e('Ir para o conteúdo', 'cultural'); ?></a>
 
-            <ul class="toggle-bar">
+            <ul id="tabs-menu-handler" class="toggle-bar">
                 <li><a href="#tabs-1" class="current main-toggle" data-tab="tab-1"><i class="fa fa-list-ul"></i></a></li>
                 <?php if (is_active_sidebar('header-widget-area')) : ?>
                     <li><a href="#tab-2" class="highlights-toggle" data-tab="tab-2"><i class="fa fa-search"></i></a></li>
                 <?php endif; ?>
                 <li><a href="#tab-3" class="calendar-toggle" data-tab="tab-3"><i class="fa fa-calendar"></i></a></li>
             </ul>
+
+			<div class="toggle-bar hidden" id="mobile-menu-handler">
+				<a href="#tab-2" class="highlights-toggle alignright" data-tab="tab-2"><i class="fa fa-bars"></i></a> &nbsp;
+			</div>
 
             <div id="share-buttons">
                 <span>Compartilhe:</span>
@@ -63,6 +67,9 @@
                 <div class="site-header-inside">
                     <!-- Logo, description and main navigation -->
                     <div id="tab-1" class="tab-content current animated fadeIn">
+                        <nav id="mobile-nav" class="hidden" role="navigation">
+							<?php wp_nav_menu(array('theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false)); ?>
+						</nav>
                         <div class="branding">
                             <a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
                                 <?php
@@ -75,11 +82,10 @@
                                 <?php endif; ?>
                             </a>
                         </div>
+                        
                         <nav class="access cf js-access" role="navigation">
                             <?php
-                            if (wp_is_mobile()) :
-                                wp_nav_menu(array('theme_location' => 'mobile', 'container' => false, 'menu_class' => 'menu--mobile  menu', 'fallback_cb' => false));
-                            else :
+                            if (!wp_is_mobile()) :
                                 wp_nav_menu(array('theme_location' => 'primary', 'container' => false, 'menu_class' => 'menu--main  menu', 'fallback_cb' => 'default_menu'));
                                 wp_nav_menu(array('theme_location' => 'secondary', 'container' => false, 'menu_class' => 'menu--sub  menu', 'fallback_cb' => false));
                                 ?>

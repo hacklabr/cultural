@@ -384,6 +384,10 @@ img.size-large,
     max-width: 100%;
 }
 
+img.size-full{
+    width: 100%;
+}
+
 /* Make sure embeds and iframes fit their containers */
 
 embed,
@@ -532,7 +536,7 @@ img.aligncenter {
     display: none;
 }
 
-.fullscreen {
+.fullscreen, .hidden {
     display: none;
 }
 
@@ -745,6 +749,7 @@ img.aligncenter {
         display: inline-block;
         padding: .75rem 1em;
         transition: background-color .1s ease-out;
+        width: 100%;
     }
 
     a:hover {
@@ -771,8 +776,12 @@ img.aligncenter {
 }
 
 .menu--mobile {
-    background-color: $color--highlight;
+    // background-color: #d8e7f6;
+    @extend .menu--main;
     @include size(18,2);
+    @media screen and (min-width: 40em){
+        display: none;
+    }
 }
 
 .sub-menu {
@@ -2443,4 +2452,13 @@ button.mfp-arrow-left {
     transform: scaleY(1.0);
     -webkit-transform: scaleY(1.0);
   }
+}
+
+@media screen and (max-width: 40em) {
+    #mobile-menu-handler {
+        display:block;
+    }
+    #tabs-menu-handler {
+		display: none;
+    }
 }
