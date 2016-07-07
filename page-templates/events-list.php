@@ -66,7 +66,22 @@ if(is_category()){
                        >
             </div>
         </div>
-
+        <div ng-if="data.linguagens.length > 1" class="filter">
+             <span class="label"><?php _e('Linguagem', 'cultural'); ?></span>
+             <div class="dropdown">
+                 <div class="placeholder">
+                     <span ng-if="!svc.data.linguagens.length"><?php _e('Selecione as linguagens', 'cultural'); ?></span>
+                     <span ng-if="svc.data.linguagens.length">{{svc.data.linguagens.join(', ')}}</span>
+                 </div>
+                 <div class="submenu-dropdown">
+                     <ul class="lista-de-filtro select">
+                         <li ng-repeat="linguagem in data.linguagens" ng-class="{'selected': linguagem.active}" ng-click="toggleListItem('linguagens', linguagem)" class="ng-scope">
+                             <span>{{linguagem.name}}</span>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+         </div>
         <div ng-if="data.classificacoes" class="filter">
             <span class="label"><?php _e('Classificação', 'cultural'); ?></span>
             <div id="classificacao" class="dropdown">
