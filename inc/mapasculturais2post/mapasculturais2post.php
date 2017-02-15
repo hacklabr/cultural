@@ -87,7 +87,7 @@ class MapasCulturais2Post {
             if ('post' === $post->post_type || 'noticias' === $post->post_type) {
 
                 wp_enqueue_script('mustache', get_stylesheet_directory_uri() . '/js/min/mustache.js');
-                wp_enqueue_script('mapasculturais2post', get_stylesheet_directory_uri() . '/includes/mapasculturais2post/admin.js');
+                wp_enqueue_script('mapasculturais2post', get_stylesheet_directory_uri() . '/inc/mapasculturais2post/admin.js');
 
                 wp_localize_script('mapasculturais2post', 'mc', array(
                     'apiUrl' => MAPASCULTURAIS_API_URL
