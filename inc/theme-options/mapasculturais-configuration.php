@@ -101,11 +101,13 @@ class MapasCulturaisConfiguration {
             'NAME' => new CulturalConfigModel('URL', 'Nome da instalação do Mapas Culturais', 'header', ''),
             'verified' => new CulturalConfigModel('verified', 'Resultados Verificados', 'header', false),
             'linguagens' => new CulturalConfigModel('linguagens', 'Linguagens', 'header'),
+            'selos' => new CulturalConfigModel('selos', 'Selos', 'header'),
             'classificacaoEtaria' => new CulturalConfigModel('classificacaoEtaria', 'Classificação Etária', 'header'),
             'geoDivisions' => new CulturalConfigModel('geoDivisions', 'Divisões Geográficas', 'header', $geoDivisions),
             'agent' => new CulturalConfigModel('agent', 'Agentes', 'entity'),
             'space' => new CulturalConfigModel('space', 'Espaços', 'entity'),
-            'project' => new CulturalConfigModel('project', 'Projetos', 'entity')
+            'project' => new CulturalConfigModel('project', 'Projetos', 'entity'),
+            // 'seal' => new CulturalConfigModel('seal', 'Selos', 'entity') tentei essa abordagem primeiro e não funcionou
         );
 
 
@@ -135,6 +137,7 @@ class MapasCulturaisConfiguration {
             };
 
             $configs['linguagens']->data = $defaultRequest('term/list/linguagem/');
+            $configs['selos']->data = $defaultRequest('seal/find?@select=id,name');
 
             $eventDescription = $defaultRequest('event/describe/');
             $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
@@ -175,12 +178,14 @@ class MapasCulturaisConfiguration {
         $selectedEntities = array(
             'agent' => self::getValue('agent'),
             'space' => self::getValue('space'),
-            'project' => self::getValue('project')
+            'project' => self::getValue('project'),
+            'seal' => self::getValue('seal')
         );
 
         $selectedEntities['agent'] = array_map($decode_entity_json, is_array($selectedEntities['agent']) ? $selectedEntities['agent'] : array());
         $selectedEntities['space'] = array_map($decode_entity_json, is_array($selectedEntities['space']) ? $selectedEntities['space'] : array());
         $selectedEntities['project'] = array_map($decode_entity_json, is_array($selectedEntities['project']) ? $selectedEntities['project'] : array());
+        $selectedEntities['seal'] = array_map($decode_entity_json, is_array($selectedEntities['seal']) ? $selectedEntities['seal'] : array());
 
         if(isset($_GET['taxonomy']) && $_GET['taxonomy'] == 'category' && isset($_GET['tag_ID'])){
             $selectedFilters = get_option("category_{$_GET['tag_ID']}");
@@ -198,6 +203,7 @@ class MapasCulturaisConfiguration {
             $selectedEntities['agent'] = array_map($decode_entity_json, is_array($selectedEntities['agent']) ? $selectedEntities['agent'] : array());
             $selectedEntities['space'] = array_map($decode_entity_json, is_array($selectedEntities['space']) ? $selectedEntities['space'] : array());
             $selectedEntities['project'] = array_map($decode_entity_json, is_array($selectedEntities['project']) ? $selectedEntities['project'] : array());
+            $selectedEntities['seal'] = array_map($decode_entity_json, is_array($selectedEntities['seal']) ? $selectedEntities['seal'] : array());
         }
 
 
@@ -417,6 +423,7 @@ class MapasCulturaisConfiguration {
         <div id="mapasculturais-config-tabs">
             <ul>
                 <li><a href="#tab-geral">Geral</a></li>
+                <!-- <li><a href="#tab-selos">Selos</a></li> Eu tentei essa abordagem primeiro, não funcionou, fui para uma lista simples -->
                 <li><a href="#tab-recorte-geografico">Recorte geográfico</a></li>
                 <li><a href="#tab-agentes">Agentes Culturais</a></li>
                 <li><a href="#tab-espacos">Espaços</a></li>
@@ -425,6 +432,7 @@ class MapasCulturaisConfiguration {
 
             <div id="tab-geral" class='config-tab'>
                 <div class='config-section'>
+                    <!--
                     <?php if (!$category_id || !self::getValue('verified')): ?>
                         <h3>Selo</h3>
                         <label>
@@ -433,6 +441,41 @@ class MapasCulturaisConfiguration {
                             Retornar somente eventos verificados com selo
                         </label>
                     <?php endif; ?>
+                    -->
+                    <h3>Selos</h3>
+                    <ul>
+                        <?php
+                        $generalMetaValue = self::getValue('selos');
+
+                        $_selected = 0;
+                        foreach ($selos->data as $selo){
+                            $d = $selo->id;
+                            if(isset($generalMetaValue[$d]) && $generalMetaValue[$d]){
+                                $_selected++;
+                            }
+                        }
+
+                        $metaValue = self::getValue('selos', $categoryOptions);
+
+                        foreach ($selos->data as $selo):
+                            $d = $selo->id;
+                            
+                            if($category_id && $_selected && !$generalMetaValue[$d]){
+                                continue;
+                            }
+                            
+                            
+                            
+                            ?>
+                            <li>
+                                <label>
+                                    <input type="hidden"   name="<?php echo self::OPTION_NAME ?>[selos][<?php echo $d ?>]"  value="0">
+                                    <input type="checkbox" name="<?php echo self::OPTION_NAME ?>[selos][<?php echo $d ?>]"  value="1" <?php if (isset($metaValue[$d]) && $metaValue[$d]) echo 'checked'; ?> >
+                                    <?php echo $selo->name; ?>
+                                </label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
 
                     <h3>Classificação etária</h3>
                     <ul>
@@ -491,6 +534,15 @@ class MapasCulturaisConfiguration {
                             </li>
                         <?php endforeach; ?>
                     </ul>
+                </div>
+            </div>
+            <div id="tab-selos" class="entity-tab">
+                <div class="entity-header">
+                    <label>Buscar selo: </label>
+                    <input  type='text' class='entity-autocomplete' data-entity='seal'/>
+                    <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
+                </div>
+                <div id="seal-container" class="entity-container js-entity-container">
                 </div>
             </div>
             <div id="tab-recorte-geografico">
