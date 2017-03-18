@@ -106,6 +106,7 @@
 
                 $.get(mc.apiUrl + parsed.entity + '/findOne', {
                     '@select': 'id,name,files',
+                    '@version': '1',
                     'id': 'EQ(' + parsed.id + ')'
                 }, function(r){
                     $spinner.css('display', 'none');
@@ -116,7 +117,7 @@
                         typeName: parsed.entityTypeName,
                         images: []
                     };
-
+                    
                     if(r.files.avatar){
                         entity.images.push({
                             group: 'avatar',
