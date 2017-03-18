@@ -24,7 +24,7 @@
 //                '@limit': 10,
                 '@files': '(header.header,avatar.avatarBig):url',
                 '@from': svc.data.startDate.format('YYYY-MM-DD'),
-                '@to': svc.data.endDate.format('YYYY-MM-DD'), '@version': 1
+                '@to': svc.data.endDate.format('YYYY-MM-DD')
             };
 
             if(svc.data.keyword){
