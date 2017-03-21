@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libre.coop_es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 16:40-0300\n"
-"PO-Revision-Date: 2017-03-21 16:41-0300\n"
+"POT-Creation-Date: 2017-03-21 18:38-0300\n"
+"PO-Revision-Date: 2017-03-21 18:38-0300\n"
 "Last-Translator: Felipe <felipecoelhokussik@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -221,6 +221,7 @@ msgid "eventos encontrados"
 msgstr "eventos encontrados"
 
 #: ../page-templates/events-list.php:140
+#: ../inc/theme-options/mapasculturais-configuration.php:467
 msgid "Linguagens"
 msgstr "Tipos de evento"
 
@@ -408,12 +409,37 @@ msgstr "Espacios"
 msgid "Projetos/Editais"
 msgstr "Proyecto"
 
+#: ../inc/theme-options/mapasculturais-configuration.php:429
+msgid "Selo"
+msgstr ""
+
+#: ../inc/theme-options/mapasculturais-configuration.php:433
+msgid "Retornar somente eventos verificados com selo"
+msgstr ""
+
+#: ../inc/theme-options/mapasculturais-configuration.php:437
+#, fuzzy
+msgid "Classificação etária"
+msgstr "Clasificación"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:535
+msgid "Buscar agente:"
+msgstr ""
+
 #: ../inc/theme-options/mapasculturais-configuration.php:537
 #: ../inc/theme-options/mapasculturais-configuration.php:546
 #: ../inc/theme-options/mapasculturais-configuration.php:554
 #: ../inc/theme-options/mapasculturais-configuration.php:589
 msgid "Salvar Filtros"
 msgstr "Guardar filtros"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:544
+msgid "Buscar espaço:"
+msgstr ""
+
+#: ../inc/theme-options/mapasculturais-configuration.php:552
+msgid "Buscar projeto ou edital:"
+msgstr ""
 
 #: ../inc/theme-options/mapasculturais-configuration.php:565
 msgid "Filtros da API do Mapas Culturais"
@@ -427,13 +453,32 @@ msgstr "Configure aquí cuales eventos de la API de la plataforma"
 msgid "deve retornar para o site."
 msgstr "debe devolver al sitio."
 
+#: ../inc/theme-options/mapasculturais-configuration.php:579
+#, fuzzy
+msgid "Insira a URL da instalação do Mapas Culturais:"
+msgstr "Filtros de la API de Cultura en Línea"
+
 #: ../inc/theme-options/mapasculturais-configuration.php:581
 msgid "O endereço do site de onde os eventos serão alimentados."
 msgstr "La dirección del sitio desde dónde los eventos serán alimentados."
 
+#: ../inc/theme-options/mapasculturais-configuration.php:584
+#, fuzzy
+msgid "Nome da instalação do Mapas Culturais:"
+msgstr "Filtros de la API de Cultura en Línea"
+
 #: ../inc/theme-options/mapasculturais-configuration.php:586
 msgid "O nome do site de onde os eventos serão alimentados."
 msgstr "El nombre del sitio desde dónde los eventos serán alimentados."
+
+#: ../inc/theme-options/mapasculturais-configuration-category.php:14
+#: ../inc/theme-options/mapasculturais-configuration-category.php:35
+msgid "Usar agenda de eventos"
+msgstr ""
+
+#: ../inc/theme-options/mapasculturais-configuration-category.php:20
+msgid "Esta categoria está associada aos seguintes filtros:"
+msgstr ""
 
 #: ../inc/theme-options/destaques.php:165
 #: ../inc/theme-options/destaques.php:166
@@ -448,6 +493,10 @@ msgstr "Página principal"
 #: ../inc/theme-options/destaques.php:207
 msgid "Destaques"
 msgstr "Destacados"
+
+#: ../inc/theme-options/destaques.php:211
+msgid "Configurações salvas."
+msgstr ""
 
 #: ../inc/theme-options/destaques.php:223
 #: ../inc/theme-options/destaques.php:283
@@ -469,9 +518,30 @@ msgstr ""
 msgid "Posts destacados"
 msgstr "Entradas destacadas"
 
+#: ../inc/theme-options/destaques.php:253
+#, fuzzy
+msgid "URL do Post"
+msgstr "Logo del sitio"
+
+#: ../inc/theme-options/destaques.php:254
+msgid "Data/Hora de Expiração"
+msgstr ""
+
 #: ../inc/theme-options/destaques.php:275
 msgid "Posts fixos"
 msgstr "Entradas fijas"
+
+#: ../inc/mapasculturais2post/mapasculturais2post.php:47
+msgid "Importar todas"
+msgstr ""
+
+#: ../inc/mapasculturais2post/mapasculturais2post.php:48
+msgid "Importar selecionadas"
+msgstr ""
+
+#: ../inc/mapasculturais2post/mapasculturais2post.php:50
+msgid "Imagens inportadas e anexadas ao post."
+msgstr ""
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:62
 msgid "Importar imagens da plataforma "
@@ -480,6 +550,11 @@ msgstr "Importar imágenes de la plataforma"
 #: ../inc/mapasculturais2post/mapasculturais2post.php:66
 msgid "Url do evento, projeto, agente ou espaço"
 msgstr "Url del evento, proyecto, agente o especio"
+
+#: ../inc/mapasculturais2post/mapasculturais2post.php:68
+#, fuzzy
+msgid "Buscar Imagens"
+msgstr "Imágenes"
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:78
 msgid "Importar imagens da plataforma"
@@ -505,6 +580,25 @@ msgstr "Archivo de tamaño cero descargado"
 #: ../inc/mapasculturais2post/importimages.php:65
 msgid "Invalid file type"
 msgstr "Tipo de archivo no válido"
+
+#: ../inc/metaboxes/mapasculturais-entity-relation.php:57
+msgid "Linkar a url de uma entidade da plataforma"
+msgstr "Vincular la url de una entidad de la plataforma"
+
+#: ../inc/metaboxes/mapasculturais-entity-relation.php:57
+msgid ""
+"a um post, adiciona ao final do post um link de saiba mais que leva à página "
+"da entidade na plataforma e substitui a url da entidade pela url deste post "
+"em páginas do site como a busca de evento."
+msgstr ""
+"a una entrada, agrega al final de la entrada un link \"saber más\" que lleva "
+"a la página de la entidad en la plataforma y sustituye la url de la entidad "
+"por la url de esta entrada en las páginas del sitio como la busqueda de "
+"evento."
+
+#: ../inc/metaboxes/mapasculturais-entity-relation.php:59
+msgid "Informe aqui a url incluindo o http://"
+msgstr "Informe aquí la url incluyendo http://"
 
 #: ../inc/post-types/marca.php:8
 msgctxt "Post Type General Name"

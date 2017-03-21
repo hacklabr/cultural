@@ -44,10 +44,10 @@ class MapasCulturais2Post {
         <script id="mc-import-template" type="text/html">
             <h2>Imagens do {{typeName}} {{name}}</h2>
             <p>
-                <a id="mc-import-image-all" class="button">Importar todas</a>
-                <a id="mc-import-image-selected" class="button">Importar selecionadas</a>
+                <a id="mc-import-image-all" class="button"><?php _e("Importar todas","cultural");?></a>
+                <a id="mc-import-image-selected" class="button"><?php _e("Importar selecionadas","cultural");?></a>
                 <span id="mc-import-image--search-spinner" class="spinner" style="display:none;"></span>
-                <span id="mc-import-image--feedback" style="display:none; float:right;">Imagens inportadas e anexadas ao post.</span>
+                <span id="mc-import-image--feedback" style="display:none; float:right;"><?php _e("Imagens inportadas e anexadas ao post.","cultural");?></span>
             </p>
             {{#images}}
             <label class="mc-image">
@@ -59,13 +59,13 @@ class MapasCulturais2Post {
 
         <div id="mc-import-images" style="display:none;">
             <h2>
-                <?php _e('Importar imagens da plataforma '); ?> <?php echo MAPASCULTURAIS_NAME ?>
+                <?php _e('Importar imagens da plataforma ','cultural'); ?> <?php echo MAPASCULTURAIS_NAME ?>
             </h2>
             <p>
                 <label>
                     <input id="mc-import-image--search-url" type="text" placeholder="<?php _e("Url do evento, projeto, agente ou espaço", 'cultural') ?>" style="width:350px;">
                 </label>
-                <a id="mc-import-image--search-button" class="button"> Buscar Imagens </a>
+                <a id="mc-import-image--search-button" class="button"> <?php _e("Buscar Imagens","cultural");?> </a>
             </p>
             <span id="mc-import-image--import-spinner" class="spinner" style="display:none;"></span>
 
@@ -75,7 +75,7 @@ class MapasCulturais2Post {
         </div>
 
         <a href="#TB_inline?width=768&height=750&inlineId=mc-import-images" class="thickbox button">
-            <?php _e("Importar imagens da plataforma"); ?> <?php echo MAPASCULTURAIS_NAME; ?>
+            <?php _e("Importar imagens da plataforma","cultural"); ?> <?php echo MAPASCULTURAIS_NAME; ?>
         </a>
         <?php
     }
@@ -338,7 +338,7 @@ class MapasCulturais2Post {
 
         if (!$url) { // se não foi informado uma url
             if (current_user_can('edit_post')) {
-                return "<div class='shortcode-error'>Informe a url do evento dentro do tag evento da seguinte forma: <strong>[evento http://" . MAPASCULTURAIS_URL . "evento/0000]</strong></div>";
+                return "<div class='shortcode-error'>"+ "<?php _e('Informe a url do evento dentro do tag evento da seguinte forma:','cultural');?>"+" <strong>[evento http://" . MAPASCULTURAIS_URL . "evento/0000]</strong></div>";
             }
         } else { // se a url foi informada
             global $__event_url, $__image;

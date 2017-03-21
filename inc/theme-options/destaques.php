@@ -208,7 +208,7 @@ class Cultural_Hightlights {
 
             <?php if (isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true'): ?>
                 <div id="message" class="updated below-h2">
-                    <p>Configurações salvas.</p>
+                    <p><?php _e("Configurações salvas.","cultural");?></p>
                     <div class="clear"></div>
                 </div>
                 <script type="text/javascript">
@@ -250,8 +250,8 @@ class Cultural_Hightlights {
                                 <strong><?php _e('Posts destacados', 'cultural'); ?></strong><br>
 								<table class="table" style="width:100%">                               
 									<thead>
-										<th>URL do Post</th>
-										<th>Data/Hora de Expiração</th>
+										<th><?php _e("URL do Post","cultural");?></th>
+										<th><?php _e("Data/Hora de Expiração","cultural");?></th>
 									</thead>
 									<tbody>
 										

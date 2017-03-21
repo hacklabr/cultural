@@ -54,11 +54,9 @@ class MCEntityRelationMetabox {
 
         ?>
         <p>
-            Linkar a url de uma entidade da plataforma <?php echo MAPASCULTURAIS_NAME ?> a um post,
-            adiciona ao final do post um link de "saiba mais" que leva à página da entidade na plataforma e
-            substitui a url da entidade pela url deste post em páginas do site como a busca de evento.
+            <?php _e('Linkar a url de uma entidade da plataforma','cultural');?> <?php echo MAPASCULTURAIS_NAME ?> <?php _e('a um post, adiciona ao final do post um link de saiba mais que leva à página da entidade na plataforma e substitui a url da entidade pela url deste post em páginas do site como a busca de evento.','cultural');?>
         </p>
-        <input type="text" name="<?php echo __CLASS__ ?>[mc-entity-relation]" value="<?php echo $metadata; ?>" style="width:100%" placeholder="Informe aqui a url incluindo o http://"/> <?php
+        <input type="text" name="<?php echo __CLASS__ ?>[mc-entity-relation]" value="<?php echo $metadata; ?>" style="width:100%" placeholder='Informe aqui a url incluindo o http://' /> <?php
     }
 
     static function savePost($post_id) {
