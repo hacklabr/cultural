@@ -416,11 +416,11 @@ class MapasCulturaisConfiguration {
         </script>
         <div id="mapasculturais-config-tabs">
             <ul>
-                <li><a href="#tab-geral">Geral</a></li>
-                <li><a href="#tab-recorte-geografico">Recorte geográfico</a></li>
-                <li><a href="#tab-agentes">Agentes Culturais</a></li>
-                <li><a href="#tab-espacos">Espaços</a></li>
-                <li><a href="#tab-projetos">Projetos/Editais</a></li>
+                <li><a href="#tab-geral"><?php _e("Geral");?></a></li>
+                <li><a href="#tab-recorte-geografico"><?php _e("Recorte geográfico");?></a></li>
+                <li><a href="#tab-agentes"><?php _e("Agentes Culturais");?></a></li>
+                <li><a href="#tab-espacos"><?php _e("Espaços");?></a></li>
+                <li><a href="#tab-projetos"><?php _e("Projetos/Editais");?></a></li>
             </ul>
 
             <div id="tab-geral" class='config-tab'>
@@ -565,7 +565,7 @@ class MapasCulturaisConfiguration {
             <h2><?php _e('Filtros da API do Mapas Culturais', 'cultural'); ?></h2>
             <?php if (MAPASCULTURAIS_URL): ?>
             <p>
-                Configure aqui quais eventos a API da plataforma <?php echo MAPASCULTURAIS_NAME ?> deve retornar para o site.
+                <?php _e('Configure aqui quais eventos a API da plataforma');?> <?php echo MAPASCULTURAIS_NAME ?> <?php _e('deve retornar para o site.');?>
             </p>
             <?php endif; ?>
 
@@ -578,12 +578,12 @@ class MapasCulturaisConfiguration {
                 <div class="form-field">
                     <label>Insira a URL da instalação do Mapas Culturais:</label>
                     <input type="text" name="<?php echo self::OPTION_NAME ?>[URL]" value="<?php echo self::getValue('URL') ?>" class="regular-text" />
-                    <p>O endereço do site de onde os eventos serão alimentados.</p>
+                    <p><?php _e("O endereço do site de onde os eventos serão alimentados.");?></p>
                 </div>
                 <div class="form-field">
                     <label>Nome da instalação do Mapas Culturais:</label>
                     <input type="text" name="<?php echo self::OPTION_NAME ?>[NAME]" value="<?php echo self::getValue('NAME') ?>" class="regular-text" />
-                    <p>O nome do site de onde os eventos serão alimentados.</p>
+                    <p><?php _e("O nome do site de onde os eventos serão alimentados.");?></p>
                 </div>
                 <p class="submit">
                     <input type="submit" class="button-primary" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />

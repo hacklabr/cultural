@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libre.coop_es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 13:01-0300\n"
-"PO-Revision-Date: 2017-03-21 15:52-0300\n"
+"POT-Creation-Date: 2017-03-21 16:40-0300\n"
+"PO-Revision-Date: 2017-03-21 16:41-0300\n"
 "Last-Translator: Felipe <felipecoelhokussik@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -387,6 +387,27 @@ msgstr "Guardado"
 msgid "Folded"
 msgstr ""
 
+#: ../inc/theme-options/mapasculturais-configuration.php:419
+msgid "Geral"
+msgstr "General"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:420
+msgid "Recorte geográfico"
+msgstr "Recorte geográfico"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:421
+msgid "Agentes Culturais"
+msgstr "Agentes Culturales"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:422
+msgid "Espaços"
+msgstr "Espacios"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:423
+#, fuzzy
+msgid "Projetos/Editais"
+msgstr "Proyecto"
+
 #: ../inc/theme-options/mapasculturais-configuration.php:537
 #: ../inc/theme-options/mapasculturais-configuration.php:546
 #: ../inc/theme-options/mapasculturais-configuration.php:554
@@ -397,6 +418,22 @@ msgstr "Guardar filtros"
 #: ../inc/theme-options/mapasculturais-configuration.php:565
 msgid "Filtros da API do Mapas Culturais"
 msgstr "Filtros de la API de Cultura en Línea"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:568
+msgid "Configure aqui quais eventos a API da plataforma"
+msgstr "Configure aquí cuales eventos de la API de la plataforma"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:568
+msgid "deve retornar para o site."
+msgstr "debe devolver al sitio."
+
+#: ../inc/theme-options/mapasculturais-configuration.php:581
+msgid "O endereço do site de onde os eventos serão alimentados."
+msgstr "La dirección del sitio desde dónde los eventos serán alimentados."
+
+#: ../inc/theme-options/mapasculturais-configuration.php:586
+msgid "O nome do site de onde os eventos serão alimentados."
+msgstr "El nombre del sitio desde dónde los eventos serán alimentados."
 
 #: ../inc/theme-options/destaques.php:165
 #: ../inc/theme-options/destaques.php:166
