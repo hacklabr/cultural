@@ -35,14 +35,14 @@
             
             
             // SELOS
-            if(vars.categoryFilters && vars.categoryFilters.selos && vars.categoryFilters.selos.length){
-                console.log('1');
-                searchParams['@seals'] = vars.categoryFilters.selos.sort().toString();
-            
-            }else if(!vars.generalFilters.empty.selos && vars.generalFilters.selos && vars.generalFilters.selos.length){
-                console.log('2');
-                searchParams['@seals'] = vars.generalFilters.selos.sort().toString();
-            }
+            //if(vars.categoryFilters && vars.categoryFilters.selos && vars.categoryFilters.selos.length){
+            //    console.log('1');
+            //    searchParams['@seals'] = vars.categoryFilters.selos.sort().toString();
+            //
+            //}else if(!vars.generalFilters.empty.selos && vars.generalFilters.selos && vars.generalFilters.selos.length){
+            //    console.log('2');
+            //    searchParams['@seals'] = vars.generalFilters.selos.sort().toString();
+            //}
             
             // LINGUAGENS
             // se tem filtro selecionado na busca

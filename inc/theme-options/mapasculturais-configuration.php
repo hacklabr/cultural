@@ -442,6 +442,8 @@ class MapasCulturaisConfiguration {
                         </label>
                     <?php endif; ?>
                     -->
+                    
+                    <!--
                     <h3>Selos</h3>
                     <ul>
                         <?php
@@ -476,7 +478,8 @@ class MapasCulturaisConfiguration {
                             </li>
                         <?php endforeach; ?>
                     </ul>
-
+                    -->
+                    
                     <h3>Classificação etária</h3>
                     <ul>
                         <?php
@@ -536,6 +539,7 @@ class MapasCulturaisConfiguration {
                     </ul>
                 </div>
             </div>
+            <!-- comecei nessa abordagem, não funcionou
             <div id="tab-selos" class="entity-tab">
                 <div class="entity-header">
                     <label>Buscar selo: </label>
@@ -545,6 +549,7 @@ class MapasCulturaisConfiguration {
                 <div id="seal-container" class="entity-container js-entity-container">
                 </div>
             </div>
+            -->
             <div id="tab-recorte-geografico">
                 <?php
                 foreach ($geoDivisions->data as $geoDivisionMetadata):
