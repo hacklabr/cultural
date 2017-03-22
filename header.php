@@ -57,10 +57,10 @@
 			</div>
 
             <div id="share-buttons">
-                <span>Compartilhe:</span>
-                <a href="#" title="Compartilhar no Facebook" class="facebook js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_button_share.png" alt="Facebook"></a>
-                <a href="#" title="Compartilhar no Twitter" class="twitter js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_button_share.png" alt="Twitter"></a>
-                <a href="#" title="Compartilhar no Google Plus" class="gplus js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/gplus_button_share.png" alt="Google+"></a>
+                <span><?php _e("Compartilhe:","cultural");?></span>
+                <a href="#" title="<?php esc_attr_e('Compartilhar no Facebook', 'cultural'); ?>" class="facebook js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_button_share.png" alt="Facebook"></a>
+                <a href="#" title="<?php esc_attr_e('Compartilhar no Twitter', 'cultural'); ?>" class="twitter js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_button_share.png" alt="Twitter"></a>
+                <a href="#" title="<?php esc_attr_e('Compartilhar no Google Plus', 'cultural'); ?>" class="gplus js-share"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/gplus_button_share.png" alt="Google+"></a>
             </div>
 
             <div id="tabs" class="toggle-tabs">
@@ -102,7 +102,7 @@
                     <div id="tab-3" class="tab-content animated fadeIn">
                         <?php get_template_part('inc/featured-posts'); ?>
                         <div class="tab__description">
-                            <a href="#"><i class="fa fa-arrow-right"></i> Ver mais eventos</a>
+                            <a href="#"><i class="fa fa-arrow-right"></i> <?php _e('Ver mais eventos','cultural');?></a>
                         </div>
                     </div>
                 </div>

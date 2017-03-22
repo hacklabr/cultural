@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libre.coop_es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 18:38-0300\n"
-"PO-Revision-Date: 2017-03-21 18:38-0300\n"
+"POT-Creation-Date: 2017-03-22 15:37-0300\n"
+"PO-Revision-Date: 2017-03-22 15:44-0300\n"
 "Last-Translator: Felipe <felipecoelhokussik@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -122,6 +122,14 @@ msgstr "Chats"
 msgid "Arquivos"
 msgstr "Archivos"
 
+#: ../archive.php:80
+msgid "Ver eventos"
+msgstr "Ver eventos"
+
+#: ../archive.php:97
+msgid "Nunhum post encontrado"
+msgstr "Ninguna entrada encontrada"
+
 #: ../content-grid.php:29
 #, php-format
 msgid "Permalink para &ldquo;%s&rdquo;"
@@ -135,6 +143,26 @@ msgstr "Más información"
 #: ../header.php:45
 msgid "Ir para o conteúdo"
 msgstr "Ir al contenido"
+
+#: ../header.php:60
+msgid "Compartilhe:"
+msgstr "Compartir:"
+
+#: ../header.php:61
+msgid "Compartilhar no Facebook"
+msgstr "Compartir en Facebook"
+
+#: ../header.php:62
+msgid "Compartilhar no Twitter"
+msgstr "Compartir en Twitter"
+
+#: ../header.php:63
+msgid "Compartilhar no Google Plus"
+msgstr "Compartir en Google+"
+
+#: ../header.php:105
+msgid "Ver mais eventos"
+msgstr "Ver más eventos"
 
 #: ../comments.php:12 ../inc/template-tags.php:206
 #, fuzzy, php-format
@@ -286,6 +314,8 @@ msgid ""
 "<span class=\"meta-nav\">Anterior</span><span class=\"post-title\">%title</"
 "span>"
 msgstr ""
+"<span class=\"meta-nav\">Anterior</span><span class=\"post-title\">%title</"
+"span>"
 
 #: ../inc/template-tags.php:80
 msgctxt "Next post link"
@@ -293,6 +323,8 @@ msgid ""
 "<span class=\"meta-nav\">Próximo</span><span class=\"post-title\">%title</"
 "span>"
 msgstr ""
+"<span class=\"meta-nav\">Próximo</span><span class=\"post-title\">%title</"
+"span>"
 
 #: ../inc/template-tags.php:161 ../inc/template-tags.php:181
 #, php-format
@@ -405,26 +437,24 @@ msgid "Espaços"
 msgstr "Espacios"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:423
-#, fuzzy
 msgid "Projetos/Editais"
-msgstr "Proyecto"
+msgstr "Proyectos/Convocatorias"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:429
 msgid "Selo"
-msgstr ""
+msgstr "Sello"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:433
 msgid "Retornar somente eventos verificados com selo"
-msgstr ""
+msgstr "Retornar solamente eventos verificados con sello"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:437
-#, fuzzy
 msgid "Classificação etária"
-msgstr "Clasificación"
+msgstr "Clasificación etaria"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:535
 msgid "Buscar agente:"
-msgstr ""
+msgstr "Buscar agente:"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:537
 #: ../inc/theme-options/mapasculturais-configuration.php:546
@@ -435,11 +465,11 @@ msgstr "Guardar filtros"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:544
 msgid "Buscar espaço:"
-msgstr ""
+msgstr "Buscar espacio:"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:552
 msgid "Buscar projeto ou edital:"
-msgstr ""
+msgstr "Buscar proyecto o convocatoria:"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:565
 msgid "Filtros da API do Mapas Culturais"
@@ -454,18 +484,16 @@ msgid "deve retornar para o site."
 msgstr "debe devolver al sitio."
 
 #: ../inc/theme-options/mapasculturais-configuration.php:579
-#, fuzzy
 msgid "Insira a URL da instalação do Mapas Culturais:"
-msgstr "Filtros de la API de Cultura en Línea"
+msgstr "Ingrese la URL de la instalación de Cultura en Línea"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:581
 msgid "O endereço do site de onde os eventos serão alimentados."
 msgstr "La dirección del sitio desde dónde los eventos serán alimentados."
 
 #: ../inc/theme-options/mapasculturais-configuration.php:584
-#, fuzzy
 msgid "Nome da instalação do Mapas Culturais:"
-msgstr "Filtros de la API de Cultura en Línea"
+msgstr "Nombre de la instalación de Cultura en Línea:"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:586
 msgid "O nome do site de onde os eventos serão alimentados."
@@ -474,11 +502,11 @@ msgstr "El nombre del sitio desde dónde los eventos serán alimentados."
 #: ../inc/theme-options/mapasculturais-configuration-category.php:14
 #: ../inc/theme-options/mapasculturais-configuration-category.php:35
 msgid "Usar agenda de eventos"
-msgstr ""
+msgstr "Usar agenda de eventos"
 
 #: ../inc/theme-options/mapasculturais-configuration-category.php:20
 msgid "Esta categoria está associada aos seguintes filtros:"
-msgstr ""
+msgstr "Esta categoría está asociada a los siguientes filtros:"
 
 #: ../inc/theme-options/destaques.php:165
 #: ../inc/theme-options/destaques.php:166
@@ -496,7 +524,7 @@ msgstr "Destacados"
 
 #: ../inc/theme-options/destaques.php:211
 msgid "Configurações salvas."
-msgstr ""
+msgstr "Configuraciones guardadas."
 
 #: ../inc/theme-options/destaques.php:223
 #: ../inc/theme-options/destaques.php:283
@@ -519,13 +547,12 @@ msgid "Posts destacados"
 msgstr "Entradas destacadas"
 
 #: ../inc/theme-options/destaques.php:253
-#, fuzzy
 msgid "URL do Post"
-msgstr "Logo del sitio"
+msgstr "URL de la entrada"
 
 #: ../inc/theme-options/destaques.php:254
 msgid "Data/Hora de Expiração"
-msgstr ""
+msgstr "Fecha y hora de finalización"
 
 #: ../inc/theme-options/destaques.php:275
 msgid "Posts fixos"
@@ -533,15 +560,15 @@ msgstr "Entradas fijas"
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:47
 msgid "Importar todas"
-msgstr ""
+msgstr "Importar todas"
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:48
 msgid "Importar selecionadas"
-msgstr ""
+msgstr "Importar seleccionadas"
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:50
 msgid "Imagens inportadas e anexadas ao post."
-msgstr ""
+msgstr "Imágenes importadas y adjuntadas a la entrada"
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:62
 msgid "Importar imagens da plataforma "
@@ -552,9 +579,8 @@ msgid "Url do evento, projeto, agente ou espaço"
 msgstr "Url del evento, proyecto, agente o especio"
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:68
-#, fuzzy
 msgid "Buscar Imagens"
-msgstr "Imágenes"
+msgstr "Buscar Imágenes"
 
 #: ../inc/mapasculturais2post/mapasculturais2post.php:78
 msgid "Importar imagens da plataforma"
@@ -597,6 +623,7 @@ msgstr ""
 "evento."
 
 #: ../inc/metaboxes/mapasculturais-entity-relation.php:59
+#: ../inc/metaboxes/link.php:40
 msgid "Informe aqui a url incluindo o http://"
 msgstr "Informe aquí la url incluyendo http://"
 
