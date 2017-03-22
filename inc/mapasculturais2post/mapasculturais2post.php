@@ -2,7 +2,7 @@
 
 class MapasCulturais2Post {
 
-    const EVENT_FIELDS = 'id,singleUrl,name,subTitle,project.id,project.name,project.singleUrl,owner.id,owner.name,owner.singleUrl,classificacaoEtaria,traducaoLibras,descricaoSonora,shortDescription,description,occurrences';
+    const EVENT_FIELDS = 'id,singleUrl,name,subTitle,project.id,project.name,project.singleUrl,owner.id,owner.name,owner.singleUrl,classificacaoEtaria,traducaoLibras,descricaoSonora,shortDescription,description,occurrences.{rule,space.{id,name,singleUrl,shortDescription}}';
 
     static function init() {
 
@@ -187,7 +187,6 @@ class MapasCulturais2Post {
         $date_format = get_option('date_format');
         return array_map(function($e) use($date_format) {
             $occ = new stdClass;
-
             $occ->startsAt = @$e->rule->startsAt;
             $occ->endsAt = @$e->rule->endsAt;
 

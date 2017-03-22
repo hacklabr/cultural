@@ -19,7 +19,7 @@
         svc.submit = function(){
             var deferred = $q.defer();
             var searchParams = {
-                '@select': 'id,singleUrl,name,subTitle,type,shortDescription,terms,classificacaoEtaria,traducaoLibras,descricaoSonora,owner.name,owner.singleUrl,project.name,project.singleUrl,occurrences.{rule,space.{id,name,singleUrl,shortDescription}},seal',
+                '@select': 'id,singleUrl,name,subTitle,type,shortDescription,terms,classificacaoEtaria,traducaoLibras,descricaoSonora,owner.name,owner.singleUrl,project.name,project.singleUrl,occurrences.{rule,space.{id,name,singleUrl,shortDescription}}',
 //                '@page': 1,
 //                '@limit': 10,
                 '@files': '(header.header,avatar.avatarBig):url',
@@ -37,11 +37,11 @@
             // SELOS
             if(vars.categoryFilters && vars.categoryFilters.selos && vars.categoryFilters.selos.length){
                 console.log('1');
-                searchParams['seal'] = 'IN(' + vars.categoryFilters.selos.sort().toString() + ')';
-
+                searchParams['@seals'] = vars.categoryFilters.selos.sort().toString();
+            
             }else if(!vars.generalFilters.empty.selos && vars.generalFilters.selos && vars.generalFilters.selos.length){
                 console.log('2');
-                searchParams['seal'] = 'IN(' + vars.generalFilters.selos.sort().toString() + ')';
+                searchParams['@seals'] = vars.generalFilters.selos.sort().toString();
             }
             
             // LINGUAGENS
