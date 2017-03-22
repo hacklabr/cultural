@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libre.coop_es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-22 15:37-0300\n"
-"PO-Revision-Date: 2017-03-22 15:44-0300\n"
+"POT-Creation-Date: 2017-03-22 16:22-0300\n"
+"PO-Revision-Date: 2017-03-22 16:25-0300\n"
 "Last-Translator: Felipe <felipecoelhokussik@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -249,6 +249,7 @@ msgid "eventos encontrados"
 msgstr "eventos encontrados"
 
 #: ../page-templates/events-list.php:140
+#: ../inc/theme-options/mapasculturais-configuration.php:103
 #: ../inc/theme-options/mapasculturais-configuration.php:467
 msgid "Linguagens"
 msgstr "Tipos de evento"
@@ -420,6 +421,39 @@ msgstr "Guardado"
 msgid "Folded"
 msgstr ""
 
+#: ../inc/theme-options/mapasculturais-configuration.php:100
+msgid "URL da instalação do Mapas Culturais"
+msgstr "URL de la instalación de Cultura en Línea:"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:101
+msgid "Nome da instalação do Mapas Culturais"
+msgstr "Nombre de la instalación de Cultura en Línea"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:102
+msgid "Resultados Verificados"
+msgstr ""
+
+#: ../inc/theme-options/mapasculturais-configuration.php:104
+msgid "Classificação Etária"
+msgstr "Clasificación etaria"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:105
+msgid "Divisões Geográficas"
+msgstr ""
+
+#: ../inc/theme-options/mapasculturais-configuration.php:106
+msgid "Agentes"
+msgstr ""
+
+#: ../inc/theme-options/mapasculturais-configuration.php:107
+#: ../inc/theme-options/mapasculturais-configuration.php:422
+msgid "Espaços"
+msgstr "Espacios"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:108
+msgid "Projetos"
+msgstr "Proyectos"
+
 #: ../inc/theme-options/mapasculturais-configuration.php:419
 msgid "Geral"
 msgstr "General"
@@ -431,10 +465,6 @@ msgstr "Recorte geográfico"
 #: ../inc/theme-options/mapasculturais-configuration.php:421
 msgid "Agentes Culturais"
 msgstr "Agentes Culturales"
-
-#: ../inc/theme-options/mapasculturais-configuration.php:422
-msgid "Espaços"
-msgstr "Espacios"
 
 #: ../inc/theme-options/mapasculturais-configuration.php:423
 msgid "Projetos/Editais"

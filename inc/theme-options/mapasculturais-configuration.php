@@ -97,15 +97,15 @@ class MapasCulturaisConfiguration {
         }
 
         $configs = array(
-            'URL' => new CulturalConfigModel('URL', 'URL da instalação do Mapas Culturais', 'header', ''),
-            'NAME' => new CulturalConfigModel('URL', 'Nome da instalação do Mapas Culturais', 'header', ''),
-            'verified' => new CulturalConfigModel('verified', 'Resultados Verificados', 'header', false),
-            'linguagens' => new CulturalConfigModel('linguagens', 'Linguagens', 'header'),
-            'classificacaoEtaria' => new CulturalConfigModel('classificacaoEtaria', 'Classificação Etária', 'header'),
-            'geoDivisions' => new CulturalConfigModel('geoDivisions', 'Divisões Geográficas', 'header', $geoDivisions),
-            'agent' => new CulturalConfigModel('agent', 'Agentes', 'entity'),
-            'space' => new CulturalConfigModel('space', 'Espaços', 'entity'),
-            'project' => new CulturalConfigModel('project', 'Projetos', 'entity')
+            'URL' => new CulturalConfigModel('URL', __('URL da instalação do Mapas Culturais'), 'header', ''),
+            'NAME' => new CulturalConfigModel('URL', __('Nome da instalação do Mapas Culturais'), 'header', ''),
+            'verified' => new CulturalConfigModel('verified', __('Resultados Verificados'), 'header', false),
+            'linguagens' => new CulturalConfigModel('linguagens', __('Linguagens'), 'header'),
+            'classificacaoEtaria' => new CulturalConfigModel('classificacaoEtaria', __('Classificação Etária'), 'header'),
+            'geoDivisions' => new CulturalConfigModel('geoDivisions', __('Divisões Geográficas'), 'header', $geoDivisions),
+            'agent' => new CulturalConfigModel('agent', __('Agentes'), 'entity'),
+            'space' => new CulturalConfigModel('space', __('Espaços'), 'entity'),
+            'project' => new CulturalConfigModel('project', __('Projetos'), 'entity')
         );
 
 
