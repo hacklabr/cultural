@@ -89,11 +89,15 @@ class MapasCulturaisConfiguration {
         if (!$geoDivisions) {
             $_geoDivisions = wp_remote_get(MAPASCULTURAIS_API_URL . 'geoDivision/list/', array('timeout' => '120'));
 
-            $geoDivisions_encoded = $_geoDivisions['body'];
+            if (is_array($_geoDivisions) && isset($_geoDivisions['body'])) {
+            
+                $geoDivisions_encoded = $_geoDivisions['body'];
 
-            $geoDivisions = json_decode($geoDivisions_encoded);
+                $geoDivisions = json_decode($geoDivisions_encoded);
 
-            set_transient($transient_id, $geoDivisions, self::TRANSIENT_TIMEOUT);
+                set_transient($transient_id, $geoDivisions, self::TRANSIENT_TIMEOUT);
+            
+            }
         }
 
         $configs = array(
@@ -133,26 +137,36 @@ class MapasCulturaisConfiguration {
                 $defaultRequestArgs = array('timeout' => '120');
                 $response = wp_remote_get(MAPASCULTURAIS_API_URL . $urlPath, $defaultRequestArgs);
 
-                return json_decode($response['body']);
+                return wp_remote_retrieve_response_code($response) == 200 ? json_decode(wp_remote_retrieve_body($response)) : false;
             };
 
             $configs['linguagens']->data = $defaultRequest('term/list/linguagem/');
-            $configs['selos']->data = $defaultRequest('seal/find?@select=id,name');
+            //$configs['selos']->data = $defaultRequest('seal/find?@select=id,name');
 
             $eventDescription = $defaultRequest('event/describe/');
             $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
 
             $geoDivisions = $defaultRequest('geoDivision/list/includeData:1/');
 
-            foreach ($geoDivisions as $geoDivision) {
-                $configs[$geoDivision->metakey]->data = $geoDivision->data;
-            }
+            if (is_array($geoDivisions)) {
+                foreach ($geoDivisions as $geoDivision) {
+                    $configs[$geoDivision->metakey]->data = $geoDivision->data;
+                }
 
-            set_transient($transient_id, $configs, self::TRANSIENT_TIMEOUT);
+                set_transient($transient_id, $configs, self::TRANSIENT_TIMEOUT);
+                
+            }
         }
         return $configs;
     }
+    
+    static function checkApiConnection() {
 
+        $response = wp_remote_get(MAPASCULTURAIS_API_URL . 'agent/find/?id=EQ(1)');
+        return wp_remote_retrieve_response_code($response) == 200 ? wp_remote_retrieve_body($response) : false;
+
+    }
+    
     static function getOption() {
         return wp_parse_args(get_option(self::OPTION_NAME));
     }
@@ -628,7 +642,7 @@ class MapasCulturaisConfiguration {
 
             <form action="options.php" method="post" class="form-wrap">
                 <?php settings_fields(self::OPTION_NAME); ?>
-                <?php if (MAPASCULTURAIS_URL): ?>
+                <?php if (MAPASCULTURAIS_URL && self::checkApiConnection()): ?>
                     <?php self::printForm() ?>
 
                 <?php endif; ?>
