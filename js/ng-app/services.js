@@ -32,22 +32,32 @@
             }
 
             var spaces, projects, agents;
-
-            console.log(svc.data);
+            
+            
+            // SELOS
+            //if(vars.categoryFilters && vars.categoryFilters.selos && vars.categoryFilters.selos.length){
+            //    console.log('1');
+            //    searchParams['@seals'] = vars.categoryFilters.selos.sort().toString();
+            //
+            //}else if(!vars.generalFilters.empty.selos && vars.generalFilters.selos && vars.generalFilters.selos.length){
+            //    console.log('2');
+            //    searchParams['@seals'] = vars.generalFilters.selos.sort().toString();
+            //}
+            
             // LINGUAGENS
             // se tem filtro selecionado na busca
             if(svc.data.linguagens && svc.data.linguagens.length){
-                console.log('0');
+                //console.log('0');
                 searchParams['term:linguagem'] = 'IN(' + svc.data.linguagens.sort().toString() + ')';
 
             // ou se está numa categoria tem filtro configurado para a mesma
             }else {
                 if(vars.categoryFilters && vars.categoryFilters.linguagens && vars.categoryFilters.linguagens.length){
-                    console.log('1');
+                    //console.log('1');
                     searchParams['term:linguagem'] = 'IN(' + vars.categoryFilters.linguagens.sort().toString() + ')';
 
                 }else if(!vars.generalFilters.empty.linguagens && vars.generalFilters.linguagens && vars.generalFilters.linguagens.length){
-                    console.log('2');
+                    //console.log('2');
                     searchParams['term:linguagem'] = 'IN(' + vars.generalFilters.linguagens.sort().toString() + ')';
                 }
             }

@@ -37,12 +37,11 @@
         function receiveSearch(events){
             $log.debug('receiveSearch events', events);
             var format = 'YYYY-MM-DD';
-            var start = $scope.dateRange.startDate.format(format) + ' 00:00:00';
-            var end = $scope.dateRange.endDate.format(format) + ' 00:00:00';
-
+            var start = $scope.dateRange.startDate.format(format);
+            var end = $scope.dateRange.endDate.format(format);
             events.forEach(function(e){
                 e.occurrences.forEach(function(occ){
-                    occ.inPeriod = (occ.startsOn.date >= start && occ.startsOn.date <= end) || (occ.startsOn.date <= end && occ.until && occ.until.date >= end);
+                    occ.inPeriod = (occ.rule.startsOn >= start && occ.rule.startsOn <= end) || (occ.rule.startsOn <= end && occ.rule.until && occ.rule.until >= end);
                 });
             });
 
@@ -88,7 +87,6 @@
                 $timeout.cancel(keywordTimeout);
             }
             keywordTimeout = $timeout(function(){
-                console.log($scope.keyword);
                 searchService.data.keyword = $scope.keyword;
                 searchService.submit().then(receiveSearch);
             },500);

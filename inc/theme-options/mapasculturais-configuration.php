@@ -89,11 +89,15 @@ class MapasCulturaisConfiguration {
         if (!$geoDivisions) {
             $_geoDivisions = wp_remote_get(MAPASCULTURAIS_API_URL . 'geoDivision/list/', array('timeout' => '120'));
 
-            $geoDivisions_encoded = $_geoDivisions['body'];
+            if (is_array($_geoDivisions) && isset($_geoDivisions['body'])) {
+            
+                $geoDivisions_encoded = $_geoDivisions['body'];
 
-            $geoDivisions = json_decode($geoDivisions_encoded);
+                $geoDivisions = json_decode($geoDivisions_encoded);
 
-            set_transient($transient_id, $geoDivisions, self::TRANSIENT_TIMEOUT);
+                set_transient($transient_id, $geoDivisions, self::TRANSIENT_TIMEOUT);
+            
+            }
         }
 
         $configs = array(
@@ -105,7 +109,8 @@ class MapasCulturaisConfiguration {
             'geoDivisions' => new CulturalConfigModel('geoDivisions', __('Divisões Geográficas'), 'header', $geoDivisions),
             'agent' => new CulturalConfigModel('agent', __('Agentes'), 'entity'),
             'space' => new CulturalConfigModel('space', __('Espaços'), 'entity'),
-            'project' => new CulturalConfigModel('project', __('Projetos'), 'entity')
+            'project' => new CulturalConfigModel('project', __('Projetos'), 'entity'),
+            // 'seal' => new CulturalConfigModel('seal', 'Selos', 'entity') tentei essa abordagem primeiro e não funcionou
         );
 
 
@@ -131,25 +136,36 @@ class MapasCulturaisConfiguration {
                 $defaultRequestArgs = array('timeout' => '120');
                 $response = wp_remote_get(MAPASCULTURAIS_API_URL . $urlPath, $defaultRequestArgs);
 
-                return json_decode($response['body']);
+                return wp_remote_retrieve_response_code($response) == 200 ? json_decode(wp_remote_retrieve_body($response)) : false;
             };
 
             $configs['linguagens']->data = $defaultRequest('term/list/linguagem/');
+            //$configs['selos']->data = $defaultRequest('seal/find?@select=id,name');
 
             $eventDescription = $defaultRequest('event/describe/');
             $configs['classificacaoEtaria']->data = array_values((array) $eventDescription->classificacaoEtaria->options);
 
             $geoDivisions = $defaultRequest('geoDivision/list/includeData:1/');
 
-            foreach ($geoDivisions as $geoDivision) {
-                $configs[$geoDivision->metakey]->data = $geoDivision->data;
-            }
+            if (is_array($geoDivisions)) {
+                foreach ($geoDivisions as $geoDivision) {
+                    $configs[$geoDivision->metakey]->data = $geoDivision->data;
+                }
 
-            set_transient($transient_id, $configs, self::TRANSIENT_TIMEOUT);
+                set_transient($transient_id, $configs, self::TRANSIENT_TIMEOUT);
+                
+            }
         }
         return $configs;
     }
+    
+    static function checkApiConnection() {
 
+        $response = wp_remote_get(MAPASCULTURAIS_API_URL . 'agent/find/?id=EQ(1)');
+        return wp_remote_retrieve_response_code($response) == 200 ? wp_remote_retrieve_body($response) : false;
+
+    }
+    
     static function getOption() {
         return wp_parse_args(get_option(self::OPTION_NAME));
     }
@@ -175,12 +191,14 @@ class MapasCulturaisConfiguration {
         $selectedEntities = array(
             'agent' => self::getValue('agent'),
             'space' => self::getValue('space'),
-            'project' => self::getValue('project')
+            'project' => self::getValue('project'),
+            'seal' => self::getValue('seal')
         );
 
         $selectedEntities['agent'] = array_map($decode_entity_json, is_array($selectedEntities['agent']) ? $selectedEntities['agent'] : array());
         $selectedEntities['space'] = array_map($decode_entity_json, is_array($selectedEntities['space']) ? $selectedEntities['space'] : array());
         $selectedEntities['project'] = array_map($decode_entity_json, is_array($selectedEntities['project']) ? $selectedEntities['project'] : array());
+        $selectedEntities['seal'] = array_map($decode_entity_json, is_array($selectedEntities['seal']) ? $selectedEntities['seal'] : array());
 
         if(isset($_GET['taxonomy']) && $_GET['taxonomy'] == 'category' && isset($_GET['tag_ID'])){
             $selectedFilters = get_option("category_{$_GET['tag_ID']}");
@@ -198,6 +216,7 @@ class MapasCulturaisConfiguration {
             $selectedEntities['agent'] = array_map($decode_entity_json, is_array($selectedEntities['agent']) ? $selectedEntities['agent'] : array());
             $selectedEntities['space'] = array_map($decode_entity_json, is_array($selectedEntities['space']) ? $selectedEntities['space'] : array());
             $selectedEntities['project'] = array_map($decode_entity_json, is_array($selectedEntities['project']) ? $selectedEntities['project'] : array());
+            $selectedEntities['seal'] = array_map($decode_entity_json, is_array($selectedEntities['seal']) ? $selectedEntities['seal'] : array());
         }
 
 
@@ -417,6 +436,7 @@ class MapasCulturaisConfiguration {
         <div id="mapasculturais-config-tabs">
             <ul>
                 <li><a href="#tab-geral"><?php _e("Geral","cultural");?></a></li>
+                <!-- <li><a href="#tab-selos">Selos</a></li> Eu tentei essa abordagem primeiro, não funcionou, fui para uma lista simples -->
                 <li><a href="#tab-recorte-geografico"><?php _e("Recorte geográfico","cultural");?></a></li>
                 <li><a href="#tab-agentes"><?php _e("Agentes Culturais","cultural");?></a></li>
                 <li><a href="#tab-espacos"><?php _e("Espaços","cultural");?></a></li>
@@ -425,6 +445,7 @@ class MapasCulturaisConfiguration {
 
             <div id="tab-geral" class='config-tab'>
                 <div class='config-section'>
+                    <!--
                     <?php if (!$category_id || !self::getValue('verified')): ?>
                         <h3><?php _e("Selo","cultural");?></h3>
                         <label>
@@ -433,8 +454,45 @@ class MapasCulturaisConfiguration {
                             <?php _e("Retornar somente eventos verificados com selo","cultural");?>
                         </label>
                     <?php endif; ?>
+                    -->
+                    
+                    <!--
+                    <h3>Selos</h3>
+                    <ul>
+                        <?php
+                        $generalMetaValue = self::getValue('selos');
+                        $_selected = 0;
+                        foreach ($selos->data as $selo){
+                            $d = $selo->id;
+                            if(isset($generalMetaValue[$d]) && $generalMetaValue[$d]){
+                                $_selected++;
+                            }
+                        }
 
-                    <h3><?php _e("Classificação etária","cultural");?></h3>
+                        $metaValue = self::getValue('selos', $categoryOptions);
+
+                        foreach ($selos->data as $selo):
+                            $d = $selo->id;
+                            
+                            if($category_id && $_selected && !$generalMetaValue[$d]){
+                                continue;
+                            }
+                            
+                            
+                            
+                            ?>
+                            <li>
+                                <label>
+                                    <input type="hidden"   name="<?php echo self::OPTION_NAME ?>[selos][<?php echo $d ?>]"  value="0">
+                                    <input type="checkbox" name="<?php echo self::OPTION_NAME ?>[selos][<?php echo $d ?>]"  value="1" <?php if (isset($metaValue[$d]) && $metaValue[$d]) echo 'checked'; ?> >
+                                    <?php echo $selo->name; ?>
+                                </label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    -->
+                    
+                    <h3><?php _e("Classificação etária","cultural");?></h3><h3>Classificação etária</h3>
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('classificacaoEtaria');
@@ -493,6 +551,17 @@ class MapasCulturaisConfiguration {
                     </ul>
                 </div>
             </div>
+            <!-- comecei nessa abordagem, não funcionou
+            <div id="tab-selos" class="entity-tab">
+                <div class="entity-header">
+                    <label>Buscar selo: </label>
+                    <input  type='text' class='entity-autocomplete' data-entity='seal'/>
+                    <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
+                </div>
+                <div id="seal-container" class="entity-container js-entity-container">
+                </div>
+            </div>
+            -->
             <div id="tab-recorte-geografico">
                 <?php
                 foreach ($geoDivisions->data as $geoDivisionMetadata):
@@ -571,7 +640,7 @@ class MapasCulturaisConfiguration {
 
             <form action="options.php" method="post" class="form-wrap">
                 <?php settings_fields(self::OPTION_NAME); ?>
-                <?php if (MAPASCULTURAIS_URL): ?>
+                <?php if (MAPASCULTURAIS_URL && self::checkApiConnection()): ?>
                     <?php self::printForm() ?>
 
                 <?php endif; ?>
