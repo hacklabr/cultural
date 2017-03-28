@@ -115,10 +115,11 @@ class MapasCulturaisConfiguration {
         );
 
 
-        foreach ($geoDivisions as $geoDivision) {
-            $configs[$geoDivision->metakey] = new CulturalConfigModel($geoDivision->metakey, $geoDivision->name, 'header');
+        if (is_array($geoDivisions) {
+            foreach ($geoDivisions as $geoDivision) {
+                $configs[$geoDivision->metakey] = new CulturalConfigModel($geoDivision->metakey, $geoDivision->name, 'header');
+            }
         }
-
 
         uasort($configs, function($a, $b) {
             return $a->order > $b->order;
