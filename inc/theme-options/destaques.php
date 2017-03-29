@@ -24,7 +24,7 @@ class Cultural_Hightlights {
 				}
 			}	
 		}
-		$option[$key]['highlights'] = array_values($option[$key]['highlights']);	
+		$option[$key]['highlights'] = is_array($option[$key]['highlights']) ? array_values($option[$key]['highlights']) : false;	
         return isset($option[$key]) ? $option[$key] : false;
     }
 
