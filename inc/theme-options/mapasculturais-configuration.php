@@ -115,7 +115,7 @@ class MapasCulturaisConfiguration {
         );
 
 
-        if (is_array($geoDivisions) {
+        if (is_array($geoDivisions)) {
             foreach ($geoDivisions as $geoDivision) {
                 $configs[$geoDivision->metakey] = new CulturalConfigModel($geoDivision->metakey, $geoDivision->name, 'header');
             }
