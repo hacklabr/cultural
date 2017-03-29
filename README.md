@@ -42,9 +42,10 @@ Para destacar ou fixar posts nos começos das listagens da home e das categorias
 
 ### Posts/Páginas
 #### Relacionando post/página com entidade do Mapas Culturais
-Relacionar uma entidade do Mapas Culturais a um post de seu site você faz com que, em diversos lugares do site, as urls dos links para esta entidade do Mapas Culturais seja substituido pela url do post relacionado. Por exemplo, se você relacionar um post Y a um evento X e este evento X aparecer no resultado de uma busca por eventos, o link de **mais imformações** levará ao post Y ao invés de levar para a página do evento X no Mapas Culturais.
+Você pode relacionar uma entidade do Mapas Culturais a um post de seu site. Ao fazer isso duas coisas acontecem:
 
-Além das mudanças de urls dos links pelo site, se a entidade que está sendo relacionada ao post for um evento, uma caixa de serviço do evento será exibida ao final do post.
+* em diversos lugares do site, as urls dos links para esta entidade do Mapas Culturais é substituido pela url do post relacionado. Por exemplo, se você relacionar um post Y a um evento X e este evento X aparecer no resultado de uma busca por eventos, o link de **mais imformações** levará ao post Y ao invés de levar para a página do evento X no Mapas Culturais. Isto é útil para manter o visitante navegando no site, sem ser redirecionado ao Mapas Culturais
+* Se a entidade que está sendo relacionada ao post for um evento, uma caixa de serviço do evento será exibida ao final do post.
 
 Para relacionar um post a uma entidade do Mapas Culturais copie a url da entidade (_exemplos: **http://spcultura.prefeitura.sp.gov.br/espaco/0000/** ou **http://spcultura.prefeitura.sp.gov.br/evento/0000/**) e cole na caixa **Linkar com entidade do Mapas Culturais**.
 
