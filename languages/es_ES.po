@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libre.coop_es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-22 16:22-0300\n"
-"PO-Revision-Date: 2017-03-22 16:25-0300\n"
+"POT-Creation-Date: 2017-05-02 18:41-0300\n"
+"PO-Revision-Date: 2017-05-02 18:43-0300\n"
 "Last-Translator: Felipe <felipecoelhokussik@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -50,7 +50,7 @@ msgstr "Páginas:"
 
 #: ../content.php:25
 msgid "Continua&hellip;"
-msgstr ""
+msgstr "Continúa&hellip;"
 
 #: ../archive.php:34
 #, php-format
@@ -165,13 +165,11 @@ msgid "Ver mais eventos"
 msgstr "Ver más eventos"
 
 #: ../comments.php:12 ../inc/template-tags.php:206
-#, fuzzy, php-format
+#, php-format
 msgid "Um comentário"
 msgid_plural "%1$s comentários"
-msgstr[0] ""
-"#-#-#-#-#  0extracted.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"#-#-#-#-#  1extracted.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-msgstr[1] "#-#-#-#-#  0extracted.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+msgstr[0] "Un comentario"
+msgstr[1] "%1$s comentarios"
 
 #: ../comments.php:14
 #, php-format
@@ -204,11 +202,15 @@ msgstr "No informado"
 msgid "Local"
 msgstr "Local"
 
-#: ../partials/event-box.php:82
+#: ../partials/event-box.php:77
+msgid "acessibilidade"
+msgstr "Accesibilidad"
+
+#: ../partials/event-box.php:82 ../page-templates/events-list.php:157
 msgid "Projeto"
 msgstr "Proyecto"
 
-#: ../partials/event-box.php:89
+#: ../partials/event-box.php:89 ../page-templates/events-list.php:161
 msgid "Publicado por"
 msgstr "Publicado por"
 
@@ -249,8 +251,8 @@ msgid "eventos encontrados"
 msgstr "eventos encontrados"
 
 #: ../page-templates/events-list.php:140
-#: ../inc/theme-options/mapasculturais-configuration.php:103
-#: ../inc/theme-options/mapasculturais-configuration.php:467
+#: ../inc/theme-options/mapasculturais-configuration.php:107
+#: ../inc/theme-options/mapasculturais-configuration.php:526
 msgid "Linguagens"
 msgstr "Tipos de evento"
 
@@ -419,113 +421,114 @@ msgstr "Guardado"
 
 #: ../inc/widgets-extra-classes.php:17
 msgid "Folded"
-msgstr ""
+msgstr "Archivado"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:100
+#: ../inc/theme-options/mapasculturais-configuration.php:104
 msgid "URL da instalação do Mapas Culturais"
 msgstr "URL de la instalación de Cultura en Línea:"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:101
+#: ../inc/theme-options/mapasculturais-configuration.php:105
 msgid "Nome da instalação do Mapas Culturais"
 msgstr "Nombre de la instalación de Cultura en Línea"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:102
+#: ../inc/theme-options/mapasculturais-configuration.php:106
 msgid "Resultados Verificados"
-msgstr ""
+msgstr "Resultados Verificados"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:104
+#: ../inc/theme-options/mapasculturais-configuration.php:108
 msgid "Classificação Etária"
 msgstr "Clasificación etaria"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:105
+#: ../inc/theme-options/mapasculturais-configuration.php:109
 msgid "Divisões Geográficas"
-msgstr ""
+msgstr "Divisiones Geográficas"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:106
+#: ../inc/theme-options/mapasculturais-configuration.php:110
 msgid "Agentes"
-msgstr ""
+msgstr "Agentes"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:107
-#: ../inc/theme-options/mapasculturais-configuration.php:422
+#: ../inc/theme-options/mapasculturais-configuration.php:111
+#: ../inc/theme-options/mapasculturais-configuration.php:443
 msgid "Espaços"
 msgstr "Espacios"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:108
+#: ../inc/theme-options/mapasculturais-configuration.php:112
 msgid "Projetos"
 msgstr "Proyectos"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:419
+#: ../inc/theme-options/mapasculturais-configuration.php:439
 msgid "Geral"
 msgstr "General"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:420
+#: ../inc/theme-options/mapasculturais-configuration.php:441
 msgid "Recorte geográfico"
 msgstr "Recorte geográfico"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:421
+#: ../inc/theme-options/mapasculturais-configuration.php:442
 msgid "Agentes Culturais"
 msgstr "Agentes Culturales"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:423
+#: ../inc/theme-options/mapasculturais-configuration.php:444
 msgid "Projetos/Editais"
 msgstr "Proyectos/Convocatorias"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:429
+#: ../inc/theme-options/mapasculturais-configuration.php:451
 msgid "Selo"
 msgstr "Sello"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:433
+#: ../inc/theme-options/mapasculturais-configuration.php:455
 msgid "Retornar somente eventos verificados com selo"
 msgstr "Retornar solamente eventos verificados con sello"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:437
+#: ../inc/theme-options/mapasculturais-configuration.php:496
 msgid "Classificação etária"
 msgstr "Clasificación etaria"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:535
-msgid "Buscar agente:"
-msgstr "Buscar agente:"
-
-#: ../inc/theme-options/mapasculturais-configuration.php:537
-#: ../inc/theme-options/mapasculturais-configuration.php:546
-#: ../inc/theme-options/mapasculturais-configuration.php:554
-#: ../inc/theme-options/mapasculturais-configuration.php:589
+#: ../inc/theme-options/mapasculturais-configuration.php:560
+#: ../inc/theme-options/mapasculturais-configuration.php:607
+#: ../inc/theme-options/mapasculturais-configuration.php:616
+#: ../inc/theme-options/mapasculturais-configuration.php:624
+#: ../inc/theme-options/mapasculturais-configuration.php:659
 msgid "Salvar Filtros"
 msgstr "Guardar filtros"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:544
+#: ../inc/theme-options/mapasculturais-configuration.php:605
+msgid "Buscar agente:"
+msgstr "Buscar agente:"
+
+#: ../inc/theme-options/mapasculturais-configuration.php:614
 msgid "Buscar espaço:"
 msgstr "Buscar espacio:"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:552
+#: ../inc/theme-options/mapasculturais-configuration.php:622
 msgid "Buscar projeto ou edital:"
 msgstr "Buscar proyecto o convocatoria:"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:565
+#: ../inc/theme-options/mapasculturais-configuration.php:635
 msgid "Filtros da API do Mapas Culturais"
 msgstr "Filtros de la API de Cultura en Línea"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:568
+#: ../inc/theme-options/mapasculturais-configuration.php:638
 msgid "Configure aqui quais eventos a API da plataforma"
 msgstr "Configure aquí cuales eventos de la API de la plataforma"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:568
+#: ../inc/theme-options/mapasculturais-configuration.php:638
 msgid "deve retornar para o site."
 msgstr "debe devolver al sitio."
 
-#: ../inc/theme-options/mapasculturais-configuration.php:579
+#: ../inc/theme-options/mapasculturais-configuration.php:649
 msgid "Insira a URL da instalação do Mapas Culturais:"
 msgstr "Ingrese la URL de la instalación de Cultura en Línea"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:581
+#: ../inc/theme-options/mapasculturais-configuration.php:651
 msgid "O endereço do site de onde os eventos serão alimentados."
 msgstr "La dirección del sitio desde dónde los eventos serán alimentados."
 
-#: ../inc/theme-options/mapasculturais-configuration.php:584
+#: ../inc/theme-options/mapasculturais-configuration.php:654
 msgid "Nome da instalação do Mapas Culturais:"
 msgstr "Nombre de la instalación de Cultura en Línea:"
 
-#: ../inc/theme-options/mapasculturais-configuration.php:586
+#: ../inc/theme-options/mapasculturais-configuration.php:656
 msgid "O nome do site de onde os eventos serão alimentados."
 msgstr "El nombre del sitio desde dónde los eventos serán alimentados."
 
