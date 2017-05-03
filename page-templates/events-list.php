@@ -51,12 +51,12 @@ if(is_category()){
                 <input class="form-control date-picker date" ng-model="dateRange"
                        date-range-picker="{
                        format:'DD/MMMM',
-                       separator: '  a  ',
+                       separator: '  ->  ',
                        locale: {
-                       applyLabel: 'Aplicar',
-                       cancelLabel: 'Cancelar',
-                       fromLabel: 'De',
-                       toLabel: 'Até'
+                           applyLabel: '<?php esc_attr_e('Aplicar', 'cultural'); ?>',
+                           cancelLabel: '<?php esc_attr_e('Cancelar', 'cultural'); ?>',
+                           fromLabel: '<?php esc_attr_e('De', 'cultural'); ?>',
+                           toLabel: '<?php esc_attr_e('Até', 'cultural'); ?>'
                        },
                        applyClass: 'testApplyClass btn-primary btn-xs',
                        cancelClass: 'testCancelClass btn-xs',

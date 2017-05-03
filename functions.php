@@ -270,9 +270,13 @@ if (!is_admin()) {
 //        if(is_home() || is_archive() && get_post_type() === 'evento'){
         //ANGULAR
         wp_enqueue_script('moment', $js_lib_path . 'moment.js', array('jquery'), null, false);
-        wp_enqueue_script('moment-ptbr', $js_lib_path . 'moment.pt-br.js', array('moment'), null, false);
+        $moment_locale = 'pt-br';
+        if (substr(get_locale(), 0, 2) == 'es')
+            $moment_locale = 'es-es';
+        
+        wp_enqueue_script('moment-locale', $js_lib_path . 'moment.'.$moment_locale.'.js', array('moment'), null, false);
 
-        wp_enqueue_script('angular-core', $js_lib_path . 'angular.js', array('moment-ptbr'), null, false);
+        wp_enqueue_script('angular-core', $js_lib_path . 'angular.js', array('moment-locale'), null, false);
 
         wp_enqueue_script('angular-ui-router', $js_lib_path . 'angular-ui-router.js', array('angular-core'), null, false);
         //wp_enqueue_script('angular-resource', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js', array('angular-route'), null, false);
