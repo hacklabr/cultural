@@ -65,12 +65,13 @@ foreach ($event->occurrences as $i => $occ) {
 
         <?php 
         $accessibility = '';
-        if($event->traducaoLibras == 'Sim'){
-            $accessibility .= 'Tradução para LIBRAS';
+        if($event->traducaoLibras == __('Sim', 'cultural')){ // Isso está um tanto frágil...
+            $accessibility .= __('Tradução para LIBRAS', 'cultural');
         }
 
-        if($event->descricaoSonora == 'Sim'){
-            $accessibility .= $accessibility ? ', Áudio descrição' : 'Áudio descrição';
+        if($event->descricaoSonora == __('Sim', 'cultural')){ // Isso está um tanto frágil...
+            $accessibility .= $accessibility ? ', ' : ''; 
+            $accessibility .= __('Áudio descrição', 'cultural');
         }
         ?>
         <?php if($accessibility): ?>
