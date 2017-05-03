@@ -11,13 +11,13 @@ function mapasculturais_category_edit( $term ) {
         <td>
             <input type='hidden' name="<?php echo MapasCulturaisConfiguration::OPTION_NAME ?>[use_events]" value="0">
             <label>
-                <input id="category-use-events" type="checkbox" name="<?php echo MapasCulturaisConfiguration::OPTION_NAME ?>[use_events]" value="1" <?php if(isset($selectedFilters['use_events']) && $selectedFilters['use_events']) echo 'checked="checked"' ?>> Usar agenda de eventos
+                <input id="category-use-events" type="checkbox" name="<?php echo MapasCulturaisConfiguration::OPTION_NAME ?>[use_events]" value="1" <?php if(isset($selectedFilters['use_events']) && $selectedFilters['use_events']) echo 'checked="checked"' ?>> <?php _e("Usar agenda de eventos","cultural");?>
             </label>
         </td>
     </tr>
     <tr id="category-events-filter">
         <td valign="bottom" colspan="2">
-            <h4>Esta categoria está associada aos seguintes filtros:</h4>
+            <h4><?php _e("Esta categoria está associada aos seguintes filtros:","cultural");?></h4>
             <?php MapasCulturaisConfiguration::printForm($term->term_id, $selectedFilters); ?>
         </td>
     </tr>
@@ -32,7 +32,7 @@ function mapasculturais_category_add($taxonomy) {
     <div class="form-field">
         <input type='hidden' name="<?php echo MapasCulturaisConfiguration::OPTION_NAME ?>[use_events]" value="0">
         <label>
-            <input id="category-use-events" type="checkbox" name="<?php echo MapasCulturaisConfiguration::OPTION_NAME ?>[use_events]" value="1" <?php if(isset($selectedFilters['use_events']) && $selectedFilters['use_events']) echo 'checked="checked"' ?>> Usar agenda de eventos
+            <input id="category-use-events" type="checkbox" name="<?php echo MapasCulturaisConfiguration::OPTION_NAME ?>[use_events]" value="1" <?php if(isset($selectedFilters['use_events']) && $selectedFilters['use_events']) echo 'checked="checked"' ?>> <?php _e("Usar agenda de eventos","cultural");?>
         </label>
     </div>
     <?php

@@ -77,7 +77,7 @@ if(is_category()){
         </h1>
         <?php if (is_category() && isset($cat_data['use_events']) && $cat_data['use_events']) : ?>
             <a href="<?php echo $agenda_url ?>" class="category-events-link">
-                Ver eventos
+                <?php _e('Ver eventos','cultural');?>
                 <i class="fa fa-arrow-right"></i>
             </a>
         <?php endif; ?>
@@ -94,7 +94,7 @@ if(is_category()){
 
         </div><!-- /grid -->
     <?php else: ?>
-        <h3>Nunhum post encontrado</h3>
+        <h3><?php _e('Nunhum post encontrado','cultural');?></h3>
     <?php endif; ?>
 
     <?php cultural_paging_nav(); ?>

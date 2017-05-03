@@ -101,16 +101,15 @@ class MapasCulturaisConfiguration {
         }
 
         $configs = array(
-            'URL' => new CulturalConfigModel('URL', 'URL da instalação do Mapas Culturais', 'header', ''),
-            'NAME' => new CulturalConfigModel('URL', 'Nome da instalação do Mapas Culturais', 'header', ''),
-            'verified' => new CulturalConfigModel('verified', 'Resultados Verificados', 'header', false),
-            'linguagens' => new CulturalConfigModel('linguagens', 'Linguagens', 'header'),
-            'selos' => new CulturalConfigModel('selos', 'Selos', 'header'),
-            'classificacaoEtaria' => new CulturalConfigModel('classificacaoEtaria', 'Classificação Etária', 'header'),
-            'geoDivisions' => new CulturalConfigModel('geoDivisions', 'Divisões Geográficas', 'header', $geoDivisions),
-            'agent' => new CulturalConfigModel('agent', 'Agentes', 'entity'),
-            'space' => new CulturalConfigModel('space', 'Espaços', 'entity'),
-            'project' => new CulturalConfigModel('project', 'Projetos', 'entity'),
+            'URL' => new CulturalConfigModel('URL', __('URL da instalação do Mapas Culturais'), 'header', ''),
+            'NAME' => new CulturalConfigModel('URL', __('Nome da instalação do Mapas Culturais'), 'header', ''),
+            'verified' => new CulturalConfigModel('verified', __('Resultados Verificados'), 'header', false),
+            'linguagens' => new CulturalConfigModel('linguagens', __('Linguagens'), 'header'),
+            'classificacaoEtaria' => new CulturalConfigModel('classificacaoEtaria', __('Classificação Etária'), 'header'),
+            'geoDivisions' => new CulturalConfigModel('geoDivisions', __('Divisões Geográficas'), 'header', $geoDivisions),
+            'agent' => new CulturalConfigModel('agent', __('Agentes'), 'entity'),
+            'space' => new CulturalConfigModel('space', __('Espaços'), 'entity'),
+            'project' => new CulturalConfigModel('project', __('Projetos'), 'entity'),
             // 'seal' => new CulturalConfigModel('seal', 'Selos', 'entity') tentei essa abordagem primeiro e não funcionou
         );
 
@@ -437,23 +436,23 @@ class MapasCulturaisConfiguration {
         </script>
         <div id="mapasculturais-config-tabs">
             <ul>
-                <li><a href="#tab-geral">Geral</a></li>
+                <li><a href="#tab-geral"><?php _e("Geral","cultural");?></a></li>
                 <!-- <li><a href="#tab-selos">Selos</a></li> Eu tentei essa abordagem primeiro, não funcionou, fui para uma lista simples -->
-                <li><a href="#tab-recorte-geografico">Recorte geográfico</a></li>
-                <li><a href="#tab-agentes">Agentes Culturais</a></li>
-                <li><a href="#tab-espacos">Espaços</a></li>
-                <li><a href="#tab-projetos">Projetos/Editais</a></li>
+                <li><a href="#tab-recorte-geografico"><?php _e("Recorte geográfico","cultural");?></a></li>
+                <li><a href="#tab-agentes"><?php _e("Agentes Culturais","cultural");?></a></li>
+                <li><a href="#tab-espacos"><?php _e("Espaços","cultural");?></a></li>
+                <li><a href="#tab-projetos"><?php _e("Projetos/Editais","cultural");?></a></li>
             </ul>
 
             <div id="tab-geral" class='config-tab'>
                 <div class='config-section'>
                     <!--
                     <?php if (!$category_id || !self::getValue('verified')): ?>
-                        <h3>Selo</h3>
+                        <h3><?php _e("Selo","cultural");?></h3>
                         <label>
                             <input type="hidden"   name="<?php echo self::OPTION_NAME ?>[verified]"  value="0">
                             <input type="checkbox" name="<?php echo self::OPTION_NAME ?>[verified]"  value="1" <?php if (self::getValue('verified', $categoryOptions)) echo 'checked'; ?>>
-                            Retornar somente eventos verificados com selo
+                            <?php _e("Retornar somente eventos verificados com selo","cultural");?>
                         </label>
                     <?php endif; ?>
                     -->
@@ -463,7 +462,6 @@ class MapasCulturaisConfiguration {
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('selos');
-
                         $_selected = 0;
                         foreach ($selos->data as $selo){
                             $d = $selo->id;
@@ -495,7 +493,7 @@ class MapasCulturaisConfiguration {
                     </ul>
                     -->
                     
-                    <h3>Classificação etária</h3>
+                    <h3><?php _e("Classificação etária","cultural");?></h3><h3>Classificação etária</h3>
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('classificacaoEtaria');
@@ -525,7 +523,7 @@ class MapasCulturaisConfiguration {
                     </ul>
                 </div>
                 <div class='config-section checkbox-list'>
-                    <h3>Linguagens</h3>
+                    <h3><?php _e("Linguagens","cultural");?></h3>
                     <ul>
                         <?php
                         $generalMetaValue = self::getValue('linguagens');
@@ -604,7 +602,7 @@ class MapasCulturaisConfiguration {
             </div>
             <div id="tab-agentes" class="entity-tab">
                 <div class="entity-header">
-                    <label>Buscar agente: </label>
+                    <label><?php _e("Buscar agente:","cultural");?> </label>
                     <input  type='text' class='entity-autocomplete' data-entity='agent'/>
                     <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
                 </div>
@@ -613,7 +611,7 @@ class MapasCulturaisConfiguration {
             </div>
             <div id="tab-espacos" class="entity-tab">
                 <div class="entity-header">
-                    <label>Buscar espaço: </label>
+                    <label><?php _e("Buscar espaço:","cultural");?> </label>
                     <input  type='text' class='entity-autocomplete' data-entity='space'/>
                     <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
                 </div>
@@ -621,7 +619,7 @@ class MapasCulturaisConfiguration {
             </div>
             <div id="tab-projetos" class="entity-tab">
                 <div class="entity-header">
-                    <label>Buscar projeto ou edital: </label>
+                    <label><?php _e("Buscar projeto ou edital:","cultural");?> </label>
                     <input  type='text' class='entity-autocomplete' data-entity='project'/>
                     <input type="submit" class="button-primary alignright" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />
                 </div>
@@ -637,7 +635,7 @@ class MapasCulturaisConfiguration {
             <h2><?php _e('Filtros da API do Mapas Culturais', 'cultural'); ?></h2>
             <?php if (MAPASCULTURAIS_URL): ?>
             <p>
-                Configure aqui quais eventos a API da plataforma <?php echo MAPASCULTURAIS_NAME ?> deve retornar para o site.
+                <?php _e('Configure aqui quais eventos a API da plataforma','cultural');?> <?php echo MAPASCULTURAIS_NAME ?> <?php _e('deve retornar para o site.','cultural');?>
             </p>
             <?php endif; ?>
 
@@ -648,14 +646,14 @@ class MapasCulturaisConfiguration {
 
                 <?php endif; ?>
                 <div class="form-field">
-                    <label>Insira a URL da instalação do Mapas Culturais:</label>
+                    <label><?php _e("Insira a URL da instalação do Mapas Culturais:","cultural");?></label>
                     <input type="text" name="<?php echo self::OPTION_NAME ?>[URL]" value="<?php echo self::getValue('URL') ?>" class="regular-text" />
-                    <p>O endereço do site de onde os eventos serão alimentados.</p>
+                    <p><?php _e("O endereço do site de onde os eventos serão alimentados.","cultural");?></p>
                 </div>
                 <div class="form-field">
-                    <label>Nome da instalação do Mapas Culturais:</label>
+                    <label><?php _e("Nome da instalação do Mapas Culturais:","cultural");?></label>
                     <input type="text" name="<?php echo self::OPTION_NAME ?>[NAME]" value="<?php echo self::getValue('NAME') ?>" class="regular-text" />
-                    <p>O nome do site de onde os eventos serão alimentados.</p>
+                    <p><?php _e("O nome do site de onde os eventos serão alimentados.","cultural");?></p>
                 </div>
                 <p class="submit">
                     <input type="submit" class="button-primary" value="<?php _e('Salvar Filtros', 'cultural'); ?>" />

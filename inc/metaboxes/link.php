@@ -37,7 +37,7 @@ class LinkMetabox {
 
         $metadata = get_metadata('post', $post->ID, 'link', true);
 
-        ?> <input type="text" name="<?php echo __CLASS__ ?>[link]" value="<?php echo $metadata; ?>" style="width:100%" placeholder="Informe aqui a url incluindo o http://"/> <?php
+        ?> <input type="text" name="<?php echo __CLASS__ ?>[link]" value="<?php echo $metadata; ?>" style="width:100%" placeholder="<?php esc_attr_e('Informe aqui a url incluindo o http://', 'cultural'); ?>"/> <?php
     }
 
     static function savePost($post_id) {

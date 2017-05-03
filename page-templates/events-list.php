@@ -154,11 +154,11 @@ if(is_category()){
                 <div ng-if="event.traducaoLibras != 'Sim' && event.descricaoSonora == 'Sim'" class="event__accessibility"><strong>acessibilidade:</strong> Áudio descrição</div>
 
                 <div ng-if="event.project.name">
-                    <h4>projeto:</h4>
-                    <a href="{{event.project.singleUrl}}">{{event.project.name}}</a>
+                		<h4><?php _e('Projeto', 'cultural');?>:</h4>                   
+                    	<a href="{{event.project.singleUrl}}">{{event.project.name}}</a>
                 </div>
                 <div ng-if="event.owner.name">
-                    <h4>publicado por:</h4>
+                		<h4><?php _e('Publicado por', 'cultural');?>:</h4>                    
                     <a href="{{event.owner.singleUrl}}">{{event.owner.name}}</a>
                 </div>
                 <a href="{{event.singleUrl}}" target="_blank" class="event__info"><?php _e('Mais informações', 'cultural'); ?></a>

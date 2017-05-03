@@ -74,7 +74,7 @@ foreach ($event->occurrences as $i => $occ) {
         }
         ?>
         <?php if($accessibility): ?>
-            <span class="event__accessibility"><strong>acessibilidade:</strong> <?php echo $accessibility ?></span>
+            <span class="event__accessibility"><strong><?php _e('acessibilidade', 'cultural');?>:</strong> <?php echo $accessibility ?></span>
         <?php endif; ?>
 
         <?php if ( $event->project->name ) : ?>
