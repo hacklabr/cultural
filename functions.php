@@ -184,7 +184,7 @@ function cultural_scripts() {
     $empty = [];
 
     foreach ($savedFilters as $key => $data) {
-        if ($configModel[$key]->type === 'entity') {
+        if (isset($configModel[$key]) && $configModel[$key]->type === 'entity') {
             foreach ($data as $id => $json) {
                 $data[$id] = json_decode($json);
             }
